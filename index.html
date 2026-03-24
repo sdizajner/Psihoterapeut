@@ -914,51 +914,42 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
   .nav-overlay-links a{font-size:30px;min-height:52px;}
 }
 
-/* ===============================
-   HERO — MOBILNI FIX
-=============================== */
-@media(max-width: 767px){
-
-  /* Hero wrapper */
-  .hero-bg {
-    overflow: hidden;         /* ništa ne izlazi van ekrana */
-    position: relative;       /* da absolute elementi budu u okviru */
-  }
+/* ======== MOBILNI HERO I NAV FIX ======== */
+@media (max-width: 767px) {
 
   /* Hero slika */
   .hero-bg img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;              /* horizontalno popunjava ekran */
-    height: 100%;             /* vertikalno popunjava ekran */
-    object-fit: cover;        /* centrira sliku i cropuje proporcionalno */
-    object-position: center center; /* fokus na sredinu */
-    transform: none !important;     /* uklanja scale koji izbacuje deo */
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center center !important;
+    transform: none !important;
+    z-index: 1;
   }
 
-  /* Hero content (tekst, logo) */
+  /* Hero content: tekst i logo */
   #hero-content {
-    position: relative;
-    z-index: 10;
+    position: relative !important;
+    z-index: 10 !important;
   }
 
-  /* Hamburger */
+  /* Hamburger meni */
   #hamburger {
-    position: relative;
-    z-index: 15;              /* iznad slike */
-    display: block;
+    position: relative !important;
+    z-index: 15 !important;
+    display: block !important;
   }
 
   /* Jezički dugmići */
   [data-lang-btn], .lang-pill {
-    position: relative;
-    z-index: 15;
-    display: inline-block;
+    position: relative !important;
+    z-index: 15 !important;
+    display: inline-block !important;
   }
 }
-
-
 </style>
 </head>
 <body id="top" class="loading">
@@ -1988,23 +1979,21 @@ document.addEventListener('DOMContentLoaded', function(){
   setLang(savedLang);
 });
 
-// Slab parallax za mobilni
+// ======== MOBILNI HERO LAGANI PARALLAX ========
 if (IS_TOUCH) {
-  var heroImgMobile = document.querySelector('.hero-bg img');
-  var heroContentMobile = document.getElementById('hero-content');
-  
-  if(heroImgMobile && heroContentMobile) {
+  var heroImg = document.querySelector('.hero-bg img');
+  var heroContent = document.getElementById('hero-content');
+
+  if (heroImg && heroContent) {
     window.addEventListener('scroll', function(){
-      var s = window.scrollY, h = window.innerHeight;
-      if (s < h) {
-        heroImgMobile.style.transform = 'translateY(' + (s * 0.08) + 'px)';
-        heroContentMobile.style.transform = 'translateY(' + (s * 0.1) + 'px)';
-        heroContentMobile.style.opacity = Math.max(0, 1 - s / (h * 0.8));
-      }
+      var s = window.scrollY;
+      heroImg.style.transform = 'translateY(' + (s * 0.05) + 'px)';
+      heroContent.style.transform = 'translateY(' + (s * 0.08) + 'px)';
+      heroContent.style.opacity = Math.max(0, 1 - s / (window.innerHeight * 0.8));
     }, {passive:true});
   }
 }
-
 </script>
+
 </body>
 </html>
