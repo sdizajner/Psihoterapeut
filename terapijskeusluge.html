@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html lang="sr" data-lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Terapijske Usluge — Elena Ivancova</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+/* =============================================
+   CSS CUSTOM PROPERTIES
+   ============================================= */
+:root{
+  --sage:#7A9E7E; --sage-light:#A8C5AC; --sage-pale:#E8F0E9;
+  --cream:#F5F0E8; --warm-white:#FDFAF5; --deep:#2C3328;
+  --text:#3A3530; --text-light:#6B6058; --text-muted:#9E9189;
+  --gold:#C9A96E; --gold-light:#E8D5A8;
+  --fd:'Cormorant Garamond',serif;
+  --fb:'Montserrat',sans-serif;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-io:cubic-bezier(.65,0,.35,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --nav-h:70px;
+  --max-prose:560px;
+  --section-v:120px;
+  --col-gap:80px;
+  --side-pad:68px;
+  --container:1200px;
+}
+
+/* =============================================
+   RESET & BASE
+   ============================================= */
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:auto;}
+body{
+  font-family:var(--fb);
+  background:var(--warm-white);
+  color:var(--text);
+  overflow-x:hidden;
+  cursor:none;
+}
+
+/* =============================================
+   CUSTOM CURSOR (desktop only)
+   ============================================= */
+.cdot{
+  width:12px;height:12px;
+  background:rgba(122,158,126,.9);
+  border-radius:50%;
+  position:fixed;top:0;left:0;
+  pointer-events:none;z-index:9999;
+  transform:translate(-50%,-50%);
+  mix-blend-mode:multiply;
+  transition:width .25s var(--ease-spring),height .25s var(--ease-spring),background .2s;
+}
+.cdot.hv{width:30px;height:30px;background:rgba(201,169,110,.95);}
+
+/* Deaktivacija cursora na touch uređajima */
+@media (hover:none) and (pointer:coarse){
+  .cdot{display:none!important;}
+  body{cursor:auto!important;}
+}
+
+/* =============================================
+   PROGRESS BAR
+   ============================================= */
+.read-progress{
+  position:fixed;top:0;left:0;z-index:10000;
+  height:2px;width:0%;
+  background:linear-gradient(90deg,var(--sage),var(--gold),var(--sage-light));
+  background-size:200% 100%;
+  animation:shimmer 3s linear infinite;
+  transition:width .08s linear;
+}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* =============================================
+   LANGUAGE SYSTEM
+   ============================================= */
+.t-sr,.t-en,.t-ru{display:none!important;}
+[data-lang="sr"] .t-sr{display:revert!important;}
+[data-lang="en"] .t-en{display:revert!important;}
+[data-lang="ru"] .t-ru{display:revert!important;}
+[data-lang="sr"] li.t-sr,[data-lang="en"] li.t-en,[data-lang="ru"] li.t-ru{display:list-item!important;}
+[data-lang="sr"] span.t-sr,[data-lang="sr"] a.t-sr{display:inline!important;}
+[data-lang="en"] span.t-en,[data-lang="en"] a.t-en{display:inline!important;}
+[data-lang="ru"] span.t-ru,[data-lang="ru"] a.t-ru{display:inline!important;}
+[data-lang="sr"] .nav-logo-title.t-sr,[data-lang="en"] .nav-logo-title.t-en,[data-lang="ru"] .nav-logo-title.t-ru{display:block!important;}
+
+/* =============================================
+   NAVIGACIJA — DESKTOP
+   ============================================= */
+#nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  height:var(--nav-h);padding:0 var(--side-pad);
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(238,232,223,0.0);
+  backdrop-filter:blur(0px);
+  transition:background .6s ease, backdrop-filter .6s ease, box-shadow .5s;
+}
+#nav.sc{
+  background:rgba(238,232,223,0.96);
+  backdrop-filter:blur(28px);
+  box-shadow:0 1px 0 rgba(90,107,82,0.12), 0 4px 32px rgba(44,51,40,0.06);
+}
+
+.nav-logo{text-decoration:none;display:flex;align-items:center;gap:16px;}
+.nav-logo-accent{width:2.5px;height:46px;flex-shrink:0;background:linear-gradient(to bottom,transparent,rgba(31,30,30,0.8) 25%,rgba(51,50,50,0.8) 75%,transparent);opacity:0.9;}
+.nav-logo-text{display:flex;flex-direction:column;gap:4px;}
+.nav-logo-name{display:flex;align-items:baseline;gap:8px;line-height:1;}
+.nav-logo-first{font-family:var(--fd);font-size:25px;font-weight:400;font-style:italic;color:rgb(220,212,212);letter-spacing:.03em;transition:color .4s;}
+.nav-logo-last{font-family:var(--fd);font-size:23px;font-weight:500;color:rgba(3,51,10,0.8);letter-spacing:.10em;text-transform:uppercase;transition:color .4s;}
+#nav.sc .nav-logo-first{color:#1A2418;}
+#nav.sc .nav-logo-last{color:#4A7A50;}
+.nav-logo-divider{width:100%;height:1px;background:linear-gradient(to right,rgba(122,158,126,.6),rgba(82,75,75,0.8));margin:2px 0;}
+.nav-logo-title{font-family:var(--fb);font-size:9.5px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:rgb(220,212,212);transition:color .4s;white-space:nowrap;}
+#nav.sc .nav-logo-title{color:#2C3328;}
+
+.nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
+.nav-links a{font-family:var(--fb);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:#1E2820;text-decoration:none;position:relative;opacity:1;transition:color .25s;}
+#nav.sc .nav-links a{color:#1E2820;}
+.nav-links a::after{content:'';position:absolute;bottom:-5px;left:0;width:0;height:1.5px;background:var(--sage);transition:width .35s var(--ease-out);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-links a:hover{color:var(--sage);}
+#nav.sc .nav-links a:hover{color:var(--sage);}
+.nav-links a.active{color:var(--sage)!important;}
+.nav-links a.nav-cta{display:inline-block!important;background:var(--deep)!important;color:rgba(253,250,245,.92)!important;padding:10px 22px!important;border-radius:2px!important;font-size:10px!important;font-weight:400!important;letter-spacing:.16em!important;opacity:1!important;transition:all .4s var(--ease-out)!important;}
+#nav.sc .nav-links a.nav-cta{background:var(--deep)!important;color:rgba(253,250,245,.9)!important;}
+.nav-links a.nav-cta::after{display:none!important;}
+.nav-links a.nav-cta:hover{background:var(--sage)!important;color:#fff!important;transform:translateY(-2px);}
+
+.lang-pills{display:flex;gap:6px;}
+.lang-pill{font-family:var(--fb);font-size:9.5px;letter-spacing:.15em;text-transform:uppercase;color:#303c31;background:rgba(48,60,49,0.03);border:1px solid rgba(48,60,49,0.15);padding:5px 12px;border-radius:100px;cursor:pointer;transition:all .35s ease;}
+.lang-pill:hover{color:#1a211a;border:1px solid rgba(48,60,49,0.6);box-shadow:0 0 0 0.5px rgba(48,60,49,0.4);background:rgba(48,60,49,0.08);transform:translateY(-1px);}
+.lang-pill.active{color:#ffffff;background:#4c6041;box-shadow:0 2px 10px rgba(76,96,65,0.15);border:1px solid #4c6041;}
+#nav.sc .lang-pill{color:#1a1a1a;border-color:rgba(0,0,0,0.1);}
+#nav.sc .lang-pill.active{background:#303c31;color:#fff;border-color:#303c31;}
+
+/* Hamburger dugme — sakriveno na desktopu */
+.nav-ham{display:none;}
+
+/* =============================================
+   MOBILE OVERLAY NAVIGACIJA
+   ============================================= */
+.mob-nav{
+  position:fixed;inset:0;z-index:9500;
+  background:rgba(44,51,40,0.97);
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .45s var(--ease-io);
+}
+.mob-nav.open{opacity:1;pointer-events:all;}
+
+.mob-nav-inner{
+  display:flex;flex-direction:column;
+  align-items:flex-start;
+  gap:0;
+  padding:0 48px;
+  width:100%;
+  max-width:480px;
+}
+
+/* Dekorativna linija */
+.mob-nav-line{
+  width:40px;height:1px;
+  background:linear-gradient(to right,var(--sage),transparent);
+  margin-bottom:40px;
+  opacity:0;transform:translateX(-20px);
+  transition:opacity .4s ease, transform .4s ease;
+}
+.mob-nav.open .mob-nav-line{
+  opacity:1;transform:translateX(0);
+  transition-delay:.15s;
+}
+
+.mob-nav-links{list-style:none;}
+.mob-nav-links li{overflow:hidden;}
+.mob-nav-links a{
+  display:block;
+  font-family:var(--fd);
+  font-size:clamp(34px,8vw,52px);
+  font-weight:400;
+  font-style:italic;
+  color:rgba(253,250,245,0.85);
+  text-decoration:none;
+  line-height:1.15;
+  padding:10px 0;
+  letter-spacing:-.01em;
+  border-bottom:1px solid rgba(122,158,126,.1);
+  transition:color .3s ease, padding-left .35s var(--ease-out);
+  /* Staggered: svaki link translateY iz -100% → 0 */
+  transform:translateY(100%);
+  opacity:0;
+  transition:transform .55s var(--ease-out), opacity .55s ease, color .3s ease, padding-left .35s var(--ease-out);
+}
+.mob-nav.open .mob-nav-links a{transform:translateY(0);opacity:1;}
+
+/* Staggered delays za svaki link */
+.mob-nav.open .mob-nav-links li:nth-child(1) a{transition-delay:.18s;}
+.mob-nav.open .mob-nav-links li:nth-child(2) a{transition-delay:.26s;}
+.mob-nav.open .mob-nav-links li:nth-child(3) a{transition-delay:.34s;}
+.mob-nav.open .mob-nav-links li:nth-child(4) a{transition-delay:.42s;}
+.mob-nav.open .mob-nav-links li:nth-child(5) a{transition-delay:.50s;}
+
+.mob-nav-links a:hover{color:#fff;padding-left:12px;}
+.mob-nav-links a.nav-cta-mob{
+  display:inline-block;
+  margin-top:28px;
+  font-family:var(--fb);
+  font-size:11px;
+  font-style:normal;
+  font-weight:500;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+  color:var(--deep);
+  background:var(--sage-light);
+  padding:14px 32px;
+  border-radius:2px;
+  border:none;
+  min-height:48px;
+  display:flex;align-items:center;
+}
+.mob-nav-links a.nav-cta-mob:hover{padding-left:32px;background:var(--sage);}
+
+/* Jezičke pillule unutar mobilnog menija */
+.mob-nav-langs{
+  display:flex;gap:8px;
+  margin-top:36px;
+  opacity:0;transform:translateY(14px);
+  transition:opacity .4s ease, transform .4s ease;
+}
+.mob-nav.open .mob-nav-langs{
+  opacity:1;transform:translateY(0);
+  transition-delay:.6s;
+}
+.mob-nav-langs .lang-pill{
+  color:rgba(253,250,245,.6);
+  border-color:rgba(253,250,245,.2);
+  background:transparent;
+  min-height:44px;min-width:44px;
+  display:flex;align-items:center;justify-content:center;
+}
+.mob-nav-langs .lang-pill.active{
+  background:var(--sage);
+  color:#fff;
+  border-color:var(--sage);
+}
+.mob-nav-langs .lang-pill:hover{
+  color:#fff;
+  border-color:rgba(253,250,245,.5);
+  background:rgba(253,250,245,.08);
+}
+
+/* =============================================
+   HERO
+   ============================================= */
+.page-hero{height:90vh;min-height:600px;position:relative;display:flex;align-items:center;justify-content:flex-start;padding:0 10%;overflow:hidden;background-color:transparent;}
+.hero-img{position:absolute;inset:0;z-index:0;background:url('images/services-hero.jpg') center/cover no-repeat;transform:scale(1.08);will-change:transform;opacity:1;}
+.hero-ov1,.hero-ov2,.hero-texture,.hero-visual{display:none;}
+.hero-content{position:relative;z-index:5;max-width:540px;}
+
+.hero-h1{font-family:var(--fd);font-size:clamp(62px,8vw,104px);font-weight:400;line-height:1.04;letter-spacing:-.03em;color:var(--deep);margin:0;}
+.hero-h1 em{font-style:italic;font-weight:400;color:#2f5835;display:block;margin-top:4px;}
+.hero-h1 span,.hero-h1 em{opacity:0;transform:translateY(36px);animation:hW 1.2s var(--ease-out) forwards;}
+.hero-h1 em{animation-delay:.22s;}
+.hero-tagline{font-family:var(--fb);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--deep);margin-top:30px;opacity:0;animation:hW 1s var(--ease-out) .48s forwards;background:rgba(255,255,255,0.5);display:inline-block;padding:4px 12px;border-radius:2px;}
+.hero-divider{width:0;height:1px;background:linear-gradient(to right,var(--sage),rgba(48,60,49,0));margin:22px 0;opacity:0;animation:heroLine 1.2s var(--ease-out) .38s forwards;}
+@keyframes heroLine{to{width:80px;opacity:1;}}
+@keyframes hW{to{opacity:1;transform:translateY(0);}}
+
+.hero-scroll-hint{position:absolute;bottom:44px;left:10%;z-index:5;display:flex;align-items:center;gap:14px;opacity:0;animation:hW 1s ease .9s forwards;}
+.hero-scroll-line{width:44px;height:1px;background:rgba(90,107,82,0.4);position:relative;overflow:hidden;}
+.hero-scroll-line::after{content:'';position:absolute;inset:0;background:var(--sage);transform:translateX(-100%);animation:sL 2.2s ease-in-out 1.4s infinite;}
+@keyframes sL{0%{transform:translateX(-100%)}50%{transform:translateX(0)}100%{transform:translateX(100%)}}
+.hero-scroll-txt{font-family:var(--fb);font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--deep);text-shadow:0 1px 5px rgba(255,255,255,0.8);}
+.hero-side-text{position:absolute;right:52px;bottom:80px;writing-mode:vertical-rl;font-family:var(--fb);font-size:9px;letter-spacing:.5em;color:var(--deep);opacity:0.7;z-index:5;text-transform:uppercase;text-shadow:0 1px 5px rgba(255,255,255,0.8);}
+.hero-stat{position:absolute;right:90px;top:50%;transform:translateY(-50%);z-index:6;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;animation:hW 1.2s var(--ease-out) 1.1s forwards;background:rgba(255,255,255,0.4);padding:10px;border-radius:4px;}
+.hero-stat-n{font-family:var(--fd);font-size:52px;font-weight:300;color:var(--text-light);line-height:1;}
+.hero-stat-l{font-family:var(--fb);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--deep);text-align:center;}
+.hero-stat-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,rgba(122,158,126,0.28),transparent);margin-bottom:8px;}
+
+/* =============================================
+   ANCHOR NAV
+   ============================================= */
+.anav{background:var(--deep);position:sticky;top:var(--nav-h);z-index:900;border-bottom:2px solid rgba(122,158,126,.14);box-shadow:0 6px 28px rgba(0,0,0,.22);}
+.anav-inner{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;width:100%;}
+.al{font-family:var(--fb);font-size:10.5px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:rgba(253,250,245,.48);text-decoration:none;padding:16px 8px;display:flex;align-items:center;justify-content:center;text-align:center;border-bottom:3px solid transparent;border-right:1px solid rgba(122,158,126,.07);transition:color .3s,border-color .3s,background .3s;line-height:1.35;}
+.al:last-of-type{border-right:none;}
+.al:hover{color:var(--sage-light);background:rgba(122,158,126,.07);}
+.al.active{color:#fff;border-bottom-color:var(--sage);background:rgba(122,158,126,.08);font-weight:500;}
+
+/* =============================================
+   TIPOGRAFIJA
+   ============================================= */
+.s-eye{font-family:var(--fb);font-size:10px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--sage);margin-bottom:16px;opacity:.85;display:block;}
+.s-title{font-family:var(--fd);font-size:clamp(38px,4.6vw,66px);font-weight:400;line-height:1.05;color:var(--deep);margin-bottom:16px;letter-spacing:-.01em;}
+.s-title em{font-style:italic;color:var(--sage);}
+.lead{font-family:var(--fd);font-size:22px;font-weight:400;font-style:italic;line-height:1.68;color:var(--sage);margin-bottom:28px;max-width:var(--max-prose);}
+.txt{font-family:var(--fb);font-size:15.5px;font-weight:400;line-height:1.9;color:var(--text);margin-bottom:0;max-width:var(--max-prose);letter-spacing:.01em;}
+.txt+.txt{margin-top:18px;}
+.bl-t{font-family:var(--fd);font-size:22px;font-weight:400;color:var(--deep);margin-bottom:10px;letter-spacing:-.01em;}
+.bl-d{font-family:var(--fb);font-size:15.5px;font-weight:400;line-height:1.9;color:var(--text);letter-spacing:.01em;}
+.ft-title{font-family:var(--fb);font-size:15px;font-weight:500;color:var(--deep);display:block;margin-bottom:3px;}
+.ft-text{font-family:var(--fb);font-size:15.5px;font-weight:400;line-height:1.9;color:var(--text-light);letter-spacing:.01em;}
+.svc-q{font-family:var(--fd);font-size:22px;font-style:italic;font-weight:400;color:var(--sage);padding:14px 0 14px 24px;margin:28px 0;line-height:1.68;position:relative;max-width:var(--max-prose);}
+.svc-q::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,var(--sage),transparent);}
+.info-n{font-family:var(--fd);font-size:46px;font-weight:300;color:var(--sage);display:block;line-height:1;opacity:0;transform:translateY(14px) scale(.88);transition:opacity .55s ease,transform .55s var(--ease-spring);}
+.info-n.shown{opacity:1;transform:translateY(0) scale(1);}
+.info-l{font-family:var(--fb);font-size:9px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);display:block;margin-top:8px;}
+.faq-q{font-family:var(--fd);font-size:22px;font-weight:400;color:#fff;margin-bottom:14px;letter-spacing:-.01em;}
+.faq-a{font-family:var(--fb);font-size:15.5px;font-weight:400;line-height:1.9;color:rgba(253,250,245,.76);letter-spacing:.01em;}
+.cta-t{font-family:var(--fd);font-size:clamp(38px,4.8vw,66px);font-weight:400;color:var(--deep);margin-bottom:20px;letter-spacing:-.02em;position:relative;z-index:1;}
+.cta-t em{font-style:italic;color:var(--sage);}
+.cta-s{font-family:var(--fb);font-size:15.5px;font-weight:400;color:var(--text);margin-bottom:44px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.9;position:relative;z-index:1;letter-spacing:.01em;}
+.ft-brand{font-family:var(--fd);font-size:30px;color:var(--warm-white);margin-bottom:12px;font-weight:300;}
+.ft-brand em{color:var(--sage-light);font-style:italic;}
+.ft-sub{font-family:var(--fb);font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--sage);margin-bottom:20px;font-weight:500;}
+.ft-bio{font-family:var(--fb);font-size:15.5px;line-height:1.9;color:rgba(249,245,239,.68);max-width:320px;font-weight:400;letter-spacing:.01em;}
+.ft-col-t{font-family:var(--fb);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.2em;color:var(--warm-white);margin-bottom:28px;}
+.ft-links{list-style:none;padding:0;}
+.ft-links li{margin-bottom:14px;}
+.ft-links a{font-family:var(--fb);font-size:14.5px;font-weight:400;color:rgba(249,245,239,.6);text-decoration:none;transition:color .3s,transform .3s;display:inline-block;}
+.ft-links a:hover{color:var(--sage-light);transform:translateX(5px);}
+.fco{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.fco-i{width:16px;height:16px;stroke:var(--sage);flex-shrink:0;}
+.fco-t{font-family:var(--fb);font-size:14.5px;font-weight:400;color:rgba(249,245,239,.68);text-decoration:none;transition:color .3s;}
+.fco-t:hover{color:var(--warm-white);}
+
+/* =============================================
+   SERVICE SEKCIJE — DESKTOP
+   ============================================= */
+.svc{padding:var(--section-v) 0;position:relative;overflow:hidden;}
+.svc:nth-child(odd){background:var(--warm-white);}
+.svc:nth-child(even){background:var(--cream);}
+.svc-watermark{position:absolute;font-family:var(--fd);font-size:clamp(200px,22vw,300px);font-weight:300;color:rgba(122,158,126,.033);line-height:1;user-select:none;pointer-events:none;z-index:0;right:-30px;top:50%;transform:translateY(-50%);will-change:transform;}
+.svc:nth-child(even) .svc-watermark{left:-30px;right:auto;}
+.svc-in{display:grid;grid-template-columns:1fr 1fr;gap:var(--col-gap);align-items:center;position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--side-pad);}
+.svc-in.rev .svc-vis{order:2;}.svc-in.rev .svc-content{order:1;}
+.svc-vis{position:relative;width:100%;opacity:0;transform:translateX(-32px) scale(.97);transition:opacity .95s var(--ease-out),transform .95s var(--ease-out);}
+.svc-in.rev .svc-vis{transform:translateX(32px) scale(.97);}
+.svc-vis.iv{opacity:1;transform:translateX(0) scale(1);}
+.svc-vis::before,.svc-vis::after{content:'';position:absolute;z-index:0;border-radius:4px 44px 4px 44px;opacity:0;transform:scale(.92);transition:opacity .9s var(--ease-out) .1s,transform .9s var(--ease-out) .1s;}
+.svc-vis::before{top:-14px;left:-14px;right:14px;bottom:14px;border:1px solid rgba(122,158,126,.17);}
+.svc-vis::after{top:14px;left:14px;right:-14px;bottom:-14px;border:1px solid rgba(201,169,110,.11);}
+.svc-vis.iv::before,.svc-vis.iv::after{opacity:1;transform:scale(1);}
+.svc-vis:hover::before{transform:translate(-5px,-5px)!important;}
+.svc-vis:hover::after{transform:translate(5px,5px)!important;}
+.svc-frame{width:100%;padding-bottom:108%;border-radius:4px 44px 4px 44px;overflow:hidden;position:relative;z-index:1;box-shadow:0 28px 72px rgba(0,0,0,.16),0 6px 20px rgba(0,0,0,.09);clip-path:inset(0 100% 0 0 round 4px 44px 4px 44px);transition:clip-path 1.15s var(--ease-out);}
+.svc-vis.iv .svc-frame{clip-path:inset(0 0% 0 0 round 4px 44px 4px 44px);}
+.svc-ph{position:absolute;inset:0;z-index:1;}
+.svc-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:2;transform:scale(1.1);transition:transform 1.5s var(--ease-out);}
+.svc-vis.iv .svc-frame img{transform:scale(1.0);}
+.svc-vis:hover .svc-frame img{transform:scale(1.04)!important;}
+.svc-frame::after{content:'';position:absolute;inset:0;z-index:3;background:linear-gradient(135deg,rgba(255,255,255,.1) 0%,transparent 50%,rgba(0,0,0,.06) 100%);opacity:0;transition:opacity .5s;}
+.svc-vis:hover .svc-frame::after{opacity:1;}
+.svc-tag{position:absolute;bottom:-14px;right:22px;z-index:5;background:var(--deep);padding:16px 22px;border-radius:2px;box-shadow:0 10px 44px rgba(0,0,0,.26);opacity:0;transform:translateY(14px);transition:opacity .7s ease .55s,transform .7s var(--ease-out) .55s;}
+.svc-vis.iv .svc-tag{opacity:1;transform:translateY(0);}
+.svc-tag-n{font-family:var(--fd);font-size:32px;font-weight:300;color:var(--sage-light);display:block;line-height:1;}
+.svc-tag-l{font-family:var(--fb);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(253,250,245,.5);margin-top:5px;display:block;}
+.svc-num{position:absolute;top:-15px;left:22px;z-index:5;font-family:var(--fb);font-size:10px;letter-spacing:.22em;color:var(--sage);padding:6px 16px;border-radius:100px;border:1px solid rgba(122,158,126,.2);font-weight:500;}
+.svc:nth-child(odd) .svc-num{background:var(--warm-white);}
+.svc:nth-child(even) .svc-num{background:var(--cream);}
+.svc-divider{position:absolute;bottom:0;left:0;right:0;height:1px;z-index:2;background:linear-gradient(to right,transparent,rgba(122,158,126,.13) 20%,rgba(122,158,126,.13) 80%,transparent);}
+.svc-content{display:flex;flex-direction:column;justify-content:center;align-self:center;padding-top:0;}
+
+/* =============================================
+   REVEAL ANIMACIJE
+   ============================================= */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .85s ease,transform .85s var(--ease-out);}
+.reveal.shown{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:.04s;}.rd2{transition-delay:.13s;}.rd3{transition-delay:.23s;}
+.rd4{transition-delay:.34s;}.rd5{transition-delay:.46s;}
+.hr-a{width:0;height:1px;margin:24px 0;background:linear-gradient(to right,var(--sage),rgba(122,158,126,.08));transition:width 1.1s var(--ease-out);}
+.hr-a.shown{width:64px;}
+
+/* Info row */
+.info-row{display:flex;gap:0;margin:34px 0;flex-wrap:wrap;border:1px solid rgba(122,158,126,.16);border-radius:2px;overflow:hidden;max-width:var(--max-prose);}
+.info-it{text-align:center;flex:1;min-width:80px;padding:22px 12px;border-right:1px solid rgba(122,158,126,.12);}
+.info-it:last-child{border-right:none;}
+
+/* Blocks */
+.blocks{margin:30px 0;display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:var(--max-prose);}
+.bl{background:var(--sage-pale);padding:26px 22px;border-radius:2px;border-left:3px solid var(--sage);position:relative;overflow:hidden;transition:transform .35s var(--ease-out),box-shadow .35s;}
+.bl::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(122,158,126,.06),transparent);opacity:0;transition:opacity .3s;}
+.bl:hover{transform:translateY(-4px);box-shadow:0 14px 44px rgba(122,158,126,.12);}
+.bl:hover::before{opacity:1;}
+.svc:nth-child(even) .bl{background:var(--warm-white);}
+
+/* Features */
+.feats{margin:26px 0;display:grid;gap:4px;max-width:var(--max-prose);}
+.feat{display:flex;align-items:flex-start;gap:16px;padding:12px 14px;border-radius:2px;transition:background .3s;}
+.feat:hover{background:rgba(122,158,126,.05);}
+.fdot{width:5px;height:5px;background:var(--sage);border-radius:50%;margin-top:12px;flex-shrink:0;transition:transform .3s,box-shadow .3s;}
+.feat:hover .fdot{transform:scale(1.7);box-shadow:0 0 8px rgba(122,158,126,.4);}
+
+/* Button */
+.btn-p{display:inline-flex;align-items:center;gap:12px;font-family:var(--fb);font-size:10.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--deep);background:var(--sage-light);padding:16px 40px;text-decoration:none;border-radius:1px;position:relative;overflow:hidden;margin-top:16px;transition:transform .35s var(--ease-out),box-shadow .35s;}
+.btn-p::before{content:'';position:absolute;inset:0;background:var(--gold-light);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease-io);}
+.btn-p:hover::before{transform:scaleX(1);}
+.btn-p:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(122,158,126,.26);}
+.btn-p span,.btn-p svg{position:relative;z-index:1;}
+.btn-arrow{transition:transform .35s var(--ease-out);}
+.btn-p:hover .btn-arrow{transform:translateX(6px);}
+
+/* FAQ */
+.faq-sec{padding:100px 0;background:var(--deep);}
+.faq-inner{max-width:var(--container);margin:0 auto;padding:0 var(--side-pad);}
+.faq-t{font-family:var(--fd);font-size:clamp(32px,3.8vw,54px);font-weight:400;color:var(--warm-white);text-align:center;margin-bottom:60px;}
+.faq-t em{font-style:italic;color:var(--sage-light);}
+.faq-g{display:grid;grid-template-columns:1fr 1fr;gap:2px;}
+.faq-i{background:rgba(122,158,126,.05);border:1px solid rgba(122,158,126,.12);padding:36px 38px;transition:background .3s,border-color .3s;position:relative;overflow:hidden;}
+.faq-i::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--sage),transparent);transform:scaleX(0);transition:transform .5s var(--ease-out);}
+.faq-i:hover{background:rgba(122,158,126,.1);border-color:rgba(122,158,126,.25);}
+.faq-i:hover::before{transform:scaleX(1);}
+
+/* CTA */
+.cta-sec{padding:110px var(--side-pad);background:var(--cream);text-align:center;position:relative;overflow:hidden;}
+.cta-sec::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(122,158,126,.07),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.cta-sec .btn-p{position:relative;z-index:1;}
+
+/* =============================================
+   FOOTER
+   ============================================= */
+footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,255,255,.05);}
+.ft-inner{max-width:var(--container);margin:0 auto;padding:0 var(--side-pad);}
+.ft1{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:60px;margin-bottom:80px;}
+.ft2{padding:40px var(--side-pad);border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;}
+.ft-copy{font-family:var(--fb);font-size:12px;color:rgba(249,245,239,.48);}
+.socials{display:flex;gap:20px;}
+.soc svg{width:18px;height:18px;fill:none;stroke:rgba(249,245,239,.38);stroke-width:1.5;transition:all .3s;}
+.soc:hover svg{stroke:var(--sage-light);transform:translateY(-3px);}
+
+/* =============================================
+   RESPONSIVE — TABLET (max 1280px)
+   ============================================= */
+@media(max-width:1280px){
+  :root{--side-pad:48px;--col-gap:64px;}
+  .al{font-size:9.5px;padding:14px 6px;}
+}
+
+/* =============================================
+   RESPONSIVE — TABLET (max 1024px)
+   ENKAPSULIRAN MOBILNI CSS — NE DIRAJU DESKTOP
+   ============================================= */
+@media(max-width:1024px){
+
+  :root{
+    --col-gap:48px;
+    --nav-h:64px;
+    --section-v:90px;
+    --side-pad:40px;
+  }
+
+  /* ---------- NAVIGACIJA ---------- */
+  /* Desktop linkovi sakriveni */
+  .nav-links{display:none!important;}
+
+  /* Hamburger dugme */
+  .nav-ham{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:5px;
+    width:48px;height:48px;
+    background:none;border:none;
+    cursor:pointer;
+    padding:6px;
+    position:relative;
+    z-index:9600;
+    flex-shrink:0;
+  }
+  .nav-ham span{
+    display:block;
+    width:24px;height:1.5px;
+    background:rgb(220,212,212);
+    border-radius:2px;
+    transition:transform .4s var(--ease-out), opacity .3s ease, width .4s var(--ease-out), background .3s ease;
+    transform-origin:center;
+  }
+  /* Kada je nav scrollan */
+  #nav.sc .nav-ham span{background:#2C3328;}
+
+  /* Open state — X transformacija */
+  .nav-ham.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:#fff;}
+  .nav-ham.open span:nth-child(2){opacity:0;width:0;}
+  .nav-ham.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:#fff;}
+
+  /* Hover efekat */
+  .nav-ham:not(.open):hover span:nth-child(2){width:16px;}
+
+  /* ---------- ANCHOR NAV ---------- */
+  /* Horizontalni scroll za anchor nav na tabletu */
+  .anav-inner{
+    display:flex;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    grid-template-columns:unset;
+    width:100%;
+  }
+  .anav-inner::-webkit-scrollbar{display:none;}
+  .al{
+    flex-shrink:0;
+    white-space:nowrap;
+    font-size:9px;
+    padding:14px 16px;
+    letter-spacing:.06em;
+    min-height:48px;
+  }
+
+  /* ---------- HERO ---------- */
+  .hero-stat{display:none;}
+  .page-hero{
+    height:75vh;
+    padding:0 var(--side-pad);
+  }
+  .hero-h1{font-size:clamp(52px,9vw,88px);}
+  .hero-side-text{display:none;}
+
+  /* ---------- SERVICE LAYOUT ---------- */
+  .svc-in,
+  .svc-in.rev{
+    grid-template-columns:1fr;
+    gap:52px;
+  }
+  /* Svi vizuali na vrh, content ispod */
+  .svc-in .svc-vis,
+  .svc-in.rev .svc-vis{order:1;}
+  .svc-in .svc-content,
+  .svc-in.rev .svc-content{order:2;}
+
+  /* Asimetrično pomeranje vizuala — zadržava premium osećaj */
+  .svc-vis{
+    width:calc(100% + var(--side-pad));
+    max-width:none;
+    margin:0;
+    /* Neparni servisi: slika blago izlazi levo */
+    margin-left:calc(var(--side-pad) * -0.5);
+    transform:translateY(28px) scale(.97)!important;
+  }
+  /* Parni servisi: slika blago izlazi desno */
+  .svc-in.rev .svc-vis{
+    margin-left:0;
+    margin-right:calc(var(--side-pad) * -0.5);
+    transform:translateY(28px) scale(.97)!important;
+  }
+
+  .svc-vis.iv{transform:translateY(0) scale(1)!important;}
+
+  .svc-frame{
+    padding-bottom:68%;
+    border-radius:2px 32px 2px 32px;
+  }
+
+  /* Content ima blagi indent za asimetriju */
+  .svc-content{
+    padding-left:0;
+  }
+
+  /* Skaliranje tipografije */
+  .s-title{font-size:clamp(36px,6vw,56px);}
+  .lead{font-size:20px;}
+  .txt{font-size:15px;}
+
+  /* Blocks u 1 kolonu */
+  .blocks{grid-template-columns:1fr;}
+
+  /* FAQ u 1 kolonu */
+  .faq-g{grid-template-columns:1fr;}
+
+  /* Max-width override */
+  .txt,.lead,.svc-q,.info-row,.blocks,.feats{max-width:100%!important;}
+
+  /* Touch target za dugmad */
+  .btn-p{
+    min-height:52px;
+    padding:16px 36px;
+    display:inline-flex;
+    align-items:center;
+  }
+
+  /* CTA sekcija */
+  .cta-sec{padding:80px var(--side-pad);}
+
+  /* Footer grid */
+  .ft1{
+    grid-template-columns:1fr 1fr;
+    gap:40px;
+  }
+}
+
+/* =============================================
+   RESPONSIVE — MOBILNI TELEFONI (max 768px)
+   ============================================= */
+@media(max-width:768px){
+
+  :root{
+    --nav-h:58px;
+    --section-v:72px;
+    --side-pad:22px;
+    --col-gap:32px;
+  }
+
+  /* Nav padding */
+  #nav{padding:0 var(--side-pad);}
+
+  /* Logo prilagođen */
+  .nav-logo-first{font-size:21px;}
+  .nav-logo-last{font-size:19px;letter-spacing:.07em;}
+  .nav-logo-title{font-size:8.5px;letter-spacing:.12em;}
+  .nav-logo-accent{height:38px;}
+
+  /* Lang pillule — kompaktne */
+  .lang-pill{
+    font-size:8.5px;
+    padding:5px 9px;
+    min-height:36px;
+    min-width:36px;
+    display:flex;align-items:center;justify-content:center;
+  }
+
+  /* Hamburger vidljiviji na beloj pozadini */
+  .nav-ham{width:44px;height:44px;}
+
+  /* Hero */
+  .page-hero{
+    height:65vh;
+    min-height:480px;
+    padding:0 var(--side-pad);
+  }
+  .hero-h1{
+    font-size:clamp(44px,11vw,72px);
+    letter-spacing:-.04em;
+  }
+  .hero-tagline{
+    font-size:9px;
+    letter-spacing:.2em;
+    margin-top:20px;
+  }
+  .hero-scroll-hint{bottom:28px;left:var(--side-pad);}
+
+  /* Anchor nav */
+  .al{
+    font-size:8px;
+    padding:12px 14px;
+    letter-spacing:.04em;
+    min-height:44px;
+  }
+
+  /* Service vizuali — pune širine sa blagim offsetom */
+  .svc-vis{
+    width:calc(100% + var(--side-pad));
+    margin-left:calc(var(--side-pad) * -1);
+    margin-right:0;
+  }
+  .svc-in.rev .svc-vis{
+    margin-left:0;
+    margin-right:calc(var(--side-pad) * -1);
+  }
+
+  /* Svc tag pomeren radi malih ekrana */
+  .svc-tag{
+    right:12px;
+    bottom:-10px;
+    padding:12px 16px;
+  }
+  .svc-tag-n{font-size:26px;}
+
+  /* Watermark još maniji */
+  .svc-watermark{font-size:clamp(120px,35vw,200px);}
+
+  /* Section padding */
+  .svc{padding:var(--section-v) 0;}
+  .svc-in{padding:0 var(--side-pad);}
+
+  /* S-title */
+  .s-title{font-size:clamp(32px,8vw,48px);}
+  .lead{font-size:18px;line-height:1.65;}
+  .txt{font-size:14.5px;line-height:1.85;}
+  .bl-t{font-size:19px;}
+  .bl-d{font-size:14.5px;}
+  .svc-q{font-size:18px;padding-left:18px;}
+  .info-n{font-size:38px;}
+  .info-it{padding:18px 8px;}
+
+  /* FAQ */
+  .faq-sec{padding:72px 0;}
+  .faq-inner{padding:0 var(--side-pad);}
+  .faq-i{padding:28px 22px;}
+  .faq-q{font-size:19px;}
+  .faq-a{font-size:14.5px;}
+
+  /* CTA */
+  .cta-sec{padding:72px var(--side-pad);}
+  .cta-t{font-size:clamp(34px,8vw,52px);}
+  .cta-s{font-size:14.5px;margin-bottom:36px;}
+
+  /* Footer */
+  .ft-inner{padding:0 var(--side-pad);}
+  .ft1{grid-template-columns:1fr;gap:36px;margin-bottom:52px;}
+  .ft2{
+    flex-direction:column;gap:20px;
+    align-items:flex-start;
+    padding:32px var(--side-pad);
+  }
+  .ft-copy{font-size:11px;}
+  .ft-brand{font-size:26px;}
+}
+
+/* =============================================
+   RESPONSIVE — MALI TELEFONI (max 560px)
+   ============================================= */
+@media(max-width:560px){
+  :root{--side-pad:18px;}
+
+  /* Anchor nav 2x2 grid na malim ekranima */
+  .anav-inner{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    overflow-x:unset;
+  }
+  .al{
+    padding:11px 8px;
+    font-size:8px;
+    border-bottom:1px solid rgba(122,158,126,.07);
+    min-height:44px;
+  }
+  .al:nth-child(1),.al:nth-child(2){border-bottom:1px solid rgba(122,158,126,.07);}
+
+  /* Blok lista u 1 kolonu */
+  .blocks{grid-template-columns:1fr;}
+
+  /* Feat text veći touch target */
+  .feat{padding:14px 10px;min-height:48px;}
+
+  /* CTA dugme puna širina */
+  .btn-p{
+    width:100%;
+    justify-content:center;
+    padding:18px 24px;
+  }
+
+  /* Mobile nav linkovi još veći na malim ekranima */
+  .mob-nav-links a{font-size:clamp(28px,9vw,42px);}
+  .mob-nav-inner{padding:0 var(--side-pad);}
+}
+
+/* =============================================
+   TOUCH UREĐAJI — Ubrzanje animacija ~20%
+   Sve reveal animacije ostaju aktivne ali su brže
+   za fluidno klizanje prstom
+   ============================================= */
+@media (hover:none) and (pointer:coarse){
+
+  /* Ubrzane reveal tranzicije */
+  .reveal{
+    transition:
+      opacity .68s ease,
+      transform .68s var(--ease-out);
+  }
+  .hr-a{transition:width .88s var(--ease-out);}
+
+  /* Ubrzane svc-vis animacije */
+  .svc-vis{
+    transition:
+      opacity .76s var(--ease-out),
+      transform .76s var(--ease-out)!important;
+  }
+  /* Ubrzano clip-path otkrivanje slike */
+  .svc-frame{
+    transition:clip-path .92s var(--ease-out);
+  }
+  /* Ubrzana svc-tag animacija */
+  .svc-tag{
+    transition:
+      opacity .56s ease .44s,
+      transform .56s var(--ease-out) .44s;
+  }
+
+  /* info-n animacije */
+  .info-n{
+    transition:
+      opacity .44s ease,
+      transform .44s var(--ease-spring);
+  }
+
+  /* Disable hover efekti na touch (ne rade ionako) */
+  .bl:hover{transform:none;box-shadow:none;}
+  .feat:hover{background:transparent;}
+  .feat:hover .fdot{transform:none;box-shadow:none;}
+  .svc-vis:hover .svc-frame img{transform:scale(1.0)!important;}
+  .faq-i:hover{background:rgba(122,158,126,.05);border-color:rgba(122,158,126,.12);}
+  .faq-i:hover::before{transform:scaleX(0);}
+
+  /* Touch targets — minimalno 48x48px */
+  .al{min-height:48px;}
+  .lang-pill{min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;}
+  .soc{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;}
+  .ft-links a{min-height:44px;display:flex;align-items:center;}
+  .ft-links a:hover{transform:none;}
+  .fco{min-height:44px;}
+}
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="read-progress" id="readProgress"></div>
+
+<!-- Custom cursor (desktop) -->
+<div class="cdot" id="cdot"></div>
+
+<!-- =============================================
+     FULLSCREEN MOBILNI MENI OVERLAY
+     ============================================= -->
+<div class="mob-nav" id="mobNav" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="mob-nav-inner">
+    <div class="mob-nav-line"></div>
+
+    <ul class="mob-nav-links" id="mobNavLinks">
+      <!-- SR linkovi -->
+      <li class="t-sr"><a href="index.html?nopreload" id="mobLinkClose">Početna</a></li>
+      <li class="t-sr"><a href="#" class="js-top">Usluge</a></li>
+      <li class="t-sr"><a href="oblastirada.html">Oblasti rada</a></li>
+      <li class="t-sr"><a href="index.html?nopreload#intro">O meni</a></li>
+      <li class="t-sr"><a href="index.html?nopreload#contact" class="nav-cta-mob">Kontakt →</a></li>
+      <!-- EN linkovi -->
+      <li class="t-en"><a href="index.html?nopreload">Home</a></li>
+      <li class="t-en"><a href="#" class="js-top">Services</a></li>
+      <li class="t-en"><a href="oblastirada.html">Areas</a></li>
+      <li class="t-en"><a href="index.html?nopreload#intro">About me</a></li>
+      <li class="t-en"><a href="index.html?nopreload#contact" class="nav-cta-mob">Contact →</a></li>
+      <!-- RU linkovi -->
+      <li class="t-ru"><a href="index.html?nopreload">Главная</a></li>
+      <li class="t-ru"><a href="#" class="js-top">Услуги</a></li>
+      <li class="t-ru"><a href="oblastirada.html">Области</a></li>
+      <li class="t-ru"><a href="index.html?nopreload#intro">Обо мне</a></li>
+      <li class="t-ru"><a href="index.html?nopreload#contact" class="nav-cta-mob">Контакт →</a></li>
+    </ul>
+
+    <!-- Jezičke pilule unutar mobilnog menija -->
+    <div class="mob-nav-langs">
+      <button class="lang-pill" onclick="setLang('sr');closeMobNav();">SR</button>
+      <button class="lang-pill" onclick="setLang('en');closeMobNav();">EN</button>
+      <button class="lang-pill" onclick="setLang('ru');closeMobNav();">RU</button>
+    </div>
+  </div>
+</div>
+
+<!-- =============================================
+     NAVIGACIJA
+     ============================================= -->
+<nav id="nav">
+  <a href="index.html?nopreload" class="nav-logo">
+    <div class="nav-logo-accent"></div>
+    <div class="nav-logo-text">
+      <div class="nav-logo-name">
+        <span class="nav-logo-first">Elena</span>
+        <span class="nav-logo-last">Ivancova</span>
+      </div>
+      <div class="nav-logo-divider"></div>
+      <span class="nav-logo-title t-sr">Klinički psiholog &nbsp;·&nbsp; Geštalt psihoterapeut</span>
+      <span class="nav-logo-title t-en">Clinical Psychologist &nbsp;·&nbsp; Gestalt Psychotherapist</span>
+      <span class="nav-logo-title t-ru">Клинический психолог &nbsp;·&nbsp; Гештальт психотерапевт</span>
+    </div>
+  </a>
+
+  <!-- Desktop navigacioni linkovi -->
+  <ul class="nav-links">
+    <li class="t-sr"><a href="index.html?nopreload">Početna</a></li>
+    <li class="t-sr"><a href="#" class="active js-top">Usluge</a></li>
+    <li class="t-sr"><a href="oblastirada.html">Oblasti</a></li>
+    <li class="t-sr"><a href="index.html?nopreload#intro">O meni</a></li>
+    <li class="t-sr"><a href="index.html?nopreload#contact" class="nav-cta">Kontakt</a></li>
+    <li class="t-en"><a href="index.html?nopreload">Home</a></li>
+    <li class="t-en"><a href="#" class="active js-top">Services</a></li>
+    <li class="t-en"><a href="oblastirada.html">Areas</a></li>
+    <li class="t-en"><a href="index.html?nopreload#intro">About me</a></li>
+    <li class="t-en"><a href="index.html?nopreload#contact" class="nav-cta">Contact</a></li>
+    <li class="t-ru"><a href="index.html?nopreload">Главная</a></li>
+    <li class="t-ru"><a href="#" class="active js-top">Услуги</a></li>
+    <li class="t-ru"><a href="oblastirada.html">Области</a></li>
+    <li class="t-ru"><a href="index.html?nopreload#intro">Обо мне</a></li>
+    <li class="t-ru"><a href="index.html?nopreload#contact" class="nav-cta">Контакт</a></li>
+  </ul>
+
+  <div style="display:flex;align-items:center;gap:14px;">
+    <!-- Lang pillule — desktop -->
+    <div class="lang-pills">
+      <button class="lang-pill" onclick="setLang('sr')">SR</button>
+      <button class="lang-pill" onclick="setLang('en')">EN</button>
+      <button class="lang-pill" onclick="setLang('ru')">RU</button>
+    </div>
+    <!-- Hamburger dugme — vidljivo samo na mobile/tablet -->
+    <button class="nav-ham" id="navHam" aria-label="Otvori meni" aria-expanded="false" aria-controls="mobNav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- =============================================
+     HERO
+     ============================================= -->
+<section class="page-hero" id="pageTop">
+  <div class="hero-img" id="heroImg"></div>
+  <div class="hero-stat" aria-hidden="true">
+    <div class="hero-stat-line"></div>
+    <span class="hero-stat-n">4</span>
+    <span class="hero-stat-l t-sr">Oblasti<br>rada</span>
+    <span class="hero-stat-l t-en">Areas<br>of practice</span>
+    <span class="hero-stat-l t-ru">Области<br>практики</span>
+  </div>
+  <div class="hero-content">
+    <h1 class="hero-h1">
+      <span class="t-sr">Terapijske<br><em>Usluge</em></span>
+      <span class="t-en">Therapeutic<br><em>Services</em></span>
+      <span class="t-ru">Терапевтические<br><em>Услуги</em></span>
+    </h1>
+    <div class="hero-divider"></div>
+    <p class="hero-tagline t-sr">Prostor za promenu · Beograd &amp; Online</p>
+    <p class="hero-tagline t-en">A space for change · Belgrade &amp; Online</p>
+    <p class="hero-tagline t-ru">Пространство для изменений · Белград &amp; Онлайн</p>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="hero-scroll-line"></div>
+    <span class="hero-scroll-txt t-sr">Skrolujte</span>
+    <span class="hero-scroll-txt t-en">Scroll</span>
+    <span class="hero-scroll-txt t-ru">Прокрутите</span>
+  </div>
+  <div class="hero-side-text">
+    <span class="t-sr">EST. 2026 / BEOGRAD</span>
+    <span class="t-en">EST. 2026 / BELGRADE</span>
+    <span class="t-ru">EST. 2026 / БЕЛГРАД</span>
+  </div>
+</section>
+
+<!-- =============================================
+     ANCHOR NAV
+     ============================================= -->
+<nav class="anav" id="anav" aria-label="Sekcije">
+  <div class="anav-inner">
+    <a href="#individualna" class="al t-sr">Individualna Psihoterapija</a>
+    <a href="#individualna" class="al t-en">Individual Psychotherapy</a>
+    <a href="#individualna" class="al t-ru">Индивидуальная Психотерапия</a>
+    <a href="#parovi" class="al t-sr">Psihoterapija za Parove</a>
+    <a href="#parovi" class="al t-en">Couples Psychotherapy</a>
+    <a href="#parovi" class="al t-ru">Психотерапия для Пар</a>
+    <a href="#online" class="al t-sr">Online Psihoterapija</a>
+    <a href="#online" class="al t-en">Online Psychotherapy</a>
+    <a href="#online" class="al t-ru">Онлайн Психотерапия</a>
+    <a href="#dijagnostika" class="al t-sr">Psihološka Dijagnostika</a>
+    <a href="#dijagnostika" class="al t-en">Psychological Diagnostics</a>
+    <a href="#dijagnostika" class="al t-ru">Психологическая Диагностика</a>
+  </div>
+</nav>
+
+<!-- =============================================
+     SERVICE 01 — INDIVIDUALNA
+     ============================================= -->
+<section class="svc" id="individualna">
+  <div class="svc-watermark" data-parallax=".14">01</div>
+  <div class="svc-in">
+    <div class="svc-vis">
+      <span class="svc-num t-sr">Usluga 01</span><span class="svc-num t-en">Service 01</span><span class="svc-num t-ru">Услуга 01</span>
+      <div class="svc-frame">
+        <div class="svc-ph" style="background:linear-gradient(155deg,#C4B5A5,#8C7B6E)"></div>
+        <img src="images/individualna.jpg" alt="Individualna psihoterapija" loading="lazy">
+      </div>
+      <div class="svc-tag">
+        <span class="svc-tag-n">50'</span>
+        <span class="svc-tag-l t-sr">Po sesiji</span>
+        <span class="svc-tag-l t-en">Per session</span>
+        <span class="svc-tag-l t-ru">За сессию</span>
+      </div>
+    </div>
+    <div class="svc-content">
+      <p class="s-eye reveal rd1 t-sr">Psihološka podrška</p>
+      <p class="s-eye reveal rd1 t-en">Psychological Support</p>
+      <p class="s-eye reveal rd1 t-ru">Психологическая поддержка</p>
+      <h2 class="s-title reveal rd2 t-sr">Individualna<br><em>Psihoterapija</em></h2>
+      <h2 class="s-title reveal rd2 t-en">Individual<br><em>Psychotherapy</em></h2>
+      <h2 class="s-title reveal rd2 t-ru">Индивидуальная<br><em>Психотерапия</em></h2>
+      <div class="hr-a reveal rd2"></div>
+      <p class="lead reveal rd3 t-sr">"Svaka osoba nosi u sebi sve što joj je potrebno za ozdravljenje."</p>
+      <p class="lead reveal rd3 t-en">"Every person carries within themselves everything they need for healing."</p>
+      <p class="lead reveal rd3 t-ru">"Каждый человек несёт в себе всё необходимое для исцеления."</p>
+      <p class="txt reveal rd3 t-sr">Individualna psihoterapija je siguran prostor za istraživanje misli, osećanja i obrazaca ponašanja. Radimo zajedno — u poverljivom i neosudujućem okruženju.</p>
+      <p class="txt reveal rd3 t-sr">Cilj je da pronađete unutrašnji balans, prevaziđete blokade i počnete da živite autentičnije.</p>
+      <p class="txt reveal rd3 t-en">Individual psychotherapy is a safe space to explore your thoughts, feelings and behavioral patterns. We work together — in a confidential, non-judgmental setting.</p>
+      <p class="txt reveal rd3 t-en">The goal is to find inner balance, overcome blockages and live more authentically.</p>
+      <p class="txt reveal rd3 t-ru">Индивидуальная психотерапия — это безопасное пространство для исследования мыслей, чувств и паттернов поведения в доверительной атмосфере.</p>
+      <p class="txt reveal rd3 t-ru">Цель — найти внутренний баланс, преодолеть блоки и начать жить более аутентично.</p>
+      <div class="info-row reveal rd3">
+        <div class="info-it"><span class="info-n">50'</span><span class="info-l t-sr">Trajanje</span><span class="info-l t-en">Duration</span><span class="info-l t-ru">Длительность</span></div>
+        <div class="info-it"><span class="info-n">1×</span><span class="info-l t-sr">Nedeljno</span><span class="info-l t-en">Weekly</span><span class="info-l t-ru">Еженедельно</span></div>
+        <div class="info-it"><span class="info-n">6+</span><span class="info-l t-sr">Sesija min.</span><span class="info-l t-en">Sessions min.</span><span class="info-l t-ru">Сессий мин.</span></div>
+      </div>
+      <div class="blocks reveal rd4">
+        <div class="bl">
+          <p class="bl-t t-sr">Fokus rada</p><p class="bl-t t-en">Areas of Focus</p><p class="bl-t t-ru">Направления</p>
+          <p class="bl-d t-sr">Anksioznost, depresija, nisko samopouzdanje, stres, tuga, životne blokade i partnerski odnosi.</p>
+          <p class="bl-d t-en">Anxiety, depression, low self-esteem, stress, grief, life blockages and relationship issues.</p>
+          <p class="bl-d t-ru">Тревога, депрессия, самооценка, стресс, горе, жизненные блоки и отношения.</p>
+        </div>
+        <div class="bl">
+          <p class="bl-t t-sr">Metode rada</p><p class="bl-t t-en">Methods</p><p class="bl-t t-ru">Методы работы</p>
+          <p class="bl-d t-sr">Geštalt terapija, body awareness (telesna svesnost), eksperimentalne tehnike i rad sa snovima.</p>
+          <p class="bl-d t-en">Gestalt therapy, body awareness, experimental techniques and dream work.</p>
+          <p class="bl-d t-ru">Гештальт-терапия, осознанность тела, экспериментальные техники и работа со сновидениями.</p>
+        </div>
+      </div>
+      <div class="feats reveal rd4">
+        <div class="feat"><div class="fdot"></div><div><span class="ft-title t-sr">Poverljivost</span><span class="ft-title t-en">Confidentiality</span><span class="ft-title t-ru">Конфиденциальность</span><span class="ft-text t-sr">Sve što podelite ostaje strogo poverljivo, u skladu sa etičkim kodeksom.</span><span class="ft-text t-en">Everything you share remains strictly confidential, in line with the code of ethics.</span><span class="ft-text t-ru">Всё, что вы рассказываете, строго конфиденциально согласно этическому кодексу.</span></div></div>
+        <div class="feat"><div class="fdot"></div><div><span class="ft-title t-sr">Vaš tempo</span><span class="ft-title t-en">Your pace</span><span class="ft-title t-ru">Ваш темп</span><span class="ft-text t-sr">Terapijski proces se prilagođava isključivo vašim potrebama i ritmu.</span><span class="ft-text t-en">The therapeutic process adapts entirely to your needs and rhythm.</span><span class="ft-text t-ru">Процесс адаптируется исключительно к вашим потребностям и темпу.</span></div></div>
+        <div class="feat"><div class="fdot"></div><div><span class="ft-title t-sr">Bez osude</span><span class="ft-title t-en">Non-judgmental</span><span class="ft-title t-ru">Без осуждения</span><span class="ft-text t-sr">Nema pogrešnih osećanja ni glupih pitanja — svaki razgovor je dobrodošao.</span><span class="ft-text t-en">No wrong feelings or silly questions — every conversation is welcome.</span><span class="ft-text t-ru">Нет неправильных чувств и глупых вопросов — каждый разговор важен.</span></div></div>
+      </div>
+      <a href="index.html?nopreload#contact" class="btn-p reveal rd5">
+        <span class="t-sr">Zakažite sesiju</span><span class="t-en">Book a session</span><span class="t-ru">Записаться</span>
+        <svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="svc-divider"></div>
+</section>
+
+<!-- =============================================
+     SERVICE 02 — PAROVI
+     ============================================= -->
+<section class="svc" id="parovi">
+  <div class="svc-watermark" data-parallax=".14">02</div>
+  <div class="svc-in rev">
+    <div class="svc-content">
+      <p class="s-eye reveal rd1 t-sr">Usluga 02</p><p class="s-eye reveal rd1 t-en">Service 02</p><p class="s-eye reveal rd1 t-ru">Услуга 02</p>
+      <h2 class="s-title reveal rd2 t-sr">Psihoterapija<br><em>za Parove</em></h2>
+      <h2 class="s-title reveal rd2 t-en">Couples<br><em>Psychotherapy</em></h2>
+      <h2 class="s-title reveal rd2 t-ru">Психотерапия<br><em>для Пар</em></h2>
+      <div class="hr-a reveal rd2"></div>
+      <p class="lead reveal rd3 t-sr">"Zdrava veza ne znači odsustvo konflikta — znači sposobnost da se kroz njega prođe zajedno."</p>
+      <p class="lead reveal rd3 t-en">"A healthy relationship doesn't mean the absence of conflict — it means the ability to navigate it together."</p>
+      <p class="lead reveal rd3 t-ru">"Здоровые отношения — это способность проходить через конфликт вместе."</p>
+      <p class="txt reveal rd3 t-sr">Terapija za parove pruža siguran prostor za iskren razgovor — gde oba partnera mogu da govore i da budu saslušani.</p>
+      <p class="txt reveal rd3 t-sr">Radimo na komunikaciji, neispunjenim potrebama i obnovi bliskosti u vašoj vezi.</p>
+      <p class="txt reveal rd3 t-en">Couples therapy provides a safe space for honest conversation — where both partners can speak and truly be heard.</p>
+      <p class="txt reveal rd3 t-en">We work on communication, unmet needs and the restoration of closeness in your relationship.</p>
+      <p class="txt reveal rd3 t-ru">Терапия для пар — это пространство для честного разговора, где каждый партнёр может говорить и быть услышанным.</p>
+      <p class="txt reveal rd3 t-ru">Мы работаем над коммуникацией, неудовлетворёнными потребностями и восстановлением близости.</p>
+      <div class="info-row reveal rd3">
+        <div class="info-it"><span class="info-n">75'</span><span class="info-l t-sr">Trajanje</span><span class="info-l t-en">Duration</span><span class="info-l t-ru">Длительность</span></div>
+        <div class="info-it"><span class="info-n">2</span><span class="info-l t-sr">Partnera</span><span class="info-l t-en">Partners</span><span class="info-l t-ru">Партнёра</span></div>
+        <div class="info-it"><span class="info-n">8+</span><span class="info-l t-sr">Sesija min.</span><span class="info-l t-en">Sessions min.</span><span class="info-l t-ru">Сессий мин.</span></div>
+      </div>
+      <div class="blocks reveal rd4">
+        <div class="bl">
+          <p class="bl-t t-sr">Kada potražiti pomoć</p><p class="bl-t t-en">When to seek help</p><p class="bl-t t-ru">Когда обратиться</p>
+          <p class="bl-d t-sr">Česti sukobi, emocionalna udaljenost, nevera, kriza poverenja ili osecaj zastoja u vezi.</p>
+          <p class="bl-d t-en">Frequent conflicts, emotional distance, infidelity, trust crisis or a sense of stagnation.</p>
+          <p class="bl-d t-ru">Конфликты, эмоциональная дистанция, измена, кризис доверия или ощущение застоя.</p>
+        </div>
+        <div class="bl">
+          <p class="bl-t t-sr">Šta dobijate</p><p class="bl-t t-en">What you gain</p><p class="bl-t t-ru">Что вы получаете</p>
+          <p class="bl-d t-sr">Bolju komunikaciju, dublje razumevanje partnera i konkretne alate za rešavanje konflikata.</p>
+          <p class="bl-d t-en">Better communication, deeper understanding of your partner and concrete tools for conflict resolution.</p>
+          <p class="bl-d t-ru">Лучшую коммуникацию, понимание партнёра и конкретные инструменты для разрешения конфликтов.</p>
+        </div>
+      </div>
+      <p class="svc-q reveal rd4 t-sr">"Terapija za parove nije poslednji korak pre kraja — može biti prvi korak novog početka."</p>
+      <p class="svc-q reveal rd4 t-en">"Couples therapy isn't the last step before the end — it can be the first step of a new beginning."</p>
+      <p class="svc-q reveal rd4 t-ru">"Терапия для пар — это не последний шаг перед концом, а первый шаг нового начала."</p>
+      <a href="index.html?nopreload#contact" class="btn-p reveal rd5">
+        <span class="t-sr">Zakažite sesiju</span><span class="t-en">Book a session</span><span class="t-ru">Записаться</span>
+        <svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="svc-vis">
+      <span class="svc-num t-sr">Usluga 02</span><span class="svc-num t-en">Service 02</span><span class="svc-num t-ru">Услуга 02</span>
+      <div class="svc-frame">
+        <div class="svc-ph" style="background:linear-gradient(155deg,#B5A898,#7A6B5E)"></div>
+        <img src="images/parovi.jpg" alt="Psihoterapija za parove" loading="lazy">
+      </div>
+      <div class="svc-tag"><span class="svc-tag-n">75'</span><span class="svc-tag-l t-sr">Po sesiji</span><span class="svc-tag-l t-en">Per session</span><span class="svc-tag-l t-ru">За сессию</span></div>
+    </div>
+  </div>
+  <div class="svc-divider"></div>
+</section>
+
+<!-- =============================================
+     SERVICE 03 — ONLINE
+     ============================================= -->
+<section class="svc" id="online">
+  <div class="svc-watermark" data-parallax=".14">03</div>
+  <div class="svc-in">
+    <div class="svc-vis">
+      <span class="svc-num t-sr">Usluga 03</span><span class="svc-num t-en">Service 03</span><span class="svc-num t-ru">Услуга 03</span>
+      <div class="svc-frame">
+        <div class="svc-ph" style="background:linear-gradient(155deg,#7A9E7E,#3D4A38)"></div>
+        <img src="images/online.jpg" alt="Online psihoterapija" loading="lazy">
+      </div>
+      <div class="svc-tag"><span class="svc-tag-n">50'</span><span class="svc-tag-l t-sr">Online sesija</span><span class="svc-tag-l t-en">Online session</span><span class="svc-tag-l t-ru">Онлайн сессия</span></div>
+    </div>
+    <div class="svc-content">
+      <p class="s-eye reveal rd1 t-sr">Usluga 03</p><p class="s-eye reveal rd1 t-en">Service 03</p><p class="s-eye reveal rd1 t-ru">Услуга 03</p>
+      <h2 class="s-title reveal rd2 t-sr">Online<br><em>Psihoterapija</em></h2>
+      <h2 class="s-title reveal rd2 t-en">Online<br><em>Psychotherapy</em></h2>
+      <h2 class="s-title reveal rd2 t-ru">Онлайн<br><em>Психотерапия</em></h2>
+      <div class="hr-a reveal rd2"></div>
+      <p class="lead reveal rd3 t-sr">"Promena ne zahteva fizičko prisustvo — zahteva prisutnost uma i srca."</p>
+      <p class="lead reveal rd3 t-en">"Change doesn't require physical presence — it requires presence of mind and heart."</p>
+      <p class="lead reveal rd3 t-ru">"Изменения требуют присутствия ума и сердца."</p>
+      <p class="txt reveal rd3 t-sr">Online terapija je jednako efikasna kao i terapija uživo. Vi ste u svom prostoru — opušteni i sigurni.</p>
+      <p class="txt reveal rd3 t-sr">Posebno pogodna za srpsku dijasporu i sve one sa zahtevnim rasporedima.</p>
+      <p class="txt reveal rd3 t-en">Online therapy is just as effective as in-person therapy. You are in your own space — relaxed and safe.</p>
+      <p class="txt reveal rd3 t-en">Especially convenient for the Serbian diaspora and those with demanding schedules.</p>
+      <p class="txt reveal rd3 t-ru">Онлайн-терапия столь же эффективна, как очная. Вы находитесь в своём пространстве — расслабленно и безопасно.</p>
+      <p class="txt reveal rd3 t-ru">Особенно удобно для диаспоры и тех, у кого плотный график.</p>
+      <div class="info-row reveal rd3">
+        <div class="info-it"><span class="info-n">🌍</span><span class="info-l t-sr">Svuda</span><span class="info-l t-en">Worldwide</span><span class="info-l t-ru">Весь мир</span></div>
+        <div class="info-it"><span class="info-n">🔒</span><span class="info-l t-sr">Sigurno</span><span class="info-l t-en">Secure</span><span class="info-l t-ru">Безопасно</span></div>
+        <div class="info-it"><span class="info-n">📱</span><span class="info-l t-sr">Tel./PC</span><span class="info-l t-en">Phone/PC</span><span class="info-l t-ru">Тел./ПК</span></div>
+      </div>
+      <div class="blocks reveal rd4">
+        <div class="bl">
+          <p class="bl-t t-sr">Tehničke potrebe</p><p class="bl-t t-en">Requirements</p><p class="bl-t t-ru">Требования</p>
+          <p class="bl-d t-sr">Stabilan internet, kamera, mikrofon i tiho privatno mesto.</p>
+          <p class="bl-d t-en">Stable internet, camera, microphone and a quiet, private place.</p>
+          <p class="bl-d t-ru">Стабильный интернет, камера, микрофон и тихое место.</p>
+        </div>
+        <div class="bl">
+          <p class="bl-t t-sr">Platforme</p><p class="bl-t t-en">Platforms</p><p class="bl-t t-ru">Платформы</p>
+          <p class="bl-d t-sr">Zoom, Google Meet ili Signal — vi birate ono što vam odgovara.</p>
+          <p class="bl-d t-en">Zoom, Google Meet or Signal — you choose what suits you best.</p>
+          <p class="bl-d t-ru">Zoom, Google Meet или Signal — вы выбираете наиболее удобный вариант.</p>
+        </div>
+      </div>
+      <a href="index.html?nopreload#contact" class="btn-p reveal rd5">
+        <span class="t-sr">Zakažite online sesiju</span><span class="t-en">Book online session</span><span class="t-ru">Онлайн запись</span>
+        <svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+  </div>
+  <div class="svc-divider"></div>
+</section>
+
+<!-- =============================================
+     SERVICE 04 — DIJAGNOSTIKA
+     ============================================= -->
+<section class="svc" id="dijagnostika">
+  <div class="svc-watermark" data-parallax=".14">04</div>
+  <div class="svc-in rev">
+    <div class="svc-content">
+      <p class="s-eye reveal rd1 t-sr">Usluga 04</p><p class="s-eye reveal rd1 t-en">Service 04</p><p class="s-eye reveal rd1 t-ru">Услуга 04</p>
+      <h2 class="s-title reveal rd2 t-sr">Psihološka<br><em>Dijagnostika</em></h2>
+      <h2 class="s-title reveal rd2 t-en">Psychological<br><em>Diagnostics</em></h2>
+      <h2 class="s-title reveal rd2 t-ru">Психологическая<br><em>Диагностика</em></h2>
+      <div class="hr-a reveal rd2"></div>
+      <p class="lead reveal rd3 t-sr">"Razumeti sebe znači imati mapu — bez mape, svaki korak je nasumičan."</p>
+      <p class="lead reveal rd3 t-en">"Understanding yourself means having a map — without a map, every step is random."</p>
+      <p class="lead reveal rd3 t-ru">"Понять себя — значит иметь карту."</p>
+      <p class="txt reveal rd3 t-sr">Psihološka dijagnostika koristi standardizovane testove i klinička zapažanja. Dobijate jasnu sliku kognitivnih sposobnosti i emocionalne strukture.</p>
+      <p class="txt reveal rd3 t-sr">Proces završava detaljnim pismenim izveštajem i individualnom feedback sesijom.</p>
+      <p class="txt reveal rd3 t-en">Psychological diagnostics uses standardized tests and clinical observations. You receive a clear picture of your cognitive abilities and emotional structure.</p>
+      <p class="txt reveal rd3 t-en">The process concludes with a detailed written report and an individual feedback session.</p>
+      <p class="txt reveal rd3 t-ru">Диагностика использует стандартизированные тесты и клинические наблюдения. Вы получаете чёткую картину когнитивных способностей и эмоциональной структуры.</p>
+      <p class="txt reveal rd3 t-ru">Процесс завершается подробным письменным отчётом и индивидуальной сессией обратной связи.</p>
+      <div class="info-row reveal rd3">
+        <div class="info-it"><span class="info-n">2–3</span><span class="info-l t-sr">Sesije</span><span class="info-l t-en">Sessions</span><span class="info-l t-ru">Сессии</span></div>
+        <div class="info-it"><span class="info-l t-sr">Izveštaj</span><span class="info-l t-en">Report</span><span class="info-l t-ru">Отчёт</span></div>
+        <div class="info-it"><span class="info-n">✓</span><span class="info-l t-sr">Svi uzrasti</span><span class="info-l t-en">All ages</span><span class="info-l t-ru">Все возрасты</span></div>
+      </div>
+      <div class="blocks reveal rd4">
+        <div class="bl">
+          <p class="bl-t t-sr">Oblasti procene</p><p class="bl-t t-en">Assessment areas</p><p class="bl-t t-ru">Области оценки</p>
+          <p class="bl-d t-sr">Inteligencija, ličnost, anksioznost, depresija, pažnja, pamćenje i razvojne teškoće.</p>
+          <p class="bl-d t-en">Intelligence, personality, anxiety, depression, attention, memory and developmental difficulties.</p>
+          <p class="bl-d t-ru">Интеллект, личность, тревога, депрессия, внимание, память и трудности развития.</p>
+        </div>
+        <div class="bl">
+          <p class="bl-t t-sr">Ko može koristiti</p><p class="bl-t t-en">Who can benefit</p><p class="bl-t t-ru">Для кого</p>
+          <p class="bl-d t-sr">Odrasli, adolescenti i deca od 6 godina, bez obzira na razlog obraćanja.</p>
+          <p class="bl-d t-en">Adults, adolescents and children from age 6, regardless of the reason for contact.</p>
+          <p class="bl-d t-ru">Взрослые, подростки и дети от 6 лет, независимо от причины обращения.</p>
+        </div>
+      </div>
+      <a href="index.html?nopreload#contact" class="btn-p reveal rd5">
+        <span class="t-sr">Zakažite dijagnostiku</span><span class="t-en">Schedule diagnostics</span><span class="t-ru">Записаться на диагностику</span>
+        <svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+    <div class="svc-vis">
+      <span class="svc-num t-sr">Usluga 04</span><span class="svc-num t-en">Service 04</span><span class="svc-num t-ru">Услуга 04</span>
+      <div class="svc-frame">
+        <div class="svc-ph" style="background:linear-gradient(155deg,#C9A96E,#8C7B6E)"></div>
+        <img src="images/dijagnostika.jpg" alt="Psihološka dijagnostika" loading="lazy">
+      </div>
+      <div class="svc-tag"><span class="svc-tag-n">2–3</span><span class="svc-tag-l t-sr">Sesije</span><span class="svc-tag-l t-en">Sessions</span><span class="svc-tag-l t-ru">Сессии</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     FAQ
+     ============================================= -->
+<section class="faq-sec">
+  <div class="faq-inner">
+    <h2 class="faq-t reveal">
+      <span class="t-sr">Česta <em>Pitanja</em></span>
+      <span class="t-en">Frequently <em>Asked</em></span>
+      <span class="t-ru">Частые <em>Вопросы</em></span>
+    </h2>
+    <div class="faq-g">
+      <div class="faq-i reveal rd1">
+        <p class="faq-q t-sr">Koliko dugo traje terapija?</p>
+        <p class="faq-q t-en">How long does therapy last?</p>
+        <p class="faq-q t-ru">Сколько длится терапия?</p>
+        <p class="faq-a t-sr">Zavisi od ciljeva. Kratkotrajna terapija traje 8–12 sesija. Dublja lična promena zahteva godinu ili više.</p>
+        <p class="faq-a t-en">It depends on your goals. Short-term therapy lasts 8–12 sessions. Deeper personal change requires a year or more.</p>
+        <p class="faq-a t-ru">Зависит от ваших целей. Краткосрочная — 8–12 сессий. Глубокие изменения требуют год и больше.</p>
+      </div>
+      <div class="faq-i reveal rd2">
+        <p class="faq-q t-sr">Da li je terapija poverljiva?</p>
+        <p class="faq-q t-en">Is therapy confidential?</p>
+        <p class="faq-q t-ru">Конфиденциальна ли терапия?</p>
+        <p class="faq-a t-sr">Da, apsolutno. Sve ostaje između vas i terapeuta. Izuzetak su jedino zakonski propisani slučajevi opasnosti po život.</p>
+        <p class="faq-a t-en">Yes, absolutely. Everything stays between you and the therapist. The only exception is a legally mandated case of danger to life.</p>
+        <p class="faq-a t-ru">Да, абсолютно. Всё остаётся между вами и терапевтом. Исключение — лишь законодательно предусмотренные случаи опасности для жизни.</p>
+      </div>
+      <div class="faq-i reveal rd3">
+        <p class="faq-q t-sr">Šta da očekujem od prve sesije?</p>
+        <p class="faq-q t-en">What to expect from the first session?</p>
+        <p class="faq-q t-ru">Чего ждать от первой сессии?</p>
+        <p class="faq-a t-sr">Upoznajemo se i razgovaramo o tome šta vas je dovelo. Postavljamo osnovne ciljeve — bez pritiska i bez obaveza.</p>
+        <p class="faq-a t-en">We get acquainted and talk about what brought you here. We set basic goals — no pressure, no obligations.</p>
+        <p class="faq-a t-ru">Знакомимся и обсуждаем, что привело вас. Намечаем цели — без давления и обязательств.</p>
+      </div>
+      <div class="faq-i reveal rd4">
+        <p class="faq-q t-sr">Mogu li prekinuti terapiju?</p>
+        <p class="faq-q t-en">Can I stop therapy?</p>
+        <p class="faq-q t-ru">Могу ли прекратить терапию?</p>
+        <p class="faq-a t-sr">Da, u svakom trenutku. Terapija je dobrovoljna — vi odlučujete kada je pravo vreme za pauzu ili završetak.</p>
+        <p class="faq-a t-en">Yes, at any time. Therapy is voluntary — you decide when the right time for a break or conclusion is.</p>
+        <p class="faq-a t-ru">Да, в любое время. Терапия добровольна — вы сами решаете, когда подходящий момент для паузы или завершения.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     CTA
+     ============================================= -->
+<section class="cta-sec">
+  <h2 class="cta-t reveal">
+    <span class="t-sr">Spremni ste da počnete?</span>
+    <span class="t-en">Ready to <em>begin?</em></span>
+    <span class="t-ru">Готовы <em>начать?</em></span>
+  </h2>
+  <p class="cta-s reveal t-sr">Pišite mi ili pozovite — odgovaram u roku od 24 sata. Sve je poverljivo.</p>
+  <p class="cta-s reveal t-en">Write or call — we respond within 24 hours. Everything is confidential.</p>
+  <p class="cta-s reveal t-ru">Напишите или позвоните — ответим в течение 24 часов. Всё конфиденциально.</p>
+  <a href="index.html?nopreload#contact" class="btn-p reveal">
+    <span class="t-sr">Zakažite razgovor</span>
+    <span class="t-en">Schedule a conversation</span>
+    <span class="t-ru">Записаться</span>
+    <svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+  </a>
+</section>
+
+<!-- =============================================
+     FOOTER
+     ============================================= -->
+<footer>
+  <div class="ft-inner">
+    <div class="ft1">
+      <div>
+        <p class="ft-brand">Elena <em>Ivancova</em></p>
+        <p class="ft-sub t-sr">Klinički Psiholog · Geštalt Terapeut</p>
+        <p class="ft-sub t-en">Clinical Psychologist · Gestalt Therapist</p>
+        <p class="ft-sub t-ru">Клинический Психолог · Гештальт Терапевт</p>
+        <p class="ft-bio t-sr">Licencovani psihoterapeut sa višegodišnjim iskustvom u radu sa odraslima, parovima i adolescentima u Beogradu i onlajn.</p>
+        <p class="ft-bio t-en">Licensed psychotherapist with years of experience working with adults, couples and adolescents in Belgrade and online.</p>
+        <p class="ft-bio t-ru">Лицензированный психотерапевт с многолетним опытом работы в Белграде и онлайн.</p>
+      </div>
+      <div>
+        <p class="ft-col-t t-sr">Meni</p><p class="ft-col-t t-en">Menu</p><p class="ft-col-t t-ru">Меню</p>
+        <ul class="ft-links">
+          <li class="t-sr"><a href="index.html?nopreload">Početna</a></li>
+          <li class="t-sr"><a href="#" class="js-top">Usluge</a></li>
+          <li class="t-sr"><a href="oblastirada.html">Oblasti</a></li>
+          <li class="t-sr"><a href="index.html?nopreload#process">Proces</a></li>
+          <li class="t-sr"><a href="index.html?nopreload#contact">Kontakt</a></li>
+          <li class="t-en"><a href="index.html?nopreload">Home</a></li>
+          <li class="t-en"><a href="#" class="js-top">Services</a></li>
+          <li class="t-en"><a href="oblastirada.html">Areas</a></li>
+          <li class="t-en"><a href="index.html?nopreload#process">Process</a></li>
+          <li class="t-en"><a href="index.html?nopreload#contact">Contact</a></li>
+          <li class="t-ru"><a href="index.html?nopreload">Главная</a></li>
+          <li class="t-ru"><a href="#" class="js-top">Услуги</a></li>
+          <li class="t-ru"><a href="oblastirada.html">Области</a></li>
+          <li class="t-ru"><a href="index.html?nopreload#process">Процесс</a></li>
+          <li class="t-ru"><a href="index.html?nopreload#contact">Контакт</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="ft-col-t">FAQ</p>
+        <ul class="ft-links">
+          <li class="t-sr"><a href="#">Koliko traje sesija?</a></li>
+          <li class="t-sr"><a href="#">Online ili uživo?</a></li>
+          <li class="t-en"><a href="#">How long is a session?</a></li>
+          <li class="t-en"><a href="#">Online or in person?</a></li>
+          <li class="t-ru"><a href="#">Сколько длится сессия?</a></li>
+          <li class="t-ru"><a href="#">Онлайн или очно?</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="ft-col-t t-sr">Kontakt</p><p class="ft-col-t t-en">Contact</p><p class="ft-col-t t-ru">Контакт</p>
+        <div class="fco"><svg class="fco-i" viewBox="0 0 24 24" fill="none" stroke="rgba(249,245,239,.5)" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:helena11@mail.ru" class="fco-t">helena11@mail.ru</a></div>
+        <div class="fco"><svg class="fco-i" viewBox="0 0 24 24" fill="none" stroke="rgba(249,245,239,.5)" stroke-width="1.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.59 1.23h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg><a href="tel:+381628165004" class="fco-t">+381 62 816 5004</a></div>
+        <div class="fco"><svg class="fco-i" viewBox="0 0 24 24" fill="none" stroke="rgba(249,245,239,.5)" stroke-width="1.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="fco-t">Beograd, Srbija</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="ft2">
+    <p class="ft-copy">Copyright &copy; 2026 | Elena IVANCOVA. <span class="t-sr">Designed and developed by Aleksandar Anicic Web UI/UX designer.</span><span class="t-en">All rights reserved.</span><span class="t-ru">Все права защищены.</span></p>
+    <div class="socials">
+      <a href="#" class="soc" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="#" class="soc" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="#" class="soc" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<!-- =============================================
+     JAVASCRIPT
+     ============================================= -->
+<script>
+/* -----------------------------------------------
+   DETEKCIJA TOUCH UREĐAJA — Custom kursor
+   ----------------------------------------------- */
+const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches
+             || ('ontouchstart' in window)
+             || navigator.maxTouchPoints > 0;
+
+const cdot = document.getElementById('cdot');
+
+if (!isTouch) {
+  // Desktop: aktivira custom kursor
+  document.addEventListener('mousemove', e => {
+    cdot.style.left = e.clientX + 'px';
+    cdot.style.top  = e.clientY + 'px';
+  });
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => cdot.classList.add('hv'));
+    el.addEventListener('mouseleave', () => cdot.classList.remove('hv'));
+  });
+} else {
+  // Touch: sakrij kursor, vrati default ponašanje
+  cdot.style.display = 'none';
+  document.body.style.cursor = 'auto';
+}
+
+/* -----------------------------------------------
+   READ PROGRESS BAR
+   ----------------------------------------------- */
+const bar = document.getElementById('readProgress');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement.scrollHeight - window.innerHeight;
+  bar.style.width = (h > 0 ? window.scrollY / h * 100 : 0) + '%';
+}, { passive: true });
+
+/* -----------------------------------------------
+   NAV SCROLL EFEKAT
+   ----------------------------------------------- */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('sc', window.scrollY > 80);
+}, { passive: true });
+
+/* -----------------------------------------------
+   HAMBURGER MENI
+   ----------------------------------------------- */
+const navHam  = document.getElementById('navHam');
+const mobNav  = document.getElementById('mobNav');
+let   menuOpen = false;
+
+function openMobNav() {
+  menuOpen = true;
+  mobNav.classList.add('open');
+  navHam.classList.add('open');
+  navHam.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden'; // blokira skrol pozadine
+}
+
+function closeMobNav() {
+  menuOpen = false;
+  mobNav.classList.remove('open');
+  navHam.classList.remove('open');
+  navHam.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+
+navHam.addEventListener('click', () => {
+  menuOpen ? closeMobNav() : openMobNav();
+});
+
+// Zatvaranje klikom na overlay (izvan menija)
+mobNav.addEventListener('click', e => {
+  if (e.target === mobNav) closeMobNav();
+});
+
+// Zatvaranje Escape tasterom
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && menuOpen) closeMobNav();
+});
+
+// Zatvaranje klikom na bilo koji link unutar mobilnog menija
+document.querySelectorAll('.mob-nav-links a').forEach(a => {
+  a.addEventListener('click', () => closeMobNav());
+});
+
+/* -----------------------------------------------
+   JEZIK / LANGUAGE
+   ----------------------------------------------- */
+function setLang(l) {
+  document.documentElement.setAttribute('data-lang', l);
+  // Ažuriraj lang pillule u navbaru I u mobilnom meniju
+  document.querySelectorAll('.lang-pill').forEach(p => {
+    p.classList.toggle('active', p.textContent.trim() === l.toUpperCase());
+  });
+  localStorage.setItem('ei-lang', l);
+}
+setLang(localStorage.getItem('ei-lang') || 'sr');
+
+/* -----------------------------------------------
+   JS-TOP LINKOVI (scroll na vrh)
+   ----------------------------------------------- */
+document.querySelectorAll('.js-top').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  });
+});
+
+/* -----------------------------------------------
+   ANCHOR NAV — ACTIVE STATE
+   ----------------------------------------------- */
+const sids = ['individualna', 'parovi', 'online', 'dijagnostika'];
+const als  = document.querySelectorAll('.al');
+
+function updateAnav() {
+  let c = '';
+  sids.forEach(id => {
+    const s = document.getElementById(id);
+    if (s && window.scrollY >= s.offsetTop - 160) c = id;
+  });
+  als.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + c));
+}
+
+window.addEventListener('scroll', updateAnav, { passive: true });
+updateAnav();
+
+/* -----------------------------------------------
+   HERO PARALLAX (samo na non-touch)
+   ----------------------------------------------- */
+const heroImg = document.getElementById('heroImg');
+
+if (!isTouch) {
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < window.innerHeight) {
+      heroImg.style.transform = `scale(1.08) translateY(${window.scrollY * .18}px)`;
+    }
+  }, { passive: true });
+}
+
+/* -----------------------------------------------
+   WATERMARK PARALLAX (samo na non-touch)
+   ----------------------------------------------- */
+if (!isTouch) {
+  document.querySelectorAll('.svc-watermark').forEach(w => {
+    window.addEventListener('scroll', () => {
+      const r   = w.parentElement.getBoundingClientRect();
+      const off = (window.innerHeight / 2 - r.top - r.height / 2)
+                * parseFloat(w.dataset.parallax || .14);
+      w.style.transform = `translateY(calc(-50% + ${off}px))`;
+    }, { passive: true });
+  });
+}
+
+/* -----------------------------------------------
+   INTERSECTION OBSERVER — REVEAL ANIMACIJE
+   Aktivne i na mobilnom, ubrzane 20% putem CSS
+   ----------------------------------------------- */
+const imgObs = new IntersectionObserver(entries => {
+  entries.forEach(e => e.target.classList.toggle('iv', e.isIntersecting));
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.svc-vis').forEach(el => imgObs.observe(el));
+
+const cObs = new IntersectionObserver(entries => {
+  entries.forEach(e => e.target.classList.toggle('shown', e.isIntersecting));
+}, { threshold: 0.05, rootMargin: '0px 0px -16px 0px' });
+
+document.querySelectorAll('.reveal, .hr-a, .info-n').forEach(el => cObs.observe(el));
+
+/* -----------------------------------------------
+   INITIAL HASH SCROLL
+   ----------------------------------------------- */
+window.addEventListener('load', () => {
+  if (window.location.hash) {
+    setTimeout(() => {
+      const el = document.querySelector(window.location.hash);
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 400);
+  }
+});
+</script>
+
+</body>
+</html>

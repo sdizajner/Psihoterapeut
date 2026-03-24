@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="sr" data-lang="sr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oblasti Rada — Elena Ivancova</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sage:#7A9E7E; --sage-light:#A8C5AC; --sage-pale:#E8F0E9;
+  --cream:#F5F0E8; --warm-white:#FDFAF5; --deep:#2C3328;
+  --text:#3A3530; --text-light:#6B6058; --text-muted:#9E9189;
+  --gold:#C9A96E; --gold-light:#E8D5A8;
+  --fd:'Cormorant Garamond',serif;
+  --fb:'Montserrat',sans-serif;
+  --ease-out:cubic-bezier(.16,1,.3,1);
+  --ease-io:cubic-bezier(.65,0,.35,1);
+  --ease-spring:cubic-bezier(.34,1.56,.64,1);
+  --nav-h:70px;
+  --max-prose:560px;
+  --section-v:120px;
+  --col-gap:80px;
+  --side-pad:68px;
+  --container:1200px;
+}
+
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:auto;}
+body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased;}
+
+.cdot{width:12px;height:12px;background:rgba(122,158,126,.9);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:multiply;transition:width .25s var(--ease-spring),height .25s var(--ease-spring),background .2s;}
+.cdot.hv{width:30px;height:30px;background:rgba(201,169,110,.95);}
+@media (hover:none) and (pointer:coarse){.cdot{display:none!important;}body{cursor:auto!important;}}
+
+.read-progress{position:fixed;top:0;left:0;z-index:10000;height:2px;width:0%;background:linear-gradient(90deg,var(--sage),var(--gold),var(--sage-light));background-size:200% 100%;animation:shimmer 3s linear infinite;transition:width .08s linear;}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+.t-sr,.t-en,.t-ru{display:none!important;}
+[data-lang="sr"] .t-sr{display:revert!important;}
+[data-lang="en"] .t-en{display:revert!important;}
+[data-lang="ru"] .t-ru{display:revert!important;}
+[data-lang="sr"] li.t-sr,[data-lang="en"] li.t-en,[data-lang="ru"] li.t-ru{display:list-item!important;}
+[data-lang="sr"] span.t-sr,[data-lang="sr"] a.t-sr{display:inline!important;}
+[data-lang="en"] span.t-en,[data-lang="en"] a.t-en{display:inline!important;}
+[data-lang="ru"] span.t-ru,[data-lang="ru"] a.t-ru{display:inline!important;}
+[data-lang="sr"] .nav-logo-title.t-sr,[data-lang="en"] .nav-logo-title.t-en,[data-lang="ru"] .nav-logo-title.t-ru{display:block!important;}
+
+#nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);padding:0 var(--side-pad);display:flex;align-items:center;justify-content:space-between;transition:background .5s ease,box-shadow .5s;}
+#nav.sc{background:rgba(253,250,245,.97);backdrop-filter:blur(24px);box-shadow:0 1px 0 rgba(181,168,152,.18);}
+.nav-logo{text-decoration:none;display:flex;align-items:center;gap:14px;}
+.nav-logo-accent{width:2px;height:42px;flex-shrink:0;background:linear-gradient(to bottom,transparent,var(--sage) 30%,var(--sage-light) 70%,transparent);}
+.nav-logo-text{display:flex;flex-direction:column;gap:3px;}
+.nav-logo-name{display:flex;align-items:baseline;gap:7px;line-height:1;}
+.nav-logo-first{font-family:var(--fd);font-size:24px;font-weight:300;font-style:italic;color:rgba(253,250,245,.92);letter-spacing:.04em;transition:color .5s;}
+.nav-logo-last{font-family:var(--fd);font-size:22px;font-weight:500;color:rgba(168,197,172,.8);letter-spacing:.06em;text-transform:uppercase;transition:color .5s;}
+#nav.sc .nav-logo-first{color:#2C3328!important;}
+#nav.sc .nav-logo-last{color:var(--sage)!important;}
+.nav-logo-divider{width:100%;height:1px;background:linear-gradient(to right,rgba(122,158,126,.6),rgba(122,158,126,.15));margin:1px 0;}
+.nav-logo-title{font-family:var(--fb);font-size:9.5px;font-weight:400;letter-spacing:.18em;text-transform:uppercase;color:rgba(253,250,245,.85);transition:color .5s;white-space:nowrap;}
+#nav.sc .nav-logo-title{color:var(--deep)!important;font-weight:500;letter-spacing:.15em;}
+.nav-links{display:flex;gap:36px;list-style:none;align-items:center;}
+.nav-links a{font-family:var(--fb);font-size:11px;font-weight:400;letter-spacing:.14em;text-transform:uppercase;color:rgba(253,250,245,.8);text-decoration:none;position:relative;opacity:.8;transition:color .3s,opacity .4s;}
+#nav.sc .nav-links a{color:#2C3328!important;}
+.nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--sage);transition:width .35s var(--ease-out);}
+.nav-links a:hover::after,.nav-links a.active::after{width:100%;}
+.nav-links a:hover{color:var(--sage-light);opacity:1;}
+#nav.sc .nav-links a:hover{color:var(--sage);}
+.nav-links a.active{opacity:1!important;color:var(--sage-light)!important;}
+#nav.sc .nav-links a.active{color:var(--sage)!important;}
+.nav-links a.nav-cta{display:inline-block!important;background:rgba(253,250,245,.92)!important;color:var(--deep)!important;padding:10px 22px!important;border-radius:2px!important;font-size:10px!important;font-weight:400!important;letter-spacing:.16em!important;opacity:1!important;transition:all .4s var(--ease-out)!important;}
+#nav.sc .nav-links a.nav-cta{background:var(--deep)!important;color:rgba(253,250,245,.9)!important;}
+.nav-links a.nav-cta::after{display:none!important;}
+.nav-links a.nav-cta:hover{background:var(--sage)!important;color:#fff!important;transform:translateY(-2px);}
+.lang-pills{display:flex;gap:5px;}
+.lang-pill{font-family:var(--fb);font-size:9.5px;letter-spacing:.1em;color:rgb(56,62,54);background:transparent;border:1px solid rgb(79,88,76);padding:5px 11px;border-radius:100px;cursor:pointer;transition:all .3s;}
+.lang-pill:hover{color:rgba(253,250,245,.85);border-color:rgba(253,250,245,.45);}
+.lang-pill.active{color:var(--sage-light);border-color:var(--sage);background:rgba(0,0,0,0.1);}
+#nav.sc .lang-pill{color:var(--text-muted);border-color:rgba(58,53,48,.18);}
+#nav.sc .lang-pill.active{color:var(--sage);border-color:var(--sage);background:rgba(122,158,126,.08);}
+.nav-ham{display:none;}
+
+.mob-nav{position:fixed;inset:0;z-index:9500;background:rgba(30,45,45,0.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .45s var(--ease-io);}
+.mob-nav.open{opacity:1;pointer-events:all;}
+.mob-nav-inner{display:flex;flex-direction:column;align-items:flex-start;padding:0 48px;width:100%;max-width:480px;}
+.mob-nav-line{width:40px;height:1px;background:linear-gradient(to right,var(--sage-light),transparent);margin-bottom:40px;opacity:0;transform:translateX(-20px);transition:opacity .4s ease, transform .4s ease;}
+.mob-nav.open .mob-nav-line{opacity:1;transform:translateX(0);transition-delay:.15s;}
+.mob-nav-links{list-style:none;}
+.mob-nav-links li{overflow:hidden;}
+.mob-nav-links a{display:block;font-family:var(--fd);font-size:clamp(34px,8vw,52px);font-weight:400;font-style:italic;color:rgba(253,250,245,0.85);text-decoration:none;line-height:1.15;padding:10px 0;letter-spacing:-.01em;border-bottom:1px solid rgba(168,197,172,.1);transform:translateY(100%);opacity:0;transition:transform .55s var(--ease-out), opacity .55s ease, color .3s ease, padding-left .35s var(--ease-out);}
+.mob-nav.open .mob-nav-links a{transform:translateY(0);opacity:1;}
+.mob-nav.open .mob-nav-links li:nth-child(1) a{transition-delay:.18s;}
+.mob-nav.open .mob-nav-links li:nth-child(2) a{transition-delay:.26s;}
+.mob-nav.open .mob-nav-links li:nth-child(3) a{transition-delay:.34s;}
+.mob-nav.open .mob-nav-links li:nth-child(4) a{transition-delay:.42s;}
+.mob-nav.open .mob-nav-links li:nth-child(5) a{transition-delay:.50s;}
+.mob-nav-links a:hover{color:#fff;padding-left:12px;}
+.mob-nav-links a.nav-cta-mob{margin-top:28px;font-family:var(--fb);font-size:11px;font-style:normal;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--deep);background:var(--sage-light);padding:14px 32px;border-radius:2px;border:none;min-height:48px;display:flex;align-items:center;}
+.mob-nav-links a.nav-cta-mob:hover{padding-left:32px;background:var(--sage);}
+.mob-nav-langs{display:flex;gap:8px;margin-top:36px;opacity:0;transform:translateY(14px);transition:opacity .4s ease, transform .4s ease;}
+.mob-nav.open .mob-nav-langs{opacity:1;transform:translateY(0);transition-delay:.6s;}
+.mob-nav-langs .lang-pill{color:rgba(253,250,245,.6);border-color:rgba(253,250,245,.2);background:transparent;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;}
+.mob-nav-langs .lang-pill.active{background:var(--sage);color:#fff;border-color:var(--sage);}
+.mob-nav-langs .lang-pill:hover{color:#fff;border-color:rgba(253,250,245,.5);background:rgba(253,250,245,.08);}
+
+.page-hero{height:100vh;position:relative;display:flex;align-items:center;justify-content:flex-start;padding:0 10%;overflow:hidden;background-color:#1E2D2D;}
+.hero-img{position:absolute;inset:0;background:url('images/oblastihero.jpg') center/cover no-repeat;z-index:0;transform:scale(1.08);will-change:transform;opacity:0.75;}
+.hero-ov1{position:absolute;inset:0;z-index:1;background:linear-gradient(to right,rgba(30,45,45,0.6) 0%,rgba(30,45,45,0.4) 20%,rgba(30,45,45,0.2) 40%,rgba(30,45,45,0) 60%);}
+.hero-ov2{position:absolute;inset:0;z-index:1;background:linear-gradient(to bottom,rgba(30,45,45,0.3) 0%,transparent 22%,transparent 78%,rgba(30,45,45,0.3) 100%);}
+.hero-content{position:relative;z-index:5;max-width:520px;}
+.hero-h1{font-family:var(--fd);font-size:clamp(65px,8.5vw,110px);font-weight:400;line-height:1.05;letter-spacing:-.03em;color:#fff;text-shadow:0 3px 20px rgba(0,0,0,0.4);margin:0;}
+.hero-h1 em{font-style:italic;font-weight:400;color:var(--sage-light);display:block;margin-top:5px;}
+.hero-h1 span,.hero-h1 em{opacity:0;transform:translateY(40px);animation:hW 1.2s var(--ease-out) forwards;}
+.hero-h1 em{animation-delay:.25s;}
+.hero-tagline{font-family:var(--fb);font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,0.65);margin-top:28px;opacity:0;animation:hW 1s var(--ease-out) .5s forwards;}
+@keyframes hW{to{opacity:1;transform:translateY(0);}}
+.hero-scroll-hint{position:absolute;bottom:40px;left:10%;z-index:5;display:flex;align-items:center;gap:14px;opacity:0;animation:hW 1s ease .9s forwards;}
+.hero-scroll-line{width:44px;height:1px;background:rgba(255,255,255,0.2);position:relative;overflow:hidden;}
+.hero-scroll-line::after{content:'';position:absolute;inset:0;background:var(--sage-light);transform:translateX(-100%);animation:sL 2.2s ease-in-out 1.4s infinite;}
+@keyframes sL{0%{transform:translateX(-100%)}50%{transform:translateX(0)}100%{transform:translateX(100%)}}
+.hero-scroll-txt{font-family:var(--fb);font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,0.4);}
+.hero-side-text{position:absolute;right:50px;bottom:80px;writing-mode:vertical-rl;font-family:var(--fb);font-size:10px;letter-spacing:.5em;color:var(--sage-light);opacity:0.4;z-index:5;text-transform:uppercase;}
+
+/* =============================================
+   ANCHOR NAV — TICKER TRAKA  ★ IZMENJENO ★
+   Pozadina: #EAE4D8 — malo tamnija od --warm-white:#FDFAF5, ista toplo-kremasta porodica
+   Uklonjen: box-shadow, mask-image (bočni gradijenti), background:var(--deep)
+   Pojačan: font weight 500, size 10px, boje prilagođene svetloj pozadini
+   ============================================= */
+.anav{
+  background:#EAE4D8;
+  position:sticky;
+  top:var(--nav-h);
+  z-index:900;
+  border-top:1px solid rgba(58,53,48,.09);
+  border-bottom:1px solid rgba(58,53,48,.09);
+  overflow:hidden;
+  user-select:none;
+  /* BEZ mask-image — nema bočnih gradijenata */
+}
+.anav-track{
+  display:flex;
+  align-items:center;
+  width:max-content;
+  animation: ticker-scroll 45s linear infinite;
+  will-change:transform;
+}
+.anav-track:hover{animation-play-state:paused;}
+@keyframes ticker-scroll{
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.anav-set{display:flex;align-items:center;padding:12px 0;flex-shrink:0;}
+.al{
+  font-family:var(--fb);
+  font-size:10px;
+  font-weight:500;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:rgba(58,53,48,.55);
+  text-decoration:none;
+  padding:9px 18px;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid rgba(122,158,126,.22);
+  background:transparent;
+  transition:color .25s, border-color .25s, background .25s, box-shadow .25s;
+  white-space:nowrap;
+  flex-shrink:0;
+  cursor:pointer;
+  margin:0 4px;
+  min-height:44px;
+}
+.al-num{
+  font-family:var(--fd);font-size:11px;font-style:italic;font-weight:300;
+  color:rgba(122,158,126,.65);transition:color .25s;line-height:1;
+  display:inline-block;min-width:14px;
+}
+.al:hover{color:var(--deep);border-color:rgba(122,158,126,.5);background:rgba(122,158,126,.12);box-shadow:inset 0 0 0 1px rgba(122,158,126,.28);}
+.al:hover .al-num{color:var(--sage);}
+.al.active{color:var(--deep);border-color:var(--sage);background:rgba(122,158,126,.18);font-weight:500;box-shadow:inset 0 0 0 1px var(--sage);}
+.al.active .al-num{color:var(--sage);}
+.anav-sep{width:1px;height:20px;background:rgba(58,53,48,.12);flex-shrink:0;margin:0 2px;}
+
+.svc{padding:var(--section-v) 0;position:relative;overflow:hidden;}
+.svc:nth-child(odd){background:var(--warm-white);}
+.svc:nth-child(even){background:var(--cream);}
+.svc-watermark{position:absolute;font-family:var(--fd);font-size:clamp(200px,22vw,300px);font-weight:300;color:rgba(122,158,126,.033);line-height:1;user-select:none;pointer-events:none;z-index:0;right:-30px;top:50%;transform:translateY(-50%);will-change:transform;}
+.svc:nth-child(even) .svc-watermark{left:-30px;right:auto;}
+.svc-in{display:grid;grid-template-columns:1fr 1fr;gap:var(--col-gap);align-items:center;position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--side-pad);}
+.svc-in.rev .svc-vis{order:2;}.svc-in.rev .svc-content{order:1;}
+.svc-vis{position:relative;width:100%;opacity:0;transform:translateX(-32px) scale(.97);transition:opacity .95s var(--ease-out),transform .95s var(--ease-out);}
+.svc-in.rev .svc-vis{transform:translateX(32px) scale(.97);}
+.svc-vis.iv{opacity:1;transform:translateX(0) scale(1);}
+.svc-vis::before,.svc-vis::after{content:'';position:absolute;z-index:0;border-radius:4px 44px 4px 44px;opacity:0;transform:scale(.92);transition:opacity .9s var(--ease-out) .1s,transform .9s var(--ease-out) .1s;}
+.svc-vis::before{top:-14px;left:-14px;right:14px;bottom:14px;border:1px solid rgba(122,158,126,.17);}
+.svc-vis::after{top:14px;left:14px;right:-14px;bottom:-14px;border:1px solid rgba(201,169,110,.11);}
+.svc-vis.iv::before,.svc-vis.iv::after{opacity:1;transform:scale(1);}
+.svc-vis:hover::before{transform:translate(-5px,-5px)!important;}
+.svc-vis:hover::after{transform:translate(5px,5px)!important;}
+.svc-frame{width:100%;padding-bottom:108%;border-radius:4px 44px 4px 44px;overflow:hidden;position:relative;z-index:1;box-shadow:0 28px 72px rgba(0,0,0,.16),0 6px 20px rgba(0,0,0,.09);clip-path:inset(0 100% 0 0 round 4px 44px 4px 44px);transition:clip-path 1.15s var(--ease-out);}
+.svc-vis.iv .svc-frame{clip-path:inset(0 0% 0 0 round 4px 44px 4px 44px);}
+.svc-ph{position:absolute;inset:0;z-index:1;}
+.svc-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:2;transform:scale(1.1);transition:transform 1.5s var(--ease-out);}
+.svc-vis.iv .svc-frame img{transform:scale(1.0);}
+.svc-vis:hover .svc-frame img{transform:scale(1.04)!important;}
+.svc-frame::after{content:'';position:absolute;inset:0;z-index:3;background:linear-gradient(135deg,rgba(255,255,255,.1) 0%,transparent 50%,rgba(0,0,0,.06) 100%);opacity:0;transition:opacity .5s;}
+.svc-vis:hover .svc-frame::after{opacity:1;}
+.svc-tag{position:absolute;bottom:-14px;right:22px;z-index:5;background:var(--deep);padding:16px 22px;border-radius:2px;box-shadow:0 10px 44px rgba(0,0,0,.26);opacity:0;transform:translateY(14px);transition:opacity .7s ease .55s,transform .7s var(--ease-out) .55s;}
+.svc-vis.iv .svc-tag{opacity:1;transform:translateY(0);}
+.svc-tag-n{font-family:var(--fd);font-size:32px;font-weight:300;color:var(--sage-light);display:block;line-height:1;}
+.svc-tag-l{font-family:var(--fb);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:rgba(253,250,245,.5);margin-top:5px;display:block;}
+.svc-num{position:absolute;top:-15px;left:22px;z-index:5;font-family:var(--fb);font-size:10px;letter-spacing:.22em;color:var(--sage);padding:6px 16px;border-radius:100px;border:1px solid rgba(122,158,126,.2);font-weight:500;}
+.svc:nth-child(odd) .svc-num{background:var(--warm-white);}
+.svc:nth-child(even) .svc-num{background:var(--cream);}
+.svc-divider{position:absolute;bottom:0;left:0;right:0;height:1px;z-index:2;background:linear-gradient(to right,transparent,rgba(122,158,126,.13) 20%,rgba(122,158,126,.13) 80%,transparent);}
+.svc-content{display:flex;flex-direction:column;justify-content:center;align-self:center;}
+
+.s-eye{font-family:var(--fb);font-size:10px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--sage);margin-bottom:16px;opacity:.85;display:block;}
+.s-title{font-family:var(--fd);font-size:clamp(38px,4.6vw,66px);font-weight:400;line-height:1.05;color:var(--deep);margin-bottom:16px;letter-spacing:-.01em;}
+.s-title em{font-style:italic;color:var(--sage);}
+.lead{font-family:var(--fd);font-size:22px;font-weight:400;font-style:italic;line-height:1.68;color:var(--sage);margin-bottom:28px;max-width:var(--max-prose);}
+.txt{font-family:var(--fb);font-size:15.5px;font-weight:400;line-height:1.9;color:var(--text);margin-bottom:0;max-width:var(--max-prose);letter-spacing:.01em;}
+.txt+.txt{margin-top:18px;}
+.bl-t{font-family:var(--fd);font-size:22px;font-weight:400;color:var(--deep);margin-bottom:10px;letter-spacing:-.01em;}
+.bl-d{font-family:var(--fb);font-size:15.5px;font-weight:400;line-height:1.9;color:var(--text);letter-spacing:.01em;}
+.ft-title{font-family:var(--fb);font-size:15px;font-weight:500;color:var(--deep);display:block;margin-bottom:3px;}
+.ft-text{font-family:var(--fb);font-size:15.5px;font-weight:400;line-height:1.9;color:var(--text-light);letter-spacing:.01em;}
+.svc-q{font-family:var(--fd);font-size:22px;font-style:italic;font-weight:400;color:var(--sage);padding:14px 0 14px 24px;margin:28px 0;line-height:1.68;position:relative;max-width:var(--max-prose);}
+.svc-q::before{content:'';position:absolute;left:0;top:0;bottom:0;width:2px;background:linear-gradient(to bottom,transparent,var(--sage),transparent);}
+.info-n{font-family:var(--fd);font-size:46px;font-weight:300;color:var(--sage);display:block;line-height:1;opacity:0;transform:translateY(14px) scale(.88);transition:opacity .55s ease,transform .55s var(--ease-spring);}
+.info-n.shown{opacity:1;transform:translateY(0) scale(1);}
+.info-l{font-family:var(--fb);font-size:9px;font-weight:400;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted);display:block;margin-top:8px;}
+
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .85s ease,transform .85s var(--ease-out);}
+.reveal.shown{opacity:1;transform:translateY(0);}
+.rd1{transition-delay:.04s;}.rd2{transition-delay:.13s;}.rd3{transition-delay:.23s;}
+.rd4{transition-delay:.34s;}.rd5{transition-delay:.46s;}
+.hr-a{width:0;height:1px;margin:24px 0;background:linear-gradient(to right,var(--sage),rgba(122,158,126,.08));transition:width 1.1s var(--ease-out);}
+.hr-a.shown{width:64px;}
+.info-row{display:flex;gap:0;margin:34px 0;flex-wrap:wrap;border:1px solid rgba(122,158,126,.16);border-radius:2px;overflow:hidden;max-width:var(--max-prose);}
+.info-it{text-align:center;flex:1;min-width:80px;padding:22px 12px;border-right:1px solid rgba(122,158,126,.12);}
+.info-it:last-child{border-right:none;}
+.blocks{margin:30px 0;display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:var(--max-prose);}
+.bl{background:var(--sage-pale);padding:26px 22px;border-radius:2px;border-left:3px solid var(--sage);position:relative;overflow:hidden;transition:transform .35s var(--ease-out),box-shadow .35s;}
+.bl::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(122,158,126,.06),transparent);opacity:0;transition:opacity .3s;}
+.bl:hover{transform:translateY(-4px);box-shadow:0 14px 44px rgba(122,158,126,.12);}
+.bl:hover::before{opacity:1;}
+.svc:nth-child(even) .bl{background:var(--warm-white);}
+.feats{margin:26px 0;display:grid;gap:4px;max-width:var(--max-prose);}
+.feat{display:flex;align-items:flex-start;gap:16px;padding:12px 14px;border-radius:2px;transition:background .3s;}
+.feat:hover{background:rgba(122,158,126,.05);}
+.fdot{width:5px;height:5px;background:var(--sage);border-radius:50%;margin-top:12px;flex-shrink:0;transition:transform .3s,box-shadow .3s;}
+.feat:hover .fdot{transform:scale(1.7);box-shadow:0 0 8px rgba(122,158,126,.4);}
+.atags{margin:22px 0 28px;}
+.atag{display:inline-block;font-family:var(--fb);font-size:10px;font-weight:400;letter-spacing:.12em;text-transform:uppercase;color:var(--sage);border:1px solid rgba(122,158,126,.3);padding:6px 14px;border-radius:100px;margin:4px 4px 0 0;transition:background .3s,color .3s,border-color .3s;}
+.atag:hover{background:var(--sage);color:#fff;border-color:var(--sage);}
+.btn-p{display:inline-flex;align-items:center;gap:12px;font-family:var(--fb);font-size:10.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--deep);background:var(--sage-light);padding:16px 40px;text-decoration:none;border-radius:1px;position:relative;overflow:hidden;margin-top:16px;transition:transform .35s var(--ease-out),box-shadow .35s;}
+.btn-p::before{content:'';position:absolute;inset:0;background:var(--gold-light);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease-io);}
+.btn-p:hover::before{transform:scaleX(1);}
+.btn-p:hover{transform:translateY(-3px);box-shadow:0 18px 44px rgba(122,158,126,.26);}
+.btn-p span,.btn-p svg{position:relative;z-index:1;}
+.btn-arrow{transition:transform .35s var(--ease-out);}
+.btn-p:hover .btn-arrow{transform:translateX(6px);}
+
+.cta-sec{padding:110px var(--side-pad);background:var(--cream);text-align:center;position:relative;overflow:hidden;}
+.cta-sec::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(122,158,126,.07),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
+.cta-t{font-family:var(--fd);font-size:clamp(38px,4.8vw,66px);font-weight:400;color:var(--deep);margin-bottom:20px;letter-spacing:-.02em;position:relative;z-index:1;}
+.cta-t em{font-style:italic;color:var(--sage);}
+.cta-s{font-family:var(--fb);font-size:15.5px;font-weight:400;color:var(--text);margin-bottom:44px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.9;position:relative;z-index:1;letter-spacing:.01em;}
+.cta-sec .btn-p{position:relative;z-index:1;}
+
+footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,255,255,.05);}
+.ft-inner{max-width:var(--container);margin:0 auto;padding:0 var(--side-pad);}
+.ft1{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:60px;margin-bottom:80px;}
+.ft-brand{font-family:var(--fd);font-size:30px;color:var(--warm-white);margin-bottom:12px;font-weight:300;}
+.ft-brand em{color:var(--sage-light);font-style:italic;}
+.ft-sub{font-family:var(--fb);font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--sage);margin-bottom:20px;font-weight:500;}
+.ft-bio{font-family:var(--fb);font-size:15.5px;line-height:1.9;color:rgba(249,245,239,.68);max-width:320px;font-weight:400;letter-spacing:.01em;}
+.ft-col-t{font-family:var(--fb);font-size:11px;font-weight:500;text-transform:uppercase;letter-spacing:.2em;color:var(--warm-white);margin-bottom:28px;}
+.ft-links{list-style:none;padding:0;}
+.ft-links li{margin-bottom:14px;}
+.ft-links a{font-family:var(--fb);font-size:14.5px;font-weight:400;color:rgba(249,245,239,.6);text-decoration:none;transition:color .3s,transform .3s;display:inline-block;}
+.ft-links a:hover{color:var(--sage-light);transform:translateX(5px);}
+.fco{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
+.fco-i{width:16px;height:16px;stroke:var(--sage);flex-shrink:0;}
+.fco-t{font-family:var(--fb);font-size:14.5px;font-weight:400;color:rgba(249,245,239,.68);text-decoration:none;transition:color .3s;}
+.fco-t:hover{color:var(--warm-white);}
+.ft2{padding:40px var(--side-pad);border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;}
+.ft-copy{font-family:var(--fb);font-size:12px;color:rgba(249,245,239,.48);}
+.socials{display:flex;gap:20px;}
+.soc svg{width:18px;height:18px;fill:none;stroke:rgba(249,245,239,.38);stroke-width:1.5;transition:all .3s;}
+.soc:hover svg{stroke:var(--sage-light);transform:translateY(-3px);}
+
+@media(max-width:1280px){
+  :root{--side-pad:48px;--col-gap:64px;}
+}
+
+@media(max-width:1024px){
+  :root{--col-gap:48px;--nav-h:64px;--section-v:90px;--side-pad:40px;}
+  .nav-links{display:none!important;}
+  .nav-ham{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:48px;height:48px;background:none;border:none;cursor:pointer;padding:6px;position:relative;z-index:9600;flex-shrink:0;}
+  .nav-ham span{display:block;width:24px;height:1.5px;background:rgba(253,250,245,.85);border-radius:2px;transition:transform .4s var(--ease-out), opacity .3s ease, width .4s var(--ease-out), background .3s ease;transform-origin:center;}
+  #nav.sc .nav-ham span{background:#2C3328;}
+  .nav-ham.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:#fff;}
+  .nav-ham.open span:nth-child(2){opacity:0;width:0;}
+  .nav-ham.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:#fff;}
+  .nav-ham:not(.open):hover span:nth-child(2){width:16px;}
+  /* Ticker — tablet, BEZ mask-image */
+  .al{padding:10px 14px;font-size:9px;letter-spacing:.1em;min-height:48px;}
+  .al-num{font-size:10px;}
+  .anav-sep{height:14px;}
+  .page-hero{height:80vh;padding:0 var(--side-pad);}
+  .hero-side-text{display:none;}
+  .hero-h1{font-size:clamp(54px,9vw,90px);}
+  .svc-in,.svc-in.rev{grid-template-columns:1fr;gap:52px;}
+  .svc-in .svc-vis,.svc-in.rev .svc-vis{order:1;}
+  .svc-in .svc-content,.svc-in.rev .svc-content{order:2;}
+  .svc-vis{width:calc(100% + var(--side-pad));max-width:none;margin-left:calc(var(--side-pad) * -0.5);transform:translateY(28px) scale(.97)!important;}
+  .svc-in.rev .svc-vis{margin-left:0;margin-right:calc(var(--side-pad) * -0.5);transform:translateY(28px) scale(.97)!important;}
+  .svc-vis.iv{transform:translateY(0) scale(1)!important;}
+  .svc-frame{padding-bottom:68%;border-radius:2px 32px 2px 32px;}
+  .s-title{font-size:clamp(36px,6vw,56px);}
+  .lead{font-size:20px;}
+  .txt{font-size:15px;}
+  .blocks{grid-template-columns:1fr;}
+  .txt,.lead,.svc-q,.info-row,.blocks,.feats,.atags{max-width:100%!important;}
+  .btn-p{min-height:52px;padding:16px 36px;}
+  .atag{min-height:36px;display:inline-flex;align-items:center;}
+  .ft1{grid-template-columns:1fr 1fr;gap:40px;}
+  .cta-sec{padding:80px var(--side-pad);}
+}
+
+@media(max-width:768px){
+  :root{--nav-h:58px;--section-v:72px;--side-pad:22px;--col-gap:32px;}
+  #nav{padding:0 var(--side-pad);}
+  .nav-logo-first{font-size:21px;}
+  .nav-logo-last{font-size:19px;letter-spacing:.05em;}
+  .nav-logo-title{font-size:8px;letter-spacing:.12em;}
+  .nav-logo-accent{height:36px;}
+  .lang-pill{font-size:8.5px;padding:5px 8px;min-height:36px;min-width:36px;display:flex;align-items:center;justify-content:center;}
+  .page-hero{height:70vh;min-height:460px;padding:0 var(--side-pad);}
+  .hero-h1{font-size:clamp(40px,11vw,68px);letter-spacing:-.04em;}
+  .hero-tagline{font-size:10px;letter-spacing:.2em;margin-top:18px;}
+  .hero-scroll-hint{bottom:24px;left:var(--side-pad);}
+  /* Ticker — mobilni, BEZ mask-image */
+  .al{padding:9px 12px;font-size:8.5px;letter-spacing:.07em;min-height:44px;}
+  .anav-sep{height:12px;}
+  .anav-track{animation-duration:30s;}
+  .svc-vis{width:calc(100% + var(--side-pad));margin-left:calc(var(--side-pad) * -1);margin-right:0;}
+  .svc-in.rev .svc-vis{margin-left:0;margin-right:calc(var(--side-pad) * -1);}
+  .svc-in{padding:0 var(--side-pad);}
+  .svc-tag{right:10px;bottom:-10px;padding:10px 14px;}
+  .svc-tag-n{font-size:24px;}
+  .svc-watermark{font-size:clamp(110px,35vw,190px);}
+  .s-title{font-size:clamp(30px,8vw,46px);}
+  .lead{font-size:18px;line-height:1.65;}
+  .txt{font-size:14.5px;line-height:1.85;}
+  .bl-t{font-size:18px;}
+  .bl-d{font-size:14.5px;}
+  .svc-q{font-size:17px;padding-left:16px;}
+  .info-n{font-size:36px;}
+  .info-it{padding:16px 8px;}
+  .atags{margin:18px 0 22px;}
+  .atag{font-size:9px;padding:5px 10px;}
+  .cta-sec{padding:64px var(--side-pad);}
+  .cta-t{font-size:clamp(30px,8vw,48px);}
+  .cta-s{font-size:14.5px;margin-bottom:32px;}
+  .ft-inner{padding:0 var(--side-pad);}
+  .ft1{grid-template-columns:1fr;gap:32px;margin-bottom:48px;}
+  .ft2{flex-direction:column;gap:18px;align-items:flex-start;padding:28px var(--side-pad);}
+  .ft-copy{font-size:11px;}
+  .ft-brand{font-size:24px;}
+}
+
+@media(max-width:560px){
+  :root{--side-pad:16px;}
+  .mob-nav-inner{padding:0 var(--side-pad);}
+  .mob-nav-links a{font-size:clamp(28px,9vw,40px);}
+  .al{padding:8px 10px;font-size:8px;}
+  .al-num{min-width:12px;font-size:9.5px;}
+  .btn-p{width:100%;justify-content:center;padding:18px 20px;}
+  .feat{min-height:48px;padding:14px 8px;}
+}
+
+@media (hover:none) and (pointer:coarse){
+  .reveal{transition:opacity .68s ease,transform .68s var(--ease-out);}
+  .hr-a{transition:width .88s var(--ease-out);}
+  .svc-vis{transition:opacity .76s var(--ease-out),transform .76s var(--ease-out)!important;}
+  .svc-frame{transition:clip-path .92s var(--ease-out);}
+  .svc-tag{transition:opacity .56s ease .44s,transform .56s var(--ease-out) .44s;}
+  .info-n{transition:opacity .44s ease,transform .44s var(--ease-spring);}
+  .bl:hover{transform:none;box-shadow:none;}
+  .feat:hover{background:transparent;}
+  .feat:hover .fdot{transform:none;box-shadow:none;}
+  .svc-vis:hover .svc-frame img{transform:scale(1.0)!important;}
+  .atag:hover{background:transparent;color:var(--sage);border-color:rgba(122,158,126,.3);}
+  .anav-track:hover{animation-play-state:running;}
+  .al{min-height:48px;}
+  .lang-pill{min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;}
+  .soc{min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center;}
+  .ft-links a{min-height:44px;display:flex;align-items:center;}
+  .ft-links a:hover{transform:none;}
+  .fco{min-height:44px;}
+  .atag{min-height:40px;display:inline-flex;align-items:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="read-progress" id="readProgress"></div>
+<div class="cdot" id="cdot"></div>
+
+<div class="mob-nav" id="mobNav" role="dialog" aria-modal="true" aria-label="Navigation menu">
+  <div class="mob-nav-inner">
+    <div class="mob-nav-line"></div>
+    <ul class="mob-nav-links" id="mobNavLinks">
+      <li class="t-sr"><a href="index.html?nopreload">Početna</a></li>
+      <li class="t-sr"><a href="terapijskeusluge.html">Usluge</a></li>
+      <li class="t-sr"><a href="#" class="js-top">Oblasti</a></li>
+      <li class="t-sr"><a href="index.html?nopreload#intro">O meni</a></li>
+      <li class="t-sr"><a href="index.html?nopreload#contact" class="nav-cta-mob">Kontakt →</a></li>
+      <li class="t-en"><a href="index.html?nopreload">Home</a></li>
+      <li class="t-en"><a href="terapijskeusluge.html">Services</a></li>
+      <li class="t-en"><a href="#" class="js-top">Areas</a></li>
+      <li class="t-en"><a href="index.html?nopreload#intro">About me</a></li>
+      <li class="t-en"><a href="index.html?nopreload#contact" class="nav-cta-mob">Contact →</a></li>
+      <li class="t-ru"><a href="index.html?nopreload">Главная</a></li>
+      <li class="t-ru"><a href="terapijskeusluge.html">Услуги</a></li>
+      <li class="t-ru"><a href="#" class="js-top">Области</a></li>
+      <li class="t-ru"><a href="index.html?nopreload#intro">Обо мне</a></li>
+      <li class="t-ru"><a href="index.html?nopreload#contact" class="nav-cta-mob">Контакт →</a></li>
+    </ul>
+    <div class="mob-nav-langs">
+      <button class="lang-pill" onclick="setLang('sr');closeMobNav();">SR</button>
+      <button class="lang-pill" onclick="setLang('en');closeMobNav();">EN</button>
+      <button class="lang-pill" onclick="setLang('ru');closeMobNav();">RU</button>
+    </div>
+  </div>
+</div>
+
+<nav id="nav">
+  <a href="index.html?nopreload" class="nav-logo">
+    <div class="nav-logo-accent"></div>
+    <div class="nav-logo-text">
+      <div class="nav-logo-name">
+        <span class="nav-logo-first">Elena</span>
+        <span class="nav-logo-last">Ivancova</span>
+      </div>
+      <div class="nav-logo-divider"></div>
+      <span class="nav-logo-title t-sr">Klinički psiholog &nbsp;·&nbsp; Geštalt psihoterapeut</span>
+      <span class="nav-logo-title t-en">Clinical Psychologist &nbsp;·&nbsp; Gestalt Psychotherapist</span>
+      <span class="nav-logo-title t-ru">Клинический психолог &nbsp;·&nbsp; Гештальт психотерапевт</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li class="t-sr"><a href="index.html?nopreload">Početna</a></li>
+    <li class="t-sr"><a href="terapijskeusluge.html">Usluge</a></li>
+    <li class="t-sr"><a href="#" class="active js-top">Oblasti</a></li>
+    <li class="t-sr"><a href="index.html?nopreload#intro">O meni</a></li>
+    <li class="t-sr"><a href="index.html?nopreload#contact" class="nav-cta">Kontakt</a></li>
+    <li class="t-en"><a href="index.html?nopreload">Home</a></li>
+    <li class="t-en"><a href="terapijskeusluge.html">Services</a></li>
+    <li class="t-en"><a href="#" class="active js-top">Areas</a></li>
+    <li class="t-en"><a href="index.html?nopreload#intro">About me</a></li>
+    <li class="t-en"><a href="index.html?nopreload#contact" class="nav-cta">Contact</a></li>
+    <li class="t-ru"><a href="index.html?nopreload">Главная</a></li>
+    <li class="t-ru"><a href="terapijskeusluge.html">Услуги</a></li>
+    <li class="t-ru"><a href="#" class="active js-top">Области</a></li>
+    <li class="t-ru"><a href="index.html?nopreload#intro">Обо мне</a></li>
+    <li class="t-ru"><a href="index.html?nopreload#contact" class="nav-cta">Контакт</a></li>
+  </ul>
+  <div style="display:flex;align-items:center;gap:14px;">
+    <div class="lang-pills">
+      <button class="lang-pill" onclick="setLang('sr')">SR</button>
+      <button class="lang-pill" onclick="setLang('en')">EN</button>
+      <button class="lang-pill" onclick="setLang('ru')">RU</button>
+    </div>
+    <button class="nav-ham" id="navHam" aria-label="Otvori meni" aria-expanded="false" aria-controls="mobNav">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<section class="page-hero" id="pageTop">
+  <div class="hero-img" id="heroImg"></div>
+  <div class="hero-ov1"></div>
+  <div class="hero-ov2"></div>
+  <div class="hero-content">
+    <h1 class="hero-h1">
+      <span class="t-sr">Oblasti<br><em>Psihološkog Rada</em></span>
+      <span class="t-en">Areas of<br><em>Psychological Work</em></span>
+      <span class="t-ru">Области<br><em>Психологической Работы</em></span>
+    </h1>
+    <p class="hero-tagline t-sr">Prostor za promenu · Beograd &amp; Online</p>
+    <p class="hero-tagline t-en">A space for change · Belgrade &amp; Online</p>
+    <p class="hero-tagline t-ru">Пространство для изменений · Белград &amp; Онлайн</p>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="hero-scroll-line"></div>
+    <span class="hero-scroll-txt t-sr">Skrolujte</span>
+    <span class="hero-scroll-txt t-en">Scroll</span>
+    <span class="hero-scroll-txt t-ru">Прокрутите</span>
+  </div>
+  <div class="hero-side-text">
+    <span class="t-sr">EST. 2026 / BEOGRAD</span>
+    <span class="t-en">EST. 2026 / BELGRADE</span>
+    <span class="t-ru">EST. 2026 / БЕЛГРАД</span>
+  </div>
+</section>
+
+<nav class="anav" id="anav" aria-label="Oblasti rada">
+  <div class="anav-track" id="anavTrack">
+    <div class="anav-set" aria-hidden="false">
+      <a href="#anksioznost" class="al t-sr"><span class="al-num">01</span>Anksioznost</a>
+      <a href="#anksioznost" class="al t-en"><span class="al-num">01</span>Anxiety</a>
+      <a href="#anksioznost" class="al t-ru"><span class="al-num">01</span>Тревога</a>
+      <div class="anav-sep"></div>
+      <a href="#ptsd" class="al t-sr"><span class="al-num">02</span>Trauma / PTSP</a>
+      <a href="#ptsd" class="al t-en"><span class="al-num">02</span>Trauma / PTSD</a>
+      <a href="#ptsd" class="al t-ru"><span class="al-num">02</span>Травма</a>
+      <div class="anav-sep"></div>
+      <a href="#licnost" class="al t-sr"><span class="al-num">03</span>Ličnost</a>
+      <a href="#licnost" class="al t-en"><span class="al-num">03</span>Personality</a>
+      <a href="#licnost" class="al t-ru"><span class="al-num">03</span>Личность</a>
+      <div class="anav-sep"></div>
+      <a href="#opstiporemecaji" class="al t-sr"><span class="al-num">04</span>Opšti poremećaji</a>
+      <a href="#opstiporemecaji" class="al t-en"><span class="al-num">04</span>General disorders</a>
+      <a href="#opstiporemecaji" class="al t-ru"><span class="al-num">04</span>Общие расстройства</a>
+      <div class="anav-sep"></div>
+      <a href="#psihosomatika" class="al t-sr"><span class="al-num">05</span>Psihotraumatski</a>
+      <a href="#psihosomatika" class="al t-en"><span class="al-num">05</span>Psychotraumatic</a>
+      <a href="#psihosomatika" class="al t-ru"><span class="al-num">05</span>Психотравма</a>
+      <div class="anav-sep"></div>
+      <a href="#raspolozenje" class="al t-sr"><span class="al-num">06</span>Raspoloženje</a>
+      <a href="#raspolozenje" class="al t-en"><span class="al-num">06</span>Mood</a>
+      <a href="#raspolozenje" class="al t-ru"><span class="al-num">06</span>Настроение</a>
+      <div class="anav-sep"></div>
+      <a href="#samopouzdanje" class="al t-sr"><span class="al-num">07</span>Samopouzdanje</a>
+      <a href="#samopouzdanje" class="al t-en"><span class="al-num">07</span>Self-esteem</a>
+      <a href="#samopouzdanje" class="al t-ru"><span class="al-num">07</span>Самооценка</a>
+      <div class="anav-sep"></div>
+      <a href="#odnosi" class="al t-sr"><span class="al-num">08</span>Odnosi</a>
+      <a href="#odnosi" class="al t-en"><span class="al-num">08</span>Relationships</a>
+      <a href="#odnosi" class="al t-ru"><span class="al-num">08</span>Отношения</a>
+      <div class="anav-sep"></div>
+      <a href="#kriza" class="al t-sr"><span class="al-num">09</span>Kriza</a>
+      <a href="#kriza" class="al t-en"><span class="al-num">09</span>Crisis</a>
+      <a href="#kriza" class="al t-ru"><span class="al-num">09</span>Кризис</a>
+      <div class="anav-sep"></div>
+      <a href="#testiranje" class="al t-sr"><span class="al-num">10</span>Testiranje</a>
+      <a href="#testiranje" class="al t-en"><span class="al-num">10</span>Testing</a>
+      <a href="#testiranje" class="al t-ru"><span class="al-num">10</span>Тестирование</a>
+      <div class="anav-sep"></div>
+      <a href="#hronica" class="al t-sr"><span class="al-num">11</span>Hronična bolest</a>
+      <a href="#hronica" class="al t-en"><span class="al-num">11</span>Chronic illness</a>
+      <a href="#hronica" class="al t-ru"><span class="al-num">11</span>Хрон. болезнь</a>
+      <div class="anav-sep"></div>
+      <a href="#deca" class="al t-sr"><span class="al-num">12</span>Deca</a>
+      <a href="#deca" class="al t-en"><span class="al-num">12</span>Children</a>
+      <a href="#deca" class="al t-ru"><span class="al-num">12</span>Дети</a>
+      <div class="anav-sep"></div>
+      <a href="#identitet" class="al t-sr"><span class="al-num">13</span>Identitet</a>
+      <a href="#identitet" class="al t-en"><span class="al-num">13</span>Identity</a>
+      <a href="#identitet" class="al t-ru"><span class="al-num">13</span>Идентичность</a>
+      <div class="anav-sep"></div>
+      <a href="#blokade" class="al t-sr"><span class="al-num">14</span>Blokade</a>
+      <a href="#blokade" class="al t-en"><span class="al-num">14</span>Blockages</a>
+      <a href="#blokade" class="al t-ru"><span class="al-num">14</span>Блоки</a>
+      <div class="anav-sep"></div>
+      <a href="#samoprihvatanje" class="al t-sr"><span class="al-num">15</span>Rast</a>
+      <a href="#samoprihvatanje" class="al t-en"><span class="al-num">15</span>Growth</a>
+      <a href="#samoprihvatanje" class="al t-ru"><span class="al-num">15</span>Рост</a>
+    </div>
+    <div class="anav-set" aria-hidden="true">
+      <a href="#anksioznost" class="al t-sr"><span class="al-num">01</span>Anksioznost</a>
+      <a href="#anksioznost" class="al t-en"><span class="al-num">01</span>Anxiety</a>
+      <a href="#anksioznost" class="al t-ru"><span class="al-num">01</span>Тревога</a>
+      <div class="anav-sep"></div>
+      <a href="#ptsd" class="al t-sr"><span class="al-num">02</span>Trauma / PTSP</a>
+      <a href="#ptsd" class="al t-en"><span class="al-num">02</span>Trauma / PTSD</a>
+      <a href="#ptsd" class="al t-ru"><span class="al-num">02</span>Травма</a>
+      <div class="anav-sep"></div>
+      <a href="#licnost" class="al t-sr"><span class="al-num">03</span>Ličnost</a>
+      <a href="#licnost" class="al t-en"><span class="al-num">03</span>Personality</a>
+      <a href="#licnost" class="al t-ru"><span class="al-num">03</span>Личность</a>
+      <div class="anav-sep"></div>
+      <a href="#opstiporemecaji" class="al t-sr"><span class="al-num">04</span>Opšti poremećaji</a>
+      <a href="#opstiporemecaji" class="al t-en"><span class="al-num">04</span>General disorders</a>
+      <a href="#opstiporemecaji" class="al t-ru"><span class="al-num">04</span>Общие расстройства</a>
+      <div class="anav-sep"></div>
+      <a href="#psihosomatika" class="al t-sr"><span class="al-num">05</span>Psihotraumatski</a>
+      <a href="#psihosomatika" class="al t-en"><span class="al-num">05</span>Psychotraumatic</a>
+      <a href="#psihosomatika" class="al t-ru"><span class="al-num">05</span>Психотравма</a>
+      <div class="anav-sep"></div>
+      <a href="#raspolozenje" class="al t-sr"><span class="al-num">06</span>Raspoloženje</a>
+      <a href="#raspolozenje" class="al t-en"><span class="al-num">06</span>Mood</a>
+      <a href="#raspolozenje" class="al t-ru"><span class="al-num">06</span>Настроение</a>
+      <div class="anav-sep"></div>
+      <a href="#samopouzdanje" class="al t-sr"><span class="al-num">07</span>Samopouzdanje</a>
+      <a href="#samopouzdanje" class="al t-en"><span class="al-num">07</span>Self-esteem</a>
+      <a href="#samopouzdanje" class="al t-ru"><span class="al-num">07</span>Самооценка</a>
+      <div class="anav-sep"></div>
+      <a href="#odnosi" class="al t-sr"><span class="al-num">08</span>Odnosi</a>
+      <a href="#odnosi" class="al t-en"><span class="al-num">08</span>Relationships</a>
+      <a href="#odnosi" class="al t-ru"><span class="al-num">08</span>Отношения</a>
+      <div class="anav-sep"></div>
+      <a href="#kriza" class="al t-sr"><span class="al-num">09</span>Kriza</a>
+      <a href="#kriza" class="al t-en"><span class="al-num">09</span>Crisis</a>
+      <a href="#kriza" class="al t-ru"><span class="al-num">09</span>Кризис</a>
+      <div class="anav-sep"></div>
+      <a href="#testiranje" class="al t-sr"><span class="al-num">10</span>Testiranje</a>
+      <a href="#testiranje" class="al t-en"><span class="al-num">10</span>Testing</a>
+      <a href="#testiranje" class="al t-ru"><span class="al-num">10</span>Тестирование</a>
+      <div class="anav-sep"></div>
+      <a href="#hronica" class="al t-sr"><span class="al-num">11</span>Hronična bolest</a>
+      <a href="#hronica" class="al t-en"><span class="al-num">11</span>Chronic illness</a>
+      <a href="#hronica" class="al t-ru"><span class="al-num">11</span>Хрон. болезнь</a>
+      <div class="anav-sep"></div>
+      <a href="#deca" class="al t-sr"><span class="al-num">12</span>Deca</a>
+      <a href="#deca" class="al t-en"><span class="al-num">12</span>Children</a>
+      <a href="#deca" class="al t-ru"><span class="al-num">12</span>Дети</a>
+      <div class="anav-sep"></div>
+      <a href="#identitet" class="al t-sr"><span class="al-num">13</span>Identitet</a>
+      <a href="#identitet" class="al t-en"><span class="al-num">13</span>Identity</a>
+      <a href="#identitet" class="al t-ru"><span class="al-num">13</span>Идентичность</a>
+      <div class="anav-sep"></div>
+      <a href="#blokade" class="al t-sr"><span class="al-num">14</span>Blokade</a>
+      <a href="#blokade" class="al t-en"><span class="al-num">14</span>Blockages</a>
+      <a href="#blokade" class="al t-ru"><span class="al-num">14</span>Блоки</a>
+      <div class="anav-sep"></div>
+      <a href="#samoprihvatanje" class="al t-sr"><span class="al-num">15</span>Rast</a>
+      <a href="#samoprihvatanje" class="al t-en"><span class="al-num">15</span>Growth</a>
+      <a href="#samoprihvatanje" class="al t-ru"><span class="al-num">15</span>Рост</a>
+    </div>
+  </div>
+</nav>
+
+<section class="svc" id="anksioznost">
+  <div class="svc-watermark" data-parallax=".14">01</div>
+  <div class="svc-in">
+    <div class="svc-vis">
+      <span class="svc-num t-sr">Oblast 01</span><span class="svc-num t-en">Area 01</span><span class="svc-num t-ru">Область 01</span>
+      <div class="svc-frame"><div class="svc-ph" style="background:linear-gradient(155deg,#C4B8A8,#8C7B6E)"></div><img src="images/anksioznost.jpg" alt="Anksiozni poremećaji" loading="lazy"></div>
+      <div class="svc-tag"><span class="svc-tag-n t-sr">Geštalt</span><span class="svc-tag-n t-en">Gestalt</span><span class="svc-tag-n t-ru">Гештальт</span><span class="svc-tag-l t-sr">pristup</span><span class="svc-tag-l t-en">approach</span><span class="svc-tag-l t-ru">подход</span></div>
+    </div>
+    <div class="svc-content">
+      <p class="s-eye reveal rd1 t-sr">Oblast 01</p><p class="s-eye reveal rd1 t-en">Area 01</p><p class="s-eye reveal rd1 t-ru">Область 01</p>
+      <h2 class="s-title reveal rd2 t-sr">Anksiozni<br><em>Poremećaji</em></h2><h2 class="s-title reveal rd2 t-en">Anxiety<br><em>Disorders</em></h2><h2 class="s-title reveal rd2 t-ru">Тревожные<br><em>Расстройства</em></h2>
+      <div class="hr-a reveal rd2"></div>
+      <p class="lead reveal rd3 t-sr">"Anksioznost je signal — ne neprijatelj."</p><p class="lead reveal rd3 t-en">"Anxiety is a signal — not an enemy."</p><p class="lead reveal rd3 t-ru">"Тревога — это сигнал, а не враг."</p>
+      <p class="txt reveal rd3 t-sr">Anksioznost je jedan od najčešćih razloga zbog kojih ljudi dolaze na terapiju. Može se manifestovati kao generalizovana anksioznost, socijalna fobija, panični napadi, opsesivno-kompulzivni poremećaj ili specifične fobije. Kroz Geštalt terapiju radimo na razumevanju šta anksioznost "pokušava da kaže", a ne samo na ublažavanju simptoma.</p>
+      <p class="txt reveal rd3 t-en">Anxiety is one of the most common reasons people come to therapy. It can manifest as generalized anxiety, social phobia, panic attacks, OCD, or specific phobias. Through Gestalt therapy we work on understanding what anxiety is "trying to say," not just symptom relief.</p>
+      <p class="txt reveal rd3 t-ru">Тревога — одна из самых распространённых причин обращения к терапии. Через гештальт-терапию мы работаем над пониманием того, что тревога «пытается сказать», а не только над устранением симптомов.</p>
+      <div class="feats reveal rd4">
+        <div class="feat"><div class="fdot"></div><div><span class="ft-title t-sr">Generalizovana anksioznost</span><span class="ft-title t-en">Generalized anxiety</span><span class="ft-title t-ru">Генерализованная тревога</span><span class="ft-text t-sr">Hronična briga, napetost u telu, poteškoće s koncentracijom i umornost.</span><span class="ft-text t-en">Chronic worry, body tension, difficulty concentrating and fatigue.</span><span class="ft-text t-ru">Хроническое беспокойство, телесное напряжение, трудности с концентрацией.</span></div></div>
+        <div class="feat"><div class="fdot"></div><div><span class="ft-title t-sr">Panični napadi &amp; fobije</span><span class="ft-title t-en">Panic attacks &amp; phobias</span><span class="ft-title t-ru">Панические атаки и фобии</span><span class="ft-text t-sr">Intenzivan strah s fizičkim simptomima, socijalna anksioznost i specifične fobije.</span><span class="ft-text t-en">Intense fear with physical symptoms, social anxiety and specific phobias.</span><span class="ft-text t-ru">Интенсивный страх с физическими симптомами, социальная тревога и специфические фобии.</span></div></div>
+      </div>
+      <div class="atags reveal rd5"><span class="atag t-sr">Geštalt terapija</span><span class="atag t-en">Gestalt therapy</span><span class="atag t-ru">Гештальт</span><span class="atag t-sr">Body awareness</span><span class="atag t-en">Body awareness</span><span class="atag t-ru">Телесное осознавание</span><span class="atag t-sr">Mindfulness</span><span class="atag t-en">Mindfulness</span><span class="atag t-ru">Майндфулнес</span></div>
+      <a href="index.html?nopreload#contact" class="btn-p reveal rd5"><span class="t-sr">Zakažite sesiju</span><span class="t-en">Book a session</span><span class="t-ru">Записаться</span><svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+  </div>
+  <div class="svc-divider"></div>
+</section>
+
+<section class="svc" id="ptsd">
+  <div class="svc-watermark" data-parallax=".14">02</div>
+  <div class="svc-in rev">
+    <div class="svc-content">
+      <p class="s-eye reveal rd1 t-sr">Oblast 02</p><p class="s-eye reveal rd1 t-en">Area 02</p><p class="s-eye reveal rd1 t-ru">Область 02</p>
+      <h2 class="s-title reveal rd2 t-sr">Posttraumatski<br><em>Stresni Poremećaj</em></h2><h2 class="s-title reveal rd2 t-en">Post-Traumatic<br><em>Stress Disorder</em></h2><h2 class="s-title reveal rd2 t-ru">Посттравматическое<br><em>Стрессовое Расстройство</em></h2>
+      <div class="hr-a reveal rd2"></div>
+      <p class="lead reveal rd3 t-sr">"Trauma nije sudbina — ona je iskustvo koje se može integrisati."</p><p class="lead reveal rd3 t-en">"Trauma is not destiny — it is an experience that can be integrated."</p><p class="lead reveal rd3 t-ru">"Травма — это не судьба, это опыт, который можно интегрировать."</p>
+      <p class="txt reveal rd3 t-sr">PTSP nastaje kao odgovor na izuzetno teška iskustva — rat, saobraćajne nesreće, seksualno nasilje, gubitak bliskih osoba ili dugotrajna emocionalna zlostavljanja. Simptomi uključuju flashbackove, noćne more, emocionalno utrnuće i hipervigilnost. Geštalt terapija pruža siguran okvir za polagan i pažljiv rad sa traumatičnim materijalom.</p>
+      <p class="txt reveal rd3 t-en">PTSD arises as a response to extremely difficult experiences — war, accidents, sexual violence, loss of loved ones, or prolonged emotional abuse. Symptoms include flashbacks, nightmares, emotional numbness, and hypervigilance. Gestalt therapy provides a safe framework for slow, careful work with traumatic material.</p>
+      <p class="txt reveal rd3 t-ru">ПТСР возникает как ответ на крайне тяжёлые переживания. Симптомы: флэшбэки, ночные кошмары, эмоциональное онемение, гипербдительность. Гештальт-терапия обеспечивает безопасные рамки для постепенной работы с травматическим материалом.</p>
+      <div class="blocks reveal rd4">
+        <div class="bl"><p class="bl-t t-sr">Vaš tempo</p><p class="bl-t t-en">Your pace</p><p class="bl-t t-ru">Ваш темп</p><p class="bl-d t-sr">Rad se odvija postepeno — nikad se ne forsira suočavanje sa bolnim materijalom bez vaše gotovosti.</p><p class="bl-d t-en">Work proceeds at your pace — confronting painful material is never forced before you are ready.</p><p class="bl-d t-ru">Работа идёт в вашем темпе — столкновение с болезненным материалом никогда не форсируется.</p></div>
+        <div class="bl"><p class="bl-t t-sr">Telo kao saveznik</p><p class="bl-t t-en">Body as ally</p><p class="bl-t t-ru">Тело как союзник</p><p class="bl-d t-sr">Posebna pažnja telesnim senzacijama i regulaciji nervnog sistema kroz somatic experiencing.</p><p class="bl-d t-en">Special attention to bodily sensations and nervous system regulation through somatic experiencing.</p><p class="bl-d t-ru">Особое внимание телесным ощущениям и регуляции нервной системы.</p></div>
+      </div>
+      <div class="atags reveal rd5"><span class="atag t-sr">Trauma terapija</span><span class="atag t-en">Trauma therapy</span><span class="atag t-ru">Травма-терапия</span><span class="atag t-sr">Somatic work</span><span class="atag t-en">Somatic work</span><span class="atag t-ru">Соматическая работа</span></div>
+      <a href="index.html?nopreload#contact" class="btn-p reveal rd5"><span class="t-sr">Zakažite sesiju</span><span class="t-en">Book a session</span><span class="t-ru">Записаться</span><svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+    </div>
+    <div class="svc-vis">
+      <span class="svc-num t-sr">Oblast 02</span><span class="svc-num t-en">Area 02</span><span class="svc-num t-ru">Область 02</span>
+      <div class="svc-frame"><div class="svc-ph" style="background:linear-gradient(155deg,#B5A898,#7A6B5E)"></div><img src="images/ptsd.jpg" alt="Trauma i PTSP" loading="lazy"></div>
+      <div class="svc-tag"><span class="svc-tag-n">PTSP</span><span class="svc-tag-l t-sr">Trauma rad</span><span class="svc-tag-l t-en">Trauma work</span><span class="svc-tag-l t-ru">Работа с травмой</span></div>
+    </div>
+  </div>
+  <div class="svc-divider"></div>
+</section>
+
+<section class="svc" id="licnost"><div class="svc-watermark" data-parallax=".14">03</div><div class="svc-in"><div class="svc-vis"><span class="svc-num t-sr">Oblast 03</span><span class="svc-num t-en">Area 03</span><span class="svc-num t-ru">Область 03</span><div class="svc-frame"><div class="svc-ph" style="background:linear-gradient(155deg,#C4B5A5,#7A6B5E)"></div><img src="images/licnost.jpg" alt="Poremećaji ličnosti" loading="lazy"></div><div class="svc-tag"><span class="svc-tag-n t-sr">Obrasci</span><span class="svc-tag-n t-en">Patterns</span><span class="svc-tag-n t-ru">Паттерны</span><span class="svc-tag-l t-sr">i preživljavanje</span><span class="svc-tag-l t-en">and survival</span><span class="svc-tag-l t-ru">и выживание</span></div></div><div class="svc-content"><p class="s-eye reveal rd1 t-sr">Oblast 03</p><p class="s-eye reveal rd1 t-en">Area 03</p><p class="s-eye reveal rd1 t-ru">Область 03</p><h2 class="s-title reveal rd2 t-sr">Poremećaji<br><em>Ličnosti</em></h2><h2 class="s-title reveal rd2 t-en">Personality<br><em>Disorders</em></h2><h2 class="s-title reveal rd2 t-ru">Расстройства<br><em>Личности</em></h2><div class="hr-a reveal rd2"></div><p class="lead reveal rd3 t-sr">"Iza svakog obrasca ponašanja stoji pokušaj preživljavanja."</p><p class="lead reveal rd3 t-en">"Behind every behavioral pattern lies an attempt to survive."</p><p class="lead reveal rd3 t-ru">"За каждым паттерном поведения стоит попытка выжить."</p><p class="txt reveal rd3 t-sr">Poremećaji ličnosti su dugotrajni obrasci mišljenja, osećanja i ponašanja koji odstupaju od kulturnih normi i uzrokuju patnju. Geštalt terapija pomaže u razumevanju ovih obrazaca bez etiketiranja i stigmatizacije — polazimo od toga da svaki obrazac ima svoju svrhu i logiku.</p><p class="txt reveal rd3 t-en">Personality disorders are long-term patterns of thinking, feeling, and behavior that deviate from cultural norms and cause distress. Gestalt therapy helps understand these patterns without labeling — every pattern had a purpose and logic at some point.</p><p class="txt reveal rd3 t-ru">Расстройства личности — долгосрочные паттерны, отклоняющиеся от культурных норм и вызывающие страдания. Гештальт помогает понять эти паттерны без стигматизации — каждый паттерн имел свою цель и логику.</p><div class="atags reveal rd4"><span class="atag t-sr">Geštalt terapija</span><span class="atag t-en">Gestalt therapy</span><span class="atag t-ru">Гештальт</span><span class="atag t-sr">Dugotrajna terapija</span><span class="atag t-en">Long-term therapy</span><span class="atag t-ru">Долгосрочная терапия</span><span class="atag t-sr">Bez stigmatizacije</span><span class="atag t-en">No stigmatisation</span><span class="atag t-ru">Без стигматизации</span></div><a href="index.html?nopreload#contact" class="btn-p reveal rd5"><span class="t-sr">Zakažite sesiju</span><span class="t-en">Book a session</span><span class="t-ru">Записаться</span><svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div></div><div class="svc-divider"></div></section>
+<section class="svc" id="opstiporemecaji"><div class="svc-watermark" data-parallax=".14">04</div><div class="svc-in rev"><div class="svc-content"><p class="s-eye reveal rd1 t-sr">Oblast 04</p><p class="s-eye reveal rd1 t-en">Area 04</p><p class="s-eye reveal rd1 t-ru">Область 04</p><h2 class="s-title reveal rd2 t-sr">Opšti Klinički<br><em>Poremećaji</em></h2><h2 class="s-title reveal rd2 t-en">General Clinical<br><em>Disorders</em></h2><h2 class="s-title reveal rd2 t-ru">Общие Клинические<br><em>Расстройства</em></h2><div class="hr-a reveal rd2"></div><p class="lead reveal rd3 t-sr">"Svaka osoba je više od svoje dijagnoze."</p><p class="lead reveal rd3 t-en">"Every person is more than their diagnosis."</p><p class="lead reveal rd3 t-ru">"Каждый человек больше, чем его диагноз."</p><p class="txt reveal rd3 t-sr">Ova kategorija obuhvata širu paletu psiholoških teškoća: problemi sa spavanjem, hronični stres, burnout, somatizacija i poteškoće u prilagođavanju na životne promene.</p><p class="txt reveal rd3 t-en">This category covers a wider range of psychological difficulties: sleep problems, chronic stress, burnout, somatization, and difficulties adapting to life changes.</p><p class="txt reveal rd3 t-ru">Эта категория охватывает широкий спектр трудностей: проблемы со сном, хронический стресс, выгорание, соматизация и трудности адаптации.</p><p class="svc-q reveal rd4 t-sr">"Burnout nije slabost — to je signal da vam je telo reklo: dosta."</p><p class="svc-q reveal rd4 t-en">"Burnout is not weakness — it is your body saying: enough."</p><p class="svc-q reveal rd4 t-ru">"Выгорание — не слабость, это сигнал тела: достаточно."</p><a href="index.html?nopreload#contact" class="btn-p reveal rd5"><span class="t-sr">Zakažite sesiju</span><span class="t-en">Book a session</span><span class="t-ru">Записаться</span><svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div><div class="svc-vis"><span class="svc-num t-sr">Oblast 04</span><span class="svc-num t-en">Area 04</span><span class="svc-num t-ru">Область 04</span><div class="svc-frame"><div class="svc-ph" style="background:linear-gradient(155deg,#B8C4B5,#5A7060)"></div><img src="images/opstiporemecaji.jpg" alt="Opšti poremećaji" loading="lazy"></div><div class="svc-tag"><span class="svc-tag-n t-sr">Burnout</span><span class="svc-tag-n t-en">Burnout</span><span class="svc-tag-n t-ru">Выгорание</span><span class="svc-tag-l t-sr">stres &amp; spavanje</span><span class="svc-tag-l t-en">stress &amp; sleep</span><span class="svc-tag-l t-ru">стресс и сон</span></div></div></div><div class="svc-divider"></div></section>
+<section class="svc" id="psihosomatika"><div class="svc-watermark" data-parallax=".14">05</div><div class="svc-in"><div class="svc-vis"><span class="svc-num t-sr">Oblast 05</span><span class="svc-num t-en">Area 05</span><span class="svc-num t-ru">Область 05</span><div class="svc-frame"><div class="svc-ph" style="background:linear-gradient(155deg,#A8B8A5,#3D5040)"></div><img src="images/psihosomatika.jpg" alt="Psihotraumatski poremećaji" loading="lazy"></div><div class="svc-tag"><span class="svc-tag-n t-sr">Telo</span><span class="svc-tag-n t-en">Body</span><span class="svc-tag-n t-ru">Тело</span><span class="svc-tag-l t-sr">pamti sve</span><span class="svc-tag-l t-en">remembers all</span><span class="svc-tag-l t-ru">всё помнит</span></div></div><div class="svc-content"><p class="s-eye reveal rd1 t-sr">Oblast 05</p><p class="s-eye reveal rd1 t-en">Area 05</p><p class="s-eye reveal rd1 t-ru">Область 05</p><h2 class="s-title reveal rd2 t-sr">Psihotraumatski<br><em>Poremećaji</em></h2><h2 class="s-title reveal rd2 t-en">Psychotraumatic<br><em>Disorders</em></h2><h2 class="s-title reveal rd2 t-ru">Психотравматические<br><em>Расстройства</em></h2><div class="hr-a reveal rd2"></div><p class="lead reveal rd3 t-sr">"Telo pamti ono što um pokušava zaboraviti."</p><p class="lead reveal rd3 t-en">"The body remembers what the mind tries to forget."</p><p class="lead reveal rd3 t-ru">"Тело помнит то, что ум пытается забыть."</p><p class="txt reveal rd3 t-sr">Psihotraumatski poremećaji nastaju kao posledica izlaganja traumatičnim događajima, posebno kod dece i adolescenata. Rad se odvija postepeno, uz puno poštovanje klijentovog tempa i kapaciteta.</p><p class="txt reveal rd3 t-en">Psychotraumatic disorders arise from exposure to traumatic events, especially in children and adolescents. Work proceeds gradually, with full respect for the client's pace.</p><p class="txt reveal rd3 t-ru">Психотравматические расстройства возникают из-за травматических событий. Работа ведётся постепенно, с уважением к темпу клиента.</p><div class="atags reveal rd4"><span class="atag t-sr">Trauma terapija</span><span class="atag t-en">Trauma therapy</span><span class="atag t-ru">Травма-терапия</span><span class="atag t-sr">Disocijacija</span><span class="atag t-en">Dissociation</span><span class="atag t-ru">Диссоциация</span><span class="atag t-sr">Regulacija emocija</span><span class="atag t-en">Emotion regulation</span><span class="atag t-ru">Регуляция эмоций</span></div><a href="index.html?nopreload#contact" class="btn-p reveal rd5"><span class="t-sr">Zakažite sesiju</span><span class="t-en">Book a session</span><span class="t-ru">Записаться</span><svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div></div><div class="svc-divider"></div></section>
+<section class="svc" id="raspolozenje"><div class="svc-watermark" data-parallax=".14">06</div><div class="svc-in rev"><div class="svc-content"><p class="s-eye reveal rd1 t-sr">Oblast 06</p><p class="s-eye reveal rd1 t-en">Area 06</p><p class="s-eye reveal rd1 t-ru">Область 06</p><h2 class="s-title reveal rd2 t-sr">Poremećaji<br><em>Raspoloženja</em></h2><h2 class="s-title reveal rd2 t-en">Mood<br><em>Disorders</em></h2><h2 class="s-title reveal rd2 t-ru">Расстройства<br><em>Настроения</em></h2><div class="hr-a reveal rd2"></div><p class="lead reveal rd3 t-sr">"Depresija nije slabost karaktera — ona je signal da nešto treba da se promeni."</p><p class="lead reveal rd3 t-en">"Depression is not a character weakness — it is a signal that something needs to change."</p><p class="lead reveal rd3 t-ru">"Депрессия — не слабость характера, это сигнал о необходимости перемен."</p><p class="txt reveal rd3 t-sr">Poremećaji raspoloženja obuhvataju depresiju, bipolarni poremećaj, distimiju i sezonske afektivne poremećaje. Terapija je ključna komponenta tretmana, često u kombinaciji sa psihijatrijskom podrškom.</p><p class="txt reveal rd3 t-en">Mood disorders include depression, bipolar disorder, dysthymia, and seasonal affective disorders. Therapy is a key treatment component, often combined with psychiatric support.</p><p class="txt reveal rd3 t-ru">Расстройства настроения включают депрессию, биполярное расстройство, дистимию. Терапия — ключевой компонент лечения.</p><div class="info-row reveal rd3"><div class="info-it"><span class="info-n">50'</span><span class="info-l t-sr">Trajanje</span><span class="info-l t-en">Duration</span><span class="info-l t-ru">Длительность</span></div><div class="info-it"><span class="info-n">1×</span><span class="info-l t-sr">Nedeljno</span><span class="info-l t-en">Weekly</span><span class="info-l t-ru">Еженедельно</span></div><div class="info-it"><span class="info-n">∞</span><span class="info-l t-sr">Vaš tempo</span><span class="info-l t-en">Your pace</span><span class="info-l t-ru">Ваш темп</span></div></div><a href="index.html?nopreload#contact" class="btn-p reveal rd5"><span class="t-sr">Zakažite sesiju</span><span class="t-en">Book a session</span><span class="t-ru">Записаться</span><svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div><div class="svc-vis"><span class="svc-num t-sr">Oblast 06</span><span class="svc-num t-en">Area 06</span><span class="svc-num t-ru">Область 06</span><div class="svc-frame"><div class="svc-ph" style="background:linear-gradient(155deg,#8EA88E,#3D5040)"></div><img src="images/raspolozenje.jpg" alt="Poremećaji raspoloženja" loading="lazy"></div><div class="svc-tag"><span class="svc-tag-n t-sr">Depresija</span><span class="svc-tag-n t-en">Depression</span><span class="svc-tag-n t-ru">Депрессия</span><span class="svc-tag-l t-sr">i bipolarnost</span><span class="svc-tag-l t-en">and bipolarity</span><span class="svc-tag-l t-ru">и биполярность</span></div></div></div><div class="svc-divider"></div></section>
+<section class="svc" id="samopouzdanje"><div class="svc-watermark" data-parallax=".14">07</div><div class="svc-in"><div class="svc-vis"><span class="svc-num t-sr">Oblast 07</span><span class="svc-num t-en">Area 07</span><span class="svc-num t-ru">Область 07</span><div class="svc-frame"><div class="svc-ph" style="background:linear-gradient(155deg,#A8C5AC,#4A6B50)"></div><img src="images/samopouzdanje.jpg" alt="Samopouzdanje" loading="lazy"></div><div class="svc-tag"><span class="svc-tag-n t-sr">Sloboda</span><span class="svc-tag-n t-en">Freedom</span><span class="svc-tag-n t-ru">Свобода</span><span class="svc-tag-l t-sr">od tuđih glasova</span><span class="svc-tag-l t-en">from others' voices</span><span class="svc-tag-l t-ru">от чужих голосов</span></div></div><div class="svc-content"><p class="s-eye reveal rd1 t-sr">Oblast 07</p><p class="s-eye reveal rd1 t-en">Area 07</p><p class="s-eye reveal rd1 t-ru">Область 07</p><h2 class="s-title reveal rd2 t-sr">Problemi sa<br><em>Samopouzdanjem</em></h2><h2 class="s-title reveal rd2 t-en">Self-confidence<br><em>Issues</em></h2><h2 class="s-title reveal rd2 t-ru">Проблемы с<br><em>Самооценкой</em></h2><div class="hr-a reveal rd2"></div><p class="lead reveal rd3 t-sr">"Samopouzdanje se ne gradi — ono se oslobađa."</p><p class="lead reveal rd3 t-en">"Self-confidence is not built — it is freed."</p><p class="lead reveal rd3 t-ru">"Уверенность в себе не строится — она освобождается."</p><p class="txt reveal rd3 t-sr">Nizko samopouzdanje i negativna slika o sebi su u korenu mnogih psiholoških teškoća. Terapija pomaže da se oslobodimo tuđih glasova koji su postali naš unutrašnji kritičar.</p><p class="txt reveal rd3 t-en">Low self-confidence and negative self-image are at the root of many psychological difficulties. Therapy helps free ourselves from others' voices that became our inner critic.</p><p class="txt reveal rd3 t-ru">Низкая самооценка лежит в основе многих психологических трудностей. Терапия помогает освободиться от чужих голосов, ставших внутренним критиком.</p><p class="svc-q reveal rd4 t-sr">"Autentičan život počinje kada prestanemo da živimo prema tuđim scenarijima."</p><p class="svc-q reveal rd4 t-en">"An authentic life begins when we stop living according to others' scripts."</p><p class="svc-q reveal rd4 t-ru">"Аутентичная жизнь начинается, когда мы перестаём жить по чужим сценариям."</p><a href="index.html?nopreload#contact" class="btn-p reveal rd5"><span class="t-sr">Zakažite sesiju</span><span class="t-en">Book a session</span><span class="t-ru">Записаться</span><svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div></div><div class="svc-divider"></div></section>
+<section class="svc" id="odnosi"><div class="svc-watermark" data-parallax=".14">08</div><div class="svc-in rev"><div class="svc-content"><p class="s-eye reveal rd1 t-sr">Oblast 08</p><p class="s-eye reveal rd1 t-en">Area 08</p><p class="s-eye reveal rd1 t-ru">Область 08</p><h2 class="s-title reveal rd2 t-sr">Problemi u Odnosima<br><em>&amp; Komunikaciji</em></h2><h2 class="s-title reveal rd2 t-en">Relationship &amp;<br><em>Communication Issues</em></h2><h2 class="s-title reveal rd2 t-ru">Проблемы в Отношениях<br><em>&amp; Общении</em></h2><div class="hr-a reveal rd2"></div><p class="lead reveal rd3 t-sr">"Kvalitet naših odnosa određuje kvalitet našeg života."</p><p class="lead reveal rd3 t-en">"The quality of our relationships determines the quality of our life."</p><p class="lead reveal rd3 t-ru">"Качество наших отношений определяет качество нашей жизни."</p><p class="txt reveal rd3 t-sr">Poteškoće u vezama — partnerskim, porodičnim ili profesionalnim — su jedan od najčešćih razloga potražnje za psihološkom podrškom. Istražujemo obrasce vezivanja i repetitivne konflikte.</p><p class="txt reveal rd3 t-en">Difficulties in relationships — romantic, family, or professional — are one of the most common reasons for seeking psychological support. We explore attachment patterns and repetitive conflicts.</p><p class="txt reveal rd3 t-ru">Трудности в отношениях — одна из самых частых причин обращения. Исследуем паттерны привязанности и повторяющиеся конфликты.</p><div class="blocks reveal rd4"><div class="bl"><p class="bl-t t-sr">Partnerski odnosi</p><p class="bl-t t-en">Romantic relationships</p><p class="bl-t t-ru">Партнёрские отношения</p><p class="bl-d t-sr">Konflikti, emocionalna distanca, neverstvo, krize poverenja i gubitak bliskosti u vezi.</p><p class="bl-d t-en">Conflicts, emotional distance, infidelity, trust crises and loss of intimacy.</p><p class="bl-d t-ru">Конфликты, эмоциональная дистанция, измена, кризис доверия.</p></div><div class="bl"><p class="bl-t t-sr">Porodični obrasci</p><p class="bl-t t-en">Family patterns</p><p class="bl-t t-ru">Семейные паттерны</p><p class="bl-d t-sr">Transgeneracijski obrasci koji oblikuju naše sadašnje odnose i komunikaciju.</p><p class="bl-d t-en">Transgenerational patterns shaping our current relationships and communication.</p><p class="bl-d t-ru">Трансгенерационные паттерны, формирующие наши нынешние отношения.</p></div></div><a href="index.html?nopreload#contact" class="btn-p reveal rd5"><span class="t-sr">Zakažite sesiju</span><span class="t-en">Book a session</span><span class="t-ru">Записаться</span><svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div><div class="svc-vis"><span class="svc-num t-sr">Oblast 08</span><span class="svc-num t-en">Area 08</span><span class="svc-num t-ru">Область 08</span><div class="svc-frame"><div class="svc-ph" style="background:linear-gradient(155deg,#C9A96E,#8C7260)"></div><img src="images/odnosi.jpg" alt="Odnosi i komunikacija" loading="lazy"></div><div class="svc-tag"><span class="svc-tag-n t-sr">Veze</span><span class="svc-tag-n t-en">Bonds</span><span class="svc-tag-n t-ru">Связи</span><span class="svc-tag-l t-sr">i komunikacija</span><span class="svc-tag-l t-en">and communication</span><span class="svc-tag-l t-ru">и коммуникация</span></div></div></div><div class="svc-divider"></div></section>
+<section class="svc" id="kriza"><div class="svc-watermark" data-parallax=".14">09</div><div class="svc-in"><div class="svc-vis"><span class="svc-num t-sr">Oblast 09</span><span class="svc-num t-en">Area 09</span><span class="svc-num t-ru">Область 09</span><div class="svc-frame"><div class="svc-ph" style="background:linear-gradient(155deg,#8C9880,#3D4A38)"></div><img src="images/kriza.jpg" alt="Krizne intervencije" loading="lazy"></div><div class="svc-tag"><span class="svc-tag-n t-sr">Hitno</span><span class="svc-tag-n t-en">Urgent</span><span class="svc-tag-n t-ru">Срочно</span><span class="svc-tag-l t-sr">prioritetno zakazivanje</span><span class="svc-tag-l t-en">priority scheduling</span><span class="svc-tag-l t-ru">приоритетная запись</span></div></div><div class="svc-content"><p class="s-eye reveal rd1 t-sr">Oblast 09</p><p class="s-eye reveal rd1 t-en">Area 09</p><p class="s-eye reveal rd1 t-ru">Область 09</p><h2 class="s-title reveal rd2 t-sr">Krizne<br><em>Intervencije</em></h2><h2 class="s-title reveal rd2 t-en">Crisis<br><em>Interventions</em></h2><h2 class="s-title reveal rd2 t-ru">Кризисные<br><em>Интервенции</em></h2><div class="hr-a reveal rd2"></div><p class="lead reveal rd3 t-sr">"Kriza je tačka u kojoj je promena nužna — i moguća."</p><p class="lead reveal rd3 t-en">"Crisis is the point where change is necessary — and possible."</p><p class="lead reveal rd3 t-ru">"Кризис — это точка, где перемены необходимы и возможны."</p><p class="txt reveal rd3 t-sr">Krizne intervencije su hitna psihološka podrška u trenucima intenzivne patnje — suicidalne misli, akutna trauma, gubitak, razvod, ozbiljna bolest. Cilj je stabilizacija i sigurnost.</p><p class="txt reveal rd3 t-en">Crisis interventions are urgent psychological support in moments of intense distress — suicidal thoughts, acute trauma, loss, divorce, serious illness. The goal is stabilization and safety.</p><p class="txt reveal rd3 t-ru">Кризисные интервенции — срочная помощь в моменты интенсивных страданий. Цель — стабилизация и безопасность.</p><div class="blocks reveal rd4"><div class="bl"><p class="bl-t t-sr">Hitna dostupnost</p><p class="bl-t t-en">Urgent availability</p><p class="bl-t t-ru">Срочная доступность</p><p class="bl-d t-sr">Prioritetno zakazivanje sesija u roku od 24h.</p><p class="bl-d t-en">Priority scheduling within 24 hours.</p><p class="bl-d t-ru">Приоритетная запись в течение 24ч.</p></div><div class="bl"><p class="bl-t t-sr">Stabilizacija</p><p class="bl-t t-en">Stabilisation</p><p class="bl-t t-ru">Стабилизация</p><p class="bl-d t-sr">Konkretne tehnike za regulaciju u akutnoj krizi.</p><p class="bl-d t-en">Concrete techniques for regulation in acute crisis.</p><p class="bl-d t-ru">Конкретные техники регуляции в острой ситуации.</p></div></div><a href="index.html?nopreload#contact" class="btn-p reveal rd5"><span class="t-sr">Hitna podrška</span><span class="t-en">Urgent support</span><span class="t-ru">Срочная помощь</span><svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div></div><div class="svc-divider"></div></section>
+<section class="svc" id="testiranje"><div class="svc-watermark" data-parallax=".14">10</div><div class="svc-in rev"><div class="svc-content"><p class="s-eye reveal rd1 t-sr">Oblast 10</p><p class="s-eye reveal rd1 t-en">Area 10</p><p class="s-eye reveal rd1 t-ru">Область 10</p><h2 class="s-title reveal rd2 t-sr">Psihološko<br><em>Testiranje</em></h2><h2 class="s-title reveal rd2 t-en">Psychological<br><em>Testing</em></h2><h2 class="s-title reveal rd2 t-ru">Психологическое<br><em>Тестирование</em></h2><div class="hr-a reveal rd2"></div><p class="lead reveal rd3 t-sr">"Merenje je početak razumevanja."</p><p class="lead reveal rd3 t-en">"Measurement is the beginning of understanding."</p><p class="lead reveal rd3 t-ru">"Измерение — начало понимания."</p><p class="txt reveal rd3 t-sr">Psihološko testiranje uključuje primenu standardizovanih instrumenata za merenje inteligencije, ličnosti, sposobnosti i psihopatologije.</p><p class="txt reveal rd3 t-en">Psychological testing includes applying standardized instruments to measure intelligence, personality, abilities, and psychopathology.</p><p class="txt reveal rd3 t-ru">Психологическое тестирование включает стандартизированные инструменты для измерения интеллекта, личности, способностей и психопатологии.</p><div class="atags reveal rd4"><span class="atag t-sr">Inteligencija</span><span class="atag t-en">Intelligence</span><span class="atag t-ru">Интеллект</span><span class="atag t-sr">Ličnost</span><span class="atag t-en">Personality</span><span class="atag t-ru">Личность</span><span class="atag t-sr">Psihopatologija</span><span class="atag t-en">Psychopathology</span><span class="atag t-ru">Психопатология</span></div><a href="terapijskeusluge.html#dijagnostika" class="btn-p reveal rd5"><span class="t-sr">Psihološka dijagnostika</span><span class="t-en">Psychological diagnostics</span><span class="t-ru">Психологическая диагностика</span><svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div><div class="svc-vis"><span class="svc-num t-sr">Oblast 10</span><span class="svc-num t-en">Area 10</span><span class="svc-num t-ru">Область 10</span><div class="svc-frame"><div class="svc-ph" style="background:linear-gradient(155deg,#C9A96E,#8C7260)"></div><img src="images/testiranje.jpg" alt="Psihološko testiranje" loading="lazy"></div><div class="svc-tag"><span class="svc-tag-n">2–3</span><span class="svc-tag-l t-sr">sesije dijagnostike</span><span class="svc-tag-l t-en">diagnostic sessions</span><span class="svc-tag-l t-ru">сессии диагностики</span></div></div></div><div class="svc-divider"></div></section>
+<section class="svc" id="hronica"><div class="svc-watermark" data-parallax=".14">11</div><div class="svc-in"><div class="svc-vis"><span class="svc-num t-sr">Oblast 11</span><span class="svc-num t-en">Area 11</span><span class="svc-num t-ru">Область 11</span><div class="svc-frame"><div class="svc-ph" style="background:linear-gradient(155deg,#B8C8B5,#4A6050)"></div><img src="images/hronica.jpg" alt="Hronična bolest" loading="lazy"></div><div class="svc-tag"><span class="svc-tag-n t-sr">Bolest</span><span class="svc-tag-n t-en">Illness</span><span class="svc-tag-n t-ru">Болезнь</span><span class="svc-tag-l t-sr">ne menja dušu</span><span class="svc-tag-l t-en">doesn't change the soul</span><span class="svc-tag-l t-ru">не меняет душу</span></div></div><div class="svc-content"><p class="s-eye reveal rd1 t-sr">Oblast 11</p><p class="s-eye reveal rd1 t-en">Area 11</p><p class="s-eye reveal rd1 t-ru">Область 11</p><h2 class="s-title reveal rd2 t-sr">Hronična Bolest &amp;<br><em>Psihološka Podrška</em></h2><h2 class="s-title reveal rd2 t-en">Chronic Illness &amp;<br><em>Psychological Support</em></h2><h2 class="s-title reveal rd2 t-ru">Хроническая Болезнь &amp;<br><em>Психологическая Поддержка</em></h2><div class="hr-a reveal rd2"></div><p class="lead reveal rd3 t-sr">"Bolest menja telo — ali ne mora da menja dušu."</p><p class="lead reveal rd3 t-en">"Illness changes the body — but it doesn't have to change the soul."</p><p class="lead reveal rd3 t-ru">"Болезнь меняет тело — но не обязательно меняет душу."</p><p class="txt reveal rd3 t-sr">Psihološka podrška osobama s hroničnim bolestima pomaže im da pronađu načine da žive smisleno i dostojanstveno uprkos ograničenjima bolesti.</p><p class="txt reveal rd3 t-en">Psychological support helps people with chronic illnesses find ways to live meaningfully and with dignity despite the limitations of illness.</p><p class="txt reveal rd3 t-ru">Психологическая поддержка помогает найти способы жить осмысленно и достойно вопреки ограничениям болезни.</p><div class="atags reveal rd4"><span class="atag t-sr">Prilagođavanje</span><span class="atag t-en">Adjustment</span><span class="atag t-ru">Адаптация</span><span class="atag t-sr">Osmišljavanje</span><span class="atag t-en">Meaning-making</span><span class="atag t-ru">Поиск смысла</span><span class="atag t-sr">Žalovanje</span><span class="atag t-en">Grief</span><span class="atag t-ru">Горе</span></div><a href="index.html?nopreload#contact" class="btn-p reveal rd5"><span class="t-sr">Zakažite sesiju</span><span class="t-en">Book a session</span><span class="t-ru">Записаться</span><svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div></div><div class="svc-divider"></div></section>
+<section class="svc" id="deca"><div class="svc-watermark" data-parallax=".14">12</div><div class="svc-in rev"><div class="svc-content"><p class="s-eye reveal rd1 t-sr">Oblast 12</p><p class="s-eye reveal rd1 t-en">Area 12</p><p class="s-eye reveal rd1 t-ru">Область 12</p><h2 class="s-title reveal rd2 t-sr">Deca &amp;<br><em>Adolescenti</em></h2><h2 class="s-title reveal rd2 t-en">Children &amp;<br><em>Adolescents</em></h2><h2 class="s-title reveal rd2 t-ru">Дети &amp;<br><em>Подростки</em></h2><div class="hr-a reveal rd2"></div><p class="lead reveal rd3 t-sr">"Dete ne mora da razume problem da bi imalo koristi od terapije."</p><p class="lead reveal rd3 t-en">"A child doesn't need to understand the problems to benefit from therapy."</p><p class="lead reveal rd3 t-ru">"Ребёнку не нужно понимать проблемы, чтобы извлечь пользу из терапии."</p><p class="txt reveal rd3 t-sr">Rad sa decom i adolescentima zahteva poseban pristup prilagođen uzrastu. Koristim igru, crtanje, narativne tehnike i body-awareness metode. Radim sa decom od 6 godina naviše.</p><p class="txt reveal rd3 t-en">Working with children and adolescents requires a special approach adapted to age. I use play, drawing, narrative techniques, and body-awareness methods. I work with children from 6 years upwards.</p><p class="txt reveal rd3 t-ru">Работа с детьми требует особого подхода. Использую игру, рисование, нарративные техники. Работаю с детьми от 6 лет.</p><div class="info-row reveal rd4"><div class="info-it"><span class="info-n">6+</span><span class="info-l t-sr">Godina uzrast</span><span class="info-l t-en">Years of age</span><span class="info-l t-ru">Лет возраст</span></div><div class="info-it"><span class="info-n">45'</span><span class="info-l t-sr">Trajanje</span><span class="info-l t-en">Duration</span><span class="info-l t-ru">Длительность</span></div><div class="info-it"><span class="info-n">✦</span><span class="info-l t-sr">Igra &amp; rad</span><span class="info-l t-en">Play &amp; work</span><span class="info-l t-ru">Игра &amp; работа</span></div></div><a href="index.html?nopreload#contact" class="btn-p reveal rd5"><span class="t-sr">Zakažite sesiju</span><span class="t-en">Book a session</span><span class="t-ru">Записаться</span><svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div><div class="svc-vis"><span class="svc-num t-sr">Oblast 12</span><span class="svc-num t-en">Area 12</span><span class="svc-num t-ru">Область 12</span><div class="svc-frame"><div class="svc-ph" style="background:linear-gradient(155deg,#B5C8B8,#4A6B50)"></div><img src="images/deca.jpg" alt="Deca i adolescenti" loading="lazy"></div><div class="svc-tag"><span class="svc-tag-n">6+</span><span class="svc-tag-l t-sr">Godina uzrast</span><span class="svc-tag-l t-en">Years of age</span><span class="svc-tag-l t-ru">Лет возраст</span></div></div></div><div class="svc-divider"></div></section>
+<section class="svc" id="identitet"><div class="svc-watermark" data-parallax=".14">13</div><div class="svc-in"><div class="svc-vis"><span class="svc-num t-sr">Oblast 13</span><span class="svc-num t-en">Area 13</span><span class="svc-num t-ru">Область 13</span><div class="svc-frame"><div class="svc-ph" style="background:linear-gradient(155deg,#C4B5A5,#8C7B6E)"></div><img src="images/identitet.jpg" alt="Pitanje identiteta" loading="lazy"></div><div class="svc-tag"><span class="svc-tag-n t-sr">Ko sam?</span><span class="svc-tag-n t-en">Who am I?</span><span class="svc-tag-n t-ru">Кто я?</span><span class="svc-tag-l t-sr">Najdublje pitanje</span><span class="svc-tag-l t-en">The deepest question</span><span class="svc-tag-l t-ru">Самый глубокий вопрос</span></div></div><div class="svc-content"><p class="s-eye reveal rd1 t-sr">Oblast 13</p><p class="s-eye reveal rd1 t-en">Area 13</p><p class="s-eye reveal rd1 t-ru">Область 13</p><h2 class="s-title reveal rd2 t-sr">Pitanje<br><em>Identiteta</em></h2><h2 class="s-title reveal rd2 t-en">Identity<br><em>Questions</em></h2><h2 class="s-title reveal rd2 t-ru">Вопросы<br><em>Идентичности</em></h2><div class="hr-a reveal rd2"></div><p class="lead reveal rd3 t-sr">"Ko sam ja, zapravo?" — najdublje pitanje na koje terapija može pomoći da se odgovori.</p><p class="lead reveal rd3 t-en">"Who am I, really?" — the deepest question therapy can help answer.</p><p class="lead reveal rd3 t-ru">"Кто я на самом деле?" — самый глубокий вопрос, на который терапия может помочь ответить.</p><p class="txt reveal rd3 t-sr">Krize identiteta javljaju se u adolescenciji, sredovečnoj krizi, ili nakon značajnih životnih promena. Terapija pruža prostor za slobodno istraživanje bez osude.</p><p class="txt reveal rd3 t-en">Identity crises occur in adolescence, midlife crisis, or after significant life changes. Therapy provides space for free exploration without judgment.</p><p class="txt reveal rd3 t-ru">Кризисы идентичности возникают в подростковом возрасте, кризисе среднего возраста или после значимых перемен. Терапия — пространство для исследования без осуждения.</p><p class="svc-q reveal rd4 t-sr">"Identitet nije nešto što se pronalazi — to je nešto što se kontinuirano gradi u slobodnom izboru."</p><p class="svc-q reveal rd4 t-en">"Identity is not something you find — it is something continually built through free choice."</p><p class="svc-q reveal rd4 t-ru">"Идентичность не находят — её непрерывно строят в свободном выборе."</p><a href="index.html?nopreload#contact" class="btn-p reveal rd5"><span class="t-sr">Zakažite sesiju</span><span class="t-en">Book a session</span><span class="t-ru">Записаться</span><svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div></div><div class="svc-divider"></div></section>
+<section class="svc" id="blokade"><div class="svc-watermark" data-parallax=".14">14</div><div class="svc-in rev"><div class="svc-content"><p class="s-eye reveal rd1 t-sr">Oblast 14</p><p class="s-eye reveal rd1 t-en">Area 14</p><p class="s-eye reveal rd1 t-ru">Область 14</p><h2 class="s-title reveal rd2 t-sr">Blokade<br><em>u Razvoju</em></h2><h2 class="s-title reveal rd2 t-en">Growth<br><em>Blockages</em></h2><h2 class="s-title reveal rd2 t-ru">Блоки<br><em>в Развитии</em></h2><div class="hr-a reveal rd2"></div><p class="lead reveal rd3 t-sr">"Svaka blokada ima svoju logiku — i svoju poruku."</p><p class="lead reveal rd3 t-en">"Every blockage has its own logic — and its own message."</p><p class="lead reveal rd3 t-ru">"У каждого блока есть своя логика — и своё послание."</p><p class="txt reveal rd3 t-sr">Blokade u razvoju se manifestuju kroz prokrastinaciju, strah od uspeha ili neuspeha, nemogućnost donošenja odluka i sabotažu sopstvenih postignuća.</p><p class="txt reveal rd3 t-en">Growth blockages manifest through procrastination, fear of success or failure, inability to make decisions, and sabotage of own achievements.</p><p class="txt reveal rd3 t-ru">Блоки в развитии проявляются через прокрастинацию, страх успеха или неудачи, неспособность принимать решения.</p><div class="feats reveal rd4"><div class="feat"><div class="fdot"></div><div><span class="ft-title t-sr">Prokrastinacija &amp; strah od uspeha</span><span class="ft-title t-en">Procrastination &amp; fear of success</span><span class="ft-title t-ru">Прокрастинация и страх успеха</span><span class="ft-text t-sr">Razumevamo zašto odlažemo i šta bi se "strašno" dogodilo kad bismo uspeli.</span><span class="ft-text t-en">We understand why we delay and what would "terribly" happen if we succeeded.</span><span class="ft-text t-ru">Понимаем, почему мы откладываем и что «страшного» случится.</span></div></div><div class="feat"><div class="fdot"></div><div><span class="ft-title t-sr">Sabotaža postignuća</span><span class="ft-title t-en">Achievement sabotage</span><span class="ft-title t-ru">Саботаж достижений</span><span class="ft-text t-sr">Istražujemo nesvesne obrasce koji nas vraćaju na polaznu tačku svaki put kad smo blizu cilja.</span><span class="ft-text t-en">We explore unconscious patterns that bring us back to square one every time we are close to our goal.</span><span class="ft-text t-ru">Исследуем бессознательные паттерны, возвращающие нас к началу.</span></div></div></div><a href="index.html?nopreload#contact" class="btn-p reveal rd5"><span class="t-sr">Zakažite sesiju</span><span class="t-en">Book a session</span><span class="t-ru">Записаться</span><svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div><div class="svc-vis"><span class="svc-num t-sr">Oblast 14</span><span class="svc-num t-en">Area 14</span><span class="svc-num t-ru">Область 14</span><div class="svc-frame"><div class="svc-ph" style="background:linear-gradient(155deg,#C8B5A0,#8C7260)"></div><img src="images/blokade.jpg" alt="Blokade u razvoju" loading="lazy"></div><div class="svc-tag"><span class="svc-tag-n t-sr">Sloboda</span><span class="svc-tag-n t-en">Freedom</span><span class="svc-tag-n t-ru">Свобода</span><span class="svc-tag-l t-sr">iza blokade</span><span class="svc-tag-l t-en">beyond the block</span><span class="svc-tag-l t-ru">за блоком</span></div></div></div><div class="svc-divider"></div></section>
+<section class="svc" id="samoprihvatanje"><div class="svc-watermark" data-parallax=".14">15</div><div class="svc-in"><div class="svc-vis"><span class="svc-num t-sr">Oblast 15</span><span class="svc-num t-en">Area 15</span><span class="svc-num t-ru">Область 15</span><div class="svc-frame"><div class="svc-ph" style="background:linear-gradient(155deg,#A8C5AC,#4A6B50)"></div><img src="images/samoprihvatanje.jpg" alt="Samoprihvatanje i lični rast" loading="lazy"></div><div class="svc-tag"><span class="svc-tag-n t-sr">Sloboda</span><span class="svc-tag-n t-en">Freedom</span><span class="svc-tag-n t-ru">Свобода</span><span class="svc-tag-l t-sr">kao krajnji cilj</span><span class="svc-tag-l t-en">as the ultimate goal</span><span class="svc-tag-l t-ru">как конечная цель</span></div></div><div class="svc-content"><p class="s-eye reveal rd1 t-sr">Oblast 15</p><p class="s-eye reveal rd1 t-en">Area 15</p><p class="s-eye reveal rd1 t-ru">Область 15</p><h2 class="s-title reveal rd2 t-sr">Samoprihvatanje &amp;<br><em>Lični Rast</em></h2><h2 class="s-title reveal rd2 t-en">Self-acceptance &amp;<br><em>Personal Growth</em></h2><h2 class="s-title reveal rd2 t-ru">Самопринятие &amp;<br><em>Личностный Рост</em></h2><div class="hr-a reveal rd2"></div><p class="lead reveal rd3 t-sr">"Prihvatiti sebe ne znači odustati od rasta — znači rasti iz mesta ljubavi prema sebi."</p><p class="lead reveal rd3 t-en">"To accept yourself doesn't mean giving up growth — it means growing from a place of self-love."</p><p class="lead reveal rd3 t-ru">"Принять себя — не значит отказаться от роста. Это значит расти из места любви к себе."</p><p class="txt reveal rd3 t-sr">Terapija nije samo za "poremećaje" — ona je i za ljude koji žele da rastu, da razumeju sebe dublje, da žive autentičnije i da grade smislene odnose.</p><p class="txt reveal rd3 t-en">Therapy is not only for "disorders" — it is also for people who want to grow, understand themselves more deeply, and live more authentically.</p><p class="txt reveal rd3 t-ru">Терапия не только для «расстройств» — она и для тех, кто хочет расти, глубже понимать себя, жить аутентичнее.</p><div class="feats reveal rd4"><div class="feat"><div class="fdot"></div><div><span class="ft-title t-sr">Geštalt &amp; budistička psihologija</span><span class="ft-title t-en">Gestalt &amp; Buddhist psychology</span><span class="ft-title t-ru">Гештальт и буддийская психология</span><span class="ft-text t-sr">Integrišemo Geštalt terapiju sa elementima budističke psihologije u radu sa prihvatanjem i oslobađanjem.</span><span class="ft-text t-en">We integrate Gestalt therapy with elements of Buddhist psychology in work around acceptance and liberation.</span><span class="ft-text t-ru">Интегрируем гештальт с элементами буддийской психологии.</span></div></div><div class="feat"><div class="fdot"></div><div><span class="ft-title t-sr">Kraj terapije kao početak slobode</span><span class="ft-title t-en">End of therapy as beginning of freedom</span><span class="ft-title t-ru">Конец терапии — начало свободы</span><span class="ft-text t-sr">Terapija se završava tamo gde počinje vaša sloboda da svesno kreirate život.</span><span class="ft-text t-en">Therapy ends where your freedom to consciously create a life begins.</span><span class="ft-text t-ru">Терапия заканчивается там, где начинается ваша свобода.</span></div></div></div><div class="atags reveal rd5"><span class="atag t-sr">Geštalt terapija</span><span class="atag t-en">Gestalt therapy</span><span class="atag t-ru">Гештальт</span><span class="atag t-sr">Lični razvoj</span><span class="atag t-en">Personal growth</span><span class="atag t-ru">Личностный рост</span><span class="atag t-sr">Budistička psihologija</span><span class="atag t-en">Buddhist psychology</span><span class="atag t-ru">Буддийская психология</span></div><a href="index.html?nopreload#contact" class="btn-p reveal rd5"><span class="t-sr">Zakažite razgovor</span><span class="t-en">Schedule a conversation</span><span class="t-ru">Записаться</span><svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a></div></div></section>
+
+<section class="cta-sec">
+  <h2 class="cta-t reveal"><span class="t-sr">Prepoznajete <em>sebe?</em></span><span class="t-en">Do you recognize <em>yourself?</em></span><span class="t-ru">Узнаёте <em>себя?</em></span></h2>
+  <p class="cta-s reveal t-sr">Svaka od ovih oblasti je oblast u kojoj možemo raditi zajedno. Pišite mi — i napravimo plan.</p>
+  <p class="cta-s reveal t-en">Every one of these areas is one we can work on together. Write to me — and let's make a plan.</p>
+  <p class="cta-s reveal t-ru">В каждой из этих областей мы можем работать вместе. Напишите мне — и составим план.</p>
+  <a href="index.html?nopreload#contact" class="btn-p reveal"><span class="t-sr">Zakažite razgovor</span><span class="t-en">Schedule a conversation</span><span class="t-ru">Записаться</span><svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+</section>
+
+<footer>
+  <div class="ft-inner">
+    <div class="ft1">
+      <div>
+        <p class="ft-brand">Elena <em>Ivancova</em></p>
+        <p class="ft-sub t-sr">Klinički Psiholog · Geštalt Terapeut</p>
+        <p class="ft-sub t-en">Clinical Psychologist · Gestalt Therapist</p>
+        <p class="ft-sub t-ru">Клинический Психолог · Гештальт Терапевт</p>
+        <p class="ft-bio t-sr">Licencovani psihoterapeut sa višegodišnjim iskustvom u radu sa odraslima, parovima i adolescentima u Beogradu i onlajn.</p>
+        <p class="ft-bio t-en">Licensed psychotherapist with years of experience working with adults, couples and adolescents in Belgrade and online.</p>
+        <p class="ft-bio t-ru">Лицензированный психотерапевт с многолетним опытом работы в Белграде и онлайн.</p>
+      </div>
+      <div>
+        <p class="ft-col-t t-sr">Meni</p><p class="ft-col-t t-en">Menu</p><p class="ft-col-t t-ru">Меню</p>
+        <ul class="ft-links">
+          <li class="t-sr"><a href="index.html?nopreload">Početna</a></li>
+          <li class="t-sr"><a href="terapijskeusluge.html">Usluge</a></li>
+          <li class="t-sr"><a href="#" class="js-top">Oblasti</a></li>
+          <li class="t-sr"><a href="index.html?nopreload#process">Proces</a></li>
+          <li class="t-sr"><a href="index.html?nopreload#contact">Kontakt</a></li>
+          <li class="t-en"><a href="index.html?nopreload">Home</a></li>
+          <li class="t-en"><a href="terapijskeusluge.html">Services</a></li>
+          <li class="t-en"><a href="#" class="js-top">Areas</a></li>
+          <li class="t-en"><a href="index.html?nopreload#process">Process</a></li>
+          <li class="t-en"><a href="index.html?nopreload#contact">Contact</a></li>
+          <li class="t-ru"><a href="index.html?nopreload">Главная</a></li>
+          <li class="t-ru"><a href="terapijskeusluge.html">Услуги</a></li>
+          <li class="t-ru"><a href="#" class="js-top">Области</a></li>
+          <li class="t-ru"><a href="index.html?nopreload#process">Процесс</a></li>
+          <li class="t-ru"><a href="index.html?nopreload#contact">Контакт</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="ft-col-t">FAQ</p>
+        <ul class="ft-links">
+          <li class="t-sr"><a href="terapijskeusluge.html">Koliko traje sesija?</a></li>
+          <li class="t-sr"><a href="terapijskeusluge.html">Online ili uživo?</a></li>
+          <li class="t-en"><a href="terapijskeusluge.html">How long is a session?</a></li>
+          <li class="t-en"><a href="terapijskeusluge.html">Online or in person?</a></li>
+          <li class="t-ru"><a href="terapijskeusluge.html">Сколько длится сессия?</a></li>
+          <li class="t-ru"><a href="terapijskeusluge.html">Онлайн или очно?</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="ft-col-t t-sr">Kontakt</p><p class="ft-col-t t-en">Contact</p><p class="ft-col-t t-ru">Контакт</p>
+        <div class="fco"><svg class="fco-i" viewBox="0 0 24 24" fill="none" stroke="rgba(249,245,239,.5)" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:helena11@mail.ru" class="fco-t">helena11@mail.ru</a></div>
+        <div class="fco"><svg class="fco-i" viewBox="0 0 24 24" fill="none" stroke="rgba(249,245,239,.5)" stroke-width="1.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.59 1.23h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg><a href="tel:+381628165004" class="fco-t">+381 62 816 5004</a></div>
+        <div class="fco"><svg class="fco-i" viewBox="0 0 24 24" fill="none" stroke="rgba(249,245,239,.5)" stroke-width="1.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="fco-t">Beograd, Srbija</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="ft2">
+    <p class="ft-copy">Copyright &copy; 2026 | Elena IVANCOVA. <span class="t-sr">Designed and developed by Aleksandar Anicic Web UI/UX designer.</span><span class="t-en">All rights reserved.</span><span class="t-ru">Все права защищены.</span></p>
+    <div class="socials">
+      <a href="#" class="soc" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+      <a href="#" class="soc" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+      <a href="#" class="soc" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+const isTouch = window.matchMedia('(hover: none) and (pointer: coarse)').matches
+             || ('ontouchstart' in window)
+             || navigator.maxTouchPoints > 0;
+const cdot = document.getElementById('cdot');
+if (!isTouch) {
+  document.addEventListener('mousemove', e => { cdot.style.left = e.clientX + 'px'; cdot.style.top = e.clientY + 'px'; });
+  document.querySelectorAll('a, button, .svc-vis, .bl, .feat').forEach(el => {
+    el.addEventListener('mouseenter', () => cdot.classList.add('hv'));
+    el.addEventListener('mouseleave', () => cdot.classList.remove('hv'));
+  });
+} else { cdot.style.display = 'none'; document.body.style.cursor = 'auto'; }
+
+const bar = document.getElementById('readProgress');
+window.addEventListener('scroll', () => { const h = document.documentElement.scrollHeight - window.innerHeight; bar.style.width = (h > 0 ? window.scrollY / h * 100 : 0) + '%'; }, { passive: true });
+
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => { nav.classList.toggle('sc', window.scrollY > 80); }, { passive: true });
+
+const navHam = document.getElementById('navHam');
+const mobNav = document.getElementById('mobNav');
+let menuOpen = false;
+function openMobNav() { menuOpen = true; mobNav.classList.add('open'); navHam.classList.add('open'); navHam.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+function closeMobNav() { menuOpen = false; mobNav.classList.remove('open'); navHam.classList.remove('open'); navHam.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+navHam.addEventListener('click', () => menuOpen ? closeMobNav() : openMobNav());
+mobNav.addEventListener('click', e => { if (e.target === mobNav) closeMobNav(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && menuOpen) closeMobNav(); });
+document.querySelectorAll('.mob-nav-links a').forEach(a => a.addEventListener('click', () => closeMobNav()));
+
+function setLang(l) { document.documentElement.setAttribute('data-lang', l); document.querySelectorAll('.lang-pill').forEach(p => { p.classList.toggle('active', p.textContent.trim() === l.toUpperCase()); }); localStorage.setItem('ei-lang', l); }
+setLang(localStorage.getItem('ei-lang') || 'sr');
+
+document.querySelectorAll('.js-top').forEach(a => { a.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'instant' }); }); });
+
+const areaIds = ['anksioznost','ptsd','licnost','opstiporemecaji','psihosomatika','raspolozenje','samopouzdanje','odnosi','kriza','testiranje','hronica','deca','identitet','blokade','samoprihvatanje'];
+const anaEl = document.getElementById('anav');
+document.querySelectorAll('.al').forEach(a => {
+  a.addEventListener('click', function(e) {
+    e.preventDefault();
+    const targetId = this.getAttribute('href').replace('#', '');
+    const target = document.getElementById(targetId);
+    if (!target) return;
+    const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 70;
+    const anavH = anaEl.offsetHeight || 54;
+    const top = target.getBoundingClientRect().top + window.scrollY - navH - anavH - 8;
+    window.scrollTo({ top, behavior: 'smooth' });
+  });
+});
+
+function updateAnav() {
+  let c = '';
+  const navH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 70;
+  const anavH = anaEl.offsetHeight || 54;
+  const thr = navH + anavH + 40;
+  areaIds.forEach(id => { const s = document.getElementById(id); if (s && window.scrollY >= s.offsetTop - thr) c = id; });
+  document.querySelectorAll('.al').forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + c); });
+}
+window.addEventListener('scroll', updateAnav, { passive: true });
+updateAnav();
+
+const heroImg = document.getElementById('heroImg');
+if (!isTouch) {
+  window.addEventListener('scroll', () => { if (window.scrollY < window.innerHeight) { heroImg.style.transform = `scale(1.08) translateY(${window.scrollY * .18}px)`; } }, { passive: true });
+  document.querySelectorAll('.svc-watermark').forEach(w => { window.addEventListener('scroll', () => { const r = w.parentElement.getBoundingClientRect(); const off = (window.innerHeight / 2 - r.top - r.height / 2) * parseFloat(w.dataset.parallax || .14); w.style.transform = `translateY(calc(-50% + ${off}px))`; }, { passive: true }); });
+}
+
+const imgObs = new IntersectionObserver(entries => { entries.forEach(e => e.target.classList.toggle('iv', e.isIntersecting)); }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.svc-vis').forEach(el => imgObs.observe(el));
+const cObs = new IntersectionObserver(entries => { entries.forEach(e => e.target.classList.toggle('shown', e.isIntersecting)); }, { threshold: 0.05, rootMargin: '0px 0px -16px 0px' });
+document.querySelectorAll('.reveal, .hr-a, .info-n').forEach(el => cObs.observe(el));
+
+window.addEventListener('load', () => { if (window.location.hash) { setTimeout(() => { const el = document.querySelector(window.location.hash); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 500); } });
+</script>
+</body>
+</html>
