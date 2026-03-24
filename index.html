@@ -914,42 +914,51 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
   .nav-overlay-links a{font-size:30px;min-height:52px;}
 }
 
-/* ======== MOBILNI HERO I NAV FIX ======== */
-@media (max-width: 767px) {
+/* =========================
+   MOBILE FIX (NE DIRA DESKTOP)
+========================= */
+@media (max-width: 768px){
 
-  /* Hero slika */
-  .hero-bg img {
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center center !important;
-    transform: none !important;
-    z-index: 1;
+  /* ===== HERO BACKGROUND ===== */
+  .hero-bg{
+    background-size: cover !important;
+    background-position: center center !important;
+    background-repeat: no-repeat !important;
   }
 
-  /* Hero content: tekst i logo */
-  #hero-content {
-    position: relative !important;
-    z-index: 10 !important;
+  /* ===== HAMBURGER (VRATI GA) ===== */
+  .hamburger{
+    display: flex !important;     /* ← glavni razlog što ga nema */
+    position: fixed !important;
+    top: 16px;
+    right: 16px;
+    z-index: 9999;
   }
 
-  /* Hamburger meni */
-  #hamburger {
-    position: relative !important;
-    z-index: 15 !important;
-    display: block !important;
+  /* ===== JEZIK DUGMAD ===== */
+  .lang-pill,
+  [data-lang-btn]{
+    display: flex !important;
+    position: fixed !important;
+    top: 16px;
+    left: 16px;
+    z-index: 9999;
   }
 
-  /* Jezički dugmići */
-  [data-lang-btn], .lang-pill {
-    position: relative !important;
-    z-index: 15 !important;
-    display: inline-block !important;
+  /* ===== HERO CONTENT ===== */
+  .hero-content{
+    max-width: 90% !important;
+    margin: 0 auto !important;
+    text-align: center !important;
+    padding: 20px !important;
+  }
+
+  /* ===== PREVENT HORIZONTAL SCROLL ===== */
+  body{
+    overflow-x: hidden;
   }
 }
+
 </style>
 </head>
 <body id="top" class="loading">
@@ -1978,22 +1987,6 @@ document.addEventListener('DOMContentLoaded', function(){
   var savedLang = localStorage.getItem('ei-lang') || 'sr';
   setLang(savedLang);
 });
-
-// ======== MOBILNI HERO LAGANI PARALLAX ========
-if (IS_TOUCH) {
-  var heroImg = document.querySelector('.hero-bg img');
-  var heroContent = document.getElementById('hero-content');
-
-  if (heroImg && heroContent) {
-    window.addEventListener('scroll', function(){
-      var s = window.scrollY;
-      heroImg.style.transform = 'translateY(' + (s * 0.05) + 'px)';
-      heroContent.style.transform = 'translateY(' + (s * 0.08) + 'px)';
-      heroContent.style.opacity = Math.max(0, 1 - s / (window.innerHeight * 0.8));
-    }, {passive:true});
-  }
-}
 </script>
-
 </body>
 </html>
