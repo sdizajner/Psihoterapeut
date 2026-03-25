@@ -2504,5 +2504,54 @@ document.addEventListener('DOMContentLoaded', function(){
 })();
 </script>
 
+<!-- NAV OVERFLOW FIX — dodati pre </body> -->
+<style>
+@media (max-width: 1024px) {
+
+  /* Sakrij subtitle ispod loga — glavni uzrok overflow-a */
+  .nav-logo-title {
+    display: none !important;
+  }
+
+  .nav-logo-divider {
+    display: none !important;
+  }
+
+  /* Spreči overflow na celom navu */
+  #nav {
+    overflow: hidden !important;
+  }
+
+  /* Logo ne sme da širi nav */
+  .nav-logo {
+    flex: 1 1 0 !important;
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .nav-logo-text {
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .nav-logo-name {
+    min-width: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .nav-logo-first,
+  .nav-logo-last {
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    white-space: nowrap !important;
+  }
+
+  /* Desni cluster ne sme da se smanjuje */
+  .nav-right-cluster {
+    flex-shrink: 0 !important;
+  }
+}
+</style>
+
 </body>
 </html>
