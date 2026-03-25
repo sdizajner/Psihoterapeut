@@ -913,52 +913,6 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
   .nav-overlay-links{margin-left:10px;}
   .nav-overlay-links a{font-size:30px;min-height:52px;}
 }
-
-/* =========================
-   MOBILE FIX (NE DIRA DESKTOP)
-========================= */
-@media (max-width: 768px){
-
-  /* ===== HERO BACKGROUND ===== */
-  .hero-bg{
-    background-size: cover !important;
-    background-position: center center !important;
-    background-repeat: no-repeat !important;
-  }
-
-  /* ===== HAMBURGER (VRATI GA) ===== */
-  .hamburger{
-    display: flex !important;     /* ← glavni razlog što ga nema */
-    position: fixed !important;
-    top: 16px;
-    right: 16px;
-    z-index: 9999;
-  }
-
-  /* ===== JEZIK DUGMAD ===== */
-  .lang-pill,
-  [data-lang-btn]{
-    display: flex !important;
-    position: fixed !important;
-    top: 16px;
-    left: 16px;
-    z-index: 9999;
-  }
-
-  /* ===== HERO CONTENT ===== */
-  .hero-content{
-    max-width: 90% !important;
-    margin: 0 auto !important;
-    text-align: center !important;
-    padding: 20px !important;
-  }
-
-  /* ===== PREVENT HORIZONTAL SCROLL ===== */
-  body{
-    overflow-x: hidden;
-  }
-}
-
 </style>
 </head>
 <body id="top" class="loading">
@@ -1987,6 +1941,459 @@ document.addEventListener('DOMContentLoaded', function(){
   var savedLang = localStorage.getItem('ei-lang') || 'sr';
   setLang(savedLang);
 });
+</script>
+<!-- ═══════════════════════════════════════════════════════════
+     MOBILE HEADER & HERO FIX PATCH
+     Dodati ovaj blok neposredno pre </body> taga u index.html
+═══════════════════════════════════════════════════════════ -->
+<style>
+/* ══════════════════════════════════════════════
+   NAV MOBILE FIX
+══════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+
+  /* Nav container — uvek blagi backdrop na mobilnom */
+  #nav {
+    padding: 0 16px !important;
+    height: 60px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    background: rgba(10, 16, 11, 0.45) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+  }
+
+  #nav.sc {
+    padding: 0 16px !important;
+    height: 60px !important;
+    background: rgba(249, 245, 239, 0.97) !important;
+    backdrop-filter: blur(28px) !important;
+    -webkit-backdrop-filter: blur(28px) !important;
+    border-bottom: 1px solid rgba(181, 168, 152, 0.2) !important;
+  }
+
+  /* Logo */
+  .nav-logo {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    flex: 1 !important;
+    min-width: 0 !important;
+  }
+
+  .nav-logo-accent {
+    height: 32px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .nav-logo-text {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2px !important;
+    min-width: 0 !important;
+  }
+
+  .nav-logo-name {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 5px !important;
+    flex-wrap: nowrap !important;
+  }
+
+  .nav-logo-first,
+  .nav-logo-last {
+    font-size: 18px !important;
+    white-space: nowrap !important;
+  }
+
+  /* Logo boje na transparentnom navu */
+  .nav-logo-first {
+    color: rgba(230, 240, 232, 0.95) !important;
+  }
+  .nav-logo-last {
+    color: rgba(143, 179, 147, 0.9) !important;
+  }
+
+  /* Logo boje kad je nav scrollovan */
+  #nav.sc .nav-logo-first {
+    color: #1a1a1a !important;
+  }
+  #nav.sc .nav-logo-last {
+    color: #5F7D62 !important;
+  }
+
+  /* Title i divider uvek skriveni na mobilnom */
+  .nav-logo-title {
+    display: none !important;
+  }
+
+  .nav-logo-divider {
+    display: none !important;
+  }
+
+  /* Desni cluster */
+  .nav-right-cluster {
+    display: flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+    flex-shrink: 0 !important;
+  }
+
+  /* Lang pills — transparentan nav */
+  .lang-pills {
+    display: flex !important;
+    gap: 4px !important;
+  }
+
+  .lang-pill {
+    font-size: 9px !important;
+    padding: 5px 10px !important;
+    min-width: 32px !important;
+    min-height: 32px !important;
+    border-radius: 100px !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border: 1px solid rgba(255, 255, 255, 0.28) !important;
+    color: rgba(255, 255, 255, 0.92) !important;
+    backdrop-filter: blur(8px) !important;
+    -webkit-backdrop-filter: blur(8px) !important;
+    cursor: pointer !important;
+    transition: all 0.3s ease !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .lang-pill:hover {
+    background: rgba(255, 255, 255, 0.28) !important;
+    color: #fff !important;
+    transform: translateY(-1px) !important;
+  }
+
+  .lang-pill.active {
+    background: #5F7D62 !important;
+    border-color: #5F7D62 !important;
+    color: #fff !important;
+    transform: none !important;
+  }
+
+  /* Lang pills — beli nav (scrollovan) */
+  #nav.sc .lang-pill {
+    background: rgba(18, 24, 19, 0.07) !important;
+    border: 1px solid rgba(18, 24, 19, 0.14) !important;
+    color: #2a2a2a !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  #nav.sc .lang-pill:hover {
+    background: rgba(18, 24, 19, 0.14) !important;
+    transform: translateY(-1px) !important;
+  }
+
+  #nav.sc .lang-pill.active {
+    background: #5F7D62 !important;
+    border-color: #5F7D62 !important;
+    color: #fff !important;
+  }
+
+  /* Hamburger */
+  .hamburger {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 5px !important;
+    width: 44px !important;
+    height: 44px !important;
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    flex-shrink: 0 !important;
+    -webkit-tap-highlight-color: transparent !important;
+    z-index: 10002 !important;
+    position: relative !important;
+    padding: 8px !important;
+  }
+
+  .hamburger span {
+    display: block !important;
+    width: 22px !important;
+    height: 2px !important;
+    background: rgba(255, 255, 255, 0.92) !important;
+    border-radius: 2px !important;
+    transform-origin: center !important;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                opacity 0.3s ease,
+                background 0.3s ease !important;
+    pointer-events: none !important;
+  }
+
+  /* Hamburger linije kad je nav scrollovan (beli bg) */
+  #nav.sc .hamburger span {
+    background: #1a1a1a !important;
+  }
+
+  /* Hamburger aktivan (X state) */
+  .hamburger.active span {
+    background: rgba(249, 245, 239, 0.95) !important;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg) !important;
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0 !important;
+    transform: scaleX(0) !important;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg) !important;
+  }
+
+  /* Nav overlay */
+  .nav-overlay {
+    z-index: 10001 !important;
+    padding: 72px 32px 56px !important;
+  }
+
+  .nav-overlay::before {
+    left: 32px !important;
+    top: 90px !important;
+  }
+
+  .nav-overlay-links {
+    margin-left: 16px !important;
+  }
+
+  .nav-overlay-links a {
+    font-size: clamp(30px, 7.5vw, 46px) !important;
+    min-height: 54px !important;
+    padding: 7px 0 !important;
+  }
+
+  .nav-overlay-bottom {
+    margin-left: 16px !important;
+  }
+
+  .nav-overlay-lang .lang-pill {
+    background: rgba(249, 245, 239, 0.08) !important;
+    border-color: rgba(249, 245, 239, 0.15) !important;
+    color: rgba(249, 245, 239, 0.5) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .nav-overlay-lang .lang-pill:hover {
+    background: rgba(249, 245, 239, 0.18) !important;
+    color: rgba(249, 245, 239, 0.9) !important;
+  }
+
+  .nav-overlay-lang .lang-pill.active {
+    background: #5F7D62 !important;
+    border-color: #5F7D62 !important;
+    color: #fff !important;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   HERO MOBILE FIX
+══════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+
+  .hero {
+    min-height: 100svh !important;
+    height: 100svh !important;
+    align-items: flex-end !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+  }
+
+  /* Hero slika */
+  .hero-bg img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    object-position: center top !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+
+  /* Overlay 1 — bolja čitljivost teksta */
+  .hero-ov1 {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.60) 0%,
+      rgba(0, 0, 0, 0.22) 38%,
+      rgba(0, 0, 0, 0.52) 65%,
+      rgba(0, 0, 0, 0.88) 100%
+    ) !important;
+  }
+
+  /* Overlay 2 — gornji nav region */
+  .hero-ov2 {
+    background: linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.62) 0%,
+      rgba(0, 0, 0, 0.32) 20%,
+      transparent 48%
+    ) !important;
+  }
+
+  /* Extra bottom overlay */
+  .hero::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    height: 72% !important;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.90) 0%,
+      rgba(0, 0, 0, 0.62) 38%,
+      rgba(0, 0, 0, 0.18) 72%,
+      transparent 100%
+    ) !important;
+    z-index: 4 !important;
+    pointer-events: none !important;
+  }
+
+  /* Hero content */
+  .hero-content {
+    position: relative !important;
+    z-index: 6 !important;
+    padding: 0 20px 88px !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    text-align: center !important;
+    transform: none !important;
+    opacity: 1 !important;
+    will-change: auto !important;
+  }
+
+  .hero-title {
+    font-size: clamp(38px, 9.5vw, 58px) !important;
+    line-height: 1.08 !important;
+    margin-bottom: 16px !important;
+    text-shadow: 0 2px 22px rgba(0, 0, 0, 0.95),
+                 0 1px 8px rgba(0, 0, 0, 0.9) !important;
+  }
+
+  .hero-title em {
+    font-size: inherit !important;
+    color: #8FB393 !important;
+  }
+
+  .hero-sub {
+    font-size: 14px !important;
+    line-height: 1.72 !important;
+    max-width: 100% !important;
+    margin-left: 0 !important;
+    margin-bottom: 28px !important;
+    color: rgba(255, 255, 255, 0.90) !important;
+    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.85) !important;
+  }
+
+  .hero-actions {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    flex-wrap: wrap !important;
+    gap: 14px !important;
+  }
+
+  .btn-primary {
+    padding: 14px 28px !important;
+    font-size: 10px !important;
+    min-height: 48px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .btn-ghost {
+    font-size: 11px !important;
+    min-height: 44px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 8px !important;
+  }
+
+  .hero-scroll {
+    display: none !important;
+  }
+}
+
+/* ══════════════════════════════════════════════
+   MALI TELEFONI (max 480px)
+══════════════════════════════════════════════ */
+@media (max-width: 480px) {
+
+  #nav,
+  #nav.sc {
+    padding: 0 12px !important;
+    height: 56px !important;
+  }
+
+  .nav-logo-first,
+  .nav-logo-last {
+    font-size: 16px !important;
+  }
+
+  .lang-pill {
+    font-size: 8px !important;
+    padding: 4px 8px !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+  }
+
+  .hero-content {
+    padding: 0 16px 80px !important;
+  }
+
+  .hero-title {
+    font-size: clamp(32px, 9vw, 44px) !important;
+  }
+
+  .hero-sub {
+    font-size: 13px !important;
+  }
+}
+</style>
+
+<script>
+/* ══════════════════════════════════════════════
+   MOBILE PARALLAX DISABLE
+══════════════════════════════════════════════ */
+(function() {
+  var isMobileView = window.innerWidth <= 1024 ||
+                     ('ontouchstart' in window) ||
+                     (navigator.maxTouchPoints > 0);
+
+  if (!isMobileView) return;
+
+  var heroImg = document.querySelector('.hero-bg img');
+  var heroContent = document.getElementById('hero-content');
+
+  function resetHero() {
+    if (heroImg) {
+      heroImg.style.transform = 'none';
+      heroImg.style.willChange = 'auto';
+    }
+    if (heroContent) {
+      heroContent.style.transform = 'none';
+      heroContent.style.opacity = '1';
+      heroContent.style.willChange = 'auto';
+    }
+  }
+
+  resetHero();
+
+  // Overrideuj sve scroll handlerse koji menjaju hero parallax
+  window.addEventListener('scroll', resetHero, { passive: true, capture: true });
+})();
 </script>
 </body>
 </html>
