@@ -2586,38 +2586,27 @@ document.addEventListener('DOMContentLoaded', function(){
 }
 </style>
 
-<!-- LOGO SUBTITLE LANG FIX — dodati pre </body> -->
+<!-- LOGO SUBTITLE FIX v2 — dodati pre </body> -->
 <style>
 @media (max-width: 1024px) {
 
-  /* Sakrij sve subtitle-ove po defaultu */
   .nav-logo-title {
-    display: none !important;
-  }
-
-  /* Prikaži samo onaj koji odgovara aktivnom jeziku */
-  [data-lang="sr"] .nav-logo-title.t-sr,
-  [data-lang="en"] .nav-logo-title.t-en,
-  [data-lang="ru"] .nav-logo-title.t-ru {
     display: block !important;
-    font-size: 8px !important;
-    letter-spacing: 0.11em !important;
-    white-space: nowrap !important;
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    max-width: 190px !important;
-    opacity: 0.75 !important;
-    color: rgba(255,255,255,0.8) !important;
+    font-size: 7.5px !important;
+    letter-spacing: 0.10em !important;
+    white-space: normal !important;        /* dozvoli prelamanje */
+    overflow: visible !important;
+    text-overflow: unset !important;
+    max-width: 170px !important;
+    line-height: 1.5 !important;
+    opacity: 0.78 !important;
   }
 
-  #nav.sc [data-lang="sr"] .nav-logo-title.t-sr,
-  #nav.sc [data-lang="en"] .nav-logo-title.t-en,
-  #nav.sc [data-lang="ru"] .nav-logo-title.t-ru {
+  #nav.sc .nav-logo-title {
     color: var(--text-muted) !important;
     opacity: 0.85 !important;
   }
 
-  /* Divider */
   .nav-logo-divider {
     display: block !important;
     height: 1px !important;
@@ -2628,15 +2617,22 @@ document.addEventListener('DOMContentLoaded', function(){
   #nav.sc .nav-logo-divider {
     background: rgba(0,0,0,0.1) !important;
   }
+
+  /* Nav treba biti malo viši da stane dva reda */
+  #nav,
+  #nav.sc {
+    height: auto !important;
+    min-height: 60px !important;
+    padding-top: 10px !important;
+    padding-bottom: 10px !important;
+  }
 }
 
 @media (max-width: 480px) {
 
-  [data-lang="sr"] .nav-logo-title.t-sr,
-  [data-lang="en"] .nav-logo-title.t-en,
-  [data-lang="ru"] .nav-logo-title.t-ru {
+  .nav-logo-title {
     font-size: 7px !important;
-    max-width: 155px !important;
+    max-width: 145px !important;
     letter-spacing: 0.07em !important;
   }
 }
