@@ -1942,97 +1942,245 @@ document.addEventListener('DOMContentLoaded', function(){
   setLang(savedLang);
 });
 </script>
+
 <!-- ═══════════════════════════════════════════════════════════
-     MOBILE HEADER & HERO FIX PATCH
-     Dodati ovaj blok neposredno pre </body> taga u index.html
+     HAMBURGER MENU COMPLETE FIX
+     Dodati POSLE postojeceg </script> bloka, pre </body>
 ═══════════════════════════════════════════════════════════ -->
 <style>
 /* ══════════════════════════════════════════════
-   NAV MOBILE FIX
+   OVERLAY — kompletno redizajniran za mobilni
+══════════════════════════════════════════════ */
+.nav-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 10001 !important;
+  background: rgba(12, 18, 13, 0.96) !important;
+  backdrop-filter: blur(22px) !important;
+  -webkit-backdrop-filter: blur(22px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: flex-start !important;
+  padding: 80px 40px 60px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  overflow-y: auto !important;
+}
+
+.nav-overlay.open {
+  opacity: 1 !important;
+  pointer-events: all !important;
+}
+
+/* Vertikalna linija levo */
+.nav-overlay::before {
+  content: '' !important;
+  position: absolute !important;
+  left: 40px !important;
+  top: 110px !important;
+  bottom: 80px !important;
+  width: 1px !important;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(95, 125, 98, 0.35) 20%,
+    rgba(95, 125, 98, 0.35) 80%,
+    transparent
+  ) !important;
+}
+
+/* ── Link lista ── */
+.nav-overlay-links {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 0 0 28px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 2px !important;
+  width: 100% !important;
+}
+
+.nav-overlay-links li {
+  opacity: 0 !important;
+  transform: translateY(22px) !important;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Stagger animacija za svaki li */
+.nav-overlay.open .nav-overlay-links li:nth-child(1) { opacity: 1 !important; transform: none !important; transition-delay: 0.08s !important; }
+.nav-overlay.open .nav-overlay-links li:nth-child(2) { opacity: 1 !important; transform: none !important; transition-delay: 0.15s !important; }
+.nav-overlay.open .nav-overlay-links li:nth-child(3) { opacity: 1 !important; transform: none !important; transition-delay: 0.22s !important; }
+.nav-overlay.open .nav-overlay-links li:nth-child(4) { opacity: 1 !important; transform: none !important; transition-delay: 0.29s !important; }
+.nav-overlay.open .nav-overlay-links li:nth-child(5) { opacity: 1 !important; transform: none !important; transition-delay: 0.36s !important; }
+.nav-overlay.open .nav-overlay-links li:nth-child(6) { opacity: 1 !important; transform: none !important; transition-delay: 0.43s !important; }
+
+.nav-overlay-links a {
+  font-family: 'Cormorant Garamond', serif !important;
+  font-size: clamp(34px, 8vw, 50px) !important;
+  font-weight: 300 !important;
+  color: rgba(249, 245, 239, 0.72) !important;
+  text-decoration: none !important;
+  letter-spacing: 0.02em !important;
+  display: flex !important;
+  align-items: center !important;
+  padding: 10px 0 !important;
+  line-height: 1.1 !important;
+  transition: color 0.3s ease, padding-left 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  min-height: 58px !important;
+}
+
+.nav-overlay-links a:hover,
+.nav-overlay-links a:focus {
+  color: #8FB393 !important;
+  padding-left: 14px !important;
+}
+
+/* CTA dugme u overlaju */
+.nav-overlay-links a.nav-cta-ov {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: #121813 !important;
+  background: #8FB393 !important;
+  padding: 14px 28px !important;
+  border-radius: 2px !important;
+  display: inline-flex !important;
+  min-height: 48px !important;
+  margin-top: 14px !important;
+  align-self: flex-start !important;
+  transition: background 0.3s ease, transform 0.3s ease !important;
+}
+
+.nav-overlay-links a.nav-cta-ov:hover {
+  background: #D4B982 !important;
+  transform: translateX(4px) !important;
+  padding-left: 28px !important;
+}
+
+/* ── Bottom sekcija (lang + kontakt) ── */
+.nav-overlay-bottom {
+  margin-top: auto !important;
+  padding-top: 40px !important;
+  margin-left: 28px !important;
+  opacity: 0 !important;
+  transform: translateY(16px) !important;
+  transition: opacity 0.5s 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.5s 0.45s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  width: calc(100% - 28px) !important;
+}
+
+.nav-overlay.open .nav-overlay-bottom {
+  opacity: 1 !important;
+  transform: none !important;
+}
+
+/* Separator linija */
+.nav-overlay-bottom::before {
+  content: '' !important;
+  display: block !important;
+  width: 100% !important;
+  height: 1px !important;
+  background: rgba(95, 125, 98, 0.18) !important;
+  margin-bottom: 24px !important;
+}
+
+/* Lang pills u overlaju */
+.nav-overlay-lang {
+  display: flex !important;
+  gap: 8px !important;
+  margin-bottom: 20px !important;
+}
+
+.nav-overlay-lang .lang-pill {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 10px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.1em !important;
+  padding: 7px 16px !important;
+  border-radius: 100px !important;
+  min-width: 44px !important;
+  min-height: 38px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  cursor: pointer !important;
+  border: 1px solid rgba(249, 245, 239, 0.18) !important;
+  background: rgba(249, 245, 239, 0.07) !important;
+  color: rgba(249, 245, 239, 0.50) !important;
+  transition: all 0.3s ease !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+
+.nav-overlay-lang .lang-pill:hover {
+  background: rgba(249, 245, 239, 0.15) !important;
+  color: rgba(249, 245, 239, 0.9) !important;
+  transform: translateY(-2px) !important;
+}
+
+.nav-overlay-lang .lang-pill.active {
+  background: #5F7D62 !important;
+  border-color: #5F7D62 !important;
+  color: #fff !important;
+  transform: none !important;
+  box-shadow: 0 4px 14px rgba(95, 125, 98, 0.35) !important;
+}
+
+/* Kontakt info */
+.nav-overlay-contact {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 12.5px !important;
+  font-weight: 400 !important;
+  color: rgba(249, 245, 239, 0.28) !important;
+  letter-spacing: 0.03em !important;
+  line-height: 1.8 !important;
+}
+
+.nav-overlay-contact a {
+  color: rgba(143, 179, 147, 0.65) !important;
+  text-decoration: none !important;
+  transition: color 0.3s ease !important;
+}
+
+.nav-overlay-contact a:hover {
+  color: #8FB393 !important;
+}
+
+/* ══════════════════════════════════════════════
+   HAMBURGER DUGME — popravka
 ══════════════════════════════════════════════ */
 @media (max-width: 1024px) {
 
-  /* Nav container — uvek blagi backdrop na mobilnom */
   #nav {
     padding: 0 16px !important;
     height: 60px !important;
+    background: rgba(10, 16, 11, 0.48) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
     display: flex !important;
     align-items: center !important;
     justify-content: space-between !important;
-    background: rgba(10, 16, 11, 0.45) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
   }
 
   #nav.sc {
-    padding: 0 16px !important;
-    height: 60px !important;
     background: rgba(249, 245, 239, 0.97) !important;
     backdrop-filter: blur(28px) !important;
     -webkit-backdrop-filter: blur(28px) !important;
     border-bottom: 1px solid rgba(181, 168, 152, 0.2) !important;
   }
 
-  /* Logo */
-  .nav-logo {
-    display: flex !important;
-    align-items: center !important;
-    gap: 10px !important;
-    flex: 1 !important;
-    min-width: 0 !important;
-  }
+  .nav-logo-title { display: none !important; }
+  .nav-logo-divider { display: none !important; }
+  .nav-logo-first { color: rgba(230, 240, 232, 0.95) !important; font-size: 18px !important; }
+  .nav-logo-last  { color: rgba(143, 179, 147, 0.92) !important; font-size: 18px !important; }
+  #nav.sc .nav-logo-first { color: #1a1a1a !important; }
+  #nav.sc .nav-logo-last  { color: #5F7D62 !important; }
 
-  .nav-logo-accent {
-    height: 32px !important;
-    flex-shrink: 0 !important;
-  }
-
-  .nav-logo-text {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 2px !important;
-    min-width: 0 !important;
-  }
-
-  .nav-logo-name {
-    display: flex !important;
-    align-items: baseline !important;
-    gap: 5px !important;
-    flex-wrap: nowrap !important;
-  }
-
-  .nav-logo-first,
-  .nav-logo-last {
-    font-size: 18px !important;
-    white-space: nowrap !important;
-  }
-
-  /* Logo boje na transparentnom navu */
-  .nav-logo-first {
-    color: rgba(230, 240, 232, 0.95) !important;
-  }
-  .nav-logo-last {
-    color: rgba(143, 179, 147, 0.9) !important;
-  }
-
-  /* Logo boje kad je nav scrollovan */
-  #nav.sc .nav-logo-first {
-    color: #1a1a1a !important;
-  }
-  #nav.sc .nav-logo-last {
-    color: #5F7D62 !important;
-  }
-
-  /* Title i divider uvek skriveni na mobilnom */
-  .nav-logo-title {
-    display: none !important;
-  }
-
-  .nav-logo-divider {
-    display: none !important;
-  }
-
-  /* Desni cluster */
   .nav-right-cluster {
     display: flex !important;
     align-items: center !important;
@@ -2040,64 +2188,36 @@ document.addEventListener('DOMContentLoaded', function(){
     flex-shrink: 0 !important;
   }
 
-  /* Lang pills — transparentan nav */
-  .lang-pills {
-    display: flex !important;
-    gap: 4px !important;
-  }
-
-  .lang-pill {
+  /* Nav lang pills (van overlaya) */
+  .nav-right-cluster .lang-pills .lang-pill {
+    background: rgba(255,255,255,0.14) !important;
+    border: 1px solid rgba(255,255,255,0.26) !important;
+    color: rgba(255,255,255,0.9) !important;
     font-size: 9px !important;
-    padding: 5px 10px !important;
     min-width: 32px !important;
     min-height: 32px !important;
-    border-radius: 100px !important;
-    background: rgba(255, 255, 255, 0.15) !important;
-    border: 1px solid rgba(255, 255, 255, 0.28) !important;
-    color: rgba(255, 255, 255, 0.92) !important;
+    padding: 4px 9px !important;
     backdrop-filter: blur(8px) !important;
     -webkit-backdrop-filter: blur(8px) !important;
-    cursor: pointer !important;
-    transition: all 0.3s ease !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
   }
-
-  .lang-pill:hover {
-    background: rgba(255, 255, 255, 0.28) !important;
-    color: #fff !important;
-    transform: translateY(-1px) !important;
-  }
-
-  .lang-pill.active {
+  .nav-right-cluster .lang-pills .lang-pill.active {
     background: #5F7D62 !important;
     border-color: #5F7D62 !important;
     color: #fff !important;
-    transform: none !important;
   }
-
-  /* Lang pills — beli nav (scrollovan) */
-  #nav.sc .lang-pill {
-    background: rgba(18, 24, 19, 0.07) !important;
-    border: 1px solid rgba(18, 24, 19, 0.14) !important;
+  #nav.sc .nav-right-cluster .lang-pills .lang-pill {
+    background: rgba(18,24,19,0.07) !important;
+    border-color: rgba(18,24,19,0.14) !important;
     color: #2a2a2a !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
-
-  #nav.sc .lang-pill:hover {
-    background: rgba(18, 24, 19, 0.14) !important;
-    transform: translateY(-1px) !important;
-  }
-
-  #nav.sc .lang-pill.active {
+  #nav.sc .nav-right-cluster .lang-pills .lang-pill.active {
     background: #5F7D62 !important;
     border-color: #5F7D62 !important;
     color: #fff !important;
   }
 
-  /* Hamburger */
   .hamburger {
     display: flex !important;
     flex-direction: column !important;
@@ -2120,280 +2240,269 @@ document.addEventListener('DOMContentLoaded', function(){
     display: block !important;
     width: 22px !important;
     height: 2px !important;
-    background: rgba(255, 255, 255, 0.92) !important;
+    background: rgba(255,255,255,0.92) !important;
     border-radius: 2px !important;
     transform-origin: center !important;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    transition: transform 0.4s cubic-bezier(0.16,1,0.3,1),
                 opacity 0.3s ease,
                 background 0.3s ease !important;
     pointer-events: none !important;
   }
 
-  /* Hamburger linije kad je nav scrollovan (beli bg) */
-  #nav.sc .hamburger span {
-    background: #1a1a1a !important;
-  }
+  #nav.sc .hamburger span { background: #1a1a1a !important; }
 
-  /* Hamburger aktivan (X state) */
-  .hamburger.active span {
-    background: rgba(249, 245, 239, 0.95) !important;
-  }
-
-  .hamburger.active span:nth-child(1) {
-    transform: translateY(7px) rotate(45deg) !important;
-  }
-
-  .hamburger.active span:nth-child(2) {
-    opacity: 0 !important;
-    transform: scaleX(0) !important;
-  }
-
-  .hamburger.active span:nth-child(3) {
-    transform: translateY(-7px) rotate(-45deg) !important;
-  }
-
-  /* Nav overlay */
-  .nav-overlay {
-    z-index: 10001 !important;
-    padding: 72px 32px 56px !important;
-  }
-
-  .nav-overlay::before {
-    left: 32px !important;
-    top: 90px !important;
-  }
-
-  .nav-overlay-links {
-    margin-left: 16px !important;
-  }
-
-  .nav-overlay-links a {
-    font-size: clamp(30px, 7.5vw, 46px) !important;
-    min-height: 54px !important;
-    padding: 7px 0 !important;
-  }
-
-  .nav-overlay-bottom {
-    margin-left: 16px !important;
-  }
-
-  .nav-overlay-lang .lang-pill {
-    background: rgba(249, 245, 239, 0.08) !important;
-    border-color: rgba(249, 245, 239, 0.15) !important;
-    color: rgba(249, 245, 239, 0.5) !important;
-    backdrop-filter: none !important;
-    -webkit-backdrop-filter: none !important;
-  }
-
-  .nav-overlay-lang .lang-pill:hover {
-    background: rgba(249, 245, 239, 0.18) !important;
-    color: rgba(249, 245, 239, 0.9) !important;
-  }
-
-  .nav-overlay-lang .lang-pill.active {
-    background: #5F7D62 !important;
-    border-color: #5F7D62 !important;
-    color: #fff !important;
-  }
+  .hamburger.active span { background: rgba(249,245,239,0.95) !important; }
+  .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg) !important; }
+  .hamburger.active span:nth-child(2) { opacity: 0 !important; transform: scaleX(0) !important; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg) !important; }
 }
 
-/* ══════════════════════════════════════════════
-   HERO MOBILE FIX
-══════════════════════════════════════════════ */
-@media (max-width: 1024px) {
-
-  .hero {
-    min-height: 100svh !important;
-    height: 100svh !important;
-    align-items: flex-end !important;
-    justify-content: center !important;
-    overflow: hidden !important;
-  }
-
-  /* Hero slika */
-  .hero-bg img {
-    width: 100% !important;
-    height: 100% !important;
-    object-fit: cover !important;
-    object-position: center top !important;
-    transform: none !important;
-    will-change: auto !important;
-  }
-
-  /* Overlay 1 — bolja čitljivost teksta */
-  .hero-ov1 {
-    background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.60) 0%,
-      rgba(0, 0, 0, 0.22) 38%,
-      rgba(0, 0, 0, 0.52) 65%,
-      rgba(0, 0, 0, 0.88) 100%
-    ) !important;
-  }
-
-  /* Overlay 2 — gornji nav region */
-  .hero-ov2 {
-    background: linear-gradient(
-      to bottom,
-      rgba(0, 0, 0, 0.62) 0%,
-      rgba(0, 0, 0, 0.32) 20%,
-      transparent 48%
-    ) !important;
-  }
-
-  /* Extra bottom overlay */
-  .hero::after {
-    content: '' !important;
-    position: absolute !important;
-    bottom: 0 !important;
-    left: 0 !important;
-    right: 0 !important;
-    height: 72% !important;
-    background: linear-gradient(
-      to top,
-      rgba(0, 0, 0, 0.90) 0%,
-      rgba(0, 0, 0, 0.62) 38%,
-      rgba(0, 0, 0, 0.18) 72%,
-      transparent 100%
-    ) !important;
-    z-index: 4 !important;
-    pointer-events: none !important;
-  }
-
-  /* Hero content */
-  .hero-content {
-    position: relative !important;
-    z-index: 6 !important;
-    padding: 0 20px 88px !important;
-    max-width: 100% !important;
-    width: 100% !important;
-    text-align: center !important;
-    transform: none !important;
-    opacity: 1 !important;
-    will-change: auto !important;
-  }
-
-  .hero-title {
-    font-size: clamp(38px, 9.5vw, 58px) !important;
-    line-height: 1.08 !important;
-    margin-bottom: 16px !important;
-    text-shadow: 0 2px 22px rgba(0, 0, 0, 0.95),
-                 0 1px 8px rgba(0, 0, 0, 0.9) !important;
-  }
-
-  .hero-title em {
-    font-size: inherit !important;
-    color: #8FB393 !important;
-  }
-
-  .hero-sub {
-    font-size: 14px !important;
-    line-height: 1.72 !important;
-    max-width: 100% !important;
-    margin-left: 0 !important;
-    margin-bottom: 28px !important;
-    color: rgba(255, 255, 255, 0.90) !important;
-    text-shadow: 0 1px 10px rgba(0, 0, 0, 0.85) !important;
-  }
-
-  .hero-actions {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    flex-wrap: wrap !important;
-    gap: 14px !important;
-  }
-
-  .btn-primary {
-    padding: 14px 28px !important;
-    font-size: 10px !important;
-    min-height: 48px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-
-  .btn-ghost {
-    font-size: 11px !important;
-    min-height: 44px !important;
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 8px !important;
-  }
-
-  .hero-scroll {
-    display: none !important;
-  }
-}
-
-/* ══════════════════════════════════════════════
-   MALI TELEFONI (max 480px)
-══════════════════════════════════════════════ */
 @media (max-width: 480px) {
-
-  #nav,
-  #nav.sc {
-    padding: 0 12px !important;
-    height: 56px !important;
-  }
-
-  .nav-logo-first,
-  .nav-logo-last {
-    font-size: 16px !important;
-  }
-
-  .lang-pill {
-    font-size: 8px !important;
-    padding: 4px 8px !important;
-    min-width: 28px !important;
-    min-height: 28px !important;
-  }
-
-  .hero-content {
-    padding: 0 16px 80px !important;
-  }
-
-  .hero-title {
-    font-size: clamp(32px, 9vw, 44px) !important;
-  }
-
-  .hero-sub {
-    font-size: 13px !important;
-  }
+  #nav, #nav.sc { padding: 0 12px !important; height: 56px !important; }
+  .nav-logo-first, .nav-logo-last { font-size: 16px !important; }
+  .nav-overlay { padding: 70px 24px 52px !important; }
+  .nav-overlay::before { left: 24px !important; top: 96px !important; }
+  .nav-overlay-links { margin-left: 16px !important; }
+  .nav-overlay-bottom { margin-left: 16px !important; }
+  .nav-overlay-links a { font-size: clamp(28px, 8.5vw, 38px) !important; min-height: 52px !important; }
 }
 </style>
 
 <script>
 /* ══════════════════════════════════════════════
-   MOBILE PARALLAX DISABLE
+   HAMBURGER MENU — KOMPLETAN REBUILD
+   Ovaj blok zamenjuje svu logiku menija
 ══════════════════════════════════════════════ */
 (function() {
-  var isMobileView = window.innerWidth <= 1024 ||
-                     ('ontouchstart' in window) ||
-                     (navigator.maxTouchPoints > 0);
+  'use strict';
 
-  if (!isMobileView) return;
+  /* ── Nav data (linkovi za overlay) ── */
+  var NAV_DATA = {
+    sr: [
+      { label: 'Početna',  href: '#hero' },
+      { label: 'Usluge',   href: 'terapijskeusluge.html' },
+      { label: 'Oblasti',  href: 'oblastirada.html' },
+      { label: 'O meni',   href: '#intro' },
+      { label: 'Kontakt',  href: '#contact', cta: true }
+    ],
+    en: [
+      { label: 'Home',     href: '#hero' },
+      { label: 'Services', href: 'terapijskeusluge.html' },
+      { label: 'Areas',    href: 'oblastirada.html' },
+      { label: 'About me', href: '#intro' },
+      { label: 'Contact',  href: '#contact', cta: true }
+    ],
+    ru: [
+      { label: 'Главная',  href: '#hero' },
+      { label: 'Услуги',   href: 'terapijskeusluge.html' },
+      { label: 'Области',  href: 'oblastirada.html' },
+      { label: 'Обо мне',  href: '#intro' },
+      { label: 'Контакт',  href: '#contact', cta: true }
+    ]
+  };
 
-  var heroImg = document.querySelector('.hero-bg img');
-  var heroContent = document.getElementById('hero-content');
+  var hamburger = document.getElementById('hamburger');
+  var overlay   = document.getElementById('nav-overlay');
+  var linksList = document.getElementById('nav-overlay-links');
+  var isOpen    = false;
 
-  function resetHero() {
-    if (heroImg) {
-      heroImg.style.transform = 'none';
-      heroImg.style.willChange = 'auto';
-    }
-    if (heroContent) {
-      heroContent.style.transform = 'none';
-      heroContent.style.opacity = '1';
-      heroContent.style.willChange = 'auto';
-    }
+  /* ── Rebuild linkova u overlaju ── */
+  function buildLinks(lang) {
+    if (!linksList) return;
+    var items = NAV_DATA[lang] || NAV_DATA['sr'];
+    linksList.innerHTML = '';
+
+    items.forEach(function(item) {
+      var li = document.createElement('li');
+      var a  = document.createElement('a');
+      a.href      = item.href;
+      a.textContent = item.label;
+      if (item.cta) a.className = 'nav-cta-ov';
+
+      a.addEventListener('click', function() {
+        closeMenu();
+        // Smooth scroll za hash linkove
+        if (item.href.charAt(0) === '#') {
+          var target = document.querySelector(item.href);
+          if (target) {
+            setTimeout(function() {
+              target.scrollIntoView({ behavior: 'smooth' });
+            }, 300);
+          }
+        }
+      });
+
+      li.appendChild(a);
+      linksList.appendChild(li);
+    });
   }
 
-  resetHero();
+  /* ── Rebuild lang pills u overlaju ── */
+  function buildOverlayLangPills(activeLang) {
+    var langContainer = overlay ? overlay.querySelector('.nav-overlay-lang') : null;
+    if (!langContainer) return;
 
-  // Overrideuj sve scroll handlerse koji menjaju hero parallax
-  window.addEventListener('scroll', resetHero, { passive: true, capture: true });
+    langContainer.innerHTML = '';
+    ['sr', 'en', 'ru'].forEach(function(l) {
+      var btn = document.createElement('button');
+      btn.className   = 'lang-pill' + (l === activeLang ? ' active' : '');
+      btn.textContent = l.toUpperCase();
+      btn.setAttribute('data-lang-btn', l);
+
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        setActiveLang(l);
+      });
+
+      langContainer.appendChild(btn);
+    });
+  }
+
+  /* ── Globalna setLang funkcija ── */
+  function setActiveLang(lang) {
+    // Postavi atribut na html elementu
+    document.documentElement.setAttribute('data-lang', lang);
+    localStorage.setItem('ei-lang', lang);
+
+    // Update svih lang pills na stranici
+    document.querySelectorAll('[data-lang-btn]').forEach(function(btn) {
+      btn.classList.toggle('active', btn.getAttribute('data-lang-btn') === lang);
+    });
+
+    // Rebuild overlay sadrzaja
+    buildLinks(lang);
+    buildOverlayLangPills(lang);
+  }
+
+  /* ── Otvori meni ── */
+  function openMenu() {
+    if (!overlay || !hamburger) return;
+    isOpen = true;
+    overlay.classList.add('open');
+    hamburger.classList.add('active');
+    hamburger.setAttribute('aria-expanded', 'true');
+    document.body.classList.add('menu-open');
+    document.body.style.overflow = 'hidden';
+
+    // Reset li animacija pa pusti stagger
+    var items = linksList ? linksList.querySelectorAll('li') : [];
+    items.forEach(function(li) {
+      li.style.transition = 'none';
+      li.style.opacity = '0';
+      li.style.transform = 'translateY(22px)';
+    });
+    requestAnimationFrame(function() {
+      requestAnimationFrame(function() {
+        items.forEach(function(li) {
+          li.style.transition = '';
+        });
+      });
+    });
+  }
+
+  /* ── Zatvori meni ── */
+  function closeMenu() {
+    if (!overlay || !hamburger) return;
+    isOpen = false;
+    overlay.classList.remove('open');
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.classList.remove('menu-open');
+    document.body.style.overflow = '';
+  }
+
+  /* ── Event listeneri ── */
+  if (hamburger) {
+    hamburger.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      if (isOpen) closeMenu(); else openMenu();
+    });
+  }
+
+  // Klik na backdrop zatvori meni
+  if (overlay) {
+    overlay.addEventListener('click', function(e) {
+      if (e.target === overlay) closeMenu();
+    });
+  }
+
+  // Escape tipka
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && isOpen) closeMenu();
+  });
+
+  // Swipe desno — zatvori
+  if (overlay && (('ontouchstart' in window) || navigator.maxTouchPoints > 0)) {
+    var touchX = 0;
+    overlay.addEventListener('touchstart', function(e) {
+      touchX = e.touches[0].clientX;
+    }, { passive: true });
+    overlay.addEventListener('touchend', function(e) {
+      if (e.changedTouches[0].clientX - touchX > 60) closeMenu();
+    }, { passive: true });
+  }
+
+  // Delegacija klika na nav lang pills (van overlay-a)
+  document.addEventListener('click', function(e) {
+    var btn = e.target.closest('[data-lang-btn]');
+    if (btn && !btn.closest('.nav-overlay')) {
+      setActiveLang(btn.getAttribute('data-lang-btn'));
+    }
+  });
+
+  /* ── Inicijalizacija kad je DOM spreman ── */
+  function init() {
+    var savedLang = localStorage.getItem('ei-lang') || 'sr';
+
+    // Osiguraj da postoji nav-overlay-lang div
+    if (overlay && !overlay.querySelector('.nav-overlay-lang')) {
+      var bottom = overlay.querySelector('.nav-overlay-bottom');
+      if (!bottom) {
+        bottom = document.createElement('div');
+        bottom.className = 'nav-overlay-bottom';
+        overlay.appendChild(bottom);
+      }
+      if (!bottom.querySelector('.nav-overlay-lang')) {
+        var langDiv = document.createElement('div');
+        langDiv.className = 'nav-overlay-lang';
+        bottom.insertBefore(langDiv, bottom.firstChild);
+      }
+      if (!bottom.querySelector('.nav-overlay-contact')) {
+        var contact = document.createElement('p');
+        contact.className = 'nav-overlay-contact';
+        contact.innerHTML = '<a href="mailto:helena11@mail.ru">helena11@mail.ru</a> &nbsp;·&nbsp; <a href="tel:+381628165004">+381 62 816 5004</a>';
+        bottom.appendChild(contact);
+      }
+    }
+
+    setActiveLang(savedLang);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+  // Izlozi closeMenu globalno (za anchor linkove)
+  window.__closeMenu = closeMenu;
+
+})();
+
+/* ── Parallax disable na mobilnom ── */
+(function() {
+  if (window.innerWidth > 1024 && !('ontouchstart' in window)) return;
+  var heroImg = document.querySelector('.hero-bg img');
+  var heroContent = document.getElementById('hero-content');
+  function fix() {
+    if (heroImg) { heroImg.style.transform = 'none'; heroImg.style.willChange = 'auto'; }
+    if (heroContent) { heroContent.style.transform = 'none'; heroContent.style.opacity = '1'; heroContent.style.willChange = 'auto'; }
+  }
+  fix();
+  window.addEventListener('scroll', fix, { passive: true, capture: true });
 })();
 </script>
+
 </body>
 </html>
