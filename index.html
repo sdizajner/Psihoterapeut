@@ -2586,29 +2586,38 @@ document.addEventListener('DOMContentLoaded', function(){
 }
 </style>
 
-<!-- LOGO SUBTITLE FIX — dodati pre </body> -->
+<!-- LOGO SUBTITLE LANG FIX — dodati pre </body> -->
 <style>
 @media (max-width: 1024px) {
 
-  /* Prikaži subtitle ali optimizovan */
+  /* Sakrij sve subtitle-ove po defaultu */
   .nav-logo-title {
+    display: none !important;
+  }
+
+  /* Prikaži samo onaj koji odgovara aktivnom jeziku */
+  [data-lang="sr"] .nav-logo-title.t-sr,
+  [data-lang="en"] .nav-logo-title.t-en,
+  [data-lang="ru"] .nav-logo-title.t-ru {
     display: block !important;
     font-size: 8px !important;
-    letter-spacing: 0.12em !important;
+    letter-spacing: 0.11em !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    max-width: 180px !important;
+    max-width: 190px !important;
     opacity: 0.75 !important;
+    color: rgba(255,255,255,0.8) !important;
   }
 
-  /* Kad je nav scrollovan (beli bg) */
-  #nav.sc .nav-logo-title {
+  #nav.sc [data-lang="sr"] .nav-logo-title.t-sr,
+  #nav.sc [data-lang="en"] .nav-logo-title.t-en,
+  #nav.sc [data-lang="ru"] .nav-logo-title.t-ru {
     color: var(--text-muted) !important;
-    opacity: 0.8 !important;
+    opacity: 0.85 !important;
   }
 
-  /* Divider vidljiv ali tanak */
+  /* Divider */
   .nav-logo-divider {
     display: block !important;
     height: 1px !important;
@@ -2623,10 +2632,12 @@ document.addEventListener('DOMContentLoaded', function(){
 
 @media (max-width: 480px) {
 
-  .nav-logo-title {
+  [data-lang="sr"] .nav-logo-title.t-sr,
+  [data-lang="en"] .nav-logo-title.t-en,
+  [data-lang="ru"] .nav-logo-title.t-ru {
     font-size: 7px !important;
-    max-width: 150px !important;
-    letter-spacing: 0.08em !important;
+    max-width: 155px !important;
+    letter-spacing: 0.07em !important;
   }
 }
 </style>
