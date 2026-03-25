@@ -2504,88 +2504,6 @@ document.addEventListener('DOMContentLoaded', function(){
 })();
 </script>
 
-<!-- NAV OVERFLOW FIX — dodati pre </body> -->
-<style>
-@media (max-width: 1024px) {
-
-  /* Sakrij subtitle ispod loga — glavni uzrok overflow-a */
-  .nav-logo-title {
-    display: none !important;
-  }
-
-  .nav-logo-divider {
-    display: none !important;
-  }
-
-  /* Spreči overflow na celom navu */
-  #nav {
-    overflow: hidden !important;
-  }
-
-  /* Logo ne sme da širi nav */
-  .nav-logo {
-    flex: 1 1 0 !important;
-    min-width: 0 !important;
-    overflow: hidden !important;
-  }
-
-  .nav-logo-text {
-    min-width: 0 !important;
-    overflow: hidden !important;
-  }
-
-  .nav-logo-name {
-    min-width: 0 !important;
-    overflow: hidden !important;
-  }
-
-  .nav-logo-first,
-  .nav-logo-last {
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    white-space: nowrap !important;
-  }
-
-  /* Desni cluster ne sme da se smanjuje */
-  .nav-right-cluster {
-    flex-shrink: 0 !important;
-  }
-}
-</style>
-
-<!-- MOBILE NAV CLEANUP FIX — dodati pre </body> -->
-<style>
-@media (max-width: 1024px) {
-
-  /* Sakrij lang pills iz glavnog nava — nalaze se u hamburger meniju */
-  .nav-right-cluster .lang-pills {
-    display: none !important;
-  }
-
-  /* Povećaj logo malo */
-  .nav-logo-first,
-  .nav-logo-last {
-    font-size: 22px !important;
-  }
-
-  .nav-logo-accent {
-    height: 38px !important;
-  }
-}
-
-@media (max-width: 480px) {
-
-  .nav-logo-first,
-  .nav-logo-last {
-    font-size: 19px !important;
-  }
-
-  .nav-logo-accent {
-    height: 34px !important;
-  }
-}
-</style>
-
 <!-- LOGO SUBTITLE FIX v2 — dodati pre </body> -->
 <style>
 @media (max-width: 1024px) {
@@ -2637,6 +2555,8 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 }
 </style>
+
+
 
 </body>
 </html>
