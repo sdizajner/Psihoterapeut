@@ -2586,6 +2586,192 @@ document.addEventListener('DOMContentLoaded', function(){
 }
 </style>
 
+<!-- 
+  Ubaci na KRAJ fajla pre </body>.
+  Desktop (iznad 1024px) se NE DIRA.
+-->
+
+<style>
+@media (max-width: 1024px) {
+
+  /* Nav — vertikalan, auto visina */
+  #nav,
+  #nav.sc {
+    padding: 12px 20px 8px 20px !important;
+    height: auto !important;
+    min-height: auto !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+    gap: 6px !important;
+  }
+
+  /* RED 1: Accent + Ime + Prezime — u jednom redu */
+  .nav-logo {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    width: 100% !important;
+    text-decoration: none !important;
+  }
+
+  .nav-logo-accent {
+    height: 32px !important;
+    flex-shrink: 0 !important;
+  }
+
+  .nav-logo-text {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0 !important;
+    flex: 1 1 auto !important;
+    min-width: 0 !important;
+  }
+
+  .nav-logo-name {
+    display: flex !important;
+    align-items: baseline !important;
+    gap: 8px !important;
+    line-height: 1 !important;
+  }
+
+  /* Ime 25px */
+  .nav-logo-first { font-size: 25px !important; }
+  .nav-logo-last  { font-size: 25px !important; }
+
+  /* Divider i subtitle skriveni ovde — idu kao poseban red ispod */
+  .nav-logo-divider { display: none !important; }
+  .nav-logo-title   { display: none !important; }
+
+  /* RED 2: Subtitle — puna širina, ceo tekst */
+  #nav::after,
+  #nav.sc::after {
+    content: attr(data-subtitle) !important;
+    display: block !important;
+    width: 100% !important;
+    font-family: 'Montserrat', sans-serif !important;
+    font-size: 8px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.22em !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    color: rgba(255,255,255,0.78) !important;
+    text-shadow: 0 1px 8px rgba(0,0,0,0.5) !important;
+    padding-left: 26px !important; /* poravnanje sa imenom (accent širina + gap) */
+    order: 2 !important;
+  }
+  #nav.sc::after {
+    color: rgba(18,24,19,0.55) !important;
+    text-shadow: none !important;
+  }
+
+  /* RED 3: Hamburger desno */
+  .nav-right-cluster {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    width: 100% !important;
+    flex-shrink: 0 !important;
+    order: 3 !important;
+    border-top: 1px solid rgba(255,255,255,0.07) !important;
+    padding-top: 5px !important;
+    margin-top: 0 !important;
+  }
+  #nav.sc .nav-right-cluster {
+    border-top-color: rgba(18,24,19,0.07) !important;
+  }
+
+  .nav-right-cluster .lang-pills { display: none !important; }
+  .nav-links { display: none !important; }
+
+  /* Hamburger */
+  .hamburger {
+    display: flex !important;
+    width: 40px !important;
+    height: 28px !important;
+    flex-shrink: 0 !important;
+    gap: 5px !important;
+    padding: 2px 0 !important;
+  }
+  .hamburger span {
+    width: 24px !important;
+    height: 1.5px !important;
+    background: rgba(255,255,255,0.90) !important;
+  }
+  #nav.sc .hamburger span {
+    background: rgba(18,24,19,0.80) !important;
+  }
+  .hamburger.active span { background: rgba(255,255,255,0.95) !important; }
+  .hamburger.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg) !important; }
+  .hamburger.active span:nth-child(2) { opacity: 0 !important; transform: scaleX(0) !important; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg) !important; }
+
+  .nav-overlay { padding: 100px 36px 60px !important; }
+  .nav-overlay::before { left: 36px !important; top: 118px !important; }
+  .nav-overlay-links { margin-left: 22px !important; }
+  .nav-overlay-bottom { margin-left: 22px !important; }
+}
+
+@media (max-width: 768px) {
+  #nav, #nav.sc { padding: 12px 16px 8px 16px !important; }
+  .nav-logo-first, .nav-logo-last { font-size: 25px !important; }
+  .nav-logo-accent { height: 32px !important; }
+}
+
+@media (max-width: 480px) {
+  #nav, #nav.sc { padding: 10px 14px 7px 14px !important; }
+  .nav-logo-first, .nav-logo-last { font-size: 23px !important; }
+  .nav-logo-accent { height: 30px !important; }
+  #nav::after, #nav.sc::after {
+    font-size: 7.5px !important;
+    letter-spacing: 0.18em !important;
+    padding-left: 24px !important;
+  }
+}
+
+@media (max-width: 380px) {
+  #nav, #nav.sc { padding: 9px 12px 6px 12px !important; }
+  .nav-logo-first, .nav-logo-last { font-size: 21px !important; }
+  .nav-logo-accent { height: 28px !important; }
+  #nav::after, #nav.sc::after {
+    font-size: 7px !important;
+    letter-spacing: 0.14em !important;
+    padding-left: 22px !important;
+  }
+}
+</style>
+
+<script>
+/* Subtitle tekst u data-subtitle atribut nava — prema aktivnom jeziku */
+(function() {
+  var subtitles = {
+    sr: 'Klinički psiholog  ·  Geštalt psihoterapeut',
+    en: 'Clinical Psychologist  ·  Gestalt Psychotherapist',
+    ru: 'Клинический психолог  ·  Гештальт психотерапевт'
+  };
+
+  function updateSubtitle() {
+    var lang = document.documentElement.getAttribute('data-lang') || 'sr';
+    var nav = document.getElementById('nav');
+    if (nav) nav.setAttribute('data-subtitle', subtitles[lang] || subtitles['sr']);
+  }
+
+  /* Prati promene jezika */
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(m) {
+      if (m.attributeName === 'data-lang') updateSubtitle();
+    });
+  });
+  observer.observe(document.documentElement, { attributes: true });
+
+  /* Inicijalizacija */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateSubtitle);
+  } else {
+    updateSubtitle();
+  }
+})();
+</script>
 
 
 </body>
