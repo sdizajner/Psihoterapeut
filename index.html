@@ -2586,5 +2586,50 @@ document.addEventListener('DOMContentLoaded', function(){
 }
 </style>
 
+<!-- LOGO SUBTITLE FIX — dodati pre </body> -->
+<style>
+@media (max-width: 1024px) {
+
+  /* Prikaži subtitle ali optimizovan */
+  .nav-logo-title {
+    display: block !important;
+    font-size: 8px !important;
+    letter-spacing: 0.12em !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-width: 180px !important;
+    opacity: 0.75 !important;
+  }
+
+  /* Kad je nav scrollovan (beli bg) */
+  #nav.sc .nav-logo-title {
+    color: var(--text-muted) !important;
+    opacity: 0.8 !important;
+  }
+
+  /* Divider vidljiv ali tanak */
+  .nav-logo-divider {
+    display: block !important;
+    height: 1px !important;
+    margin: 2px 0 !important;
+    background: rgba(255,255,255,0.15) !important;
+  }
+
+  #nav.sc .nav-logo-divider {
+    background: rgba(0,0,0,0.1) !important;
+  }
+}
+
+@media (max-width: 480px) {
+
+  .nav-logo-title {
+    font-size: 7px !important;
+    max-width: 150px !important;
+    letter-spacing: 0.08em !important;
+  }
+}
+</style>
+
 </body>
 </html>
