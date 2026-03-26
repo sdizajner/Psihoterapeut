@@ -2504,242 +2504,9 @@ document.addEventListener('DOMContentLoaded', function(){
 })();
 </script>
 
-<!-- NAV OVERFLOW FIX — dodati pre </body> -->
-<style>
-@media (max-width: 1024px) {
 
-  /* Sakrij subtitle ispod loga — glavni uzrok overflow-a */
-  .nav-logo-title {
-    display: none !important;
-  }
 
-  .nav-logo-divider {
-    display: none !important;
-  }
 
-  /* Spreči overflow na celom navu */
-  #nav {
-    overflow: hidden !important;
-  }
-
-  /* Logo ne sme da širi nav */
-  .nav-logo {
-    flex: 1 1 0 !important;
-    min-width: 0 !important;
-    overflow: hidden !important;
-  }
-
-  .nav-logo-text {
-    min-width: 0 !important;
-    overflow: hidden !important;
-  }
-
-  .nav-logo-name {
-    min-width: 0 !important;
-    overflow: hidden !important;
-  }
-
-  .nav-logo-first,
-  .nav-logo-last {
-    overflow: hidden !important;
-    text-overflow: ellipsis !important;
-    white-space: nowrap !important;
-  }
-
-  /* Desni cluster ne sme da se smanjuje */
-  .nav-right-cluster {
-    flex-shrink: 0 !important;
-  }
-}
-</style>
-
-<!-- MOBILE NAV CLEANUP FIX — dodati pre </body> -->
-<style>
-@media (max-width: 1024px) {
-
-  /* Sakrij lang pills iz glavnog nava — nalaze se u hamburger meniju */
-  .nav-right-cluster .lang-pills {
-    display: none !important;
-  }
-
-  /* Povećaj logo malo */
-  .nav-logo-first,
-  .nav-logo-last {
-    font-size: 22px !important;
-  }
-
-  .nav-logo-accent {
-    height: 38px !important;
-  }
-}
-
-@media (max-width: 480px) {
-
-  .nav-logo-first,
-  .nav-logo-last {
-    font-size: 19px !important;
-  }
-
-  .nav-logo-accent {
-    height: 34px !important;
-  }
-}
-</style>
-
-<!-- 
-  Ubaci na KRAJ fajla pre </body>.
-  Desktop (iznad 1024px) se NE DIRA.
--->
-
-<style>
-@media (max-width: 1024px) {
-
-  /* Nav — vertikalan, auto visina */
-  #nav,
-  #nav.sc {
-    padding: 12px 20px 8px 20px !important;
-    height: auto !important;
-    min-height: auto !important;
-    flex-direction: column !important;
-    align-items: stretch !important;
-    justify-content: flex-start !important;
-    gap: 6px !important;
-  }
-
-  /* RED 1: Accent + Ime + Prezime — u jednom redu */
-  .nav-logo {
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-    width: 100% !important;
-    text-decoration: none !important;
-  }
-
-  .nav-logo-accent {
-    height: 32px !important;
-    flex-shrink: 0 !important;
-  }
-
-  .nav-logo-text {
-    display: flex !important;
-    flex-direction: column !important;
-    gap: 0 !important;
-    flex: 1 1 auto !important;
-    min-width: 0 !important;
-  }
-
-  .nav-logo-name {
-    display: flex !important;
-    align-items: baseline !important;
-    gap: 8px !important;
-    line-height: 1 !important;
-  }
-
-  /* Ime 25px */
-  .nav-logo-first { font-size: 25px !important; }
-  .nav-logo-last  { font-size: 25px !important; }
-
-  /* Divider i subtitle skriveni ovde — idu kao poseban red ispod */
-  .nav-logo-divider { display: none !important; }
-  .nav-logo-title   { display: none !important; }
-
-  /* RED 2: Subtitle — puna širina, ceo tekst */
-  #nav::after,
-  #nav.sc::after {
-    content: attr(data-subtitle) !important;
-    display: block !important;
-    width: 100% !important;
-    font-family: 'Montserrat', sans-serif !important;
-    font-size: 8px !important;
-    font-weight: 400 !important;
-    letter-spacing: 0.22em !important;
-    text-transform: uppercase !important;
-    white-space: nowrap !important;
-    color: rgba(255,255,255,0.78) !important;
-    text-shadow: 0 1px 8px rgba(0,0,0,0.5) !important;
-    padding-left: 26px !important; /* poravnanje sa imenom (accent širina + gap) */
-    order: 2 !important;
-  }
-  #nav.sc::after {
-    color: rgba(18,24,19,0.55) !important;
-    text-shadow: none !important;
-  }
-
-  /* RED 3: Hamburger desno */
-  .nav-right-cluster {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: flex-end !important;
-    width: 100% !important;
-    flex-shrink: 0 !important;
-    order: 3 !important;
-    border-top: 1px solid rgba(255,255,255,0.07) !important;
-    padding-top: 5px !important;
-    margin-top: 0 !important;
-  }
-  #nav.sc .nav-right-cluster {
-    border-top-color: rgba(18,24,19,0.07) !important;
-  }
-
-  .nav-right-cluster .lang-pills { display: none !important; }
-  .nav-links { display: none !important; }
-
-  /* Hamburger */
-  .hamburger {
-    display: flex !important;
-    width: 40px !important;
-    height: 28px !important;
-    flex-shrink: 0 !important;
-    gap: 5px !important;
-    padding: 2px 0 !important;
-  }
-  .hamburger span {
-    width: 24px !important;
-    height: 1.5px !important;
-    background: rgba(255,255,255,0.90) !important;
-  }
-  #nav.sc .hamburger span {
-    background: rgba(18,24,19,0.80) !important;
-  }
-  .hamburger.active span { background: rgba(255,255,255,0.95) !important; }
-  .hamburger.active span:nth-child(1) { transform: translateY(6.5px) rotate(45deg) !important; }
-  .hamburger.active span:nth-child(2) { opacity: 0 !important; transform: scaleX(0) !important; }
-  .hamburger.active span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg) !important; }
-
-  .nav-overlay { padding: 100px 36px 60px !important; }
-  .nav-overlay::before { left: 36px !important; top: 118px !important; }
-  .nav-overlay-links { margin-left: 22px !important; }
-  .nav-overlay-bottom { margin-left: 22px !important; }
-}
-
-@media (max-width: 768px) {
-  #nav, #nav.sc { padding: 12px 16px 8px 16px !important; }
-  .nav-logo-first, .nav-logo-last { font-size: 25px !important; }
-  .nav-logo-accent { height: 32px !important; }
-}
-
-@media (max-width: 480px) {
-  #nav, #nav.sc { padding: 10px 14px 7px 14px !important; }
-  .nav-logo-first, .nav-logo-last { font-size: 23px !important; }
-  .nav-logo-accent { height: 30px !important; }
-  #nav::after, #nav.sc::after {
-    font-size: 7.5px !important;
-    letter-spacing: 0.18em !important;
-    padding-left: 24px !important;
-  }
-}
-
-@media (max-width: 380px) {
-  #nav, #nav.sc { padding: 9px 12px 6px 12px !important; }
-  .nav-logo-first, .nav-logo-last { font-size: 21px !important; }
-  .nav-logo-accent { height: 28px !important; }
-  #nav::after, #nav.sc::after {
-    font-size: 7px !important;
-    letter-spacing: 0.14em !important;
-    padding-left: 22px !important;
-  }
-}
-</style>
 
 <script>
 /* Subtitle tekst u data-subtitle atribut nava — prema aktivnom jeziku */
@@ -2773,43 +2540,65 @@ document.addEventListener('DOMContentLoaded', function(){
 })();
 </script>
 
-<style>
+Zalepiti tik pre </body> — ukloniti sve prethodne "MOBILE NAV" style blokove i zameniti ovim:
+======================================================================================
 
-  /* ══════════════════════════════════════════════════════════════
-   MOBILE NAV FIX — 3-redni layout (max-width: 1024px)
-   Zamenjuje sve prethodne mobilne nav stilove.
-   Desktop (iznad 1024px) se NE DIRA.
-══════════════════════════════════════════════════════════════ */
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   MOBILE NAV — TRO-REDNI HEADER
+   Red 1: Logo ime "Elena Ivancova" 26px
+   Red 2: Subtitle 9px
+   Red 3: Hamburger desno
+   Desktop iznad 1024px se ne dira.
+═══════════════════════════════════════════════════════════════ */
 @media (max-width: 1024px) {
 
-  /* Nav kontejner — flexbox kolona, auto visina */
   #nav,
   #nav.sc {
+    position: fixed !important;
+    top: 0 !important; left: 0 !important; right: 0 !important;
+    z-index: 1000 !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: stretch !important;
     justify-content: flex-start !important;
-    padding: 10px 18px 8px 18px !important;
+    padding: 10px 18px 6px 18px !important;
     height: auto !important;
     min-height: auto !important;
     gap: 0 !important;
+    overflow: visible !important;
+    background: rgba(8, 14, 9, 0.55) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+    border-bottom: none !important;
+    transition: background 0.5s ease, border-color 0.5s ease !important;
   }
 
-  /* ── RED 1: Logo (accent + ime + prezime) ── */
+  #nav.sc {
+    background: rgba(249, 245, 239, 0.97) !important;
+    backdrop-filter: blur(28px) !important;
+    -webkit-backdrop-filter: blur(28px) !important;
+    border-bottom: 1px solid rgba(181, 168, 152, 0.2) !important;
+  }
+
+  .nav-links { display: none !important; }
+
+  /* RED 1: Logo */
   .nav-logo {
     display: flex !important;
     align-items: center !important;
     gap: 12px !important;
     width: 100% !important;
     text-decoration: none !important;
-    padding-bottom: 3px !important;
+    overflow: visible !important;
   }
 
   .nav-logo-accent {
     width: 2px !important;
-    height: 34px !important;
+    height: 30px !important;
     flex-shrink: 0 !important;
     display: block !important;
+    background: linear-gradient(to bottom, transparent, #5F7D62 30%, #8FB393 70%, transparent) !important;
   }
 
   .nav-logo-text {
@@ -2818,6 +2607,7 @@ document.addEventListener('DOMContentLoaded', function(){
     gap: 0 !important;
     flex: 1 1 auto !important;
     min-width: 0 !important;
+    overflow: visible !important;
   }
 
   .nav-logo-name {
@@ -2828,74 +2618,74 @@ document.addEventListener('DOMContentLoaded', function(){
   }
 
   .nav-logo-first {
-    font-size: 24px !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 26px !important;
+    font-weight: 500 !important;
+    font-style: italic !important;
     color: rgba(230, 240, 232, 0.95) !important;
+    letter-spacing: 0.04em !important;
+    white-space: nowrap !important;
+    line-height: 1 !important;
   }
 
   .nav-logo-last {
-    font-size: 24px !important;
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+    font-family: 'Cormorant Garamond', serif !important;
+    font-size: 26px !important;
+    font-weight: 600 !important;
     color: rgba(143, 179, 147, 0.92) !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    white-space: nowrap !important;
+    line-height: 1 !important;
   }
 
   #nav.sc .nav-logo-first { color: #1a1a1a !important; }
   #nav.sc .nav-logo-last  { color: #5F7D62 !important; }
 
-  /* Divider sakriven — subtitle ide kao poseban red */
   .nav-logo-divider { display: none !important; }
 
-  /* ── RED 2: Subtitle ── */
-  /* Koristimo nav-logo-title elemente koji već postoje u HTML-u */
+  /* RED 2: Subtitle */
   .nav-logo-title {
-    display: block !important;
     font-family: 'Montserrat', sans-serif !important;
-    font-size: 8.5px !important;
+    font-size: 9px !important;
     font-weight: 400 !important;
-    letter-spacing: 0.22em !important;
+    letter-spacing: 0.20em !important;
     text-transform: uppercase !important;
     white-space: nowrap !important;
     overflow: hidden !important;
     text-overflow: ellipsis !important;
-    color: rgba(255, 255, 255, 0.70) !important;
-    padding-left: 14px !important; /* poravnanje ispod imena (bez accent linije) */
-    padding-top: 3px !important;
-    padding-bottom: 4px !important;
+    color: rgba(255, 255, 255, 0.60) !important;
+    padding-left: 14px !important;
+    margin-top: 4px !important;
+    margin-bottom: 0 !important;
     opacity: 1 !important;
+    display: block !important;
   }
 
-  #nav.sc .nav-logo-title {
-    color: rgba(18, 24, 19, 0.52) !important;
-  }
+  [data-lang="sr"] .nav-logo-title.t-sr { display: block !important; }
+  [data-lang="en"] .nav-logo-title.t-en { display: block !important; }
+  [data-lang="ru"] .nav-logo-title.t-ru { display: block !important; }
 
-  /* ── RED 3: Hamburger ── */
-  .nav-links { display: none !important; }
+  #nav.sc .nav-logo-title { color: rgba(18, 24, 19, 0.48) !important; }
 
+  /* RED 3: Hamburger */
   .nav-right-cluster {
     display: flex !important;
     align-items: center !important;
     justify-content: flex-end !important;
     width: 100% !important;
     flex-shrink: 0 !important;
-    padding-top: 5px !important;
+    padding-top: 6px !important;
+    margin-top: 4px !important;
     border-top: 1px solid rgba(255, 255, 255, 0.08) !important;
-    margin-top: 1px !important;
   }
 
   #nav.sc .nav-right-cluster {
-    border-top-color: rgba(18, 24, 19, 0.08) !important;
+    border-top-color: rgba(18, 24, 19, 0.09) !important;
   }
 
-  /* Lang pills u navu — skriveni (samo u hamburger meniju) */
-  .nav-right-cluster .lang-pills {
-    display: none !important;
-  }
+  .nav-right-cluster .lang-pills { display: none !important; }
 
-  /* Hamburger dugme */
   .hamburger {
     display: flex !important;
     flex-direction: column !important;
@@ -2903,7 +2693,7 @@ document.addEventListener('DOMContentLoaded', function(){
     align-items: center !important;
     gap: 5px !important;
     width: 44px !important;
-    height: 32px !important;
+    height: 30px !important;
     background: none !important;
     border: none !important;
     cursor: pointer !important;
@@ -2911,14 +2701,14 @@ document.addEventListener('DOMContentLoaded', function(){
     -webkit-tap-highlight-color: transparent !important;
     z-index: 10002 !important;
     position: relative !important;
-    padding: 4px 0 !important;
+    padding: 3px 0 !important;
   }
 
   .hamburger span {
     display: block !important;
     width: 24px !important;
     height: 1.8px !important;
-    background: rgba(255, 255, 255, 0.90) !important;
+    background: rgba(255, 255, 255, 0.88) !important;
     border-radius: 2px !important;
     transform-origin: center !important;
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
@@ -2927,80 +2717,33 @@ document.addEventListener('DOMContentLoaded', function(){
     pointer-events: none !important;
   }
 
-  #nav.sc .hamburger span {
-    background: rgba(18, 24, 19, 0.80) !important;
-  }
+  #nav.sc .hamburger span { background: rgba(18, 24, 19, 0.78) !important; }
 
-  .hamburger.active span {
-    background: rgba(249, 245, 239, 0.95) !important;
-  }
-  .hamburger.active span:nth-child(1) {
-    transform: translateY(6.8px) rotate(45deg) !important;
-  }
-  .hamburger.active span:nth-child(2) {
-    opacity: 0 !important;
-    transform: scaleX(0) !important;
-  }
-  .hamburger.active span:nth-child(3) {
-    transform: translateY(-6.8px) rotate(-45deg) !important;
-  }
+  .hamburger.active span { background: rgba(249, 245, 239, 0.95) !important; }
+  .hamburger.active span:nth-child(1) { transform: translateY(6.8px) rotate(45deg) !important; }
+  .hamburger.active span:nth-child(2) { opacity: 0 !important; transform: scaleX(0) !important; }
+  .hamburger.active span:nth-child(3) { transform: translateY(-6.8px) rotate(-45deg) !important; }
 }
 
-/* ── 768px ── */
 @media (max-width: 768px) {
-  #nav, #nav.sc {
-    padding: 10px 16px 8px 16px !important;
-  }
-  .nav-logo-first,
-  .nav-logo-last {
-    font-size: 22px !important;
-  }
-  .nav-logo-accent {
-    height: 30px !important;
-  }
-  .nav-logo-title {
-    font-size: 8px !important;
-    letter-spacing: 0.19em !important;
-  }
+  #nav, #nav.sc { padding: 9px 16px 5px 16px !important; }
+  .nav-logo-first, .nav-logo-last { font-size: 24px !important; }
+  .nav-logo-accent { height: 28px !important; }
+  .nav-logo-title { font-size: 8.5px !important; letter-spacing: 0.18em !important; }
 }
 
-/* ── 480px ── */
 @media (max-width: 480px) {
-  #nav, #nav.sc {
-    padding: 9px 14px 7px 14px !important;
-  }
-  .nav-logo-first,
-  .nav-logo-last {
-    font-size: 20px !important;
-  }
-  .nav-logo-accent {
-    height: 28px !important;
-  }
-  .nav-logo-title {
-    font-size: 7.5px !important;
-    letter-spacing: 0.16em !important;
-    padding-left: 12px !important;
-  }
+  #nav, #nav.sc { padding: 8px 14px 5px 14px !important; }
+  .nav-logo-first, .nav-logo-last { font-size: 21px !important; }
+  .nav-logo-accent { height: 26px !important; }
+  .nav-logo-title { font-size: 8px !important; letter-spacing: 0.15em !important; padding-left: 10px !important; }
 }
 
-/* ── 380px ── */
 @media (max-width: 380px) {
-  #nav, #nav.sc {
-    padding: 8px 12px 6px 12px !important;
-  }
-  .nav-logo-first,
-  .nav-logo-last {
-    font-size: 18px !important;
-  }
-  .nav-logo-accent {
-    height: 26px !important;
-    gap: 10px !important;
-  }
-  .nav-logo-title {
-    font-size: 7px !important;
-    letter-spacing: 0.13em !important;
-    padding-left: 10px !important;
-  }
+  #nav, #nav.sc { padding: 7px 12px 4px 12px !important; }
+  .nav-logo-first, .nav-logo-last { font-size: 19px !important; }
+  .nav-logo-accent { height: 24px !important; }
+  .nav-logo-title { font-size: 7.5px !important; letter-spacing: 0.12em !important; }
 }
 </style>
 
