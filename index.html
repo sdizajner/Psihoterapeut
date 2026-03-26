@@ -1032,7 +1032,7 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
   </ul>
 
   <!-- Right: lang pills + hamburger -->
-  <div class="nav-right-cluster" style="display:flex;align-items:center;gap:10px;">
+  <div class="nav-right-cluster">
     <div class="lang-pills" id="nav-lang-pills">
       <button class="lang-pill" data-lang-btn="sr">SR</button>
       <button class="lang-pill" data-lang-btn="en">EN</button>
@@ -1661,6 +1661,13 @@ window.addEventListener('load', function(){
     }
   }, 6000);
 });
+
+// Fallback: ukloni preloader nakon 8 sekundi ako se ne ukloni automatski
+setTimeout(function(){
+  if (document.body.classList.contains('loading')) {
+    hidePreloader();
+  }
+}, 8000);
 
 /* ═══════════════════════════════════════════════════════════
    CUSTOM CURSOR — desktop only
