@@ -3,8 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Elena Ivancova — Klinički Psiholog &amp; Geštalt Terapeut Beograd</title>
-<meta name="description" content="Elena Ivancova — licencirani klinički psiholog i Geštalt psihoterapeut u Beogradu sa 20 godina iskustva.">
+<title>Psihoterapija Beograd i Online | Elena Ivancova – Klinički psiholog i Geštalt psihoterapeut</title>
+<meta name="description" content="Psihoterapija u Beogradu i online. Rad sa anksioznošću, stresom i bolestima zavisnosti. Elena Ivancova, klinički psiholog i geštalt psihoterapeut sa 20+ godina iskustva.">
+<link rel="alternate" hreflang="sr" href="/">
+<link rel="alternate" hreflang="en" href="/?lang=en">
+<link rel="alternate" hreflang="ru" href="/?lang=ru">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
@@ -25,7 +28,7 @@
 html{scroll-behavior:auto;font-size:16px;}
 body{
   font-family:var(--fb);background:var(--warm-white);color:var(--text);
-  overflow-x:hidden;cursor:none;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+  overflow-x:hidden;cursor:auto;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
 }
 body.menu-open{overflow:hidden!important;}
 
@@ -444,6 +447,23 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
 /* ═══════════════════════════════════════
    GLOBAL OVERRIDES
 ═══════════════════════════════════════ */
+.seo-h1{
+position:absolute;
+width:1px;
+height:1px;
+padding:0;
+margin:-1px;
+overflow:hidden;
+clip:rect(0,0,0,0);
+white-space:nowrap;
+border:0;
+}
+
+@media (hover: hover) and (pointer: fine){
+  body{
+    cursor:none;
+  }
+}
 .s-title,.ap-title,.cta-title{font-size:clamp(32px,4.6vw,66px)!important;line-height:1.1!important;margin-bottom:32px!important;}
 .s-body,.srv-desc,.ap-id,.step-desc,.cta-sub,.intro p,.intro-quote{font-family:var(--fb)!important;font-size:15.5px!important;line-height:1.85!important;font-weight:400!important;letter-spacing:.01em!important;}
 .approach .ap-id,.cta-inner .cta-sub{color:rgba(249,245,239,.7)!important;}
@@ -645,6 +665,10 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
 </head>
 <body id="top">
 
+  <h1 class="seo-h1">
+Psihoterapija Beograd i online – Elena Ivancova
+</h1>
+
 <!-- NAV OVERLAY -->
 <div class="nav-overlay" id="nav-overlay" role="dialog" aria-modal="true" aria-label="Navigation menu">
   <button class="nav-overlay-close" id="nav-overlay-close" aria-label="Zatvori meni">
@@ -711,7 +735,7 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg" data-parallax="0.3">
-    <img src="images/hero.jpg" alt="Hero background" fetchpriority="high" decoding="sync">
+  <img src="images/hero.jpg" alt="Psihoterapija Beograd Elena Ivancova" fetchpriority="high" decoding="async" loading="eager">
   </div>
   <div class="hero-ov1"></div>
   <div class="hero-ov2"></div>
@@ -721,14 +745,15 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
     <h1 class="hero-title t-en">It’s not<br><em>easy doing everything alone.</em></h1>
     <h1 class="hero-title t-ru">Нелегко справляться<br><em>со всем одному.</em></h1>
     <p class="hero-sub t-sr">Psihoterapija uživo i online — podrška za anksioznost,
-       stres i emotivne poteškoće kroz razgovor koji pomaže da jasnije razumete sebe..</p>
+       stres i emotivne poteškoće kroz razgovor koji pomaže da jasnije razumete sebe.</p>
     <p class="hero-sub t-en">Psychotherapy in person and online — support for anxiety,
-       stress, and emotional difficulties through a conversation that helps you better understand yourself..</p>
+       stress, and emotional difficulties through a conversation that helps you better understand yourself.</p>
     <p class="hero-sub t-ru">Психотерапия очно и онлайн — поддержка при тревоге, 
-      стрессе и эмоциональных трудностях через разговор, который помогает лучше понять себя..</p>
+      стрессе и эмоциональных трудностях через разговор, который помогает лучше понять себя.</p>
     <div class="hero-actions">
+      
       <a href="#contact" class="btn-primary">
-        <span class="t-sr">Zakažite Sesiju</span><span class="t-en">Book a Session</span><span class="t-ru">Записаться</span>
+        <span class="t-sr">Zakažite razgovor</span><span class="t-en">Book a Session</span><span class="t-ru">Записаться</span>
       </a>
       <a href="#intro" class="btn-ghost t-sr">Saznajte više</a>
       <a href="#intro" class="btn-ghost t-en">Learn more</a>
