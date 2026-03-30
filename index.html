@@ -247,7 +247,7 @@ h1,h2,h3,h4{font-family:var(--fd);font-weight:400;}
 .hero-ov2{position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom,rgba(1,1,1,0.805) 0%,rgba(55,55,54,0.4) 20%,transparent 35%);}
 #hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:3;pointer-events:none;}
 .hero-content{position:relative;z-index:5;padding:0 68px 0 0;max-width:640px;text-align:right;will-change:transform,opacity;}
-.hero-title{font-family:var(--fd);font-size:clamp(58px,7.8vw,108px);font-weight:300;line-height:.94;color:var(--warm-white);margin-bottom:30px;opacity:0;animation:fadeUp 1.1s .45s var(--ease-out) forwards;letter-spacing:-.01em;text-shadow:0 5px 20px rgba(0,0,0,0.6);}
+.hero-title{font-family:var(--fd);font-size:clamp(58px,7.8vw,90px);font-weight:300;line-height:.94;color:var(--warm-white);margin-bottom:30px;opacity:0;animation:fadeUp 1.1s .45s var(--ease-out) forwards;letter-spacing:-.01em;text-shadow:0 5px 20px rgba(0,0,0,0.6);}
 .hero-title em{font-style:italic;font-weight:300;color:var(--sage-light);display:block;}
 .hero-sub{font-family:var(--fb);font-size:16px;font-weight:400;line-height:1.9;color:rgba(255,255,255,0.95);margin-bottom:44px;opacity:0;animation:fadeUp .9s .72s var(--ease-out) forwards;margin-left:auto;max-width:400px;text-shadow:0 2px 10px rgba(0,0,0,0.5);}
 .hero-actions{display:flex;align-items:center;gap:32px;justify-content:flex-end;opacity:0;animation:fadeUp .9s .9s var(--ease-out) forwards;}
@@ -509,7 +509,7 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
 .hero-ov2{background:linear-gradient(to bottom,rgba(1,1,1,0.58) 0%,rgba(55,55,54,0.22) 20%,transparent 35%)!important;}
 .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:65%;background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.58) 40%,transparent 100%);z-index:4;pointer-events:none;}
 .hero-content{position:relative;z-index:6;padding:0 24px 48px;max-width:100%;width:100%;text-align:center;}
-  .hero-title{font-size:clamp(42px,10vw,62px)!important;line-height:1.05!important;margin-bottom:18px;text-shadow:0 3px 24px rgba(0,0,0,.9),0 1px 6px rgba(0,0,0,.8);}
+  .hero-title{font-size:clamp(32px,7vw,48px)!important;line-height:1.05!important;margin-bottom:18px;text-shadow:0 3px 24px rgba(0,0,0,.9),0 1px 6px rgba(0,0,0,.8);}
   .hero-sub{font-size:14.5px;line-height:1.75;max-width:100%;margin-left:0;margin-bottom:32px;text-shadow:0 2px 12px rgba(0,0,0,.8);color:rgba(255,255,255,.92);}
   .hero-actions{justify-content:center;flex-wrap:wrap;gap:14px;}
   .btn-primary{padding:14px 32px;font-size:10px;min-height:48px;display:inline-flex;align-items:center;}
@@ -717,12 +717,15 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
   <div class="hero-ov2"></div>
   <canvas id="hero-canvas"></canvas>
   <div class="hero-content" id="hero-content">
-    <h1 class="hero-title t-sr">Zakažite Razgovor<br><em>Već Danas</em></h1>
-    <h1 class="hero-title t-en">Schedule<br><em>Your Conversation</em></h1>
-    <h1 class="hero-title t-ru">Запишитесь<br><em>На Разговор Уже Сегодня</em></h1>
-    <p class="hero-sub t-sr">Prvi korak je najvažniji. Dozvolite sebi prostor za rast, ozdravljenje i autentičan život.</p>
-    <p class="hero-sub t-en">The first step is the most important. Allow yourself space for growth, healing, and authentic living.</p>
-    <p class="hero-sub t-ru">Первый шаг — самый важный. Позвольте себе пространство для роста, исцеления и аутентичной жизни.</p>
+    <h1 class="hero-title t-sr">Nije lako<br><em>kada sve morate sami</em></h1>
+    <h1 class="hero-title t-en">It’s not<br><em>easy doing everything alone.</em></h1>
+    <h1 class="hero-title t-ru">Нелегко справляться<br><em>со всем одному.</em></h1>
+    <p class="hero-sub t-sr">Psihoterapija uživo i online — podrška za anksioznost,
+       stres i emotivne poteškoće kroz razgovor koji pomaže da jasnije razumete sebe..</p>
+    <p class="hero-sub t-en">Psychotherapy in person and online — support for anxiety,
+       stress, and emotional difficulties through a conversation that helps you better understand yourself..</p>
+    <p class="hero-sub t-ru">Психотерапия очно и онлайн — поддержка при тревоге, 
+      стрессе и эмоциональных трудностях через разговор, который помогает лучше понять себя..</p>
     <div class="hero-actions">
       <a href="#contact" class="btn-primary">
         <span class="t-sr">Zakažite Sesiju</span><span class="t-en">Book a Session</span><span class="t-ru">Записаться</span>
@@ -774,30 +777,90 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
     </div>
   </div>
   <div>
-    <span class="s-eye sr t-sr">Klinički psiholog &amp; Geštalt psihoterapeut · Beograd · Prag</span>
+    <span class="s-eye sr t-sr">Klinički psiholog &amp; Geštalt psihoterapeut · Beograd · Online</span>
     <h1 class="s-title sr sd1 t-sr">Elena Ivancova</h1>
     <h2 class="s-subtitle sr sd1 t-sr">20 godina kliničke prakse</h2>
     <p class="credentials-line sr sd2 t-sr">MSc Psihologije &nbsp;·&nbsp; Klinička psihologija &nbsp;·&nbsp; Geštalt psihoterapija &nbsp;·&nbsp; Beograd &amp; Prag</p>
-    <p class="s-body sr sd2 t-sr">Postoje periodi u životu kada ni najbliži ne mogu da pomognu — ne zato što ne žele, već zato što nekada treba neko ko stoji potpuno izvan vaše priče i vidi ono što vi sami ne možete. To je ono što radim. Od 2006. godine, kroz klinike, bolnice i privatnu praksu u Srbiji, Češkoj i Rusiji, radila sam sa ljudima koji su prolazili kroz zavisnosti, anksioznost, krize identiteta, gubitak, traume i sve ono što se teško imenuje.</p>
-    <blockquote class="intro-quote sr sd3 t-sr">"Ne tražim od vas da budete spremni. Tražim samo da dođete — onakvi kakvi jeste, sa svim onim što nosite. Odatle počinjemo."</blockquote>
-    <p class="s-body sr sd3 t-sr">Radila sam kao glavni psiholog u specijalizovanim bolnicama Dr. Vorobjov i kao klinički psiholog u Psihijatrijskoj bolnici Nova Medica u Beogradu. Od 2023. delujem i kao savetnik u Workplace Options, Prag. Geštalt psihoterapiju studiram u Beogradu od 2018, a znanje proširujem kroz katatimijersku imaginativnu psihoterapiju i budističku psihologiju (Tibet House, Nju Delhi). Sesije vodim na srpskom, engleskom, ruskom, bugarskom, bosanskom i hrvatskom.</p>
+    <p class="s-body sr sd2 t-sr">Postoje periodi kada ni najbliži ne mogu da pomognu — ne zato što ne žele, 
+      već zato što je ponekad potreban neko ko stoji izvan vaše priče i vidi ono što vi sami ne vidite.
+
+     Od 2006. godine radim kao klinički psiholog kroz bolnice i privatnu praksu u Srbiji, Rusiji i Online.
+      U radu se susrećem sa anksioznošću, problemima zavisnosti, krizama identiteta, traumama, gubitkom i 
+      drugim složenim emotivnim stanjima.</p>
+    <blockquote class="intro-quote sr sd3 t-sr">"Ne tražim od vas da budete spremni. Tražim samo da dođete — 
+      onakvi kakvi jeste, sa svim onim što nosite. Odatle počinjemo."</blockquote>
+
+    <p class="s-body sr sd3 t-sr">Radila sam kao glavni psiholog u specijalizovanim bolnicama dr Vorobjova,
+       kao i kao klinički psiholog u psihijatrijskoj bolnici Nova Medica u Beogradu.
+
+      Od 2023. godine sarađujem kao savetnik sa organizacijom Workplace Options (Prag).
+
+      Geštalt psihoterapiju usavršavam od 2018. godine, uz dodatnu edukaciju iz katatimno-imaginativne psihoterapije
+      i budističke psihologije (Tibet House, Nju Delhi).</p>
+
+      <blockquote class="intro-quote sr sd3 t-sr">Psihoterapiju sprovodim uživo i online, na srpskom, engleskom,
+       ruskom, bugarskom, bosanskom i hrvatskom jeziku.</blockquote>
+
     <a href="#contact" class="btn-ol sr sd4 t-sr">Zakažite razgovor</a>
-    <span class="s-eye sr t-en">Clinical Psychologist &amp; Gestalt Psychotherapist · Belgrade · Prague</span>
+
+    <span class="s-eye sr t-en">Clinical Psychologist &amp; Gestalt Psychotherapist · Belgrade · Online</span>
+
     <h1 class="s-title sr sd1 t-en">Elena Ivancova</h1>
+
     <h2 class="s-subtitle sr sd1 t-en">20 Years of Clinical Practice</h2>
-    <p class="credentials-line sr sd2 t-en">MSc Psychology &nbsp;·&nbsp; Clinical Psychology &nbsp;·&nbsp; Gestalt Psychotherapy &nbsp;·&nbsp; Belgrade &amp; Prague</p>
-    <p class="s-body sr sd2 t-en">There are times when even the people closest to you cannot help — not because they don't want to, but because sometimes you need someone who stands completely outside your story and sees what you cannot. That is what I do. Since 2006, through clinics, hospitals and private practice across Serbia, the Czech Republic and Russia, I have worked with people navigating addiction, anxiety, identity crises, grief, trauma and everything in between.</p>
-    <blockquote class="intro-quote sr sd3 t-en">"I don't ask you to arrive ready. I only ask that you come as you are — with everything you carry. That is where we begin."</blockquote>
-    <p class="s-body sr sd3 t-en">I have served as Chief Psychologist at two Dr. Vorobyov specialised clinics in Belgrade, and as a clinical psychologist at Psychiatric Hospital Nova Medica. Since 2023 I work as a counsellor at Workplace Options in Prague. My Gestalt psychotherapy training is ongoing at the Training Institute in Belgrade, deepened through Katathym-Imaginative Psychotherapy and Buddhist psychology studies at Tibet House, New Delhi. I conduct sessions in Serbian, English, Russian, Bulgarian, Bosnian and Croatian.</p>
-    <a href="#contact" class="btn-ol sr sd4 t-en">Book a Consultation</a>
-    <span class="s-eye sr t-ru">Клинический психолог &amp; Гештальт-терапевт · Белград · Прага</span>
+
+    <p class="credentials-line sr sd2 t-en">MSc Psychology &nbsp;·&nbsp; Clinical Psychology &nbsp;·&nbsp; Gestalt Psychotherapy </p>
+
+    <p class="s-body sr sd2 t-en">There are times when even the people closest to you cannot help — not because they don’t want to, but because sometimes you need someone who stands outside your story and can see what you no longer can.
+
+    Since 2006, I have worked as a clinical psychologist in hospitals, private practice, and through online psychotherapy with clients internationally.
+
+    I work with anxiety, addiction-related issues, identity crises, trauma, loss, and other complex emotional challenges — the kind that are often difficult to understand and even harder to put into words.</p>
+
+    <blockquote class="intro-quote sr sd3 t-en">“I don’t ask you to come prepared.
+     I only ask you to come as you are — with everything you carry.
+     That’s where we begin.”</blockquote>
+
+    <p class="s-body sr sd3 t-en">I have worked as a lead psychologist in specialized clinics of Dr. Vorobyev and as a clinical psychologist at the psychiatric hospital Nova Medica in Belgrade.
+
+    Since 2023, I have also been working as a consultant with Workplace Options (Prague).
+
+    I have been training in Gestalt psychotherapy since 2018, with additional education in katathymic-imaginative psychotherapy and Buddhist psychology (Tibet House, New Delhi).</p>
+
+    <blockquote class="intro-quote sr sd3 t-en">I offer psychotherapy sessions in person and online in Serbian, English, Russian, Bulgarian, Bosnian, and Croatian.</blockquote>
+
+    <a href="#contact" class="btn-ol sr sd4 t-en">Book a session</a>
+
+
+    <span class="s-eye sr t-ru">Клинический психолог &amp; Гештальт-терапевт · Белград · Онлайн</span>
+
     <h1 class="s-title sr sd1 t-ru">Елена Иванцова</h1>
+
     <h2 class="s-subtitle sr sd1 t-ru">20 лет клинической практики</h2>
+
     <p class="credentials-line sr sd2 t-ru">MSc Психологии &nbsp;·&nbsp; Клиническая психология &nbsp;·&nbsp; Гештальт-психотерапия &nbsp;·&nbsp; Белград &amp; Прага</p>
-    <p class="s-body sr sd2 t-ru">Бывают периоды, когда даже самые близкие люди не могут помочь — не потому что не хотят, а потому что иногда нужен кто-то, кто стоит полностью вне вашей истории и видит то, чего вы сами не замечаете. Именно это я и делаю. С 2006 года, работая в клиниках, больницах и частной практике в Сербии, Чехии и России, я сопровождала людей через зависимости, тревожные расстройства, кризисы идентичности, потери, травмы — и всё то, чему трудно дать имя.</p>
-    <blockquote class="intro-quote sr sd3 t-ru">«Я не прошу вас прийти готовыми. Я прошу только прийти — такими, какие вы есть, со всем, что вы несёте. Именно отсюда мы начинаем».</blockquote>
-    <p class="s-body sr sd3 t-ru">Я работала главным психологом в специализированных клиниках доктора Воробьёва и клиническим психологом в психиатрической больнице Nova Medica в Белграде. С 2023 года — консультант в Workplace Options (Прага). Гештальт-психотерапию изучаю в Белградском институте с 2018 года. Провожу сессии на русском, сербском, английском, болгарском, боснийском и хорватском языках.</p>
+
+    <p class="s-body sr sd2 t-ru">Бывают периоды, когда даже самые близкие не могут помочь — не потому, что не хотят, а потому что иногда нужен кто-то, кто находится вне вашей истории и способен увидеть то, что вы сами уже не замечаете.
+
+    С 2006 года я работаю клиническим психологом в больницах, частной практике, а также провожу онлайн-психотерапию с клиентами из разных стран.
+
+    В своей работе я сталкиваюсь с тревогой, зависимостями, кризисами идентичности, травмами, утратой и другими сложными эмоциональными состояниями — тем, что часто трудно понять и ещё сложнее выразить словами.</p>
+
+    <blockquote class="intro-quote sr sd3 t-ru">«Я не прошу вас приходить готовыми.
+    Достаточно прийти такими, какие вы есть — со всем, что вы несёте.
+    С этого мы и начинаем.»</blockquote>
+
+    <p class="s-body sr sd3 t-ru">Я работала главным психологом в специализированных клиниках доктора Воробьёва, а также клиническим психологом в психиатрической больнице Nova Medica в Белграде.
+
+    С 2023 года сотрудничаю как консультант с организацией Workplace Options (Прага).
+
+    С 2018 года прохожу обучение гештальт-психотерапии, а также дополнительно изучаю кататимно-имагинативную психотерапию и буддийскую психологию (Tibet House, Нью-Дели).</p>
+
+      <blockquote class="intro-quote sr sd3 t-ru">Провожу психотерапию очно и онлайн на русском, сербском, английском, болгарском, боснийском и хорватском языках.</blockquote>
+
+
     <a href="#contact" class="btn-ol sr sd4 t-ru">Записаться на консультацию</a>
+
   </div>
 </section>
 
@@ -812,9 +875,14 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
       <h2 class="s-title sr sd1 t-en">Therapeutic<br><em>Services</em></h2>
       <h2 class="s-title sr sd1 t-ru">Услуги<br><em>Психотерапии</em></h2>
     </div>
-    <p class="services-note sr t-sr">Verujem da ne postoji univerzalan recept za mir. Svaku sesiju oblikujemo prema vašim trenutnim potrebama i ritmu.</p>
-    <p class="services-note sr t-en">Healing isn't one-size-fits-all. Every session is mindfully crafted to honor your unique needs and personal pace.</p>
-    <p class="services-note sr t-ru">Универсальных решений не существует. Каждая сессия строится на уважении к вашим потребностям и внутреннему темпу.</p>
+    <p class="services-note sr t-sr">Ne postoji univerzalan način da vam bude bolje.
+     Psihoterapija se prilagođava vama — vašem tempu, vašim potrebama i onome kroz šta prolazite.</p>
+
+    <p class="services-note sr t-en">There is no universal way to feel better.
+     Psychotherapy is tailored to you — your pace, your needs, and what you are going through.</p>
+
+    <p class="services-note sr t-ru">Не существует универсального способа почувствовать себя лучше.
+     Психотерапия адаптируется под вас — ваш темп, ваши потребности и то, через что вы проходите.</p>
   </div>
   <div class="srv-grid">
     <a href="terapijskeusluge.html#individualna" class="srv-card sr">
@@ -823,9 +891,11 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
       <h3 class="srv-name t-sr">Individualna<br>Psihoterapija</h3>
       <h3 class="srv-name t-en">Individual<br>Psychotherapy</h3>
       <h3 class="srv-name t-ru">Индивидуальная<br>Психотерапия</h3>
-      <p class="srv-desc t-sr">Siguran prostor za rad na ličnom razvoju i prevazilaženju anksioznosti, depresije ili osećaja unutrašnje zaglavljenosti.</p>
-      <p class="srv-desc t-en">A safe space for personal growth, helping you navigate anxiety, burnout, or the feeling of being stuck in life.</p>
-      <p class="srv-desc t-ru">Безопасное пространство для личностного роста и преодоления тревоги, депрессии или чувства внутренней тупиковости.</p>
+      <p class="srv-desc t-sr">Individualna psihoterapija pruža siguran i poverljiv prostor za rad na anksioznosti, depresiji i osećaju unutrašnje zaglavljenosti, uz dublje razumevanje sebe i svojih obrazaca.</p>
+
+      <p class="srv-desc t-en">Individual psychotherapy offers a safe and confidential space to work through anxiety, depression, and feeling stuck, while developing a deeper understanding of yourself and your patterns.</p>
+      
+      <p class="srv-desc t-ru">Индивидуальная психотерапия — это безопасное и конфиденциальное пространство для работы с тревогой, депрессией и ощущением внутреннего тупика, а также для более глубокого понимания себя и своих паттернов.</p>
       <span class="srv-arr">↗</span>
     </a>
     <a href="terapijskeusluge.html#parovi" class="srv-card sr sd1">
@@ -834,9 +904,9 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
       <h3 class="srv-name t-sr">Psihoterapija<br>za Parove</h3>
       <h3 class="srv-name t-en">Couples<br>Psychotherapy</h3>
       <h3 class="srv-name t-ru">Психотерапия<br>для Пар</h3>
-      <p class="srv-desc t-sr">Narušeno poverenje ili tišina koja traje predugo nisu kraj puta. Tu sam da vam pomognem da ponovo čujete jedno drugo i pronađete put nazad ka bliskosti.</p>
-      <p class="srv-desc t-en">Communication is more than just talking. I provide a neutral space where you can safely explore your conflicts and rebuild a deeper emotional connection.</p>
-      <p class="srv-desc t-ru">Помощь парам в преодолении кризисов. Мы будем работать над тем, чтобы вернуть в ваши отношения доверие, открытость и искреннее желание слышать друг друга.</p>
+      <p class="srv-desc t-sr">Psihoterapija za parove pomaže u prevazilaženju problema u komunikaciji, narušenog poverenja i udaljenosti u odnosu — kako biste ponovo mogli da se razumete i izgradite bliskost.</p>
+      <p class="srv-desc t-en">Couples therapy helps address communication issues, trust problems, and emotional distance — so you can understand each other again and rebuild closeness.</p>
+      <p class="srv-desc t-ru">Психотерапия для пар помогает справиться с проблемами в общении, утратой доверия и дистанцией в отношениях — чтобы снова научиться понимать друг друга и восстановить близость.</p>
       <span class="srv-arr">↗</span>
     </a>
     <a href="terapijskeusluge.html#online" class="srv-card sr sd2">
@@ -845,9 +915,9 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
       <h3 class="srv-name t-sr">Online<br>Psihoterapija</h3>
       <h3 class="srv-name t-en">Online<br>Psychotherapy</h3>
       <h3 class="srv-name t-ru">Онлайн<br>Психотерапия</h3>
-      <p class="srv-desc t-sr">Svet se menja, a sa njim i način na koji radimo na sebi. Razgovori putem videa omogućavaju nam da gradimo odnos poverenja bez obzira na kilometre ili vašu trenutnu lokaciju.</p>
-      <p class="srv-desc t-en">Professional mental health support that fits your schedule. No commute, no boundaries — just a safe, confidential space right where you feel most comfortable.</p>
-      <p class="srv-desc t-ru">Терапия без границ. Качественная психологическая помощь доступна вам из любой точки мира — в привычной и спокойной обстановке вашего дома.</p>
+      <p class="srv-desc t-sr">Online psihoterapija omogućava rad na anksioznosti, stresu i drugim emotivnim poteškoćama kroz siguran i poverljiv razgovor — bez obzira na vašu lokaciju.</p>
+      <p class="srv-desc t-en">Online psychotherapy provides a safe and confidential space to work through anxiety, stress, and other emotional challenges — wherever you are.</p>
+      <p class="srv-desc t-ru">Онлайн-психотерапия позволяет работать с тревогой, стрессом и другими эмоциональными трудностями через безопасный и конфиденциальный разговор — независимо от вашего местоположения.</p>
       <span class="srv-arr">↗</span>
     </a>
     <a href="terapijskeusluge.html#dijagnostika" class="srv-card sr sd3">
@@ -856,9 +926,9 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
       <h3 class="srv-name t-sr">Psihološka<br>Dijagnostika</h3>
       <h3 class="srv-name t-en">Psychological<br>Assessment</h3>
       <h3 class="srv-name t-ru">Психологическая<br>Диагностика</h3>
-      <p class="srv-desc t-sr">Dubinsko razumevanje vaših unutrašnjih mehanizama nije samo testiranje — to je prvi korak ka preciznom planu vašeg oporavka i ličnog rasta.</p>
-      <p class="srv-desc t-en">A thorough professional evaluation designed to map out your mental landscape, helping us identify the most effective path for your therapy.</p>
-      <p class="srv-desc t-ru">Это не просто тесты, а глубокое исследование вашей личности. Мы создаем фундамент для того, чтобы ваша терапия была максимально точной и эффективной.</p>
+      <p class="srv-desc t-sr">Psihološka dijagnostika pruža jasan uvid u vaše psihološko stanje, obrasce i poteškoće — kao osnovu za dalji psihoterapijski rad.</p>
+      <p class="srv-desc t-en">Psychological assessment provides a clear insight into your emotional state, patterns, and difficulties — forming the basis for further therapeutic work.</p>
+      <p class="srv-desc t-ru">Психологическая диагностика даёт чёткое понимание вашего психологического состояния, паттернов и трудностей — как основу для дальнейшей психотерапии.</p>
       <span class="srv-arr">↗</span>
     </a>
   </div>
@@ -883,27 +953,174 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
       </div>
     </div>
     <div class="ap-list">
-      <article class="ap-item sr sd1 t-sr"><span class="ap-n">01 / Telo kao saveznik</span><h3 class="ap-it">Telo ne ume da laže</h3><p class="ap-id">Kada um potisne problem, telo preuzima teret. Knedla u grlu ili stezanje u grudima su poruke koje vaša podsvest šalje. Učimo kako da dešifrujete te signale pre nego što hronični stres postane fizička bolest.</p></article>
-      <article class="ap-item sr sd1 t-en"><span class="ap-n">01 / Somatic Awareness</span><h3 class="ap-it">The Body Doesn't Lie</h3><p class="ap-id">When the mind suppresses pain, the body keeps the score. A knot in your throat or chest tightness are messages from your subconscious. We decode these signals before chronic stress turns into physical illness.</p></article>
-      <article class="ap-item sr sd1 t-ru"><span class="ap-n">01 / Соматика</span><h3 class="ap-it">Тело не умеет лгать</h3><p class="ap-id">Когда разум подавляет проблему, тело берет нагрузку на себя. Комок в горле или тяжесть в груди — это сообщения вашего подсознания. Мы учимся расшифровывать их, пока хронический стресс не стал болезнью.</p></article>
-      <article class="ap-item sr sd2 t-sr"><span class="ap-n">02 / Rad sa strahom</span><h3 class="ap-it">Anksioznost nije vaš neprijatelj</h3><p class="ap-id">Mnogi doživljavaju anksioznost kao neprijatnost koju treba "ugasiti". U Geštaltu, ona je alarm koji vas opominje da u nekom delu svog života niste autentični. Umesto borbe protiv panike, tražimo njen uzrok.</p></article>
-      <article class="ap-item sr sd2 t-en"><span class="ap-n">02 / Anxiety Support</span><h3 class="ap-it">Anxiety is not your enemy</h3><p class="ap-id">Many see anxiety as a nuisance to "shut down." In Gestalt, it's an alarm warning you of unmet needs. Instead of fighting panic attacks, we explore what your fear is trying to communicate.</p></article>
-      <article class="ap-item sr sd2 t-ru"><span class="ap-n">02 / Работа с тревогой</span><h3 class="ap-it">Тревога — это не враг</h3><p class="ap-id">Многие воспринимают тревогу как помеху, которую нужно «выключить». В Гештальте это сигнал о том, что вы не аутентичны в какой-то сфере. Мы не боремся с паникой, а ищем её причину.</p></article>
-      <article class="ap-item sr sd3 t-sr"><span class="ap-n">03 / Socijalna inteligencija</span><h3 class="ap-it">Gde prestajem ja, a počinjete vi?</h3><p class="ap-id">Ako se osećate iscrpljeno u odnosima, verovatno su vaše granice propusne. Istražujemo toksične cikluse i učimo kako da kažete "ne" bez krivice, stvarajući prostor za zdrave i podržavajuće konekcije.</p></article>
-      <article class="ap-item sr sd3 t-en"><span class="ap-n">03 / Healthy Boundaries</span><h3 class="ap-it">Where do I end and you begin?</h3><p class="ap-id">If you feel drained in relationships, your boundaries are likely blurred. We investigate toxic cycles and teach you to say "no" without guilt, creating room for supportive and authentic connections.</p></article>
-      <article class="ap-item sr sd3 t-ru"><span class="ap-n">03 / Отношения и границы</span><h3 class="ap-it">Где заканчиваюсь я и начинаетесь вы?</h3><p class="ap-id">Если отношения истощают вас, ваши границы размыты. Мы исследуем токсичные циклы и учимся говорить «нет» без чувства вины, освобождая место для здоровых связей.</p></article>
-      <article class="ap-item sr sd4 t-sr"><span class="ap-n">04 / Životni balans</span><h3 class="ap-it">Sindrom pregorevanja (Burnout)</h3><p class="ap-id">Konstantna jurnjava za uspehom često vodi do emocionalnog pražnjenja. Radimo na prepoznavanju simptoma pregorevanja i vraćanju fokusa na vaše unutrašnje resurse pre nego što dođe do potpunog kolapsa.</p></article>
-      <article class="ap-item sr sd4 t-en"><span class="ap-n">04 / Career Balance</span><h3 class="ap-it">Understanding Burnout</h3><p class="ap-id">The constant chase for success often leads to emotional depletion. We work on identifying burnout symptoms and shifting focus to your inner resources before total exhaustion sets in.</p></article>
-      <article class="ap-item sr sd4 t-ru"><span class="ap-n">04 / Эмоциональное выгорание</span><h3 class="ap-it">Синдром выгорания (Burnout)</h3><p class="ap-id">Постоянная гонка за успехом ведет к истощению. Мы работаем над распознаванием симптомов выгорания и возвращением внимания к вашим внутренним ресурсам.</p></article>
-      <article class="ap-item sr t-sr"><span class="ap-n">05 / Emocionalna higijena</span><h3 class="ap-it">Zatvaranje nezavršenih poglavlja</h3><p class="ap-id">Stare rane i neizrečene reči su "energetski paraziti" koji vam kradu sadašnjost. Kroz terapiju, tim situacijama dajemo završetak, oslobađajući prostor za energiju koja vam je potrebna za budućnost.</p></article>
-      <article class="ap-item sr t-en"><span class="ap-n">05 / Healing the Past</span><h3 class="ap-it">Closing Unfinished Chapters</h3><p class="ap-id">Old wounds and unspoken words are "energy parasites" draining your present. Through therapy, we give these situations closure, freeing up vital energy for your future goals.</p></article>
-      <article class="ap-item sr t-ru"><span class="ap-n">05 / Завершение прошлого</span><h3 class="ap-it">Закрытие незаконченных глав</h3><p class="ap-id">Старые раны и невысказанные слова — это энергетические паразиты, крадущие ваше настоящее. В терапии мы завершаем эти ситуации, освобождая энергию для будущего.</p></article>
-      <article class="ap-item sr t-sr"><span class="ap-n">06 / Lični identitet</span><h3 class="ap-it">Ko ste vi bez tuđih očekivanja?</h3><p class="ap-id">Učimo kako da prepoznate tuđe glasove u svojoj glavi – one koji vam govore šta "treba" ili "morate". Geštalt vas podržava u otkrivanju vašeg autentičnog "Ja" i jačanju samopouzdanja.</p></article>
-      <article class="ap-item sr t-en"><span class="ap-n">06 / Personal Identity</span><h3 class="ap-it">Who are you without expectations?</h3><p class="ap-id">We learn to distinguish other people's voices in your head — those telling you what you "should" do. Gestalt supports you in discovering your authentic Self and building genuine self-confidence.</p></article>
-      <article class="ap-item sr t-ru"><span class="ap-n">06 / Самооценка</span><h3 class="ap-it">Кто вы без чужих ожиданий?</h3><p class="ap-id">Мы учимся различать чужие голоса в вашей голове, говорящие, что вы «должны» делать. Гештальт помогает найти ваше подлинное «Я» и укрепить самооценку.</p></article>
-      <article class="ap-item sr t-sr"><span class="ap-n">07 / Integracija</span><h3 class="ap-it">Sloboda izbora kao krajnji cilj</h3><p class="ap-id">Kada osvestite svoje procese, prestajete da budete žrtva okolnosti. Terapija se završava tamo gde počinje vaša sloboda da svesno kreirate život koji je u skladu sa vašim vrednostima.</p></article>
-      <article class="ap-item sr t-en"><span class="ap-n">07 / Conscious Growth</span><h3 class="ap-it">Freedom as the Ultimate Goal</h3><p class="ap-id">Once you become aware of your patterns, you stop being a victim of circumstance. Therapy ends where your freedom to consciously create a life aligned with your values begins.</p></article>
-      <article class="ap-item sr t-ru"><span class="ap-n">07 / Свобода выбора</span><h3 class="ap-it">Свобода как конечная цель</h3><p class="ap-id">Осознав свои процессы, вы перестаете быть жертвой обстоятельств. Терапия заканчивается там, где начинается ваша свобода осознанно строить жизнь по своим правилам.</p></article>
+     <article class="ap-item sr sd1 t-sr">
+<span class="ap-n">01 / Telo kao saveznik</span>
+<h3 class="ap-it">Telo pokazuje ono što potiskujemo</h3>
+<p class="ap-id">
+Kada se emocije i unutrašnji konflikti potiskuju, telo često reaguje kroz napetost, pritisak ili nelagodu. 
+Kroz psihoterapiju učite da prepoznate i razumete te signale — kako bi se smanjio stres i sprečile njegove dugoročne posledice.
+</p>
+</article>
+      <article class="ap-item sr sd1 t-en">
+<span class="ap-n">01 / The Body as an Ally</span>
+<h3 class="ap-it">The body reveals what we suppress</h3>
+<p class="ap-id">
+When emotions and inner conflicts are suppressed, the body often responds through tension, pressure, or discomfort. 
+Through psychotherapy, you learn to recognize and understand these signals — helping reduce stress and prevent its long-term effects.
+</p>
+</article>
+      <article class="ap-item sr sd1 t-ru">
+<span class="ap-n">01 / Тело как союзник</span>
+<h3 class="ap-it">Тело отражает то, что мы подавляем</h3>
+<p class="ap-id">
+Когда эмоции и внутренние конфликты подавляются, тело часто реагирует напряжением, давлением или дискомфортом. 
+В процессе психотерапии вы учитесь распознавать и понимать эти сигналы — чтобы снизить уровень стресса и предотвратить его долгосрочные последствия.
+</p>
+</article>
+     <article class="ap-item sr sd2 t-sr">
+<span class="ap-n">02 / Rad sa strahom</span>
+<h3 class="ap-it">Anksioznost ima svoju poruku</h3>
+<p class="ap-id">
+Anksioznost nije samo simptom koji treba ukloniti, već signal koji ukazuje na unutrašnji konflikt ili neravnotežu. 
+Kroz psihoterapiju učite da razumete njen uzrok — umesto da se borite sa njenim pojavama.
+</p>
+</article>
+      <article class="ap-item sr sd2 t-en">
+<span class="ap-n">02 / Working with Anxiety</span>
+<h3 class="ap-it">Anxiety carries a message</h3>
+<p class="ap-id">
+Anxiety is not just a symptom to eliminate, but a signal pointing to inner conflict or imbalance. 
+Through psychotherapy, you learn to understand its underlying causes — instead of fighting its surface manifestations.
+</p>
+</article>
+     <article class="ap-item sr sd2 t-ru">
+<span class="ap-n">02 / Работа с тревогой</span>
+<h3 class="ap-it">У тревоги есть свой смысл</h3>
+<p class="ap-id">
+Тревога — это не просто симптом, который нужно убрать, а сигнал о внутреннем конфликте или нарушенном балансе. 
+В процессе психотерапии вы учитесь понимать её причины — вместо того чтобы бороться с её проявлениями.
+</p>
+</article>
+      <article class="ap-item sr sd3 t-sr">
+<span class="ap-n">03 / Odnosi i granice</span>
+<h3 class="ap-it">Gde su vaše granice?</h3>
+<p class="ap-id">
+Ako se u odnosima često osećate iscrpljeno ili preopterećeno, moguće je da su vaše lične granice narušene. 
+Kroz psihoterapiju učite da ih prepoznate, postavite i održite — bez osećaja krivice i uz više jasnoće u odnosima.
+</p>
+</article>
+      <article class="ap-item sr sd3 t-en">
+<span class="ap-n">03 / Relationships & Boundaries</span>
+<h3 class="ap-it">Where are your boundaries?</h3>
+<p class="ap-id">
+If you often feel exhausted or overwhelmed in relationships, your personal boundaries may be unclear or compromised. 
+Through psychotherapy, you learn to recognize, set, and maintain them — without guilt and with greater clarity in your relationships.
+</p>
+</article>
+      <article class="ap-item sr sd3 t-ru">
+<span class="ap-n">03 / Отношения и границы</span>
+<h3 class="ap-it">Где ваши границы?</h3>
+<p class="ap-id">
+Если в отношениях вы часто чувствуете усталость или перегрузку, возможно, ваши личные границы нарушены. 
+В процессе психотерапии вы учитесь их распознавать, выстраивать и удерживать — без чувства вины и с большей ясностью в отношениях.
+</p>
+</article>
+      <article class="ap-item sr sd4 t-sr">
+<span class="ap-n">04 / Životni balans</span>
+<h3 class="ap-it">Burnout i emocionalna iscrpljenost</h3>
+<p class="ap-id">
+Dugotrajan stres i konstantno preopterećenje mogu dovesti do emocionalne iscrpljenosti i gubitka energije. 
+Kroz psihoterapiju učite da prepoznate prve znakove pregorevanja i ponovo uspostavite ravnotežu, oslanjajući se na sopstvene resurse.
+</p>
+</article>
+      <article class="ap-item sr sd4 t-en">
+<span class="ap-n">04 / Life Balance</span>
+<h3 class="ap-it">Burnout and emotional exhaustion</h3>
+<p class="ap-id">
+Chronic stress and constant overload can lead to emotional exhaustion and loss of energy. 
+Through psychotherapy, you learn to recognize early signs of burnout and restore balance by reconnecting with your inner resources.
+</p>
+</article>
+      <article class="ap-item sr sd4 t-ru">
+<span class="ap-n">04 / Жизненный баланс</span>
+<h3 class="ap-it">Выгорание и эмоциональное истощение</h3>
+<p class="ap-id">
+Длительный стресс и постоянная перегрузка могут привести к эмоциональному истощению и потере энергии. 
+В процессе психотерапии вы учитесь распознавать первые признаки выгорания и восстанавливать баланс, опираясь на внутренние ресурсы.
+</p>
+</article>
+      <article class="ap-item sr t-sr">
+<span class="ap-n">05 / Emocionalna ravnoteža</span>
+<h3 class="ap-it">Zatvaranje nezavršenih iskustava</h3>
+<p class="ap-id">
+Nezavršene situacije, neizrečene emocije i stara iskustva mogu i dalje uticati na vaše trenutno stanje. 
+Kroz psihoterapiju radimo na njihovom razumevanju i razrešavanju — kako biste oslobodili prostor za stabilniji i jasniji odnos prema sebi i budućnosti.
+</p>
+</article>
+      <article class="ap-item sr t-en">
+<span class="ap-n">05 / Emotional Balance</span>
+<h3 class="ap-it">Closing unfinished experiences</h3>
+<p class="ap-id">
+Unresolved situations, unexpressed emotions, and past experiences can continue to affect your present. 
+Through psychotherapy, you work toward understanding and resolving them — creating space for greater clarity and a more stable sense of self.
+</p>
+</article>
+      <article class="ap-item sr t-ru">
+<span class="ap-n">05 / Эмоциональный баланс</span>
+<h3 class="ap-it">Завершение незавершённых переживаний</h3>
+<p class="ap-id">
+Незавершённые ситуации, невыраженные эмоции и прошлый опыт могут продолжать влиять на ваше состояние в настоящем. 
+В процессе психотерапии вы учитесь их осознавать и проживать — освобождая пространство для большей ясности и внутренней устойчивости.
+</p>
+</article>
+      <article class="ap-item sr t-sr">
+<span class="ap-n">06 / Lični identitet</span>
+<h3 class="ap-it">Ko ste vi bez spoljašnjih očekivanja?</h3>
+<p class="ap-id">
+U psihoterapiji učite da prepoznate obrasce i unutrašnje pritiske koji oblikuju vaše odluke i način na koji doživljavate sebe. 
+Cilj je razvoj stabilnijeg osećaja identiteta i većeg oslonca na sopstvene vrednosti i izbore.
+</p>
+</article>
+     <article class="ap-item sr t-en">
+<span class="ap-n">06 / Personal Identity</span>
+<h3 class="ap-it">Who are you beyond expectations?</h3>
+<p class="ap-id">
+In psychotherapy, you learn to recognize patterns and internal pressures that shape your decisions and self-perception. 
+The goal is to develop a more stable sense of identity and a stronger reliance on your own values and choices.
+</p>
+</article>
+      <article class="ap-item sr t-ru">
+<span class="ap-n">06 / Личная идентичность</span>
+<h3 class="ap-it">Кто вы вне чужих ожиданий?</h3>
+<p class="ap-id">
+В психотерапии вы учитесь распознавать внутренние установки и давления, которые влияют на ваши решения и восприятие себя. 
+Цель — формирование более устойчивого чувства идентичности и опоры на собственные ценности и выбор.
+</p>
+</article>
+     <article class="ap-item sr t-sr">
+<span class="ap-n">07 / Integracija</span>
+<h3 class="ap-it">Svesniji izbori u svakodnevnom životu</h3>
+<p class="ap-id">
+Kroz psihoterapiju razvijate veću svest o svojim mislima, emocijama i obrascima ponašanja. 
+To vam omogućava da donosite promišljenije odluke i živite u skladu sa sopstvenim vrednostima.
+</p>
+</article>
+     <article class="ap-item sr t-en">
+<span class="ap-n">07 / Integration</span>
+<h3 class="ap-it">More conscious choices in everyday life</h3>
+<p class="ap-id">
+Through psychotherapy, you develop greater awareness of your thoughts, emotions, and behavioral patterns. 
+This allows you to make more intentional decisions and live in alignment with your values.
+</p>
+</article>
+     <article class="ap-item sr t-ru">
+<span class="ap-n">07 / Интеграция</span>
+<h3 class="ap-it">Более осознанный выбор в повседневной жизни</h3>
+<p class="ap-id">
+В процессе психотерапии вы развиваете осознанность своих мыслей, эмоций и поведенческих паттернов. 
+Это позволяет принимать более взвешенные решения и жить в соответствии со своими ценностями.
+</p>
+</article>
     </div>
   </div>
 </section>
