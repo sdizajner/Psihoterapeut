@@ -7,8 +7,11 @@
 <meta name="description" content="Psiholog i geštalt psihoterapeut u Beogradu i online. Individualna psihoterapija, terapija za parove i psihološka dijagnostika. Zakažite razgovor.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" as="style" onload="this.rel='stylesheet'">
+<noscript>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+</noscript>
 <style>
 /* === TOKENS === */
 :root{
@@ -106,9 +109,9 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
   position:absolute;
   inset:0;
   z-index:0;
-  background:url('images/services-hero.jpg') right 20% center / cover no-repeat;
+ background: url('images/services-hero.webp') right 20% center / cover no-repeat;
 }
-.hero-content{position:relative;z-index:5;max-width:540px;}
+.hero-content{position:relative;z-index:2;max-width:540px;}
 .hero-h1{font-family:var(--fd);font-size:clamp(62px,8vw,104px);font-weight:400;line-height:1.04;letter-spacing:-.03em;color:var(--deep);margin:0;}
 .hero-h1 em{font-style:italic;color:#2f5835;display:block;margin-top:4px;}
 .hero-h1 span,.hero-h1 em{opacity:0;transform:translateY(36px);animation:hW 1.2s var(--ease-out) forwards;}
@@ -514,12 +517,6 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
 <!-- HERO -->
 <section class="page-hero" id="pageTop">
   <div class="hero-img" id="heroImg"></div>
-
- <img src="images/services-hero.webp" 
-     alt="Psihoterapijske usluge i psihološko savetovanje"
-     loading="eager" 
-     fetchpriority="high">
-
   <div class="hero-stat" aria-hidden="true">
     <div class="hero-stat-line"></div>
     <span class="hero-stat-n">4</span>
