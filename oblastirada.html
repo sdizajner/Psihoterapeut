@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <meta property="og:locale" content="sr_RS">
 <!-- PERF-FIX: Hero image preload with fetchpriority=high for LCP — must be first resource hint -->
-<link rel="preload" as="image" href="images/oblastihero.jpg" fetchpriority="high">
+<link rel="preload" as="image" href="images/oblastihero.webp" type="image/webp" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- PERF-FIX: Font stylesheet loaded non-blocking via rel=preload + onload swap; display=swap already present in URL -->
@@ -440,8 +440,24 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
        width/height — prevents layout shift (CLS = 0).
        NO loading="lazy" on hero — lazy loading would delay LCP; eager is correct here.
        object-fit:cover via .hero-img CSS class replicates background-cover exactly. -->
+  <picture>
+
+  <!-- MOBILE -->
+  <source 
+    srcset="images/oblastihero-mobile.webp"
+    media="(max-width: 768px)"
+    type="image/webp"
+  >
+
+  <!-- DESKTOP -->
+  <source 
+    srcset="images/oblastihero.webp"
+    type="image/webp"
+  >
+
+  <!-- FALLBACK -->
   <img
-    src="images/oblastihero.jpg"
+    src="images/oblastihero.webp"
     alt="Psihoterapija — mir i balans"
     class="hero-img"
     fetchpriority="high"
@@ -449,6 +465,7 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
     width="1920"
     height="1080"
   >
+</picture>
   <div class="hero-ov1" aria-hidden="true"></div>
   <div class="hero-ov2" aria-hidden="true"></div>
   <div class="hero-content">
