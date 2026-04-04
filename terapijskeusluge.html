@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Psihoterapija Beograd | Individualna, Partnerska i Online Terapija | Elena Ivancova</title>
 <meta name="description" content="Psiholog i geštalt psihoterapeut u Beogradu i online. Individualna psihoterapija, terapija za parove i psihološka dijagnostika. Zakažite razgovor.">
-<link rel="preload" as="image" href="images/services-hero-mobile.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" as="style" onload="this.rel='stylesheet'">
@@ -90,7 +89,15 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 .mob-nav-langs .lang-pill.active{background:var(--sage);color:#fff;border-color:var(--sage);}
 .mob-nav-langs .lang-pill:hover{color:#fff;border-color:rgba(253,250,245,.5);background:rgba(253,250,245,.08);}
 .page-hero{height:90vh;min-height:600px;position:relative;display:flex;align-items:center;justify-content:flex-start;padding:0 10%;overflow:hidden;}
-.hero-img{position:absolute;inset:0;z-index:0;background:url('images/services-hero.webp') right 20% center / cover no-repeat;}
+.hero-img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:75% center;
+  z-index:0;
+}
 .hero-content{position:relative;z-index:2;max-width:540px;}
 .hero-h1{font-family:var(--fd);font-size:clamp(62px,8vw,104px);font-weight:400;line-height:1.04;letter-spacing:-.03em;color:var(--deep);margin:0;}
 .hero-h1 em{font-style:italic;color:#2f5835;display:block;margin-top:4px;}
@@ -301,19 +308,14 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
     background-color:#1E2D2D;
   }
   .hero-img{
-    position:absolute;
-    inset:0;
-    width:100%;
-    height:100%;
-    background-image:url('images/services-hero-mobile.webp');
-    background-size:cover;
-    background-position:70% center;
-    background-repeat:no-repeat;
-    transform:none!important;
-    will-change:auto;
-    z-index:0;
-    opacity:.8;
-  }
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:78% center;
+  z-index:0;
+}
   .hero-content{
     position:absolute;
     z-index:5;
@@ -635,7 +637,13 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
 </nav>
 
 <section class="page-hero" id="pageTop">
-  <div class="hero-img" id="heroImg"></div>
+ <img 
+  src="images/services-hero-mobile.webp"
+  class="hero-img"
+  alt="Psihoterapija Beograd"
+  loading="eager"
+  fetchpriority="high"
+>
   <div class="hero-stat" aria-hidden="true">
     <div class="hero-stat-line"></div>
     <span class="hero-stat-n">4</span>
