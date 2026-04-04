@@ -7,13 +7,11 @@
 <meta name="description" content="Psiholog i geštalt psihoterapeut u Beogradu i online. Individualna psihoterapija, terapija za parove i psihološka dijagnostika. Zakažite razgovor.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" as="style" onload="this.rel='stylesheet'">
 <noscript>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 </noscript>
 <style>
-/* === TOKENS === */
 :root{
   --sage:#7A9E7E;--sage-light:#A8C5AC;--sage-pale:#E8F0E9;
   --cream:#F5F0E8;--warm-white:#FDFAF5;--deep:#2C3328;
@@ -23,22 +21,14 @@
   --ease-out:cubic-bezier(.16,1,.3,1);--ease-io:cubic-bezier(.65,0,.35,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);
   --nav-h:70px;--max-prose:560px;--section-v:120px;--col-gap:80px;--side-pad:68px;--container:1200px;
 }
-
-/* === RESET === */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:auto;}
 body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overflow-x:hidden;cursor:none;}
-
-/* === CURSOR === */
 .cdot{width:12px;height:12px;background:rgba(122,158,126,.9);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:multiply;transition:width .25s var(--ease-spring),height .25s var(--ease-spring),background .2s;}
 .cdot.hv{width:30px;height:30px;background:rgba(201,169,110,.95);}
 @media(hover:none)and(pointer:coarse){.cdot{display:none!important;}body{cursor:auto!important;}}
-
-/* === PROGRESS BAR === */
 .read-progress{position:fixed;top:0;left:0;z-index:10000;height:2px;width:0%;background:linear-gradient(90deg,var(--sage),var(--gold),var(--sage-light));background-size:200% 100%;animation:shimmer 3s linear infinite;transition:width .08s linear;}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-
-/* === LANGUAGE === */
 .t-sr,.t-en,.t-ru{display:none!important;}
 [data-lang="sr"] .t-sr{display:revert!important;}
 [data-lang="en"] .t-en{display:revert!important;}
@@ -48,8 +38,6 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 [data-lang="en"] span.t-en,[data-lang="en"] a.t-en{display:inline!important;}
 [data-lang="ru"] span.t-ru,[data-lang="ru"] a.t-ru{display:inline!important;}
 [data-lang="sr"] .nav-logo-title.t-sr,[data-lang="en"] .nav-logo-title.t-en,[data-lang="ru"] .nav-logo-title.t-ru{display:block!important;}
-
-/* === NAV === */
 #nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:var(--nav-h);padding:0 var(--side-pad);display:flex;align-items:center;justify-content:space-between;background:rgba(238,232,223,0);backdrop-filter:blur(0px);transition:background .6s ease,backdrop-filter .6s ease,box-shadow .5s;}
 #nav.sc{background:rgba(238,232,223,0.96);backdrop-filter:blur(28px);box-shadow:0 1px 0 rgba(90,107,82,.12),0 4px 32px rgba(44,51,40,.06);}
 .nav-logo{text-decoration:none;display:flex;align-items:center;gap:16px;}
@@ -78,8 +66,6 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 #nav.sc .lang-pill{color:#1a1a1a;border-color:rgba(0,0,0,.1);}
 #nav.sc .lang-pill.active{background:#303c31;color:#fff;border-color:#303c31;}
 .nav-ham{display:none;}
-
-/* === MOBILE OVERLAY === */
 .mob-nav{position:fixed;inset:0;z-index:9500;background:rgba(44,51,40,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .45s var(--ease-io);}
 .mob-nav.open{opacity:1;pointer-events:all;}
 .mob-nav-inner{display:flex;flex-direction:column;align-items:flex-start;padding:0 48px;width:100%;max-width:480px;}
@@ -102,15 +88,8 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 .mob-nav-langs .lang-pill{color:rgba(253,250,245,.6);border-color:rgba(253,250,245,.2);background:transparent;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center;}
 .mob-nav-langs .lang-pill.active{background:var(--sage);color:#fff;border-color:var(--sage);}
 .mob-nav-langs .lang-pill:hover{color:#fff;border-color:rgba(253,250,245,.5);background:rgba(253,250,245,.08);}
-
-/* === HERO === */
 .page-hero{height:90vh;min-height:600px;position:relative;display:flex;align-items:center;justify-content:flex-start;padding:0 10%;overflow:hidden;}
-.hero-img{
-  position:absolute;
-  inset:0;
-  z-index:0;
- background: url('images/services-hero.webp') right 20% center / cover no-repeat;
-}
+.hero-img{position:absolute;inset:0;z-index:0;background:url('images/services-hero.webp') right 20% center / cover no-repeat;}
 .hero-content{position:relative;z-index:2;max-width:540px;}
 .hero-h1{font-family:var(--fd);font-size:clamp(62px,8vw,104px);font-weight:400;line-height:1.04;letter-spacing:-.03em;color:var(--deep);margin:0;}
 .hero-h1 em{font-style:italic;color:#2f5835;display:block;margin-top:4px;}
@@ -130,16 +109,12 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 .hero-stat-n{font-family:var(--fd);font-size:52px;font-weight:300;color:var(--text-light);line-height:1;}
 .hero-stat-l{font-family:var(--fb);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--deep);text-align:center;}
 .hero-stat-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,rgba(122,158,126,.28),transparent);margin-bottom:8px;}
-
-/* === ANCHOR NAV === */
 .anav{background:var(--deep);position:sticky;top:var(--nav-h);z-index:900;border-bottom:2px solid rgba(122,158,126,.14);box-shadow:0 6px 28px rgba(0,0,0,.22);}
 .anav-inner{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;width:100%;}
 .al{font-family:var(--fb);font-size:10.5px;font-weight:400;letter-spacing:.1em;text-transform:uppercase;color:rgba(253,250,245,.48);text-decoration:none;padding:16px 8px;display:flex;align-items:center;justify-content:center;text-align:center;border-bottom:3px solid transparent;border-right:1px solid rgba(122,158,126,.07);transition:color .3s,border-color .3s,background .3s;line-height:1.35;}
 .al:last-of-type{border-right:none;}
 .al:hover{color:var(--sage-light);background:rgba(122,158,126,.07);}
 .al.active{color:#fff;border-bottom-color:var(--sage);background:rgba(122,158,126,.08);font-weight:500;}
-
-/* === TIPOGRAFIJA === */
 .s-eye{font-family:var(--fb);font-size:10px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--sage);margin-bottom:16px;opacity:.85;display:block;}
 .s-title{font-family:var(--fd);font-size:clamp(38px,4.6vw,66px);font-weight:400;line-height:1.05;color:var(--deep);margin-bottom:16px;letter-spacing:-.01em;}
 .s-title em{font-style:italic;color:var(--sage);}
@@ -160,8 +135,6 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 .cta-t{font-family:var(--fd);font-size:clamp(38px,4.8vw,66px);font-weight:400;color:var(--deep);margin-bottom:20px;letter-spacing:-.02em;position:relative;z-index:1;}
 .cta-t em{font-style:italic;color:var(--sage);}
 .cta-s{font-family:var(--fb);font-size:15.5px;font-weight:400;color:var(--text);margin-bottom:44px;max-width:460px;margin-left:auto;margin-right:auto;line-height:1.9;position:relative;z-index:1;letter-spacing:.01em;}
-
-/* === FOOTER TIPOGRAFIJA === */
 .ft-brand{font-family:var(--fd);font-size:30px;color:var(--warm-white);margin-bottom:12px;font-weight:300;}
 .ft-brand em{color:var(--sage-light);font-style:italic;}
 .ft-sub{font-family:var(--fb);font-size:11px;text-transform:uppercase;letter-spacing:.15em;color:var(--sage);margin-bottom:20px;font-weight:500;}
@@ -175,8 +148,6 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 .fco-i{width:16px;height:16px;stroke:var(--sage);flex-shrink:0;}
 .fco-t{font-family:var(--fb);font-size:14.5px;font-weight:400;color:rgba(249,245,239,.68);text-decoration:none;transition:color .3s;}
 .fco-t:hover{color:var(--warm-white);}
-
-/* === SERVICE SEKCIJE === */
 .svc{padding:var(--section-v) 0;position:relative;overflow:hidden;}
 .svc:nth-child(odd){background:var(--warm-white);}
 .svc:nth-child(even){background:var(--cream);}
@@ -211,35 +182,25 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 .svc:nth-child(even) .svc-num{background:var(--cream);}
 .svc-divider{position:absolute;bottom:0;left:0;right:0;height:1px;z-index:2;background:linear-gradient(to right,transparent,rgba(122,158,126,.13) 20%,rgba(122,158,126,.13) 80%,transparent);}
 .svc-content{display:flex;flex-direction:column;justify-content:center;align-self:center;}
-
-/* === REVEAL === */
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .85s ease,transform .85s var(--ease-out);}
 .reveal.shown{opacity:1;transform:translateY(0);}
 .rd1{transition-delay:.04s;}.rd2{transition-delay:.13s;}.rd3{transition-delay:.23s;}.rd4{transition-delay:.34s;}.rd5{transition-delay:.46s;}
 .hr-a{width:0;height:1px;margin:24px 0;background:linear-gradient(to right,var(--sage),rgba(122,158,126,.08));transition:width 1.1s var(--ease-out);}
 .hr-a.shown{width:64px;}
-
-/* === INFO ROW === */
 .info-row{display:flex;gap:0;margin:34px 0;flex-wrap:wrap;border:1px solid rgba(122,158,126,.16);border-radius:2px;overflow:hidden;max-width:var(--max-prose);}
 .info-it{text-align:center;flex:1;min-width:80px;padding:22px 12px;border-right:1px solid rgba(122,158,126,.12);}
 .info-it:last-child{border-right:none;}
-
-/* === BLOCKS === */
 .blocks{margin:30px 0;display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:var(--max-prose);}
 .bl{background:var(--sage-pale);padding:26px 22px;border-radius:2px;border-left:3px solid var(--sage);position:relative;overflow:hidden;transition:transform .35s var(--ease-out),box-shadow .35s;}
 .bl::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(122,158,126,.06),transparent);opacity:0;transition:opacity .3s;}
 .bl:hover{transform:translateY(-4px);box-shadow:0 14px 44px rgba(122,158,126,.12);}
 .bl:hover::before{opacity:1;}
 .svc:nth-child(even) .bl{background:var(--warm-white);}
-
-/* === FEATURES === */
 .feats{margin:26px 0;display:grid;gap:4px;max-width:var(--max-prose);}
 .feat{display:flex;align-items:flex-start;gap:16px;padding:12px 14px;border-radius:2px;transition:background .3s;}
 .feat:hover{background:rgba(122,158,126,.05);}
 .fdot{width:5px;height:5px;background:var(--sage);border-radius:50%;margin-top:12px;flex-shrink:0;transition:transform .3s,box-shadow .3s;}
 .feat:hover .fdot{transform:scale(1.7);box-shadow:0 0 8px rgba(122,158,126,.4);}
-
-/* === BUTTON === */
 .btn-p{display:inline-flex;align-items:center;gap:12px;font-family:var(--fb);font-size:10.5px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:var(--deep);background:var(--sage-light);padding:16px 40px;text-decoration:none;border-radius:1px;position:relative;overflow:hidden;margin-top:16px;transition:transform .35s var(--ease-out),box-shadow .35s;}
 .btn-p::before{content:'';position:absolute;inset:0;background:var(--gold-light);transform:scaleX(0);transform-origin:left;transition:transform .5s var(--ease-io);}
 .btn-p:hover::before{transform:scaleX(1);}
@@ -247,8 +208,6 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 .btn-p span,.btn-p svg{position:relative;z-index:1;}
 .btn-arrow{transition:transform .35s var(--ease-out);}
 .btn-p:hover .btn-arrow{transform:translateX(6px);}
-
-/* === FAQ === */
 .faq-sec{padding:100px 0;background:var(--deep);}
 .faq-inner{max-width:var(--container);margin:0 auto;padding:0 var(--side-pad);}
 .faq-t{font-family:var(--fd);font-size:clamp(32px,3.8vw,54px);font-weight:400;color:var(--warm-white);text-align:center;margin-bottom:60px;}
@@ -258,13 +217,9 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 .faq-i::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(to right,transparent,var(--sage),transparent);transform:scaleX(0);transition:transform .5s var(--ease-out);}
 .faq-i:hover{background:rgba(122,158,126,.1);border-color:rgba(122,158,126,.25);}
 .faq-i:hover::before{transform:scaleX(1);}
-
-/* === CTA === */
 .cta-sec{padding:110px var(--side-pad);background:var(--cream);text-align:center;position:relative;overflow:hidden;}
 .cta-sec::before{content:'';position:absolute;width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(122,158,126,.07),transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;}
 .cta-sec .btn-p{position:relative;z-index:1;}
-
-/* === FOOTER === */
 footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,255,255,.05);}
 .ft-inner{max-width:var(--container);margin:0 auto;padding:0 var(--side-pad);}
 .ft1{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:60px;margin-bottom:80px;}
@@ -274,13 +229,11 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
 .soc svg{width:18px;height:18px;fill:none;stroke:rgba(249,245,239,.38);stroke-width:1.5;transition:all .3s;}
 .soc:hover svg{stroke:var(--sage-light);transform:translateY(-3px);}
 
-/* === TABLET (max 1280px) === */
 @media(max-width:1280px){
   :root{--side-pad:48px;--col-gap:64px;}
   .al{font-size:9.5px;padding:14px 6px;}
 }
 
-/* === TABLET (max 1024px) === */
 @media(max-width:1024px){
   :root{--col-gap:48px;--nav-h:64px;--section-v:90px;--side-pad:40px;}
   .nav-links{display:none!important;}
@@ -316,21 +269,101 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   .ft1{grid-template-columns:1fr 1fr;gap:40px;}
 }
 
-/* === MOBILE (max 768px) === */
 @media(max-width:768px){
-  :root{--nav-h:58px;--section-v:72px;--side-pad:22px;--col-gap:32px;}
+  :root{--nav-h:68px;--section-v:72px;--side-pad:22px;--col-gap:32px;}
+
+  /* NAV */
   #nav{padding:0 var(--side-pad);}
+  #nav.sc{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);}
+  #nav .lang-pills{display:none!important;}
+
+  .nav-ham{padding:10px;min-width:48px;min-height:48px;}
+  .nav-ham span{width:22px;height:2px;}
+
+  .nav-logo-accent{height:36px;width:2px;}
   .nav-logo-first{font-size:21px;}
-  .nav-logo-last{font-size:19px;letter-spacing:.07em;}
-  .nav-logo-title{font-size:8.5px;letter-spacing:.12em;}
-  .nav-logo-accent{height:38px;}
-  .lang-pill{font-size:8.5px;padding:5px 9px;min-height:36px;min-width:36px;display:flex;align-items:center;justify-content:center;}
-  .nav-ham{width:44px;height:44px;}
-  .page-hero{height:65vh;min-height:480px;padding:0 var(--side-pad);}
-  .hero-h1{font-size:clamp(44px,11vw,72px);letter-spacing:-.04em;}
-  .hero-tagline{font-size:9px;letter-spacing:.2em;margin-top:20px;}
-  .hero-scroll-hint{bottom:28px;left:var(--side-pad);}
+  .nav-logo-last{font-size:19px;letter-spacing:.05em; color:#a8c5ac; text-shadow:0 1px 4px rgba(0,0,0,.3);}
+  .nav-logo-title{font-size:8px;letter-spacing:.12em;}
+  .nav-logo-divider{margin:1px 0;}
+
+  /* LANG PILLS (mobile nav overlay) */
+  .mob-nav-langs .lang-pill{font-size:8.5px;padding:5px 8px;min-height:44px;min-width:44px;}
+
+  /* HERO — matching oblastirada mobile pattern */
+  .page-hero{
+    height:100vh;
+    min-height:auto;
+    padding:0;
+    display:block;
+    position:relative;
+    overflow:hidden;
+    background-color:#1E2D2D;
+  }
+  .hero-img{
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    background-image:url('images/services-hero.webp');
+    background-size:cover;
+    background-position:70% center;
+    background-repeat:no-repeat;
+    transform:none!important;
+    will-change:auto;
+    z-index:0;
+    opacity:.8;
+  }
+  .hero-content{
+    position:absolute;
+    z-index:5;
+    top:auto;
+    bottom:22%;
+    left:var(--side-pad);
+    right:var(--side-pad);
+    max-width:100%;
+    padding:0;
+  }
+  .hero-h1{
+    font-size:clamp(36px,11vw,60px);
+    line-height:1.08;
+    letter-spacing:-.03em;
+    color:#fff;
+    text-shadow:0 2px 10px rgba(0,0,0,.52),0 1px 2px rgba(0,0,0,.55);
+  }
+  .hero-h1 em{
+    color:var(--sage-light);
+    text-shadow:0 2px 14px rgba(0,0,0,.48),0 1px 2px rgba(0,0,0,.45);
+  }
+  .hero-tagline{
+    font-size:9.5px;
+    letter-spacing:.22em;
+    margin-top:14px;
+    color:rgba(255,255,255,.85);
+    background:rgba(0,0,0,.2);
+    text-shadow:0 1px 5px rgba(0,0,0,.45);
+    opacity:0;
+    animation:hW 1s var(--ease-out) .48s forwards;
+  }
+  .hero-divider{
+    background:linear-gradient(to right,rgba(168,197,172,.7),rgba(168,197,172,0));
+    margin:18px 0;
+  }
+  .hero-scroll-hint{
+    bottom:26px;
+    left:var(--side-pad);
+  }
+  .hero-scroll-txt{
+    color:rgba(255,255,255,.5);
+    text-shadow:none;
+  }
+  .hero-scroll-line{background:rgba(255,255,255,.2);}
+  .hero-stat{display:none;}
+  .hero-side-text{display:none;}
+
+  /* ANCHOR NAV */
   .al{font-size:8px;padding:12px 14px;letter-spacing:.04em;min-height:44px;}
+
+  /* SECTIONS */
   .svc-vis{width:calc(100% + var(--side-pad));margin-left:calc(var(--side-pad) * -1);margin-right:0;}
   .svc-in.rev .svc-vis{margin-left:0;margin-right:calc(var(--side-pad) * -1);}
   .svc-tag{right:12px;bottom:-10px;padding:12px 16px;}
@@ -346,14 +379,20 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   .svc-q{font-size:18px;padding-left:18px;}
   .info-n{font-size:38px;}
   .info-it{padding:18px 8px;}
+
+  /* FAQ */
   .faq-sec{padding:72px 0;}
   .faq-inner{padding:0 var(--side-pad);}
   .faq-i{padding:28px 22px;}
   .faq-q{font-size:19px;}
   .faq-a{font-size:14.5px;}
+
+  /* CTA */
   .cta-sec{padding:72px var(--side-pad);}
   .cta-t{font-size:clamp(34px,8vw,52px);}
   .cta-s{font-size:14.5px;margin-bottom:36px;}
+
+  /* FOOTER */
   .ft-inner{padding:0 var(--side-pad);}
   .ft1{grid-template-columns:1fr;gap:36px;margin-bottom:52px;}
   .ft2{flex-direction:column;gap:20px;align-items:flex-start;padding:32px var(--side-pad);}
@@ -361,7 +400,6 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   .ft-brand{font-size:26px;}
 }
 
-/* === MALI TELEFONI (max 560px) === */
 @media(max-width:560px){
   :root{--side-pad:18px;}
   .anav-inner{display:grid;grid-template-columns:1fr 1fr;overflow-x:unset;}
@@ -374,7 +412,6 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   .mob-nav-inner{padding:0 var(--side-pad);}
 }
 
-/* === TOUCH UREĐAJI === */
 @media(hover:none)and(pointer:coarse){
   .reveal{transition:opacity .68s ease,transform .68s var(--ease-out);}
   .hr-a{transition:width .88s var(--ease-out);}
@@ -395,6 +432,97 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   .ft-links a:hover{transform:none;}
   .fco{min-height:44px;}
 }
+@media(max-width:768px){
+
+  /* 1. PLAVI / TEAL OVERLAY (umesto crnog) */
+   .page-hero::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    z-index:1;
+
+    background:linear-gradient(
+      to right,
+      rgba(18,52,56,0.65) 0%,
+      rgba(18,52,56,0.45) 20%,
+      rgba(18,52,56,0.18) 35%,
+      rgba(18,52,56,0.06) 45%,
+      rgba(18,52,56,0.0) 55%,
+      transparent 100%
+    );
+    
+  }
+
+  /* 2. SLIKA — BLAGO HLADNI TON */
+  .hero-img{
+    background-position:78% center !important;
+     filter:contrast(1.05);
+  }
+
+  /* 3. TEKST — MALO NIŽE */
+  .hero-content{
+    bottom:14% !important; /* bilo 22% → sad niže */
+  }
+
+  /* 4. TEKST — FINI KONTRAST */
+  .hero-h1{
+    color:#f5f7f6;
+    text-shadow:
+      0 2px 10px rgba(10,20,20,.6),
+      0 1px 2px rgba(0,0,0,.5);
+  }
+
+  .hero-h1 em{
+    color:#a8c5ac;
+  }
+
+  .hero-tagline{
+    background:rgba(20,45,50,.25);
+    color:rgba(255,255,255,.9);
+  }
+
+}
+@media(max-width:768px){
+
+  /* 1. LOGO — JAČI KONTRAST */
+  .nav-logo-first{
+    color:#ffffff !important;
+    text-shadow:
+      0 1px 3px rgba(0,0,0,.6),
+      0 0 6px rgba(0,0,0,.4);
+  }
+
+  .nav-logo-last{
+    color:#a8c5ac !important;
+    text-shadow:
+      0 1px 3px rgba(0,0,0,.6),
+      0 0 6px rgba(0,0,0,.4);
+  }
+
+  .nav-logo-title{
+    color:rgba(255,255,255,.85) !important;
+    text-shadow:0 1px 4px rgba(0,0,0,.5);
+  }
+
+  /* 2. HAMBURGER — ČIST I VIDLJIV */
+  .nav-ham span{
+    background:#ffffff !important;
+    box-shadow:0 1px 4px rgba(0,0,0,.6);
+  }
+
+  /* 3. BLAGI BACKDROP SAMO IZA HEADERA */
+  #nav{
+    background:linear-gradient(
+      to bottom,
+      rgba(10,25,30,0.6),
+      rgba(10,25,30,0.2),
+      transparent
+    ) !important;
+
+    backdrop-filter:blur(6px);
+  }
+
+}
 </style>
 <script type="application/ld+json">
 {
@@ -410,7 +538,6 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   "areaServed": ["Beograd", "Online"]
 }
 </script>
-
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -424,14 +551,8 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
     "addressCountry": "RS"
   },
   "areaServed": [
-    {
-      "@type": "City",
-      "name": "Beograd"
-    },
-    {
-      "@type": "Place",
-      "name": "Online"
-    }
+    {"@type": "City","name": "Beograd"},
+    {"@type": "Place","name": "Online"}
   ]
 }
 </script>
@@ -441,7 +562,6 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
 <div class="read-progress" id="readProgress"></div>
 <div class="cdot" id="cdot"></div>
 
-<!-- MOBILNI MENI -->
 <div class="mob-nav" id="mobNav" role="dialog" aria-modal="true" aria-label="Navigation menu">
   <div class="mob-nav-inner">
     <div class="mob-nav-line"></div>
@@ -470,7 +590,6 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   </div>
 </div>
 
-<!-- NAVIGACIJA -->
 <nav id="nav">
   <a href="index.html" class="nav-logo">
     <div class="nav-logo-accent"></div>
@@ -514,7 +633,6 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   </div>
 </nav>
 
-<!-- HERO -->
 <section class="page-hero" id="pageTop">
   <div class="hero-img" id="heroImg"></div>
   <div class="hero-stat" aria-hidden="true">
@@ -526,10 +644,10 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   </div>
   <div class="hero-content">
     <h1 class="hero-h1">
-  <span class="t-sr">Terapijske<br><em>Usluge</em></span>
-  <span class="t-en" aria-hidden="true">Therapeutic<br><em>Services</em></span>
-  <span class="t-ru" aria-hidden="true">Терапевтические<br><em>Услуги</em></span>
-</h1>
+      <span class="t-sr">Terapijske<br><em>Usluge</em></span>
+      <span class="t-en" aria-hidden="true">Therapeutic<br><em>Services</em></span>
+      <span class="t-ru" aria-hidden="true">Терапевтические<br><em>Услуги</em></span>
+    </h1>
     <div class="hero-divider"></div>
     <p class="hero-tagline t-sr">Prostor za promenu · Beograd &amp; Online</p>
     <p class="hero-tagline t-en">A space for change · Belgrade &amp; Online</p>
@@ -548,7 +666,6 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   </div>
 </section>
 
-<!-- ANCHOR NAV -->
 <nav class="anav" id="anav" aria-label="Sekcije">
   <div class="anav-inner">
     <a href="#individualna" class="al t-sr">Individualna Psihoterapija</a>
@@ -566,7 +683,6 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   </div>
 </nav>
 
-<!-- SERVICE 01 — INDIVIDUALNA -->
 <section class="svc" id="individualna">
   <div class="svc-watermark" data-parallax=".14">01</div>
   <div class="svc-in">
@@ -574,7 +690,7 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
       <span class="svc-num t-sr">Usluga 01</span><span class="svc-num t-en">Service 01</span><span class="svc-num t-ru">Услуга 01</span>
       <div class="svc-frame">
         <div class="svc-ph" style="background:linear-gradient(155deg,#C4B5A5,#8C7B6E)"></div>
-       <img src="images/individualna.jpg" alt="Individualna psihoterapija Beograd psiholog geštalt psihoterapeut" loading="lazy">
+        <img src="images/individualna.jpg" alt="Individualna psihoterapija Beograd psiholog geštalt psihoterapeut" loading="lazy">
       </div>
       <div class="svc-tag">
         <span class="svc-tag-n">50'</span>
@@ -589,41 +705,15 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
       <h2 class="s-title reveal rd2 t-en">Individual<br><em>Psychotherapy</em></h2>
       <h2 class="s-title reveal rd2 t-ru">Индивидуальная<br><em>Психотерапия</em></h2>
       <div class="hr-a reveal rd2"></div>
-      <p class="lead reveal rd3 t-sr">
-"Svaka osoba nosi u sebi sve što joj je potrebno za ozdravljenje." — kroz psihoterapiju u Beogradu ili online taj potencijal se razvija uz podršku psihologa i geštalt psihoterapeuta.
-</p>
-
-<p class="lead reveal rd3 t-en">
-"Every person carries within themselves everything they need for healing." — through psychotherapy in Belgrade or online, this potential unfolds with the support of a psychologist and Gestalt psychotherapist.
-</p>
-
-<p class="lead reveal rd3 t-ru">
-"Каждый человек несёт в себе всё необходимое для исцеления." — в процессе психотерапии в Белграде или онлайн этот потенциал раскрывается при поддержке психолога и гештальт-терапевта.
-</p>
-
-     <p class="txt reveal rd3 t-sr">
-Individualna psihoterapija u Beogradu i online je siguran prostor za istraživanje misli, osećanja i obrazaca ponašanja. Rad se odvija u poverljivom i neosudujućem okruženju uz podršku psihologa i geštalt psihoterapeuta.
-</p>
-
-<p class="txt reveal rd3 t-sr">
-Cilj psihoterapije je da pronađete unutrašnji balans, prevaziđete blokade i razvijete stabilnost i autentičnost u svakodnevnom životu.
-</p>
-
-<p class="txt reveal rd3 t-en">
-Individual psychotherapy in Belgrade and online is a safe space to explore your thoughts, feelings and behavioral patterns. The process is guided by a psychologist and Gestalt psychotherapist in a confidential, non-judgmental setting.
-</p>
-
-<p class="txt reveal rd3 t-en">
-The goal of psychotherapy is to achieve inner balance, overcome blockages and develop emotional stability and authenticity.
-</p>
-
-<p class="txt reveal rd3 t-ru">
-Индивидуальная психотерапия в Белграде и онлайн — это безопасное пространство для исследования мыслей, чувств и поведенческих паттернов при поддержке психолога и гештальт-терапевта.
-</p>
-
-<p class="txt reveal rd3 t-ru">
-Цель психотерапии — обрести внутренний баланс, преодолеть внутренние блоки и развить устойчивость и аутентичность.
-</p>
+      <p class="lead reveal rd3 t-sr">"Svaka osoba nosi u sebi sve što joj je potrebno za ozdravljenje." — kroz psihoterapiju u Beogradu ili online taj potencijal se razvija uz podršku psihologa i geštalt psihoterapeuta.</p>
+      <p class="lead reveal rd3 t-en">"Every person carries within themselves everything they need for healing." — through psychotherapy in Belgrade or online, this potential unfolds with the support of a psychologist and Gestalt psychotherapist.</p>
+      <p class="lead reveal rd3 t-ru">"Каждый человек несёт в себе всё необходимое для исцеления." — в процессе психотерапии в Белграде или онлайн этот потенциал раскрывается при поддержке психолога и гештальт-терапевта.</p>
+      <p class="txt reveal rd3 t-sr">Individualna psihoterapija u Beogradu i online je siguran prostor za istraživanje misli, osećanja i obrazaca ponašanja. Rad se odvija u poverljivom i neosudujućem okruženju uz podršku psihologa i geštalt psihoterapeuta.</p>
+      <p class="txt reveal rd3 t-sr">Cilj psihoterapije je da pronađete unutrašnji balans, prevaziđete blokade i razvijete stabilnost i autentičnost u svakodnevnom životu.</p>
+      <p class="txt reveal rd3 t-en">Individual psychotherapy in Belgrade and online is a safe space to explore your thoughts, feelings and behavioral patterns. The process is guided by a psychologist and Gestalt psychotherapist in a confidential, non-judgmental setting.</p>
+      <p class="txt reveal rd3 t-en">The goal of psychotherapy is to achieve inner balance, overcome blockages and develop emotional stability and authenticity.</p>
+      <p class="txt reveal rd3 t-ru">Индивидуальная психотерапия в Белграде и онлайн — это безопасное пространство для исследования мыслей, чувств и поведенческих паттернов при поддержке психолога и гештальт-терапевта.</p>
+      <p class="txt reveal rd3 t-ru">Цель психотерапии — обрести внутренний баланс, преодолеть внутренние блоки и развить устойчивость и аутентичность.</p>
       <div class="info-row reveal rd3">
         <div class="info-it"><span class="info-n">50'-60'</span><span class="info-l t-sr">Trajanje</span><span class="info-l t-en">Duration</span><span class="info-l t-ru">Длительность</span></div>
         <div class="info-it"><span class="info-n">1×</span><span class="info-l t-sr">Nedeljno</span><span class="info-l t-en">Weekly</span><span class="info-l t-ru">Еженедельно</span></div>
@@ -632,67 +722,36 @@ The goal of psychotherapy is to achieve inner balance, overcome blockages and de
       <div class="blocks reveal rd4">
         <div class="bl">
           <p class="bl-t t-sr">Fokus rada</p><p class="bl-t t-en">Areas of Focus</p><p class="bl-t t-ru">Направления</p>
-         <p class="bl-d t-sr">
-Anksioznost, depresija, nisko samopouzdanje, stres, tuga, životne blokade i partnerski odnosi — problemi koji se rešavaju kroz psihoterapiju u Beogradu i online.
-</p>
-
-<p class="bl-d t-en">
-Anxiety, depression, low self-esteem, stress, grief, life blockages and relationship issues — addressed through psychotherapy in Belgrade and online.
-</p>
-
-<p class="bl-d t-ru">
-Тревога, депрессия, самооценка, стресс, горе, жизненные блоки и отношения — проблемы, с которыми работает психотерапия в Белграде и онлайн.
-</p>
+          <p class="bl-d t-sr">Anksioznost, depresija, nisko samopouzdanje, stres, tuga, životne blokade i partnerski odnosi — problemi koji se rešavaju kroz psihoterapiju u Beogradu i online.</p>
+          <p class="bl-d t-en">Anxiety, depression, low self-esteem, stress, grief, life blockages and relationship issues — addressed through psychotherapy in Belgrade and online.</p>
+          <p class="bl-d t-ru">Тревога, депрессия, самооценка, стресс, горе, жизненные блоки и отношения — проблемы, с которыми работает психотерапия в Белграде и онлайн.</p>
         </div>
         <div class="bl">
           <p class="bl-t t-sr">Metode rada</p><p class="bl-t t-en">Methods</p><p class="bl-t t-ru">Методы работы</p>
-          <p class="bl-d t-sr">
-Geštalt psihoterapija, body awareness (telesna svesnost), eksperimentalne tehnike i rad sa snovima — savremeni pristupi koje koristi psiholog i geštalt psihoterapeut u radu uživo i online.
-</p>
-
-<p class="bl-d t-en">
-Gestalt psychotherapy, body awareness, experimental techniques and dream work — modern approaches used by a psychologist and Gestalt psychotherapist in both in-person and online sessions.
-</p>
-
-<p class="bl-d t-ru">
-Гештальт-психотерапия, осознанность тела, экспериментальные техники и работа со сновидениями — современные подходы, используемые психологом и гештальт-терапевтом очно и онлайн.
-</p>
+          <p class="bl-d t-sr">Geštalt psihoterapija, body awareness (telesna svesnost), eksperimentalne tehnike i rad sa snovima — savremeni pristupi koje koristi psiholog i geštalt psihoterapeut u radu uživo i online.</p>
+          <p class="bl-d t-en">Gestalt psychotherapy, body awareness, experimental techniques and dream work — modern approaches used by a psychologist and Gestalt psychotherapist in both in-person and online sessions.</p>
+          <p class="bl-d t-ru">Гештальт-психотерапия, осознанность тела, экспериментальные техники и работа со сновидениями — современные подходы, используемые психологом и гештальт-терапевтом очно и онлайн.</p>
         </div>
       </div>
       <div class="feats reveal rd4">
-        <div class="feat"><div class="fdot"></div><div><span class="ft-title t-sr">Poverljivost</span><span class="ft-title t-en">Confidentiality</span><span class="ft-title t-ru">Конфиденциальность</span><span class="ft-text t-sr">
-Sve što podelite ostaje strogo poverljivo, u skladu sa etičkim kodeksom koji poštuje psiholog i geštalt psihoterapeut.
-</span>
-
-<span class="ft-text t-en">
-Everything you share remains strictly confidential, in accordance with the ethical standards followed by a psychologist and Gestalt psychotherapist.
-</span>
-
-<span class="ft-text t-ru">
-Всё, что вы рассказываете, строго конфиденциально в соответствии с этическим кодексом, которого придерживается психолог и гештальт-терапевт.
-</span></div></div>
-        <div class="feat"><div class="fdot"></div><div><span class="ft-title t-sr">Vaš tempo</span><span class="ft-title t-en">Your pace</span><span class="ft-title t-ru">Ваш темп</span><span class="ft-text t-sr">
-Terapijski proces se prilagođava vašim potrebama i ritmu, uz stručnu podršku psihologa i geštalt psihoterapeuta.
-</span>
-
-<span class="ft-text t-en">
-The therapeutic process adapts to your needs and pace, with the professional support of a psychologist and Gestalt psychotherapist.
-</span>
-
-<span class="ft-text t-ru">
-Терапевтический процесс адаптируется к вашим потребностям и темпу при поддержке психолога и гештальт-терапевта.
-</span></div></div>
-        <div class="feat"><div class="fdot"></div><div><span class="ft-title t-sr">Bez osude</span><span class="ft-title t-en">Non-judgmental</span><span class="ft-title t-ru">Без осуждения</span><span class="ft-text t-sr">
-Nema pogrešnih osećanja ni glupih pitanja — svaki razgovor je dobrodošao u sigurnom prostoru koji pruža psiholog i geštalt psihoterapeut.
-</span>
-
-<span class="ft-text t-en">
-There are no wrong feelings or silly questions — every conversation is welcome in a safe space provided by a psychologist and Gestalt psychotherapist.
-</span>
-
-<span class="ft-text t-ru">
-Нет неправильных чувств и глупых вопросов — каждый разговор важен в безопасном пространстве, которое создаёт психолог и гештальт-терапевт.
-</span></div></div>
+        <div class="feat"><div class="fdot"></div><div>
+          <span class="ft-title t-sr">Poverljivost</span><span class="ft-title t-en">Confidentiality</span><span class="ft-title t-ru">Конфиденциальность</span>
+          <span class="ft-text t-sr">Sve što podelite ostaje strogo poverljivo, u skladu sa etičkim kodeksom koji poštuje psiholog i geštalt psihoterapeut.</span>
+          <span class="ft-text t-en">Everything you share remains strictly confidential, in accordance with the ethical standards followed by a psychologist and Gestalt psychotherapist.</span>
+          <span class="ft-text t-ru">Всё, что вы рассказываете, строго конфиденциально в соответствии с этическим кодексом, которого придерживается психолог и гештальт-терапевт.</span>
+        </div></div>
+        <div class="feat"><div class="fdot"></div><div>
+          <span class="ft-title t-sr">Vaš tempo</span><span class="ft-title t-en">Your pace</span><span class="ft-title t-ru">Ваш темп</span>
+          <span class="ft-text t-sr">Terapijski proces se prilagođava vašim potrebama i ritmu, uz stručnu podršku psihologa i geštalt psihoterapeuta.</span>
+          <span class="ft-text t-en">The therapeutic process adapts to your needs and pace, with the professional support of a psychologist and Gestalt psychotherapist.</span>
+          <span class="ft-text t-ru">Терапевтический процесс адаптируется к вашим потребностям и темпу при поддержке психолога и гештальт-терапевта.</span>
+        </div></div>
+        <div class="feat"><div class="fdot"></div><div>
+          <span class="ft-title t-sr">Bez osude</span><span class="ft-title t-en">Non-judgmental</span><span class="ft-title t-ru">Без осуждения</span>
+          <span class="ft-text t-sr">Nema pogrešnih osećanja ni glupih pitanja — svaki razgovor je dobrodošao u sigurnom prostoru koji pruža psiholog i geštalt psihoterapeut.</span>
+          <span class="ft-text t-en">There are no wrong feelings or silly questions — every conversation is welcome in a safe space provided by a psychologist and Gestalt psychotherapist.</span>
+          <span class="ft-text t-ru">Нет неправильных чувств и глупых вопросов — каждый разговор важен в безопасном пространстве, которое создаёт психолог и гештальт-терапевт.</span>
+        </div></div>
       </div>
       <a href="index.html#contact" class="btn-p reveal rd5">
         <span class="t-sr">Zakažite razgovor</span><span class="t-en">Book a session</span><span class="t-ru">Записаться</span>
@@ -703,7 +762,6 @@ There are no wrong feelings or silly questions — every conversation is welcome
   <div class="svc-divider"></div>
 </section>
 
-<!-- SERVICE 02 — PAROVI -->
 <section class="svc" id="parovi">
   <div class="svc-watermark" data-parallax=".14">02</div>
   <div class="svc-in rev">
@@ -713,40 +771,15 @@ There are no wrong feelings or silly questions — every conversation is welcome
       <h2 class="s-title reveal rd2 t-en">Couples<br><em>Psychotherapy</em></h2>
       <h2 class="s-title reveal rd2 t-ru">Психотерапия<br><em>для Пар</em></h2>
       <div class="hr-a reveal rd2"></div>
-     <p class="lead reveal rd3 t-sr">
-"Zdrava veza ne znači odsustvo konflikta — znači sposobnost da se kroz njega prođe zajedno." — kroz psihoterapiju za parove u Beogradu ili online razvija se bolja komunikacija i razumevanje partnera.
-</p>
-
-<p class="lead reveal rd3 t-en">
-"A healthy relationship doesn't mean the absence of conflict — it means the ability to navigate it together." — through couples psychotherapy in Belgrade or online, partners develop better communication and understanding.
-</p>
-
-<p class="lead reveal rd3 t-ru">
-"Здоровые отношения — это способность проходить через конфликт вместе." — в процессе психотерапии для пар в Белграде или онлайн развивается лучшее понимание и коммуникация.
-</p>
-     <p class="txt reveal rd3 t-sr">
-Psihoterapija za parove u Beogradu i online pruža siguran prostor za iskren razgovor — gde oba partnera mogu da govore i da budu saslušani uz podršku psihologa i geštalt psihoterapeuta.
-</p>
-
-<p class="txt reveal rd3 t-sr">
-Rad je usmeren na unapređenje komunikacije, razumevanje neispunjenih potreba i obnovu bliskosti u vezi, kroz strukturisan terapijski proces.
-</p>
-
-<p class="txt reveal rd3 t-en">
-Couples psychotherapy in Belgrade and online provides a safe space for honest conversation — where both partners can speak and truly be heard, guided by a psychologist and Gestalt psychotherapist.
-</p>
-
-<p class="txt reveal rd3 t-en">
-The process focuses on improving communication, understanding unmet needs and restoring emotional closeness within the relationship.
-</p>
-
-<p class="txt reveal rd3 t-ru">
-Психотерапия для пар в Белграде и онлайн — это безопасное пространство для честного разговора при поддержке психолога и гештальт-терапевта.
-</p>
-
-<p class="txt reveal rd3 t-ru">
-Работа направлена на улучшение коммуникации, понимание потребностей и восстановление близости в отношениях.
-</p>
+      <p class="lead reveal rd3 t-sr">"Zdrava veza ne znači odsustvo konflikta — znači sposobnost da se kroz njega prođe zajedno." — kroz psihoterapiju za parove u Beogradu ili online razvija se bolja komunikacija i razumevanje partnera.</p>
+      <p class="lead reveal rd3 t-en">"A healthy relationship doesn't mean the absence of conflict — it means the ability to navigate it together." — through couples psychotherapy in Belgrade or online, partners develop better communication and understanding.</p>
+      <p class="lead reveal rd3 t-ru">"Здоровые отношения — это способность проходить через конфликт вместе." — в процессе психотерапии для пар в Белграде или онлайн развивается лучшее понимание и коммуникация.</p>
+      <p class="txt reveal rd3 t-sr">Psihoterapija za parove u Beogradu i online pruža siguran prostor za iskren razgovor — gde oba partnera mogu da govore i da budu saslušani uz podršku psihologa i geštalt psihoterapeuta.</p>
+      <p class="txt reveal rd3 t-sr">Rad je usmeren na unapređenje komunikacije, razumevanje neispunjenih potreba i obnovu bliskosti u vezi, kroz strukturisan terapijski proces.</p>
+      <p class="txt reveal rd3 t-en">Couples psychotherapy in Belgrade and online provides a safe space for honest conversation — where both partners can speak and truly be heard, guided by a psychologist and Gestalt psychotherapist.</p>
+      <p class="txt reveal rd3 t-en">The process focuses on improving communication, understanding unmet needs and restoring emotional closeness within the relationship.</p>
+      <p class="txt reveal rd3 t-ru">Психотерапия для пар в Белграде и онлайн — это безопасное пространство для честного разговора при поддержке психолога и гештальт-терапевта.</p>
+      <p class="txt reveal rd3 t-ru">Работа направлена на улучшение коммуникации, понимание потребностей и восстановление близости в отношениях.</p>
       <div class="info-row reveal rd3">
         <div class="info-it"><span class="info-n">60'- 90'</span><span class="info-l t-sr">Trajanje</span><span class="info-l t-en">Duration</span><span class="info-l t-ru">Длительность</span></div>
         <div class="info-it"><span class="info-n">2</span><span class="info-l t-sr">Partnera</span><span class="info-l t-en">Partners</span><span class="info-l t-ru">Партнёра</span></div>
@@ -755,44 +788,20 @@ The process focuses on improving communication, understanding unmet needs and re
       <div class="blocks reveal rd4">
         <div class="bl">
           <p class="bl-t t-sr">Kada potražiti pomoć</p><p class="bl-t t-en">When to seek help</p><p class="bl-t t-ru">Когда обратиться</p>
-          <p class="bl-d t-sr">
-Česti sukobi, emocionalna udaljenost, nevera, kriza poverenja ili osećaj zastoja u vezi — izazovi koji se rešavaju kroz psihoterapiju za parove u Beogradu i online.
-</p>
-
-<p class="bl-d t-en">
-Frequent conflicts, emotional distance, infidelity, trust issues or a sense of stagnation — challenges addressed through couples psychotherapy in Belgrade and online.
-</p>
-
-<p class="bl-d t-ru">
-Конфликты, эмоциональная дистанция, измена, кризис доверия или ощущение застоя — проблемы, с которыми работает психотерапия для пар в Белграде и онлайн.
-</p>
+          <p class="bl-d t-sr">Česti sukobi, emocionalna udaljenost, nevera, kriza poverenja ili osećaj zastoja u vezi — izazovi koji se rešavaju kroz psihoterapiju za parove u Beogradu i online.</p>
+          <p class="bl-d t-en">Frequent conflicts, emotional distance, infidelity, trust issues or a sense of stagnation — challenges addressed through couples psychotherapy in Belgrade and online.</p>
+          <p class="bl-d t-ru">Конфликты, эмоциональная дистанция, измена, кризис доверия или ощущение застоя — проблемы, с которыми работает психотерапия для пар в Белграде и онлайн.</p>
         </div>
         <div class="bl">
           <p class="bl-t t-sr">Šta dobijate</p><p class="bl-t t-en">What you gain</p><p class="bl-t t-ru">Что вы получаете</p>
-          <p class="bl-d t-sr">
-Bolju komunikaciju, dublje razumevanje partnera i konkretne alate za rešavanje konflikata — kroz psihoterapiju za parove u Beogradu i online.
-</p>
-
-<p class="bl-d t-en">
-Better communication, deeper understanding of your partner and practical tools for conflict resolution — through couples psychotherapy in Belgrade and online.
-</p>
-
-<p class="bl-d t-ru">
-Лучшую коммуникацию, понимание партнёра и конкретные инструменты для разрешения конфликтов — через психотерапию для пар в Белграде и онлайн.
-</p>
+          <p class="bl-d t-sr">Bolju komunikaciju, dublje razumevanje partnera i konkretne alate za rešavanje konflikata — kroz psihoterapiju za parove u Beogradu i online.</p>
+          <p class="bl-d t-en">Better communication, deeper understanding of your partner and practical tools for conflict resolution — through couples psychotherapy in Belgrade and online.</p>
+          <p class="bl-d t-ru">Лучшую коммуникацию, понимание партнёра и конкретные инструменты для разрешения конфликтов — через психотерапию для пар в Белграде и онлайн.</p>
         </div>
       </div>
-     <p class="svc-q reveal rd4 t-sr">
-"Terapija za parove nije poslednji korak pre kraja — može biti prvi korak novog početka." — kroz psihoterapiju za parove u Beogradu i online otvara se prostor za promenu i obnovu odnosa.
-</p>
-
-<p class="svc-q reveal rd4 t-en">
-"Couples therapy isn't the last step before the end — it can be the first step of a new beginning." — through couples psychotherapy in Belgrade and online, a new space for change and reconnection emerges.
-</p>
-
-<p class="svc-q reveal rd4 t-ru">
-"Терапия для пар — это не последний шаг перед концом, а первый шаг нового начала." — в процессе психотерапии для пар в Белграде и онлайн открывается возможность для изменений и восстановления отношений.
-</p>
+      <p class="svc-q reveal rd4 t-sr">"Terapija za parove nije poslednji korak pre kraja — može biti prvi korak novog početka." — kroz psihoterapiju za parove u Beogradu i online otvara se prostor za promenu i obnovu odnosa.</p>
+      <p class="svc-q reveal rd4 t-en">"Couples therapy isn't the last step before the end — it can be the first step of a new beginning." — through couples psychotherapy in Belgrade and online, a new space for change and reconnection emerges.</p>
+      <p class="svc-q reveal rd4 t-ru">"Терапия для пар — это не последний шаг перед концом, а первый шаг нового начала." — в процессе психотерапии для пар в Белграде и онлайн открывается возможность для изменений и восстановления отношений.</p>
       <a href="index.html#contact" class="btn-p reveal rd5">
         <span class="t-sr">Zakažite razgovor</span><span class="t-en">Book a session</span><span class="t-ru">Записаться</span>
         <svg class="btn-arrow" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
@@ -802,7 +811,7 @@ Better communication, deeper understanding of your partner and practical tools f
       <span class="svc-num t-sr">Usluga 02</span><span class="svc-num t-en">Service 02</span><span class="svc-num t-ru">Услуга 02</span>
       <div class="svc-frame">
         <div class="svc-ph" style="background:linear-gradient(155deg,#B5A898,#7A6B5E)"></div>
-        <img src="images/parovi.jpg" alt="Psihoterapija za parove Beograd psiholog geštalt psihoterapeut" loading="lazy"> 
+        <img src="images/parovi.jpg" alt="Psihoterapija za parove Beograd psiholog geštalt psihoterapeut" loading="lazy">
       </div>
       <div class="svc-tag"><span class="svc-tag-n">75'</span><span class="svc-tag-l t-sr">Po sesiji</span><span class="svc-tag-l t-en">Per session</span><span class="svc-tag-l t-ru">За сессию</span></div>
     </div>
@@ -810,7 +819,6 @@ Better communication, deeper understanding of your partner and practical tools f
   <div class="svc-divider"></div>
 </section>
 
-<!-- SERVICE 03 — ONLINE -->
 <section class="svc" id="online">
   <div class="svc-watermark" data-parallax=".14">03</div>
   <div class="svc-in">
@@ -828,40 +836,15 @@ Better communication, deeper understanding of your partner and practical tools f
       <h2 class="s-title reveal rd2 t-en">Online<br><em>Psychotherapy</em></h2>
       <h2 class="s-title reveal rd2 t-ru">Онлайн<br><em>Психотерапия</em></h2>
       <div class="hr-a reveal rd2"></div>
-      <p class="lead reveal rd3 t-sr">
-"Promena ne zahteva fizičko prisustvo — zahteva prisutnost uma i srca." — kroz online psihoterapiju uz podršku psihologa i geštalt psihoterapeuta proces promene je jednako efikasan.
-</p>
-
-<p class="lead reveal rd3 t-en">
-"Change doesn't require physical presence — it requires presence of mind and heart." — through online psychotherapy with a psychologist and Gestalt psychotherapist, the process remains equally effective.
-</p>
-
-<p class="lead reveal rd3 t-ru">
-"Изменения требуют присутствия ума и сердца." — в процессе онлайн психотерапии при поддержке психолога и гештальт-терапевта изменения возможны и эффективны.
-</p>
-     <p class="txt reveal rd3 t-sr">
-Online psihoterapija omogućava rad sa psihologom i geštalt psihoterapeutom iz sigurnosti vašeg prostora. Jednako je efikasna kao i terapija uživo, uz dodatnu fleksibilnost i dostupnost.
-</p>
-
-<p class="txt reveal rd3 t-sr">
-Posebno je pogodna za klijente koji nisu u Beogradu ili imaju ograničeno vreme za dolazak na terapiju uživo.
-</p>
-
-<p class="txt reveal rd3 t-en">
-Online psychotherapy allows you to work with a psychologist and Gestalt psychotherapist from the comfort of your own space. It is just as effective as in-person therapy, with added flexibility and accessibility.
-</p>
-
-<p class="txt reveal rd3 t-en">
-It is especially suitable for clients who are not located in Belgrade or have limited time for in-person sessions.
-</p>
-
-<p class="txt reveal rd3 t-ru">
-Онлайн-психотерапия позволяет работать с психологом и гештальт-терапевтом из безопасного пространства. Она так же эффективна, как и очная терапия.
-</p>
-
-<p class="txt reveal rd3 t-ru">
-Особенно подходит для клиентов, которые находятся вне Белграда или имеют ограниченное время для очных встреч.
-</p>
+      <p class="lead reveal rd3 t-sr">"Promena ne zahteva fizičko prisustvo — zahteva prisutnost uma i srca." — kroz online psihoterapiju uz podršku psihologa i geštalt psihoterapeuta proces promene je jednako efikasan.</p>
+      <p class="lead reveal rd3 t-en">"Change doesn't require physical presence — it requires presence of mind and heart." — through online psychotherapy with a psychologist and Gestalt psychotherapist, the process remains equally effective.</p>
+      <p class="lead reveal rd3 t-ru">"Изменения требуют присутствия ума и сердца." — в процессе онлайн психотерапии при поддержке психолога и гештальт-терапевта изменения возможны и эффективны.</p>
+      <p class="txt reveal rd3 t-sr">Online psihoterapija omogućava rad sa psihologom i geštalt psihoterapeutom iz sigurnosti vašeg prostora. Jednako je efikasna kao i terapija uživo, uz dodatnu fleksibilnost i dostupnost.</p>
+      <p class="txt reveal rd3 t-sr">Posebno je pogodna za klijente koji nisu u Beogradu ili imaju ograničeno vreme za dolazak na terapiju uživo.</p>
+      <p class="txt reveal rd3 t-en">Online psychotherapy allows you to work with a psychologist and Gestalt psychotherapist from the comfort of your own space. It is just as effective as in-person therapy, with added flexibility and accessibility.</p>
+      <p class="txt reveal rd3 t-en">It is especially suitable for clients who are not located in Belgrade or have limited time for in-person sessions.</p>
+      <p class="txt reveal rd3 t-ru">Онлайн-психотерапия позволяет работать с психологом и гештальт-терапевтом из безопасного пространства. Она так же эффективна, как и очная терапия.</p>
+      <p class="txt reveal rd3 t-ru">Особенно подходит для клиентов, которые находятся вне Белграда или имеют ограниченное время для очных встреч.</p>
       <div class="info-row reveal rd3">
         <div class="info-it"><span class="info-n">🌍</span><span class="info-l t-sr">Svuda</span><span class="info-l t-en">Worldwide</span><span class="info-l t-ru">Весь мир</span></div>
         <div class="info-it"><span class="info-n">🔒</span><span class="info-l t-sr">Sigurno</span><span class="info-l t-en">Secure</span><span class="info-l t-ru">Безопасно</span></div>
@@ -876,9 +859,9 @@ It is especially suitable for clients who are not located in Belgrade or have li
         </div>
         <div class="bl">
           <p class="bl-t t-sr">Platforme</p><p class="bl-t t-en">Platforms</p><p class="bl-t t-ru">Платформы</p>
-          <p class="bl-d t-sr">Zoom, Google Meet ili Signal — vi birate ono što vam odgovara.</p>
-          <p class="bl-d t-en">Zoom, Google Meet or Signal — you choose what suits you best.</p>
-          <p class="bl-d t-ru">Zoom, Google Meet или Signal — вы выбираете наиболее удобный вариант.</p>
+          <p class="bl-d t-sr">Zoom, Google Meet, Viber ili WhatsApp — vi birate ono što vam odgovara.</p>
+          <p class="bl-d t-en">Zoom, Google Meet, Viber or WhatsApp — you choose what suits you best.</p>
+          <p class="bl-d t-ru">Zoom, Google Meet, Viber или WhatsApp — вы выбираете наиболее удобный вариант.</p>
         </div>
       </div>
       <a href="index.html#contact" class="btn-p reveal rd5">
@@ -890,7 +873,6 @@ It is especially suitable for clients who are not located in Belgrade or have li
   <div class="svc-divider"></div>
 </section>
 
-<!-- SERVICE 04 — DIJAGNOSTIKA -->
 <section class="svc" id="dijagnostika">
   <div class="svc-watermark" data-parallax=".14">04</div>
   <div class="svc-in rev">
@@ -900,40 +882,15 @@ It is especially suitable for clients who are not located in Belgrade or have li
       <h2 class="s-title reveal rd2 t-en">Psychological<br><em>Diagnostics</em></h2>
       <h2 class="s-title reveal rd2 t-ru">Психологическая<br><em>Диагностика</em></h2>
       <div class="hr-a reveal rd2"></div>
-      <p class="lead reveal rd3 t-sr">
-"Razumeti sebe znači imati mapu — bez mape, svaki korak je nasumičan." — kroz psihološku dijagnostiku u Beogradu i online dobija se jasnija slika unutrašnjih procesa i smer za dalji rad.
-</p>
-
-<p class="lead reveal rd3 t-en">
-"Understanding yourself means having a map — without a map, every step is random." — through psychological diagnostics in Belgrade and online, a clearer understanding and direction for further work is achieved.
-</p>
-
-<p class="lead reveal rd3 t-ru">
-"Понять себя — значит иметь карту." — психологическая диагностика в Белграде и онлайн помогает лучше понять себя и определить направление дальнейшей работы.
-</p>
-      <p class="txt reveal rd3 t-sr">
-Psihološka dijagnostika u Beogradu i online obuhvata primenu standardizovanih testova i kliničkih zapažanja u cilju procene kognitivnih sposobnosti i emocionalnog funkcionisanja.
-</p>
-
-<p class="txt reveal rd3 t-sr">
-Proces se završava detaljnim pismenim izveštajem i individualnom feedback sesijom, koji pružaju jasne smernice za dalji rad ili terapiju.
-</p>
-
-<p class="txt reveal rd3 t-en">
-Psychological diagnostics in Belgrade and online includes standardized testing and clinical observation to assess cognitive abilities and emotional functioning.
-</p>
-
-<p class="txt reveal rd3 t-en">
-The process concludes with a detailed written report and an individual feedback session, providing clear guidance for further work or therapy.
-</p>
-
-<p class="txt reveal rd3 t-ru">
-Психологическая диагностика в Белграде и онлайн включает стандартизированные тесты и клинические наблюдения для оценки когнитивных способностей и эмоционального функционирования.
-</p>
-
-<p class="txt reveal rd3 t-ru">
-Процесс завершается подробным письменным отчётом и индивидуальной сессией обратной связи, что даёт чёткое направление для дальнейшей работы или терапии.
-</p>
+      <p class="lead reveal rd3 t-sr">"Razumeti sebe znači imati mapu — bez mape, svaki korak je nasumičan." — kroz psihološku dijagnostiku u Beogradu i online dobija se jasnija slika unutrašnjih procesa i smer za dalji rad.</p>
+      <p class="lead reveal rd3 t-en">"Understanding yourself means having a map — without a map, every step is random." — through psychological diagnostics in Belgrade and online, a clearer understanding and direction for further work is achieved.</p>
+      <p class="lead reveal rd3 t-ru">"Понять себя — значит иметь карту." — психологическая диагностика в Белграде и онлайн помогает лучше понять себя и определить направление дальнейшей работы.</p>
+      <p class="txt reveal rd3 t-sr">Psihološka dijagnostika u Beogradu i online obuhvata primenu standardizovanih testova i kliničkih zapažanja u cilju procene kognitivnih sposobnosti i emocionalnog funkcionisanja.</p>
+      <p class="txt reveal rd3 t-sr">Proces se završava detaljnim pismenim izveštajem i individualnom feedback sesijom, koji pružaju jasne smernice za dalji rad ili terapiju.</p>
+      <p class="txt reveal rd3 t-en">Psychological diagnostics in Belgrade and online includes standardized testing and clinical observation to assess cognitive abilities and emotional functioning.</p>
+      <p class="txt reveal rd3 t-en">The process concludes with a detailed written report and an individual feedback session, providing clear guidance for further work or therapy.</p>
+      <p class="txt reveal rd3 t-ru">Психологическая диагностика в Белграде и онлайн включает стандартизированные тесты и клинические наблюдения для оценки когнитивных способностей и эмоционального функционирования.</p>
+      <p class="txt reveal rd3 t-ru">Процесс завершается подробным письменным отчётом и индивидуальной сессией обратной связи, что даёт чёткое направление для дальнейшей работы или терапии.</p>
       <div class="info-row reveal rd3">
         <div class="info-it"><span class="info-n">2–3</span><span class="info-l t-sr">Sesije</span><span class="info-l t-en">Sessions</span><span class="info-l t-ru">Сессии</span></div>
         <div class="info-it"><span class="info-l t-sr">Izveštaj</span><span class="info-l t-en">Report</span><span class="info-l t-ru">Отчёт</span></div>
@@ -969,7 +926,6 @@ The process concludes with a detailed written report and an individual feedback 
   </div>
 </section>
 
-<!-- FAQ -->
 <section class="faq-sec">
   <div class="faq-inner">
     <h2 class="faq-t reveal">
@@ -1006,7 +962,6 @@ The process concludes with a detailed written report and an individual feedback 
   </div>
 </section>
 
-<!-- CTA -->
 <section class="cta-sec">
   <h2 class="cta-t reveal">
     <span class="t-sr">Spremni ste da počnete?</span>
@@ -1022,7 +977,6 @@ The process concludes with a detailed written report and an individual feedback 
   </a>
 </section>
 
-<!-- FOOTER -->
 <footer>
   <div class="ft-inner">
     <div class="ft1">
@@ -1061,10 +1015,10 @@ The process concludes with a detailed written report and an individual feedback 
   </div>
   <div class="ft2">
     <p class="ft-copy">
-  <span class="t-sr">© 2026 | Elena Ivancova. Dizajn i izrada — Aleksandar Aničić, Web UI/UX dizajner.</span>
-  <span class="t-en">© 2026 | Elena Ivancova. Designed and developed by Aleksandar Anicic, Web UI/UX designer.</span>
-  <span class="t-ru">© 2026 | Елена Иванцова. Дизайн и разработка сайта — Александр Аничич.</span>
-</p>
+      <span class="t-sr">© 2026 | Elena Ivancova. Dizajn i izrada — Aleksandar Aničić, Web UI/UX dizajner.</span>
+      <span class="t-en">© 2026 | Elena Ivancova. Designed and developed by Aleksandar Anicic, Web UI/UX designer.</span>
+      <span class="t-ru">© 2026 | Елена Иванцова. Дизайн и разработка сайта — Александр Аничич.</span>
+    </p>
     <div class="socials">
       <a href="#" class="soc" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
       <a href="#" class="soc" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
@@ -1075,10 +1029,7 @@ The process concludes with a detailed written report and an individual feedback 
 
 <script>
 (function(){
-  /* --- TOUCH DETEKCIJA --- */
   const isTouch = window.matchMedia('(hover:none) and (pointer:coarse)').matches || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-  /* --- CURSOR --- */
   const cdot = document.getElementById('cdot');
   if (!isTouch) {
     document.addEventListener('mousemove', e => { cdot.style.left = e.clientX + 'px'; cdot.style.top = e.clientY + 'px'; });
@@ -1090,23 +1041,16 @@ The process concludes with a detailed written report and an individual feedback 
     cdot.style.display = 'none';
     document.body.style.cursor = 'auto';
   }
-
-  /* --- PROGRESS BAR --- */
   const bar = document.getElementById('readProgress');
   window.addEventListener('scroll', () => {
     const h = document.documentElement.scrollHeight - window.innerHeight;
     bar.style.width = (h > 0 ? window.scrollY / h * 100 : 0) + '%';
   }, { passive: true });
-
-  /* --- NAV SCROLL --- */
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => nav.classList.toggle('sc', window.scrollY > 80), { passive: true });
-
-  /* --- HAMBURGER --- */
   const navHam = document.getElementById('navHam');
   const mobNav = document.getElementById('mobNav');
   let menuOpen = false;
-
   function openMobNav() {
     menuOpen = true;
     mobNav.classList.add('open');
@@ -1121,13 +1065,10 @@ The process concludes with a detailed written report and an individual feedback 
     navHam.setAttribute('aria-expanded', 'false');
     document.body.style.overflow = '';
   }
-
   navHam.addEventListener('click', () => menuOpen ? closeMobNav() : openMobNav());
   mobNav.addEventListener('click', e => { if (e.target === mobNav) closeMobNav(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape' && menuOpen) closeMobNav(); });
   document.querySelectorAll('.mob-nav-links a').forEach(a => a.addEventListener('click', closeMobNav));
-
-  /* --- JEZIK --- */
   function setLang(l) {
     document.documentElement.setAttribute('data-lang', l);
     document.querySelectorAll('.lang-pill').forEach(p => {
@@ -1135,22 +1076,16 @@ The process concludes with a detailed written report and an individual feedback 
     });
     localStorage.setItem('ei-lang', l);
   }
-
   document.querySelectorAll('.lang-pill').forEach(btn => {
     btn.addEventListener('click', () => {
       setLang(btn.dataset.lang || btn.textContent.trim().toLowerCase());
       closeMobNav();
     });
   });
-
   setLang(localStorage.getItem('ei-lang') || 'sr');
-
-  /* --- JS-TOP --- */
   document.querySelectorAll('.js-top').forEach(a => {
     a.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'instant' }); });
   });
-
-  /* --- ANCHOR NAV ACTIVE --- */
   const sids = ['individualna', 'parovi', 'online', 'dijagnostika'];
   const als = document.querySelectorAll('.al');
   function updateAnav() {
@@ -1160,18 +1095,12 @@ The process concludes with a detailed written report and an individual feedback 
   }
   window.addEventListener('scroll', updateAnav, { passive: true });
   updateAnav();
-
-  /* --- HERO PARALLAX --- */
   const heroImg = document.getElementById('heroImg');
   if (!isTouch) {
     window.addEventListener('scroll', () => {
       if (window.scrollY < window.innerHeight)
         heroImg.style.transform = `scale(1.08) translateY(${window.scrollY * .18}px)`;
     }, { passive: true });
-  }
-
-  /* --- WATERMARK PARALLAX --- */
-  if (!isTouch) {
     document.querySelectorAll('.svc-watermark').forEach(w => {
       window.addEventListener('scroll', () => {
         const r = w.parentElement.getBoundingClientRect();
@@ -1180,19 +1109,14 @@ The process concludes with a detailed written report and an individual feedback 
       }, { passive: true });
     });
   }
-
-  /* --- INTERSECTION OBSERVERS --- */
   const imgObs = new IntersectionObserver(entries => {
     entries.forEach(e => e.target.classList.toggle('iv', e.isIntersecting));
   }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.svc-vis').forEach(el => imgObs.observe(el));
-
   const cObs = new IntersectionObserver(entries => {
     entries.forEach(e => e.target.classList.toggle('shown', e.isIntersecting));
   }, { threshold: 0.05, rootMargin: '0px 0px -16px 0px' });
   document.querySelectorAll('.reveal, .hr-a, .info-n').forEach(el => cObs.observe(el));
-
-  /* --- INITIAL HASH SCROLL --- */
   window.addEventListener('load', () => {
     if (window.location.hash) {
       setTimeout(() => {
