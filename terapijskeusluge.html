@@ -10,8 +10,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<!-- [OPT-2] LCP: preload hero slike — najvažnija optimizacija za LCP skor -->
-<link rel="preload" as="image" href="images/services-hero-mobile.webp" fetchpriority="high">
+<!-- [OPT-2] LCP: preload hero — media query osigurava da mobilni preuzme odmah, desktop ne troši bandwidth -->
+<link rel="preload" as="image" href="images/services-hero-mobile.webp" fetchpriority="high" media="(max-width:768px)">
+<link rel="preload" as="image" href="images/services-hero.webp" fetchpriority="high" media="(min-width:769px)">
 
 <!-- [OPT-3] Fontovi: font-display=swap dodat u URL parametru — sprečava FOIT/FOUT blokadu rendera -->
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" as="style" onload="this.rel='stylesheet'">
@@ -44,11 +45,19 @@
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:auto;}
 body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overflow-x:hidden;cursor:none;}
-.cdot{width:12px;height:12px;background:rgba(122,158,126,.9);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:multiply;transition:width .25s var(--ease-spring),height .25s var(--ease-spring),background .2s;}
-.cdot.hv{width:30px;height:30px;background:rgba(201,169,110,.95);}
-@media(hover:none)and(pointer:coarse){.cdot{display:none!important;}body{cursor:auto!important;}}
-.read-progress{position:fixed;top:0;left:0;z-index:10000;height:2px;width:0%;background:linear-gradient(90deg,var(--sage),var(--gold),var(--sage-light));background-size:200% 100%;animation:shimmer 3s linear infinite;transition:width .08s linear;}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+/* [MOB-OPT-5] Cursor dot: mix-blend-mode:multiply stvara compositor layer — na mobilnom potpuno ukloniti */
+.cdot{display:none;}
+@media(hover:hover)and(pointer:fine){
+  .cdot{width:12px;height:12px;background:rgba(122,158,126,.9);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);mix-blend-mode:multiply;transition:width .25s var(--ease-spring),height .25s var(--ease-spring),background .2s;display:block;}
+  .cdot.hv{width:30px;height:30px;background:rgba(201,169,110,.95);}
+  body{cursor:none;}
+}
+/* [MOB-OPT-1] Read progress: animacija samo na desktopu — na mobilnom troši GPU od prvog frame-a */
+.read-progress{position:fixed;top:0;left:0;z-index:10000;height:2px;width:0%;background:var(--sage);transition:width .08s linear;}
+@media(min-width:769px){
+  .read-progress{background:linear-gradient(90deg,var(--sage),var(--gold),var(--sage-light));background-size:200% 100%;animation:shimmer 3s linear infinite;}
+  @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+}
 .t-sr,.t-en,.t-ru{display:none!important;}
 [data-lang="sr"] .t-sr{display:revert!important;}
 [data-lang="en"] .t-en{display:revert!important;}
@@ -86,7 +95,11 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 #nav.sc .lang-pill{color:#1a1a1a;border-color:rgba(0,0,0,.1);}
 #nav.sc .lang-pill.active{background:#303c31;color:#fff;border-color:#303c31;}
 .nav-ham{display:none;}
-.mob-nav{position:fixed;inset:0;z-index:9500;background:rgba(44,51,40,.97);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .45s var(--ease-io);}
+.mob-nav{position:fixed;inset:0;z-index:9500;background:rgba(44,51,40,.97);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .45s var(--ease-io);}
+/* [MOB-OPT-7] backdrop-filter samo na desktopu — na mobilnom troši previše GPU */
+@media(min-width:769px){
+  .mob-nav{backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);}
+}
 .mob-nav.open{opacity:1;pointer-events:all;}
 .mob-nav-inner{display:flex;flex-direction:column;align-items:flex-start;padding:0 48px;width:100%;max-width:480px;}
 .mob-nav-line{width:40px;height:1px;background:linear-gradient(to right,var(--sage),transparent);margin-bottom:40px;opacity:0;transform:translateX(-20px);transition:opacity .4s ease,transform .4s ease;}
@@ -122,19 +135,46 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 .hero-content{position:relative;z-index:2;max-width:540px;}
 .hero-h1{font-family:var(--fd);font-size:clamp(62px,8vw,104px);font-weight:400;line-height:1.04;letter-spacing:-.03em;color:var(--deep);margin:0;}
 .hero-h1 em{font-style:italic;color:#2f5835;display:block;margin-top:4px;}
+/* [MOB-OPT-2] Hero animacije: na mobilnom h1 odmah vidljiv (opacity:1) — LCP se meri od trenutka vidljivosti */
 .hero-h1 span,.hero-h1 em{opacity:0;transform:translateY(36px);animation:hW 1.2s var(--ease-out) forwards;}
 .hero-h1 em{animation-delay:.22s;}
 .hero-tagline{font-family:var(--fb);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--deep);margin-top:30px;opacity:0;animation:hW 1s var(--ease-out) .48s forwards;background:rgba(255,255,255,.5);display:inline-block;padding:4px 12px;border-radius:2px;}
 .hero-divider{width:0;height:1px;background:linear-gradient(to right,var(--sage),rgba(48,60,49,0));margin:22px 0;opacity:0;animation:heroLine 1.2s var(--ease-out) .38s forwards;}
 @keyframes heroLine{to{width:80px;opacity:1;}}
 @keyframes hW{to{opacity:1;transform:translateY(0);}}
+/* [MOB-OPT-3] Scroll hint animacija — na mobilnom odgođena, ne blokira LCP */
 .hero-scroll-hint{position:absolute;bottom:44px;left:10%;z-index:5;display:flex;align-items:center;gap:14px;opacity:0;animation:hW 1s ease .9s forwards;}
 .hero-scroll-line{width:44px;height:1px;background:rgba(90,107,82,.4);position:relative;overflow:hidden;}
-.hero-scroll-line::after{content:'';position:absolute;inset:0;background:var(--sage);transform:translateX(-100%);animation:sL 2.2s ease-in-out 1.4s infinite;}
-@keyframes sL{0%{transform:translateX(-100%)}50%{transform:translateX(0)}100%{transform:translateX(100%)}}
+/* [MOB-OPT-4] sL beskonačna animacija — samo na desktopu */
+.hero-scroll-line::after{content:'';position:absolute;inset:0;background:var(--sage);transform:translateX(-100%);}
+@media(min-width:769px){
+  .hero-scroll-line::after{animation:sL 2.2s ease-in-out 1.4s infinite;}
+  @keyframes sL{0%{transform:translateX(-100%)}50%{transform:translateX(0)}100%{transform:translateX(100%)}}
+}
+@media(max-width:768px){
+  /* LCP fix: h1 odmah vidljiv, bez animacije koja odlaže merenje */
+  .hero-h1 span,.hero-h1 em{
+    opacity:1 !important;
+    transform:none !important;
+    animation:none !important;
+  }
+  .hero-tagline{
+    opacity:1 !important;
+    animation:none !important;
+  }
+  .hero-divider{
+    opacity:1 !important;
+    width:60px !important;
+    animation:none !important;
+  }
+}
 .hero-scroll-txt{font-family:var(--fb);font-size:9px;letter-spacing:.28em;text-transform:uppercase;color:var(--deep);text-shadow:0 1px 5px rgba(255,255,255,.8);}
 .hero-side-text{position:absolute;right:52px;bottom:80px;writing-mode:vertical-rl;font-family:var(--fb);font-size:9px;letter-spacing:.5em;color:var(--deep);opacity:.7;z-index:5;text-transform:uppercase;text-shadow:0 1px 5px rgba(255,255,255,.8);}
-.hero-stat{position:absolute;right:90px;top:50%;transform:translateY(-50%);z-index:6;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;animation:hW 1.2s var(--ease-out) 1.1s forwards;background:rgba(255,255,255,.4);padding:10px;border-radius:4px;}
+/* [MOB-OPT-9] Hero stat: display:none na mobilnom — ukloni animaciju sa hidden elementa */
+.hero-stat{display:none;}
+@media(min-width:769px){
+  .hero-stat{position:absolute;right:90px;top:50%;transform:translateY(-50%);z-index:6;display:flex;flex-direction:column;align-items:center;gap:6px;opacity:0;animation:hW 1.2s var(--ease-out) 1.1s forwards;background:rgba(255,255,255,.4);padding:10px;border-radius:4px;}
+}
 .hero-stat-n{font-family:var(--fd);font-size:52px;font-weight:300;color:var(--text-light);line-height:1;}
 .hero-stat-l{font-family:var(--fb);font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--deep);text-align:center;}
 .hero-stat-line{width:1px;height:60px;background:linear-gradient(to bottom,transparent,rgba(122,158,126,.28),transparent);margin-bottom:8px;}
@@ -182,6 +222,8 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 .svc:nth-child(even){background:var(--cream);}
 .svc-watermark{position:absolute;font-family:var(--fd);font-size:clamp(200px,22vw,300px);font-weight:300;color:rgba(122,158,126,.033);line-height:1;user-select:none;pointer-events:none;z-index:0;right:-30px;top:50%;transform:translateY(-50%);}
 .svc:nth-child(even) .svc-watermark{left:-30px;right:auto;}
+/* [MOB-OPT-8] content-visibility: auto — browser preskace render sekcija ispod viewporta (ogromna ustedja na mobilnom) */
+#parovi,#online,#dijagnostika{content-visibility:auto;contain-intrinsic-size:0 800px;}
 .svc-in{display:grid;grid-template-columns:1fr 1fr;gap:var(--col-gap);align-items:center;position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--side-pad);}
 .svc-in.rev .svc-vis{order:2;}
 .svc-in.rev .svc-content{order:1;}
@@ -534,6 +576,11 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   .ft-links a{min-height:44px;display:flex;align-items:center;}
   .ft-links a:hover{transform:none;}
   .fco{min-height:44px;}
+  /* [MOB-OPT-11] will-change samo na elementima koji se zaista animiraju = manje compositor slojeva */
+  .svc-vis{will-change:opacity,transform;}
+  .svc-frame img{will-change:auto;}
+  /* [MOB-OPT-12] Nav backdrop-filter na mobilnom — koristimo samo background boju, bez blur-a */
+  #nav.sc{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(238,232,223,0.97)!important;}
 }
 </style>
 
@@ -647,17 +694,38 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
 </nav>
 
 <section class="page-hero" id="pageTop">
-  <!-- [OPT-8] LCP element: fetchpriority="high" + loading="eager" + eksplicitne dimenzije za stabilan layout -->
-  <img
-    src="images/services-hero-mobile.webp"
-    class="hero-img"
-    alt="Psihoterapija Beograd"
-    loading="eager"
-    fetchpriority="high"
-    width="1200"
-    height="800"
-    decoding="async"
-  >
+  <!-- [MOB-OPT-6] picture + srcset: browser bira optimalnu veličinu slike za ekran — 
+       rešava "Pravilno promenite format i veličinu slika" audit (405KB ušteda) -->
+  <picture>
+    <source
+      media="(max-width:480px)"
+      srcset="images/services-hero-mobile-480.webp 480w, images/services-hero-mobile.webp 768w"
+      sizes="100vw"
+      type="image/webp"
+    >
+    <source
+      media="(max-width:768px)"
+      srcset="images/services-hero-mobile.webp 768w, images/services-hero-mobile.webp 1x"
+      sizes="100vw"
+      type="image/webp"
+    >
+    <source
+      media="(min-width:769px)"
+      srcset="images/services-hero.webp 1200w, images/services-hero.webp 1x"
+      sizes="100vw"
+      type="image/webp"
+    >
+    <img
+      src="images/services-hero-mobile.webp"
+      class="hero-img"
+      alt="Psihoterapija Beograd"
+      loading="eager"
+      fetchpriority="high"
+      width="768"
+      height="1024"
+      decoding="sync"
+    >
+  </picture>
   <div class="hero-stat" aria-hidden="true">
     <div class="hero-stat-line"></div>
     <span class="hero-stat-n">4</span>
@@ -1034,7 +1102,7 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
       </div>
       <div>
         <p class="ft-col-t t-sr">Kontakt</p><p class="ft-col-t t-en">Contact</p><p class="ft-col-t t-ru">Контакт</p>
-        <div class="fco"><svg class="fco-i" viewBox="0 0 24 24" fill="none" stroke="rgba(249,245,239,.5)" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:helena11@mail.ru" class="fco-t">helena11@mail.ru</a></div>
+        <div class="fco"><svg class="fco-i" viewBox="0 0 24 24" fill="none" stroke="rgba(249,245,239,.5)" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="/cdn-cgi/l/email-protection#87efe2ebe2e9e6b6b6c7eae6eeeba9f5f2" class="fco-t"><span class="__cf_email__" data-cfemail="08606d646d666939394865696164267a7d">[email&#160;protected]</span></a></div>
         <div class="fco"><svg class="fco-i" viewBox="0 0 24 24" fill="none" stroke="rgba(249,245,239,.5)" stroke-width="1.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.59 1.23h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg><a href="tel:+381628165004" class="fco-t">+381 62 816 5004</a></div>
         <div class="fco"><svg class="fco-i" viewBox="0 0 24 24" fill="none" stroke="rgba(249,245,239,.5)" stroke-width="1.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="fco-t">Beograd, Srbija</span></div>
       </div>
@@ -1054,107 +1122,89 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   </div>
 </footer>
 
-<!-- [OPT-10] defer na inline skriptu nije moguć, ali je skript neblokiran jer je na dnu body-ja.
-     Sve logike su non-critical i ne blokiraju LCP render. -->
+<!-- [MOB-OPT-10] Skript na dnu body = ne blokira render. Cursor/parallax logika iskljucena na mobilnom. -->
 <script>
 (function(){
   const isTouch = window.matchMedia('(hover:none) and (pointer:coarse)').matches || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-  const cdot = document.getElementById('cdot');
-  if (!isTouch) {
-    document.addEventListener('mousemove', e => { cdot.style.left = e.clientX + 'px'; cdot.style.top = e.clientY + 'px'; });
-    document.querySelectorAll('a,button').forEach(el => {
-      el.addEventListener('mouseenter', () => cdot.classList.add('hv'));
-      el.addEventListener('mouseleave', () => cdot.classList.remove('hv'));
-    });
-  } else {
-    cdot.style.display = 'none';
-    document.body.style.cursor = 'auto';
+  const isDesktop = window.matchMedia('(min-width:769px)').matches;
+
+  // Cursor — SAMO na desktop sa mišem (ne troši resurse na mobilnom)
+  if(isDesktop && !isTouch){
+    const cdot = document.getElementById('cdot');
+    if(cdot){
+      document.addEventListener('mousemove', e => { cdot.style.left=e.clientX+'px'; cdot.style.top=e.clientY+'px'; });
+      document.querySelectorAll('a,button').forEach(el => {
+        el.addEventListener('mouseenter', () => cdot.classList.add('hv'));
+        el.addEventListener('mouseleave', () => cdot.classList.remove('hv'));
+      });
+    }
   }
+
+  // Read progress
   const bar = document.getElementById('readProgress');
-  window.addEventListener('scroll', () => {
+  if(bar) window.addEventListener('scroll', () => {
     const h = document.documentElement.scrollHeight - window.innerHeight;
     bar.style.width = (h > 0 ? window.scrollY / h * 100 : 0) + '%';
   }, { passive: true });
+
+  // Nav scroll class
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => nav.classList.toggle('sc', window.scrollY > 80), { passive: true });
+
+  // Mobile nav
   const navHam = document.getElementById('navHam');
   const mobNav = document.getElementById('mobNav');
   let menuOpen = false;
-  function openMobNav() {
-    menuOpen = true;
-    mobNav.classList.add('open');
-    navHam.classList.add('open');
-    navHam.setAttribute('aria-expanded', 'true');
-    document.body.style.overflow = 'hidden';
-  }
-  function closeMobNav() {
-    menuOpen = false;
-    mobNav.classList.remove('open');
-    navHam.classList.remove('open');
-    navHam.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  }
+  function openMobNav() { menuOpen=true; mobNav.classList.add('open'); navHam.classList.add('open'); navHam.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  function closeMobNav() { menuOpen=false; mobNav.classList.remove('open'); navHam.classList.remove('open'); navHam.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
   navHam.addEventListener('click', () => menuOpen ? closeMobNav() : openMobNav());
-  mobNav.addEventListener('click', e => { if (e.target === mobNav) closeMobNav(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape' && menuOpen) closeMobNav(); });
+  mobNav.addEventListener('click', e => { if(e.target===mobNav) closeMobNav(); });
+  document.addEventListener('keydown', e => { if(e.key==='Escape' && menuOpen) closeMobNav(); });
   document.querySelectorAll('.mob-nav-links a').forEach(a => a.addEventListener('click', closeMobNav));
+
+  // Language
   function setLang(l) {
     document.documentElement.setAttribute('data-lang', l);
-    document.querySelectorAll('.lang-pill').forEach(p => {
-      p.classList.toggle('active', (p.dataset.lang || p.textContent.trim().toLowerCase()) === l);
-    });
+    document.querySelectorAll('.lang-pill').forEach(p => { p.classList.toggle('active',(p.dataset.lang||p.textContent.trim().toLowerCase())===l); });
     localStorage.setItem('ei-lang', l);
   }
-  document.querySelectorAll('.lang-pill').forEach(btn => {
-    btn.addEventListener('click', () => {
-      setLang(btn.dataset.lang || btn.textContent.trim().toLowerCase());
-      closeMobNav();
-    });
-  });
+  document.querySelectorAll('.lang-pill').forEach(btn => { btn.addEventListener('click', () => { setLang(btn.dataset.lang||btn.textContent.trim().toLowerCase()); closeMobNav(); }); });
   setLang(localStorage.getItem('ei-lang') || 'sr');
-  document.querySelectorAll('.js-top').forEach(a => {
-    a.addEventListener('click', e => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'instant' }); });
-  });
-  const sids = ['individualna', 'parovi', 'online', 'dijagnostika'];
+
+  // Scroll to top
+  document.querySelectorAll('.js-top').forEach(a => { a.addEventListener('click', e => { e.preventDefault(); window.scrollTo({top:0,behavior:'instant'}); }); });
+
+  // Anchor nav active
+  const sids = ['individualna','parovi','online','dijagnostika'];
   const als = document.querySelectorAll('.al');
   function updateAnav() {
-    let c = '';
-    sids.forEach(id => { const s = document.getElementById(id); if (s && window.scrollY >= s.offsetTop - 160) c = id; });
-    als.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#' + c));
+    let c='';
+    sids.forEach(id => { const s=document.getElementById(id); if(s && window.scrollY>=s.offsetTop-160) c=id; });
+    als.forEach(a => a.classList.toggle('active', a.getAttribute('href')==='#'+c));
   }
-  window.addEventListener('scroll', updateAnav, { passive: true });
+  window.addEventListener('scroll', updateAnav, { passive:true });
   updateAnav();
-  const heroImg = document.getElementById('heroImg');
-  if (!isTouch) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY < window.innerHeight && heroImg)
-        heroImg.style.transform = `scale(1.08) translateY(${window.scrollY * .18}px)`;
-    }, { passive: true });
+
+  // Parallax watermark — SAMO na desktopu
+  if(isDesktop && !isTouch){
     document.querySelectorAll('.svc-watermark').forEach(w => {
       window.addEventListener('scroll', () => {
         const r = w.parentElement.getBoundingClientRect();
-        const off = (window.innerHeight / 2 - r.top - r.height / 2) * parseFloat(w.dataset.parallax || .14);
+        const off = (window.innerHeight/2 - r.top - r.height/2) * parseFloat(w.dataset.parallax||.14);
         w.style.transform = `translateY(calc(-50% + ${off}px))`;
-      }, { passive: true });
+      }, { passive:true });
     });
   }
-  const imgObs = new IntersectionObserver(entries => {
-    entries.forEach(e => e.target.classList.toggle('iv', e.isIntersecting));
-  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  // Intersection observers
+  const imgObs = new IntersectionObserver(entries => { entries.forEach(e => e.target.classList.toggle('iv', e.isIntersecting)); }, { threshold:0.12, rootMargin:'0px 0px -40px 0px' });
   document.querySelectorAll('.svc-vis').forEach(el => imgObs.observe(el));
-  const cObs = new IntersectionObserver(entries => {
-    entries.forEach(e => e.target.classList.toggle('shown', e.isIntersecting));
-  }, { threshold: 0.05, rootMargin: '0px 0px -16px 0px' });
+  const cObs = new IntersectionObserver(entries => { entries.forEach(e => e.target.classList.toggle('shown', e.isIntersecting)); }, { threshold:0.05, rootMargin:'0px 0px -16px 0px' });
   document.querySelectorAll('.reveal, .hr-a, .info-n').forEach(el => cObs.observe(el));
+
+  // Hash scroll
   window.addEventListener('load', () => {
-    if (window.location.hash) {
-      setTimeout(() => {
-        const el = document.querySelector(window.location.hash);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }, 400);
-    }
+    if(window.location.hash) setTimeout(() => { const el=document.querySelector(window.location.hash); if(el) el.scrollIntoView({behavior:'smooth',block:'start'}); }, 400);
   });
 })();
 </script>
-</body>
-</html>
