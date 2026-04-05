@@ -486,7 +486,6 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
 
   .hero-img{
     background-position:78% center !important;
-    filter:contrast(1.05);
   }
 
   .hero-content{
@@ -731,6 +730,7 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
       alt="Psihoterapija Beograd"
       loading="eager"
       fetchpriority="high"
+      decoding="sync"
       width="768"
       height="1024"
       decoding="sync"
@@ -792,7 +792,7 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
       <div class="svc-frame">
         <div class="svc-ph" style="background:linear-gradient(155deg,#C4B5A5,#8C7B6E)"></div>
         <!-- [OPT-9] Slike ispod prevoja: loading="lazy" + eksplicitne dimenzije (sprečava CLS i štedi bandwidth) -->
-        <img src="images/individualna.jpg" alt="Individualna psihoterapija Beograd psiholog geštalt psihoterapeut" loading="lazy" width="600" height="648" decoding="async">
+        <img src="images/individualna.jpg" alt="Individualna psihoterapija Beograd psiholog geštalt psihoterapeut" loading="lazy" width="600" height="648" decoding="sync">
       </div>
       <div class="svc-tag">
         <span class="svc-tag-n">50'</span>
@@ -914,7 +914,7 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
       <div class="svc-frame">
         <div class="svc-ph" style="background:linear-gradient(155deg,#B5A898,#7A6B5E)"></div>
         <!-- [OPT-9] lazy loading + eksplicitne dimenzije -->
-        <img src="images/parovi.jpg" alt="Psihoterapija za parove Beograd psiholog geštalt psihoterapeut" loading="lazy" width="600" height="648" decoding="async">
+        <img src="images/parovi.jpg" alt="Psihoterapija za parove Beograd psiholog geštalt psihoterapeut" loading="lazy" width="600" height="648" decoding="sync">
       </div>
       <div class="svc-tag"><span class="svc-tag-n">75'</span><span class="svc-tag-l t-sr">Po sesiji</span><span class="svc-tag-l t-en">Per session</span><span class="svc-tag-l t-ru">За сессию</span></div>
     </div>
