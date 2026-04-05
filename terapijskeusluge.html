@@ -5,19 +5,39 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Psihoterapija Beograd | Individualna, Partnerska i Online Terapija | Elena Ivancova</title>
 <meta name="description" content="Psiholog i geštalt psihoterapeut u Beogradu i online. Individualna psihoterapija, terapija za parove i psihološka dijagnostika. Zakažite razgovor.">
+
+<!-- [OPT-1] Preconnect za Google Fonts — smanjuje DNS/TCP latenciju -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- [OPT-2] LCP: preload hero slike — najvažnija optimizacija za LCP skor -->
+<link rel="preload" as="image" href="images/services-hero-mobile.webp" fetchpriority="high">
+
+<!-- [OPT-3] Fontovi: font-display=swap dodat u URL parametru — sprečava FOIT/FOUT blokadu rendera -->
 <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" as="style" onload="this.rel='stylesheet'">
 <noscript>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
 </noscript>
+
 <style>
+/* [OPT-4] font-display: swap u @font-face fallback — osigurava vidljiv tekst dok se font učitava */
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-display: swap;
+  src: local('Cormorant Garamond');
+}
+@font-face {
+  font-family: 'Montserrat';
+  font-display: swap;
+  src: local('Montserrat');
+}
+
 :root{
   --sage:#7A9E7E;--sage-light:#A8C5AC;--sage-pale:#E8F0E9;
   --cream:#F5F0E8;--warm-white:#FDFAF5;--deep:#2C3328;
   --text:#3A3530;--text-light:#6B6058;--text-muted:#9E9189;
   --gold:#C9A96E;--gold-light:#E8D5A8;
-  --fd:'Cormorant Garamond',serif;--fb:'Montserrat',sans-serif;
+  --fd:'Cormorant Garamond',Georgia,serif;--fb:'Montserrat','Helvetica Neue',sans-serif;
   --ease-out:cubic-bezier(.16,1,.3,1);--ease-io:cubic-bezier(.65,0,.35,1);--ease-spring:cubic-bezier(.34,1.56,.64,1);
   --nav-h:70px;--max-prose:560px;--section-v:120px;--col-gap:80px;--side-pad:68px;--container:1200px;
 }
@@ -45,7 +65,7 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 .nav-logo-text{display:flex;flex-direction:column;gap:4px;}
 .nav-logo-name{display:flex;align-items:baseline;gap:8px;line-height:1;}
 .nav-logo-first{font-family:var(--fd);font-size:25px;font-weight:400;font-style:italic;color:rgb(220,212,212);letter-spacing:.03em;transition:color .4s;}
-.nav-logo-last{font-family:var(--fd);font-size:23px;font-weight:500;color:rgba(0, 0, 0, 0.8);letter-spacing:.10em;text-transform:uppercase;transition:color .4s;}
+.nav-logo-last{font-family:var(--fd);font-size:23px;font-weight:500;color:rgba(0,0,0,0.8);letter-spacing:.10em;text-transform:uppercase;transition:color .4s;}
 #nav.sc .nav-logo-first{color:#1A2418;}
 #nav.sc .nav-logo-last{color:#4A7A50;}
 .nav-logo-divider{width:100%;height:1px;background:linear-gradient(to right,rgba(122,158,126,.6),rgba(82,75,75,.8));margin:2px 0;}
@@ -89,6 +109,7 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 .mob-nav-langs .lang-pill.active{background:var(--sage);color:#fff;border-color:var(--sage);}
 .mob-nav-langs .lang-pill:hover{color:#fff;border-color:rgba(253,250,245,.5);background:rgba(253,250,245,.08);}
 .page-hero{height:90vh;min-height:600px;position:relative;display:flex;align-items:center;justify-content:flex-start;padding:0 10%;overflow:hidden;}
+/* [OPT-5] Hero slika: eksplicitne dimenzije width/height sprečavaju CLS */
 .hero-img{
   position:absolute;
   inset:0;
@@ -173,7 +194,8 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 .svc-vis.iv::before,.svc-vis.iv::after{opacity:1;transform:scale(1);}
 .svc-vis:hover::before{transform:translate(-5px,-5px)!important;}
 .svc-vis:hover::after{transform:translate(5px,5px)!important;}
-.svc-frame{width:100%;padding-bottom:108%;border-radius:4px 44px 4px 44px;overflow:hidden;position:relative;z-index:1;box-shadow:0 28px 72px rgba(0,0,0,.16),0 6px 20px rgba(0,0,0,.09);clip-path:inset(0 100% 0 0 round 4px 44px 4px 44px);transition:clip-path 1.15s var(--ease-out);}
+/* [OPT-6] svc-frame: aspect-ratio umesto padding-bottom hack za stabilniji layout (sprečava CLS) */
+.svc-frame{width:100%;aspect-ratio:100/108;border-radius:4px 44px 4px 44px;overflow:hidden;position:relative;z-index:1;box-shadow:0 28px 72px rgba(0,0,0,.16),0 6px 20px rgba(0,0,0,.09);clip-path:inset(0 100% 0 0 round 4px 44px 4px 44px);transition:clip-path 1.15s var(--ease-out);}
 .svc-vis.iv .svc-frame{clip-path:inset(0 0% 0 0 round 4px 44px 4px 44px);}
 .svc-ph{position:absolute;inset:0;z-index:1;}
 .svc-frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;z-index:2;transform:scale(1.1);transition:transform 1.5s var(--ease-out);}
@@ -265,7 +287,8 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   .svc-vis{width:calc(100% + var(--side-pad));max-width:none;margin-left:calc(var(--side-pad) * -0.5);transform:translateY(28px) scale(.97)!important;}
   .svc-in.rev .svc-vis{margin-left:0;margin-right:calc(var(--side-pad) * -0.5);}
   .svc-vis.iv{transform:translateY(0) scale(1)!important;}
-  .svc-frame{padding-bottom:68%;border-radius:2px 32px 2px 32px;}
+  /* [OPT-7] Tablet: aspect-ratio za svc-frame */
+  .svc-frame{aspect-ratio:100/68;border-radius:2px 32px 2px 32px;}
   .s-title{font-size:clamp(36px,6vw,56px);}
   .lead{font-size:20px;}
   .txt{font-size:15px;}
@@ -290,14 +313,14 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
 
   .nav-logo-accent{height:36px;width:2px;}
   .nav-logo-first{font-size:21px;}
-  .nav-logo-last{font-size:19px;letter-spacing:.05em; color:#a8c5ac; text-shadow:0 1px 4px rgba(0,0,0,.3);}
+  .nav-logo-last{font-size:19px;letter-spacing:.05em;color:#a8c5ac;text-shadow:0 1px 4px rgba(0,0,0,.3);}
   .nav-logo-title{font-size:8px;letter-spacing:.12em;}
   .nav-logo-divider{margin:1px 0;}
 
   /* LANG PILLS (mobile nav overlay) */
   .mob-nav-langs .lang-pill{font-size:8.5px;padding:5px 8px;min-height:44px;min-width:44px;}
 
-  /* HERO — matching oblastirada mobile pattern */
+  /* HERO */
   .page-hero{
     height:100vh;
     min-height:auto;
@@ -308,14 +331,14 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
     background-color:#1E2D2D;
   }
   .hero-img{
-  position:absolute;
-  inset:0;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  object-position:78% center;
-  z-index:0;
-}
+    position:absolute;
+    inset:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    object-position:78% center;
+    z-index:0;
+  }
   .hero-content{
     position:absolute;
     z-index:5;
@@ -401,6 +424,83 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   .ft2{flex-direction:column;gap:20px;align-items:flex-start;padding:32px var(--side-pad);}
   .ft-copy{font-size:11px;}
   .ft-brand{font-size:26px;}
+
+  /* PLAVI/TEAL OVERLAY */
+  .page-hero::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    z-index:1;
+    background:linear-gradient(
+      to right,
+      rgba(18,52,56,0.65) 0%,
+      rgba(18,52,56,0.45) 20%,
+      rgba(18,52,56,0.18) 35%,
+      rgba(18,52,56,0.06) 45%,
+      rgba(18,52,56,0.0) 55%,
+      transparent 100%
+    );
+  }
+
+  .hero-img{
+    background-position:78% center !important;
+    filter:contrast(1.05);
+  }
+
+  .hero-content{
+    bottom:14% !important;
+  }
+
+  .hero-h1{
+    color:#f5f7f6;
+    text-shadow:
+      0 2px 10px rgba(10,20,20,.6),
+      0 1px 2px rgba(0,0,0,.5);
+  }
+
+  .hero-h1 em{
+    color:#a8c5ac;
+  }
+
+  .hero-tagline{
+    background:rgba(20,45,50,.25);
+    color:rgba(255,255,255,.9);
+  }
+
+  /* LOGO KONTRAST */
+  .nav-logo-first{
+    color:#ffffff !important;
+    text-shadow:
+      0 1px 3px rgba(0,0,0,.6),
+      0 0 6px rgba(0,0,0,.4);
+  }
+
+  .nav-logo-last{
+    color:#a8c5ac !important;
+    text-shadow:
+      0 1px 3px rgba(0,0,0,.6),
+      0 0 6px rgba(0,0,0,.4);
+  }
+
+  .nav-logo-title{
+    color:rgba(255,255,255,.85) !important;
+    text-shadow:0 1px 4px rgba(0,0,0,.5);
+  }
+
+  .nav-ham span{
+    background:#ffffff !important;
+    box-shadow:0 1px 4px rgba(0,0,0,.6);
+  }
+
+  #nav{
+    background:linear-gradient(
+      to bottom,
+      rgba(10,25,30,0.6),
+      rgba(10,25,30,0.2),
+      transparent
+    ) !important;
+    backdrop-filter:blur(6px);
+  }
 }
 
 @media(max-width:560px){
@@ -435,98 +535,8 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   .ft-links a:hover{transform:none;}
   .fco{min-height:44px;}
 }
-@media(max-width:768px){
-
-  /* 1. PLAVI / TEAL OVERLAY (umesto crnog) */
-   .page-hero::before{
-    content:'';
-    position:absolute;
-    inset:0;
-    z-index:1;
-
-    background:linear-gradient(
-      to right,
-      rgba(18,52,56,0.65) 0%,
-      rgba(18,52,56,0.45) 20%,
-      rgba(18,52,56,0.18) 35%,
-      rgba(18,52,56,0.06) 45%,
-      rgba(18,52,56,0.0) 55%,
-      transparent 100%
-    );
-    
-  }
-
-  /* 2. SLIKA — BLAGO HLADNI TON */
-  .hero-img{
-    background-position:78% center !important;
-     filter:contrast(1.05);
-  }
-
-  /* 3. TEKST — MALO NIŽE */
-  .hero-content{
-    bottom:14% !important; /* bilo 22% → sad niže */
-  }
-
-  /* 4. TEKST — FINI KONTRAST */
-  .hero-h1{
-    color:#f5f7f6;
-    text-shadow:
-      0 2px 10px rgba(10,20,20,.6),
-      0 1px 2px rgba(0,0,0,.5);
-  }
-
-  .hero-h1 em{
-    color:#a8c5ac;
-  }
-
-  .hero-tagline{
-    background:rgba(20,45,50,.25);
-    color:rgba(255,255,255,.9);
-  }
-
-}
-@media(max-width:768px){
-
-  /* 1. LOGO — JAČI KONTRAST */
-  .nav-logo-first{
-    color:#ffffff !important;
-    text-shadow:
-      0 1px 3px rgba(0,0,0,.6),
-      0 0 6px rgba(0,0,0,.4);
-  }
-
-  .nav-logo-last{
-    color:#a8c5ac !important;
-    text-shadow:
-      0 1px 3px rgba(0,0,0,.6),
-      0 0 6px rgba(0,0,0,.4);
-  }
-
-  .nav-logo-title{
-    color:rgba(255,255,255,.85) !important;
-    text-shadow:0 1px 4px rgba(0,0,0,.5);
-  }
-
-  /* 2. HAMBURGER — ČIST I VIDLJIV */
-  .nav-ham span{
-    background:#ffffff !important;
-    box-shadow:0 1px 4px rgba(0,0,0,.6);
-  }
-
-  /* 3. BLAGI BACKDROP SAMO IZA HEADERA */
-  #nav{
-    background:linear-gradient(
-      to bottom,
-      rgba(10,25,30,0.6),
-      rgba(10,25,30,0.2),
-      transparent
-    ) !important;
-
-    backdrop-filter:blur(6px);
-  }
-
-}
 </style>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -637,13 +647,17 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
 </nav>
 
 <section class="page-hero" id="pageTop">
- <img 
-  src="images/services-hero-mobile.webp"
-  class="hero-img"
-  alt="Psihoterapija Beograd"
-  loading="eager"
-  fetchpriority="high"
->
+  <!-- [OPT-8] LCP element: fetchpriority="high" + loading="eager" + eksplicitne dimenzije za stabilan layout -->
+  <img
+    src="images/services-hero-mobile.webp"
+    class="hero-img"
+    alt="Psihoterapija Beograd"
+    loading="eager"
+    fetchpriority="high"
+    width="1200"
+    height="800"
+    decoding="async"
+  >
   <div class="hero-stat" aria-hidden="true">
     <div class="hero-stat-line"></div>
     <span class="hero-stat-n">4</span>
@@ -699,7 +713,8 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
       <span class="svc-num t-sr">Usluga 01</span><span class="svc-num t-en">Service 01</span><span class="svc-num t-ru">Услуга 01</span>
       <div class="svc-frame">
         <div class="svc-ph" style="background:linear-gradient(155deg,#C4B5A5,#8C7B6E)"></div>
-        <img src="images/individualna.jpg" alt="Individualna psihoterapija Beograd psiholog geštalt psihoterapeut" loading="lazy">
+        <!-- [OPT-9] Slike ispod prevoja: loading="lazy" + eksplicitne dimenzije (sprečava CLS i štedi bandwidth) -->
+        <img src="images/individualna.jpg" alt="Individualna psihoterapija Beograd psiholog geštalt psihoterapeut" loading="lazy" width="600" height="648" decoding="async">
       </div>
       <div class="svc-tag">
         <span class="svc-tag-n">50'</span>
@@ -820,7 +835,8 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
       <span class="svc-num t-sr">Usluga 02</span><span class="svc-num t-en">Service 02</span><span class="svc-num t-ru">Услуга 02</span>
       <div class="svc-frame">
         <div class="svc-ph" style="background:linear-gradient(155deg,#B5A898,#7A6B5E)"></div>
-        <img src="images/parovi.jpg" alt="Psihoterapija za parove Beograd psiholog geštalt psihoterapeut" loading="lazy">
+        <!-- [OPT-9] lazy loading + eksplicitne dimenzije -->
+        <img src="images/parovi.jpg" alt="Psihoterapija za parove Beograd psiholog geštalt psihoterapeut" loading="lazy" width="600" height="648" decoding="async">
       </div>
       <div class="svc-tag"><span class="svc-tag-n">75'</span><span class="svc-tag-l t-sr">Po sesiji</span><span class="svc-tag-l t-en">Per session</span><span class="svc-tag-l t-ru">За сессию</span></div>
     </div>
@@ -835,7 +851,8 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
       <span class="svc-num t-sr">Usluga 03</span><span class="svc-num t-en">Service 03</span><span class="svc-num t-ru">Услуга 03</span>
       <div class="svc-frame">
         <div class="svc-ph" style="background:linear-gradient(155deg,#7A9E7E,#3D4A38)"></div>
-        <img src="images/online.jpg" alt="Online psihoterapija Beograd psiholog geštalt psihoterapeut" loading="lazy">
+        <!-- [OPT-9] lazy loading + eksplicitne dimenzije -->
+        <img src="images/online.jpg" alt="Online psihoterapija Beograd psiholog geštalt psihoterapeut" loading="lazy" width="600" height="648" decoding="async">
       </div>
       <div class="svc-tag"><span class="svc-tag-n">50'</span><span class="svc-tag-l t-sr">Online sesija</span><span class="svc-tag-l t-en">Online session</span><span class="svc-tag-l t-ru">Онлайн сессия</span></div>
     </div>
@@ -928,7 +945,8 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
       <span class="svc-num t-sr">Usluga 04</span><span class="svc-num t-en">Service 04</span><span class="svc-num t-ru">Услуга 04</span>
       <div class="svc-frame">
         <div class="svc-ph" style="background:linear-gradient(155deg,#C9A96E,#8C7B6E)"></div>
-        <img src="images/dijagnostika.jpg" alt="Psihološka dijagnostika Beograd psiholog geštalt psihoterapeut" loading="lazy">
+        <!-- [OPT-9] lazy loading + eksplicitne dimenzije -->
+        <img src="images/dijagnostika.jpg" alt="Psihološka dijagnostika Beograd psiholog geštalt psihoterapeut" loading="lazy" width="600" height="648" decoding="async">
       </div>
       <div class="svc-tag"><span class="svc-tag-n">2–3</span><span class="svc-tag-l t-sr">Sesije</span><span class="svc-tag-l t-en">Sessions</span><span class="svc-tag-l t-ru">Сессии</span></div>
     </div>
@@ -1036,6 +1054,8 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   </div>
 </footer>
 
+<!-- [OPT-10] defer na inline skriptu nije moguć, ali je skript neblokiran jer je na dnu body-ja.
+     Sve logike su non-critical i ne blokiraju LCP render. -->
 <script>
 (function(){
   const isTouch = window.matchMedia('(hover:none) and (pointer:coarse)').matches || 'ontouchstart' in window || navigator.maxTouchPoints > 0;
@@ -1107,7 +1127,7 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   const heroImg = document.getElementById('heroImg');
   if (!isTouch) {
     window.addEventListener('scroll', () => {
-      if (window.scrollY < window.innerHeight)
+      if (window.scrollY < window.innerHeight && heroImg)
         heroImg.style.transform = `scale(1.08) translateY(${window.scrollY * .18}px)`;
     }, { passive: true });
     document.querySelectorAll('.svc-watermark').forEach(w => {
