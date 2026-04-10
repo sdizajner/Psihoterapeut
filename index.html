@@ -57,6 +57,8 @@ body.menu-open{overflow:hidden!important;}
 [data-lang="sr"] li.t-sr{display:list-item!important;}
 [data-lang="en"] li.t-en{display:list-item!important;}
 [data-lang="ru"] li.t-ru{display:list-item!important;}
+[data-lang="sr"] .nav-logo-first.t-sr,[data-lang="en"] .nav-logo-first.t-en,[data-lang="ru"] .nav-logo-first.t-ru,
+[data-lang="sr"] .nav-logo-last.t-sr,[data-lang="en"] .nav-logo-last.t-en,[data-lang="ru"] .nav-logo-last.t-ru{display:inline!important;}
 [data-lang="sr"] a.btn-ghost.t-sr,[data-lang="sr"] a.btn-ol.t-sr{display:inline-flex!important;}
 [data-lang="en"] a.btn-ghost.t-en,[data-lang="en"] a.btn-ol.t-en{display:inline-flex!important;}
 [data-lang="ru"] a.btn-ghost.t-ru,[data-lang="ru"] a.btn-ol.t-ru{display:inline-flex!important;}
@@ -132,6 +134,29 @@ h1,h2,h3,h4{font-family:var(--fd);font-weight:400;}
 #nav.sc .lang-pill:hover{background:var(--deep);color:var(--sage-light);transform:translateY(-2px);}
 #nav.sc .lang-pill.active{background:var(--sage);color:#ffffff;border-color:var(--sage);}
 .hamburger{display:none;}
+/* MOBILE OVERLAY */
+.mob-nav{position:fixed;inset:0;z-index:9500;background:rgba(30,45,45,.98);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transform:translateY(-10px);transition:opacity .35s cubic-bezier(.65,0,.35,1),transform .35s cubic-bezier(.65,0,.35,1);will-change:opacity,transform}
+.mob-nav.open{opacity:1;pointer-events:all;transform:translateY(0)}
+.mob-nav-inner{display:flex;flex-direction:column;align-items:flex-start;padding:0 48px;width:100%;max-width:480px}
+.mob-nav-line{width:40px;height:1px;background:linear-gradient(to right,var(--sage-light),transparent);margin-bottom:40px;opacity:0;transform:translateX(-20px);transition:opacity .4s ease,transform .4s ease}
+.mob-nav.open .mob-nav-line{opacity:1;transform:translateX(0);transition-delay:.15s}
+.mob-nav-links{list-style:none}
+.mob-nav-links li{overflow:hidden}
+.mob-nav-links a{display:block;font-family:var(--fd);font-size:clamp(34px,8vw,52px);font-weight:400;font-style:italic;color:rgba(253,250,245,.85);text-decoration:none;line-height:1.15;padding:10px 0;letter-spacing:-.01em;border-bottom:1px solid rgba(168,197,172,.1);transform:translateY(100%);opacity:0;transition:transform .55s var(--ease-out),opacity .55s ease,color .3s ease,padding-left .35s var(--ease-out)}
+.mob-nav.open .mob-nav-links a{transform:translateY(0);opacity:1}
+.mob-nav.open .mob-nav-links li:nth-child(1) a{transition-delay:.18s}
+.mob-nav.open .mob-nav-links li:nth-child(2) a{transition-delay:.26s}
+.mob-nav.open .mob-nav-links li:nth-child(3) a{transition-delay:.34s}
+.mob-nav.open .mob-nav-links li:nth-child(4) a{transition-delay:.42s}
+.mob-nav.open .mob-nav-links li:nth-child(5) a{transition-delay:.50s}
+.mob-nav-links a:hover{color:#fff;padding-left:12px}
+.mob-nav-links a.nav-cta-mob{margin-top:28px;font-family:var(--fb);font-size:11px;font-style:normal;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--deep);background:var(--sage-light);padding:14px 32px;border-radius:2px;min-height:48px;display:flex;align-items:center}
+.mob-nav-links a.nav-cta-mob:hover{padding-left:32px;background:var(--sage)}
+.mob-nav-langs{display:flex;gap:8px;margin-top:36px;opacity:0;transform:translateY(14px);transition:opacity .4s ease,transform .4s ease}
+.mob-nav.open .mob-nav-langs{opacity:1;transform:translateY(0);transition-delay:.6s}
+.mob-nav-langs .lang-pill{color:rgba(253,250,245,.6);border-color:rgba(253,250,245,.2);background:transparent;min-height:44px;min-width:44px;display:flex;align-items:center;justify-content:center}
+.mob-nav-langs .lang-pill.active{background:var(--sage);color:#fff;border-color:var(--sage)}
+.mob-nav-langs .lang-pill:hover{color:#fff;border-color:rgba(253,250,245,.5);background:rgba(253,250,245,.08)}
 
 /* ═══════════════════════════════════════
    NAV OVERLAY
@@ -448,6 +473,75 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
 /* ═══════════════════════════════════════
    GLOBAL OVERRIDES
 ═══════════════════════════════════════ */
+
+/* MOBILE: ensure header (logo + hamburger) is a single line like oblastirada.html */
+@media (max-width: 1024px) {
+  #nav { display:flex !important; align-items:center !important; justify-content:space-between !important; padding:0 40px !important; height:64px !important; }
+  .nav-links { display:none !important; }
+  .nav-logo { display:flex !important; align-items:center !important; gap:12px !important; padding:12px 18px 6px 18px !important; width:auto !important; }
+  .nav-logo-accent { height:36px !important; }
+  .nav-right-cluster { display:flex !important; align-items:center !important; gap:10px !important; justify-content:flex-end !important; padding:0 18px !important; margin-left:0 !important; border-top:none !important; }
+  .nav-right-cluster::before { display:none !important; }
+  .nav-ham, .nav-ham span { display:flex !important; }
+  .hamburger { display:none !important; }
+}
+
+/* MOBILE HEADER: match structure from oblastirada.html (logo + hamburger on one line) */
+@media (max-width: 1024px) {
+  #nav {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    height: 64px !important;
+    padding: 0 40px !important;
+  }
+  .nav-links { display: none !important; }
+  .nav-ham, .nav-ham span {
+    display: flex !important;
+  }
+  .nav-ham {
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 5px !important;
+    width: 48px !important;
+    height: 48px !important;
+    background: none !important;
+    border: none !important;
+    cursor: pointer !important;
+    padding: 6px !important;
+    position: relative !important;
+    z-index: 9600 !important;
+    flex-shrink: 0 !important;
+  }
+  .nav-ham span {
+    display: block !important;
+    width: 24px !important;
+    height: 1.5px !important;
+    background: rgba(253,250,245,.85) !important;
+    border-radius: 2px !important;
+    transition: transform .4s var(--ease-out), opacity .3s ease, width .4s var(--ease-out), background .3s ease !important;
+    transform-origin: center !important;
+  }
+  #nav.sc .nav-ham span { background: #2C3328 !important; }
+  .nav-ham.open span:nth-child(1){ transform: translateY(6.5px) rotate(45deg) !important; background:#fff !important; }
+  .nav-ham.open span:nth-child(2){ opacity:0 !important; width:0 !important; }
+  .nav-ham.open span:nth-child(3){ transform: translateY(-6.5px) rotate(-45deg) !important; background:#fff !important; }
+}
+
+
+/* TABLET 1024 */
+@media(max-width:1024px){
+  #nav{display:flex!important;height:64px!important;padding:0 40px!important;align-items:center!important;justify-content:space-between!important;}
+  .nav-links{display:none!important;}
+  .nav-ham{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;width:48px;height:48px;background:none;border:none;cursor:pointer;padding:6px;position:relative;z-index:9600;flex-shrink:0;}
+  .nav-ham span{display:block;width:24px;height:1.5px;background:rgba(253,250,245,.85);border-radius:2px;transition:transform .4s var(--ease-out),opacity .3s ease,width .4s var(--ease-out),background .3s ease;transform-origin:center;}
+  #nav.sc .nav-ham span{background:#2C3328;}
+  .nav-ham.open span:nth-child(1){transform:translateY(6.5px) rotate(45deg);background:#fff;}
+  .nav-ham.open span:nth-child(2){opacity:0;width:0;}
+  .nav-ham.open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg);background:#fff;}
+  .nav-ham:not(.open):hover span:nth-child(2){width:16px;}
+}
 .seo-h1{
 position:absolute;
 width:1px;
@@ -494,13 +588,13 @@ border:0;
 @media(max-width:1024px){
   #nav,#nav.sc{
     position:fixed!important;top:0!important;left:0!important;right:0!important;
-    display:grid!important;grid-template-rows:auto auto auto!important;grid-template-columns:1fr auto!important;
+    display:flex!important;align-items:center!important;justify-content:space-between!important;
     padding:0!important;background:rgba(8,14,9,0.60)!important;
     backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important;
     border-bottom:none!important;transition:background .5s ease,border-color .5s ease!important;gap:0!important;
   }
   #nav.sc{background:rgba(249,245,239,0.97)!important;backdrop-filter:blur(28px)!important;-webkit-backdrop-filter:blur(28px)!important;border-bottom:1px solid rgba(181,168,152,.2)!important;}
-  .nav-logo{grid-column:1/3!important;grid-row:1!important;display:flex!important;align-items:center!important;gap:12px!important;padding:12px 18px 6px 18px!important;text-decoration:none!important;width:100%!important;border-bottom:none!important;}
+  .nav-logo{display:flex!important;align-items:center!important;gap:12px!important;padding:12px 18px 6px 18px!important;text-decoration:none!important;width:auto!important;border-bottom:none!important;}
   .nav-logo-accent{width:2px!important;height:30px!important;flex-shrink:0!important;background:linear-gradient(to bottom,transparent,rgba(143,179,147,.7) 40%,rgba(143,179,147,.7) 60%,transparent)!important;}
   #nav.sc .nav-logo-accent{background:linear-gradient(to bottom,transparent,var(--sage) 40%,var(--sage) 60%,transparent)!important;}
   .nav-logo-name{display:flex!important;align-items:baseline!important;gap:8px!important;line-height:1!important;}
@@ -512,9 +606,8 @@ border:0;
   .nav-logo-divider{display:none!important;}
   .nav-logo-title{display:block!important;font-size:8.5px!important;font-weight:400!important;letter-spacing:.22em!important;text-transform:uppercase!important;color:rgba(255,255,255,.52)!important;margin-top:3px!important;white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;transition:color .4s ease!important;}
   #nav.sc .nav-logo-title{color:rgba(18,24,19,.42)!important;}
-  .nav-right-cluster{display:flex!important;grid-column:1/3!important;grid-row:3!important;align-items:center!important;justify-content:flex-end!important;padding:0 18px 8px 18px!important;margin-top:0!important;border-top:1px solid rgba(255,255,255,.07)!important;transition:border-color .4s ease!important;}
-  #nav.sc .nav-right-cluster{border-top-color:rgba(18,24,19,.08)!important;}
-  .nav-right-cluster::before{content:''!important;flex:1!important;height:1px!important;background:transparent!important;}
+  .nav-right-cluster{display:flex!important;align-items:center!important;justify-content:flex-end!important;padding:0 18px!important;margin-left:0!important;border-top:none!important;transition:border-color .4s ease!important;}
+  #nav.sc .nav-right-cluster{border-top:none!important;}
   .nav-right-cluster .lang-pills{display:none!important;}
   .hamburger{display:flex!important;flex-direction:column!important;justify-content:center!important;align-items:center!important;gap:5px!important;width:44px!important;height:32px!important;background:none!important;border:none!important;cursor:pointer!important;flex-shrink:0!important;-webkit-tap-highlight-color:transparent!important;z-index:10002!important;position:relative!important;padding:3px 0!important;}
   .hamburger span{display:block!important;width:24px!important;height:1.5px!important;background:rgba(255,255,255,.85)!important;border-radius:2px!important;transform-origin:center!important;transition:transform .4s cubic-bezier(0.16,1,0.3,1),opacity .3s ease,background .3s ease!important;pointer-events:none!important;}
@@ -529,7 +622,7 @@ border:0;
   .hero-ov1{background:linear-gradient(180deg,rgba(0,0,0,0) 0%,rgba(0,0,0,.03) 40%,rgba(0,0,0,.28) 70%,rgba(0,0,0,.42) 100%)!important;}
 .hero-ov2{background:linear-gradient(to bottom,rgba(1,1,1,0.58) 0%,rgba(55,55,54,0.22) 20%,transparent 35%)!important;}
 .hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:65%;background:linear-gradient(to top,rgba(0,0,0,.92) 0%,rgba(0,0,0,.58) 40%,transparent 100%);z-index:4;pointer-events:none;}
-.hero-content{position:relative;z-index:6;padding:0 24px 48px;max-width:100%;width:100%;text-align:center;}
+.hero-content{position:relative;z-index:6;padding:0 24px 28px;max-width:100%;width:100%;text-align:center;}
   .hero-title{font-size:clamp(32px,7vw,48px)!important;line-height:1.05!important;margin-bottom:18px;text-shadow:0 3px 24px rgba(0,0,0,.9),0 1px 6px rgba(0,0,0,.8);}
   .hero-sub{font-size:14.5px;line-height:1.75;max-width:100%;margin-left:0;margin-bottom:32px;text-shadow:0 2px 12px rgba(0,0,0,.8);color:rgba(255,255,255,.92);}
   .hero-actions{justify-content:center;flex-wrap:wrap;gap:14px;}
@@ -569,6 +662,18 @@ border:0;
   .ap-item{padding:44px 0;}
   .ap-it{font-size:clamp(22px,5.5vw,32px)!important;}
   .ap-id{font-size:15px!important;max-width:100%;line-height:1.7!important;}
+
+/* Override: make mobile header single-line like oblastirada.html (logo left, hamburger right)
+   This only affects <=1024px and intentionally does not change desktop styles. */
+@media (max-width:1024px) {
+  #nav { display: flex !important; align-items: center !important; justify-content: space-between !important; padding: 0 40px !important; height: 64px !important; }
+  .nav-links { display: none !important; }
+  .nav-logo { display: flex !important; align-items: center !important; gap: 12px !important; padding: 12px 18px 6px 18px !important; width: auto !important; }
+  .nav-logo-accent { height: 36px !important; }
+  .nav-right-cluster { display: flex !important; align-items: center !important; gap: 10px !important; justify-content: flex-end !important; padding: 0 18px !important; margin-left: 0 !important; border-top: none !important; }
+  .nav-right-cluster::before { display: none !important; }
+  .nav-ham, .nav-ham span { display: flex !important; }
+}
   .ap-n{font-size:11px!important;margin-bottom:18px;}
   .areas{padding:72px 24px;}
   .areas-head{margin-bottom:48px;}
@@ -709,21 +814,32 @@ border:0;
 Psihoterapija Beograd i online – Elena Ivancova
 </h1>
 
-<!-- NAV OVERLAY -->
-<div class="nav-overlay" id="nav-overlay" role="dialog" aria-modal="true" aria-label="Navigation menu">
-  <button class="nav-overlay-close" id="nav-overlay-close" aria-label="Zatvori meni">
-    <span class="nav-overlay-close-icon"></span>
-  </button>
-  <ul class="nav-overlay-links" id="nav-overlay-links"></ul>
-  <div class="nav-overlay-bottom">
-    <div class="nav-overlay-lang">
-      <span class="nav-overlay-lang-label">Jezik / Language / Язык</span>
+<!-- MOBILE NAV -->
+<div class="mob-nav" id="mobNav" role="dialog" aria-modal="true" aria-label="Navigacioni meni">
+  <div class="mob-nav-inner">
+    <div class="mob-nav-line" aria-hidden="true"></div>
+    <ul class="mob-nav-links">
+      <li class="t-sr"><a href="#" class="js-top">Početna</a></li>
+      <li class="t-sr"><a href="terapijskeusluge.html">Usluge</a></li>
+      <li class="t-sr"><a href="oblastirada.html">Oblasti</a></li>
+      <li class="t-sr"><a href="index.html#intro">O meni</a></li>
+      <li class="t-sr"><a href="index.html#contact" class="nav-cta-mob">Kontakt →</a></li>
+      <li class="t-en"><a href="#" class="js-top">Home</a></li>
+      <li class="t-en"><a href="terapijskeusluge.html">Services</a></li>
+      <li class="t-en"><a href="oblastirada.html">Areas</a></li>
+      <li class="t-en"><a href="index.html#intro">About me</a></li>
+      <li class="t-en"><a href="index.html#contact" class="nav-cta-mob">Contact →</a></li>
+      <li class="t-ru"><a href="#" class="js-top">Главная</a></li>
+      <li class="t-ru"><a href="terapijskeusluge.html">Услуги</a></li>
+      <li class="t-ru"><a href="oblastirada.html">Области</a></li>
+      <li class="t-ru"><a href="index.html#intro">Обо мне</a></li>
+      <li class="t-ru"><a href="index.html#contact" class="nav-cta-mob">Контакт →</a></li>
+    </ul>
+    <div class="mob-nav-langs">
+      <button class="lang-pill" data-lang="sr" aria-label="Srpski jezik">SR</button>
+      <button class="lang-pill" data-lang="en" aria-label="English language">EN</button>
+      <button class="lang-pill" data-lang="ru" aria-label="Русский язык">RU</button>
     </div>
-    <p class="nav-overlay-contact">
-      <a href="mailto:helena11@mail.ru">helena11@mail.ru</a>
-      &nbsp;·&nbsp;
-      <a href="tel:+381628165004">+381 62 816 5004</a>
-    </p>
   </div>
 </div>
 
@@ -736,8 +852,12 @@ Psihoterapija Beograd i online – Elena Ivancova
     <div class="nav-logo-accent"></div>
     <div class="nav-logo-text">
       <div class="nav-logo-name">
-        <span class="nav-logo-first">Elena</span>
-        <span class="nav-logo-last">Ivancova</span>
+        <span class="nav-logo-first t-sr">Elena</span>
+        <span class="nav-logo-first t-en">Elena</span>
+        <span class="nav-logo-first t-ru">Елена</span>
+        <span class="nav-logo-last t-sr">Ivancova</span>
+        <span class="nav-logo-last t-en">Ivancova</span>
+        <span class="nav-logo-last t-ru">Иванцова</span>
       </div>
       <div class="nav-logo-divider"></div>
      <span class="nav-logo-title" id="nav-logo-subtitle"></span>
@@ -766,8 +886,8 @@ Psihoterapija Beograd i online – Elena Ivancova
       <button class="lang-pill" data-lang-btn="en">EN</button>
       <button class="lang-pill" data-lang-btn="ru">RU</button>
     </div>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="nav-overlay">
-      <span></span><span></span><span></span>
+    <button class="hamburger nav-ham" id="hamburger" aria-label="Otvori navigacioni meni" aria-expanded="false" aria-controls="nav-overlay">
+      <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
     </button>
   </div>
 </nav>
@@ -886,7 +1006,7 @@ Psihoterapija Beograd i online – Elena Ivancova
 
     <h2 class="s-subtitle sr sd1 t-ru">20 лет клинической практики</h2>
 
-    <p class="credentials-line sr sd2 t-ru">MSc Психологии &nbsp;·&nbsp; Клиническая психология &nbsp;·&nbsp; Гештальт-психотерапия &nbsp;·&nbsp; Белград &amp; Прага</p>
+    <p class="credentials-line sr sd2 t-ru">MSc Психологии &nbsp;·&nbsp; Клиническая психология &nbsp;·&nbsp; Гештальт-психотерапия &nbsp;·&nbsp; Белград &amp; Онлайн</p>
 
     <p class="s-body sr sd2 t-ru">Бывают периоды, когда даже самые близкие не могут помочь — не потому, что не хотят, а потому что иногда нужен кто-то, кто находится вне вашей истории и способен увидеть то, что вы сами уже не замечаете.
 
@@ -1433,12 +1553,11 @@ function setLang(lang){
   document.querySelectorAll('[data-lang-btn]').forEach(function(btn){
     btn.classList.toggle('active',btn.getAttribute('data-lang-btn')===lang);
   });
-  // Dodaj ovo:
+  document.querySelectorAll('.mob-nav-langs .lang-pill').forEach(function(btn){
+    btn.classList.toggle('active',btn.getAttribute('data-lang')===lang);
+  });
   var sub = document.getElementById('nav-logo-subtitle');
   if(sub) sub.textContent = subtitles[lang] || subtitles['sr'];
-  
-  buildOverlayLinks(lang);
-  buildOverlayLangPills(lang);
 }
 document.addEventListener('click',function(e){
   var btn=e.target.closest('[data-lang-btn]');
@@ -1466,34 +1585,39 @@ window.addEventListener('scroll',function(){
 
 /* HAMBURGER */
 var hamburger=document.getElementById('hamburger');
-var overlay=document.getElementById('nav-overlay');
-var overlayCloseBtn=document.getElementById('nav-overlay-close');
+var mobNav=document.getElementById('mobNav');
 var menuOpen=false;
 
 function openMobileMenu(){
-  menuOpen=true;overlay.classList.add('open');hamburger.classList.add('active');
+  menuOpen=true;mobNav.classList.add('open');hamburger.classList.add('active');
   hamburger.setAttribute('aria-expanded','true');document.body.classList.add('menu-open');
   document.body.style.overflow='hidden';
-  var items=overlay.querySelectorAll('.nav-overlay-links li');
-  items.forEach(function(li){li.style.transition='none';li.style.opacity='0';li.style.transform='translateY(22px)';});
-  requestAnimationFrame(function(){requestAnimationFrame(function(){items.forEach(function(li){li.style.transition='';});});});
 }
 
 function closeMobileMenu(){
-  menuOpen=false;overlay.classList.remove('open');hamburger.classList.remove('active');
+  menuOpen=false;mobNav.classList.remove('open');hamburger.classList.remove('active');
   hamburger.setAttribute('aria-expanded','false');document.body.classList.remove('menu-open');
   document.body.style.overflow='';
 }
 
 hamburger.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();if(menuOpen)closeMobileMenu();else openMobileMenu();});
-if(overlayCloseBtn){overlayCloseBtn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();closeMobileMenu();});}
-overlay.addEventListener('click',function(e){if(e.target===overlay)closeMobileMenu();});
+mobNav.addEventListener('click',function(e){if(e.target===mobNav)closeMobileMenu();});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&menuOpen)closeMobileMenu();});
-if(IS_TOUCH){
-  var touchX=0;
-  overlay.addEventListener('touchstart',function(e){touchX=e.touches[0].clientX;},{passive:true});
-  overlay.addEventListener('touchend',function(e){if(e.changedTouches[0].clientX-touchX>60)closeMobileMenu();},{passive:true});
-}
+document.querySelectorAll('.mob-nav-links a').forEach(function(a){a.addEventListener('click',closeMobileMenu);});
+document.querySelectorAll('.js-top').forEach(function(a){
+  a.addEventListener('click',function(e){
+    e.preventDefault();
+    window.scrollTo({top:0,behavior:'instant'});
+  });
+});
+document.addEventListener('click',function(e){
+  var langBtn=e.target.closest('.mob-nav-langs .lang-pill');
+  if(langBtn){
+    setLang(langBtn.getAttribute('data-lang'));
+    closeMobileMenu();
+    location.reload();
+  }
+});
 
 /* WEBGL PARTICLES */
 (function initWebGL(){
