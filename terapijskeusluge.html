@@ -422,6 +422,12 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
   backdrop-filter:blur(8px);
   -webkit-backdrop-filter:blur(8px);
   text-shadow:0 1px 4px rgba(0,0,0,.5);
+   text-align:center;
+}
+@media(min-width:769px){
+  .hero-tagline{
+    margin-top:70px;
+  }
 }
 
 /* ---- SCROLL HINT ---- */
@@ -824,6 +830,7 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   .nav-ham.open span:nth-child(1){transform:translateY(7px) rotate(45deg);background:#fff;}
   .nav-ham.open span:nth-child(2){opacity:0;width:0;}
   .nav-ham.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);background:#fff;}
+  .nav-ham:not(.open):hover span:nth-child(2){width:16px;}
 
   #nav .lang-pills{display:none!important;}
 
@@ -1347,7 +1354,7 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
     <span class="hero-stat-mob-num t-sr t-en t-ru" style="display:block!important;">4</span>
     <span class="hero-stat-mob-label t-sr">Terapijske<br>usluge</span>
     <span class="hero-stat-mob-label t-en">Therapeutic<br>services</span>
-    <span class="hero-stat-mob-label t-ru">Терапевт-<br>ические услуги</span>
+    <span class="hero-stat-mob-label t-ru">Терапевтические<br>услуги</span>
   </div>
 
   <!-- Desktop stat -->
@@ -1363,7 +1370,7 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
     <h1 class="hero-h1">
       <span class="t-sr">Terapijske<br><em>Usluge</em></span>
       <span class="t-en">Therapeutic<br><em>Services</em></span>
-      <span class="t-ru">Терапевт-<br><em>ические услуги</em></span>
+      <span class="t-ru">Терапевтические<br><em>услуги</em></span>
     </h1>
     <div class="hero-divider"></div>
     <p class="hero-tagline t-sr">Prostor za promenu · Beograd &amp; Online</p>
@@ -1562,7 +1569,7 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
       <p class="txt reveal rd3 t-en">Online psychotherapy allows you to work with a psychologist and Gestalt psychotherapist from the comfort of your own space. It is just as effective as in-person therapy, with added flexibility and accessibility.</p>
       <p class="txt reveal rd3 t-en">It is especially suitable for clients who are not located in Belgrade or have limited time for in-person sessions.</p>
       <p class="txt reveal rd3 t-ru">Онлайн-психотерапия позволяет работать с психологом и гештальт-терапевтом из безопасного пространства. Она так же эффективна, как и очная терапия.</p>
-      <p class="txt reveal rd3 t-ru">Особенно подходит для клиентов, которые находятся вне Белграда или имеют ограниченное время для очных встреч.</p>
+      <p class="txt reveal rd3 t-ru">Особно подходит для клиентов, которые находятся вне Белграда или имеют ограниченное время для очных встреч.</p>
       <div class="info-row reveal rd3">
         <div class="info-it"><span class="info-n">🌍</span><span class="info-l t-sr">Svuda</span><span class="info-l t-en">Worldwide</span><span class="info-l t-ru">Весь мир</span></div>
         <div class="info-it"><span class="info-n">🔒</span><span class="info-l t-sr">Sigurno</span><span class="info-l t-en">Secure</span><span class="info-l t-ru">Безопасно</span></div>
@@ -1727,7 +1734,7 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
         <p class="ft-col-t t-sr">Kontakt</p><p class="ft-col-t t-en">Contact</p><p class="ft-col-t t-ru">Контакт</p>
         <div class="fco"><svg class="fco-i" viewBox="0 0 24 24" fill="none" stroke="rgba(249,245,239,.5)" stroke-width="1.5" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg><a href="mailto:helena11@mail.ru" class="fco-t">helena11@mail.ru</a></div>
         <div class="fco"><svg class="fco-i" viewBox="0 0 24 24" fill="none" stroke="rgba(249,245,239,.5)" stroke-width="1.5" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.41 2 2 0 0 1 3.59 1.23h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg><a href="tel:+381628165004" class="fco-t">+381 62 816 5004</a></div>
-        <div class="fco"><svg class="fco-i" viewBox="0 0 24 24" fill="none" stroke="rgba(249,245,239,.5)" stroke-width="1.5" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><span class="fco-t">Beograd, Srbija</span></div>
+        <div class="fco"><svg class="fco-i" viewBox="0 0 24 24" fill="none" stroke="rgba(249,245,239,.5)" stroke-width="1.5" stroke-linecap="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><circle cx="12" cy="10" r="3"/></svg><span class="fco-t t-sr">Beograd, Srbija</span><span class="fco-t t-en">Belgrade, Serbia</span><span class="fco-t t-ru">Белград, Сербия</span></div>
       </div>
     </div>
   </div>
