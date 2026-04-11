@@ -1002,7 +1002,17 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   [data-lang="ru"] .hero-tagline{font-size:7px;letter-spacing:.15em;}
 
   /* ---- ANCHOR NAV mobile ---- */
-  .anav{top:var(--nav-h);}
+  .anav{
+    top:var(--nav-h);
+    margin-top:0;
+    position:sticky;
+    z-index:900;
+    background:linear-gradient(180deg,rgba(22,38,26,0.92) 0%,rgba(26,46,30,0.96) 100%);
+    backdrop-filter:blur(6px);
+    -webkit-backdrop-filter:blur(6px);
+    border-bottom:1px solid rgba(201,169,110,.12);
+    box-shadow:0 6px 32px rgba(0,0,0,.35);
+  }
   .anav-inner{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -1013,16 +1023,26 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   .al{
     flex-shrink:1;
     font-size:8.5px;
-    padding:14px 12px;
-    letter-spacing:.04em;
-    min-height:44px;
+    padding:16px 14px;
+    letter-spacing:.06em;
+    min-height:48px;
     white-space:normal;
     text-align:center;
     line-height:1.4;
+    color:rgba(200,195,185,0.65);
+    background:rgba(255,255,255,0.02);
     border-bottom:1px solid rgba(201,169,110,.08);
+    border-right:none;
+    box-shadow:0 4px 20px rgba(0,0,0,0.15);
+    transition:all .3s ease;
   }
   .al:nth-child(odd){
     border-right:1px solid rgba(201,169,110,.08);
+  }
+  .al:active{
+    transform:scale(0.97);
+    background:rgba(255,255,255,0.06);
+    border-color:rgba(255,255,255,0.25);
   }
 
   /* ---- SERVICE SECTIONS mobile ---- */
