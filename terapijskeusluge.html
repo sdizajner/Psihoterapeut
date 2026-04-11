@@ -363,6 +363,7 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
     );
 }
 
+
 .hero-content{position:relative;z-index:2;max-width:560px;}
 
 /* ---- HERO H1 ---- */
@@ -494,7 +495,7 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
     opacity:1!important;transform:none!important;animation:none!important;
   }
   .hero-divider{
-    opacity:1!important;width:70px!important;animation:none!important;
+    opacity:1!important;width:70px!important;animation:none!important; display:none;
   }
 }
 
@@ -894,22 +895,30 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
     height:1.5px;
     background:linear-gradient(to right,var(--gold),rgba(168,197,172,0.7));
     margin-bottom:16px;
+     display:none;
   }
 
-  .hero-h1{
-    font-size:clamp(42px,12vw,64px);
-    line-height:1.05;
-    letter-spacing:-.025em;
-    color:#fff;
-    word-break:normal;
-    overflow-wrap:break-word;
-    hyphens:manual;
-    max-width:100%;
-    text-shadow:
-      0 2px 8px rgba(0,0,0,.9),
-      0 4px 24px rgba(0,0,0,.7),
-      0 8px 48px rgba(0,0,0,.5)!important;
-  }
+ .hero-h1{
+  margin-top:0px;
+  margin-bottom:300px;
+  font-size:clamp(42px,12vw,64px);
+  line-height:1.05;
+  letter-spacing:-.025em;
+  color:#fff;
+
+  text-align:right;      /* poravnanje desno */
+  margin-left:auto;      /* gura blok udesno */
+
+  word-break:normal;
+  overflow-wrap:break-word;
+  hyphens:manual;
+  max-width:100%;
+
+  text-shadow:
+    0 2px 8px rgba(0,0,0,.9),
+    0 4px 24px rgba(0,0,0,.7),
+    0 8px 48px rgba(0,0,0,.5)!important;
+}
 
   .hero-h1 span{
     display:block;
@@ -931,17 +940,13 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   }
 
   .hero-divider{
-    width:52px!important;
-    height:1.5px;
-    background:linear-gradient(to right,var(--gold),rgba(168,197,172,0.5),transparent);
-    margin:16px 0 18px;
-    opacity:1!important;
-    animation:none!important;
+    display:none!important;
   }
 
   /* Tagline — kompaktan, nikad ne izlazi van ekrana */
   .hero-tagline{
-    display:inline-block;
+    display:block;
+    text-align:center;
     opacity:1!important;
     transform:none!important;
     animation:none!important;
@@ -949,7 +954,7 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
     letter-spacing:.2em;
     line-height:1.5;
     white-space:nowrap;
-    padding:7px 14px;
+    padding:14px 14px;
     border-radius:2px;
     background:rgba(0,0,0,.40);
     border:1px solid rgba(168,197,172,.22);
@@ -964,6 +969,7 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
 
   /* Badge sa brojem oblasti — mali premium detalj */
   .hero-stat-mob{
+    top:calc(var(--nav-h) + 450px)!important;
     display:flex;
     align-items:center;
     gap:10px;
@@ -1000,21 +1006,23 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   .anav-inner{
     display:grid;
     grid-template-columns:1fr 1fr;
-    overflow-x:unset;
-    grid-template-columns:unset;
-    display:flex;
-    overflow-x:auto;
-    -webkit-overflow-scrolling:touch;
-    scrollbar-width:none;
+    overflow-x:hidden;
+    gap:0;
   }
   .anav-inner::-webkit-scrollbar{display:none;}
   .al{
-    flex-shrink:0;
+    flex-shrink:1;
     font-size:8.5px;
-    padding:13px 16px;
-    letter-spacing:.05em;
+    padding:14px 12px;
+    letter-spacing:.04em;
     min-height:44px;
-    white-space:nowrap;
+    white-space:normal;
+    text-align:center;
+    line-height:1.4;
+    border-bottom:1px solid rgba(201,169,110,.08);
+  }
+  .al:nth-child(odd){
+    border-right:1px solid rgba(201,169,110,.08);
   }
 
   /* ---- SERVICE SECTIONS mobile ---- */
@@ -1128,9 +1136,9 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   .hero-h1{font-size:clamp(38px,11vw,56px);}
 
   .hero-tagline{
-    font-size:7.5px;
+    font-size:8.5px;
     letter-spacing:.16em;
-    padding:6px 12px;
+    padding:8px 14px;
   }
 
   .anav .al{font-size:8px;padding:12px 14px;}
