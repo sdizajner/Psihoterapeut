@@ -890,28 +890,18 @@ border:0;
   "@context": "https://schema.org",
   "@type": "Psychologist",
   "name": "Elena Ivancova",
-  "jobTitle": "Klinički psiholog i geštalt psihoterapeut",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Beograd",
-    "addressCountry": "RS"
-  },
-  "areaServed": ["Beograd", "Online"]
-}
-</script>
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "LocalBusiness",
-  "name": "Psihoterapija Elena Ivancova",
+  "url": "https://sdizajner.github.io/Psihoterapeut/",
+  "image": "https://sdizajner.github.io/Psihoterapeut/images/hero.webp",
   "telephone": "+381628165004",
   "email": "helena11@mail.ru",
+  "jobTitle": "Klinički psiholog i geštalt psihoterapeut",
+
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Beograd",
     "addressCountry": "RS"
   },
+
   "areaServed": [
     {
       "@type": "City",
@@ -921,6 +911,11 @@ border:0;
       "@type": "Place",
       "name": "Online"
     }
+  ],
+
+  "sameAs": [
+    "https://www.google.com/maps",
+    "https://www.instagram.com/"
   ]
 }
 </script>
@@ -1670,16 +1665,6 @@ function buildOverlayLangPills(activeLang){
   });
 }
 
-function setLang(lang){
-  document.documentElement.setAttribute('data-lang',lang);
-  localStorage.setItem('ei-lang',lang);
-  document.querySelectorAll('[data-lang-btn]').forEach(function(btn){
-    btn.classList.toggle('active',btn.getAttribute('data-lang-btn')===lang);
-  });
-  buildOverlayLinks(lang);
-  buildOverlayLangPills(lang);
-  
-}
 var subtitles = {
   sr: 'Klinički psiholog · Geštalt psihoterapeut',
   en: 'Clinical Psychologist · Gestalt Psychotherapist',
@@ -1689,14 +1674,21 @@ var subtitles = {
 function setLang(lang){
   document.documentElement.setAttribute('data-lang',lang);
   localStorage.setItem('ei-lang',lang);
+
   document.querySelectorAll('[data-lang-btn]').forEach(function(btn){
     btn.classList.toggle('active',btn.getAttribute('data-lang-btn')===lang);
   });
+
   document.querySelectorAll('.mob-nav-langs .lang-pill').forEach(function(btn){
     btn.classList.toggle('active',btn.getAttribute('data-lang')===lang);
   });
+
   var sub = document.getElementById('nav-logo-subtitle');
   if(sub) sub.textContent = subtitles[lang] || subtitles['sr'];
+
+  // DODAJ OVO (da ne izgubiš funkcionalnost)
+  buildOverlayLinks(lang);
+  buildOverlayLangPills(lang);
 }
 document.addEventListener('click',function(e){
   var btn=e.target.closest('[data-lang-btn]');
@@ -1766,29 +1758,94 @@ document.addEventListener('click',function(e){
 });
 
 /* WEBGL PARTICLES */
-(function initWebGL(){
+function initWebGL(){
+
+  // desktop only
+  if(window.innerWidth <= 1024) return;
+
   var isMobile=window.innerWidth<768;
   var canvas=document.getElementById('hero-canvas');
+  if(!canvas) return;
+
   var gl=canvas.getContext('webgl');
-  if(!gl)return;
-  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
-  resize();window.addEventListener('resize',resize,{passive:true});
+  if(!gl) return;
+
+  function resize(){
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+  }
+
+  resize();
+  window.addEventListener('resize',resize,{passive:true});
+
   var vs='attribute vec3 p;attribute float s;attribute float a;attribute float sp;uniform float t;varying float va;void main(){vec3 q=p;float phase=t*sp+p.x*3.14+p.y*2.71;q.y+=sin(phase)*.06;q.x+=cos(phase*.7)*.03;gl_Position=vec4(q,1.);gl_PointSize=s*(1.+sin(t*sp+p.y*5.)*.25);va=a*(0.6+sin(t*sp+p.z)*.4);}';
   var fs='precision mediump float;varying float va;void main(){vec2 d=gl_PointCoord-vec2(.5);float r=length(d);if(r>.5)discard;float f=1.-smoothstep(.2,.5,r);gl_FragColor=vec4(.56,.71,.58,va*f);}';
-  function sh(src,tp){var s=gl.createShader(tp);gl.shaderSource(s,src);gl.compileShader(s);return s;}
+
+  function sh(src,tp){
+    var s=gl.createShader(tp);
+    gl.shaderSource(s,src);
+    gl.compileShader(s);
+    return s;
+  }
+
   var pr=gl.createProgram();
-  gl.attachShader(pr,sh(vs,gl.VERTEX_SHADER));gl.attachShader(pr,sh(fs,gl.FRAGMENT_SHADER));
-  gl.linkProgram(pr);gl.useProgram(pr);
+  gl.attachShader(pr,sh(vs,gl.VERTEX_SHADER));
+  gl.attachShader(pr,sh(fs,gl.FRAGMENT_SHADER));
+  gl.linkProgram(pr);
+  gl.useProgram(pr);
+
   var N=isMobile?60:140;
-  var pos=new Float32Array(N*3),siz=new Float32Array(N),alp=new Float32Array(N),spd=new Float32Array(N);
-  for(var i=0;i<N;i++){pos[i*3]=(Math.random()-.5)*2;pos[i*3+1]=(Math.random()-.5)*2;pos[i*3+2]=Math.random()*.5;siz[i]=Math.random()*2.8+.8;alp[i]=Math.random()*.32+.04;spd[i]=Math.random()*.5+.4;}
-  function buf(data,attr,sz){var b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,data,gl.STATIC_DRAW);var a=gl.getAttribLocation(pr,attr);gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,sz,gl.FLOAT,false,0,0);}
-  buf(pos,'p',3);buf(siz,'s',1);buf(alp,'a',1);buf(spd,'sp',1);
+
+  var pos=new Float32Array(N*3),
+      siz=new Float32Array(N),
+      alp=new Float32Array(N),
+      spd=new Float32Array(N);
+
+  for(var i=0;i<N;i++){
+    pos[i*3]=(Math.random()-.5)*2;
+    pos[i*3+1]=(Math.random()-.5)*2;
+    pos[i*3+2]=Math.random()*.5;
+    siz[i]=Math.random()*2.8+.8;
+    alp[i]=Math.random()*.32+.04;
+    spd[i]=Math.random()*.5+.4;
+  }
+
+  function buf(data,attr,sz){
+    var b=gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER,b);
+    gl.bufferData(gl.ARRAY_BUFFER,data,gl.STATIC_DRAW);
+    var a=gl.getAttribLocation(pr,attr);
+    gl.enableVertexAttribArray(a);
+    gl.vertexAttribPointer(a,sz,gl.FLOAT,false,0,0);
+  }
+
+  buf(pos,'p',3);
+  buf(siz,'s',1);
+  buf(alp,'a',1);
+  buf(spd,'sp',1);
+
   var ut=gl.getUniformLocation(pr,'t');
-  gl.enable(gl.BLEND);gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
-  function render(ts){gl.viewport(0,0,canvas.width,canvas.height);gl.clearColor(0,0,0,0);gl.clear(gl.COLOR_BUFFER_BIT);gl.uniform1f(ut,ts*.001);gl.drawArrays(gl.POINTS,0,N);requestAnimationFrame(render);}
+
+  gl.enable(gl.BLEND);
+  gl.blendFunc(gl.SRC_ALPHA,gl.ONE_MINUS_SRC_ALPHA);
+
+  function render(ts){
+    gl.viewport(0,0,canvas.width,canvas.height);
+    gl.clearColor(0,0,0,0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
+    gl.uniform1f(ut,ts*.001);
+    gl.drawArrays(gl.POINTS,0,N);
+    requestAnimationFrame(render);
+  }
+
   requestAnimationFrame(render);
-})();
+}
+
+/* ⬇⬇⬇ OVO IDE ODMAH ISPOD, U ISTOM SCRIPTU ⬇⬇⬇ */
+
+window.addEventListener('load', function(){
+  setTimeout(initWebGL, 200);
+});
 
 /* HERO PARALLAX */
 var heroImg=document.querySelector('.hero-bg img');
