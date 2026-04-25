@@ -2,10 +2,19 @@
 <html lang="sr" data-lang="sr">
 <head>
 <meta charset="UTF-8">
-<link rel="preload" as="image" href="images/hero-mobile.webp" 
-      media="(max-width:768px)" fetchpriority="high" type="image/webp" imagesrcset="images/hero-mobile.webp">
-<link rel="preload" as="image" href="images/hero.webp" 
-      media="(min-width:769px)" fetchpriority="high" type="image/webp" imagesrcset="images/hero.webp">
+<link rel="preload" as="image"
+      href="images/hero-mobile.webp"
+      imagesrcset="images/hero-mobile.webp"
+      imagesizes="100vw"
+      fetchpriority="high"
+      media="(max-width:768px)">
+
+<link rel="preload" as="image"
+      href="images/hero.webp"
+      imagesrcset="images/hero.webp"
+      imagesizes="100vw"
+      fetchpriority="high"
+      media="(min-width:769px)">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Psihoterapija Beograd i Online | Elena Ivancova – Klinički psiholog i Geštalt psihoterapeut</title>
 <meta name="description" content="Psihoterapija u Beogradu i online. Rad sa anksioznošću, stresom i bolestima zavisnosti. Elena Ivancova, klinički psiholog i geštalt psihoterapeut sa 20+ godina iskustva.">
@@ -777,6 +786,10 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
   .scroll-thumb{
   animation:none!important;
 }
+.mob-nav{
+  -webkit-backdrop-filter:none!important;
+  backdrop-filter:none!important;
+}
 }
 
 /* ═══════════════════════════════════════
@@ -905,6 +918,15 @@ footer{padding:100px 68px 40px;background:var(--deep);border-top:1px solid rgba(
 }
 .photo-frame img{
   aspect-ratio:420/567;
+}
+@media(max-width:768px){
+  .approach,
+  .areas,
+  .testi,
+  .process{
+    content-visibility:auto;
+    contain-intrinsic-size:0 800px;
+  }
 }
 /* ═══════════════════════════════════════
    KEYFRAMES
@@ -1044,16 +1066,16 @@ aria-controls="mobNav"
 <source 
   srcset="images/hero-mobile.webp"
   media="(max-width: 768px)"
+  sizes="100vw"
   width="768"
   height="1080"
-  fetchpriority="high"
 >    
 <source 
   srcset="images/hero.webp"
-  type="image/webp"
+  media="(min-width: 769px)"
+  sizes="100vw"
   width="1920"
   height="1080"
-  fetchpriority="high"
 >
 <img 
   src="images/hero-mobile.webp"
