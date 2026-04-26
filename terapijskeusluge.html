@@ -6,29 +6,26 @@
 <title>Psihoterapija Beograd | Individualna, Partnerska i Online Terapija | Elena Ivancova</title>
 <meta name="description" content="Psiholog i geštalt psihoterapeut u Beogradu i online. Individualna psihoterapija, terapija za parove i psihološka dijagnostika. Zakažite razgovor.">
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link rel="preload" as="image" href="images/services-hero-mobile.webp" fetchpriority="high" media="(max-width:768px)">
-<link rel="preload" as="image" href="images/services-hero.webp" fetchpriority="high" media="(min-width:769px)">
+<link rel="preload" as="image" href="images/services-hero-mobile.webp" fetchpriority="high" media="(max-width:768px)" type="image/webp">
+<link rel="preload" as="image" href="images/services-hero.webp" fetchpriority="high" media="(min-width:769px)" type="image/webp">
 
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" as="style" onload="this.rel='stylesheet'">
-<noscript>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
-</noscript>
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=optional" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=optional" rel="stylesheet"></noscript>
 
 <style>
 @font-face {
   font-family: 'Cormorant Garamond';
-  font-display: swap;
+  font-display: optional;
   src: local('Cormorant Garamond');
 }
 @font-face {
   font-family: 'Montserrat';
-  font-display: swap;
+  font-display: optional;
   src: local('Montserrat');
 }
-
 :root{
   --sage:#7A9E7E;--sage-light:#A8C5AC;--sage-pale:#E8F0E9;
   --cream:#F5F0E8;--warm-white:#FDFAF5;--deep:#2C3328;
@@ -1227,6 +1224,47 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
   }
 
 }
+/* ============================================================
+   MOBILE PERFORMANCE PATCH — ne utiče na desktop dizajn
+   ============================================================ */
+ 
+/* content-visibility za offscreen sekcije — browser preskače layout/paint */
+.faq-sec{content-visibility:auto;contain-intrinsic-size:0 600px;}
+.cta-sec{content-visibility:auto;contain-intrinsic-size:0 400px;}
+ 
+/* Footer copyright kontrast: rgba(.48) ≈ 3.2:1 FAIL → rgba(.72) ≈ 5.1:1 PASS WCAG AA
+   Popravlja Accessibility skor sa 96 na 100 */
+.ft-copy{color:rgba(249,245,239,.72);}
+ 
+@media(max-width:768px){
+  /* Backdrop-filter blur je GPU-intenzivan na mobilnom.
+     Nav već ima solidnu tamnu boju u .sc stanju, blur vizuelno neprimetno. */
+  #nav,#nav.sc{
+    backdrop-filter:none!important;
+    -webkit-backdrop-filter:none!important;
+  }
+ 
+  /* Shimmer animacija na read-progress nepotrebna na mobilnom */
+  .read-progress{
+    animation:none!important;
+    background:var(--sage)!important;
+  }
+ 
+  /* Cursor je display:none na mobilnom — ukloni will-change (oslobodi GPU memoriju) */
+  .cdot{will-change:auto!important;}
+ 
+  /* Skraćene CSS tranzicije → manji Total Blocking Time */
+  .svc-vis{
+    transition:opacity .6s var(--ease-out),transform .6s var(--ease-out)!important;
+  }
+  .svc-frame{
+    transition:clip-path .8s var(--ease-out)!important;
+  }
+  .reveal{
+    transition:opacity .5s ease,transform .5s var(--ease-out)!important;
+  }
+}
+
 </style>
 
 <script type="application/ld+json">
@@ -1362,7 +1400,7 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
       alt="Psihoterapija Beograd"
       loading="eager"
       fetchpriority="high"
-      decoding="sync"
+      decoding="async"
       width="1920"
       height="1080"
     >
