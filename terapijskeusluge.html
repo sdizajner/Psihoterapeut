@@ -2,7 +2,7 @@
 <html lang="sr" data-lang="sr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Psihoterapija Beograd | Individualna, Partnerska i Online Terapija | Elena Ivancova</title>
 <meta name="description" content="Psiholog i geštalt psihoterapeut u Beogradu i online. Individualna psihoterapija, terapija za parove i psihološka dijagnostika. Zakažite razgovor.">
 
@@ -31,31 +31,34 @@
   ============================================================
 -->
 
-<!-- DNS + Connection hints -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 <!-- FIX 1: Hero image preload — mobile gets priority -->
-<link rel="preload" as="image" href="images/services-hero-mobile.webp" fetchpriority="high" media="(max-width:768px)">
-<link rel="preload" as="image" href="images/services-hero.webp" fetchpriority="high" media="(min-width:769px)">
-
+<link rel="preload" as="image" href="images/services-hero-mobile.webp" fetchpriority="high" type="image/webp">
 <!-- FIX 2: Fonts — preload the CSS resource itself, then swap to stylesheet -->
-<link rel="preload" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
 
 <style>
 /* FIX 2: font-display:swap ensures text is visible before fonts load */
 @font-face {
   font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 300 600;
   font-display: swap;
-  src: local('Cormorant Garamond');
+  src: url('fonts/cormorant-garamond.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: italic;
+  font-weight: 300 600;
+  font-display: swap;
+  src: url('fonts/cormorant-garamond-italic.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300 500;
   font-display: swap;
-  src: local('Montserrat');
+  src: url('fonts/montserrat.woff2') format('woff2');
 }
-
 :root{
   --sage:#7A9E7E;--sage-light:#A8C5AC;--sage-pale:#E8F0E9;
   --cream:#F5F0E8;--warm-white:#FDFAF5;--deep:#2C3328;
@@ -327,7 +330,7 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 .ft-links a:hover{color:var(--sage-light);transform:translateX(5px);}
 .fco{display:flex;align-items:center;gap:12px;margin-bottom:16px;}
 .fco-i{width:16px;height:16px;stroke:var(--sage);flex-shrink:0;}
-.fco-t{font-family:var(--fb);font-size:14.5px;font-weight:400;color:rgba(249,245,239,.68);text-decoration:none;transition:color .3s;}
+.fco-t{font-family:var(--fb);font-size:14.5px;font-weight:400;color:rgba(249,245,239,.82);text-decoration:none;transition:color .3s;}
 .fco-t:hover{color:var(--warm-white);}
 
 /* ============================================================
@@ -341,9 +344,9 @@ body{font-family:var(--fb);background:var(--warm-white);color:var(--text);overfl
 .svc:nth-child(even) .svc-watermark{left:-30px;right:auto;}
 
 /* FIX 7: tuned intrinsic sizes based on actual rendered heights */
-#parovi{content-visibility:auto;contain-intrinsic-size:0 900px;}
-#online{content-visibility:auto;contain-intrinsic-size:0 900px;}
-#dijagnostika{content-visibility:auto;contain-intrinsic-size:0 900px;}
+#parovi{content-visibility:auto;contain-intrinsic-size:1px 1100px;}
+#online{content-visibility:auto;contain-intrinsic-size:1px 1100px;}
+#dijagnostika{content-visibility:auto;contain-intrinsic-size:1px 1100px;}
 
 .svc-in{display:grid;grid-template-columns:1fr 1fr;gap:var(--col-gap);align-items:center;position:relative;z-index:1;max-width:var(--container);margin:0 auto;padding:0 var(--side-pad);}
 .svc-in.rev .svc-vis{order:2;}
@@ -422,7 +425,7 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
 .ft-inner{max-width:var(--container);margin:0 auto;padding:0 var(--side-pad);}
 .ft1{display:grid;grid-template-columns:1.5fr 1fr 1fr 1.2fr;gap:60px;margin-bottom:80px;}
 .ft2{padding:40px var(--side-pad);border-top:1px solid rgba(255,255,255,.06);display:flex;justify-content:space-between;align-items:center;}
-.ft-copy{font-family:var(--fb);font-size:12px;color:rgba(249,245,239,.48);}
+.ft-copy{font-family:var(--fb);font-size:12px;color:rgba(249,245,239,.72);}
 .socials{display:flex;gap:20px;}
 .soc svg{width:18px;height:18px;fill:none;stroke:rgba(249,245,239,.38);stroke-width:1.5;transition:all .3s;}
 
@@ -812,29 +815,16 @@ footer{padding:100px 0 0;background:var(--deep);border-top:1px solid rgba(255,25
     - width/height attributes prevent layout shift
     - The <picture> element ensures correct source is chosen
   -->
-  <picture>
-    <source
-      media="(max-width:768px)"
-      srcset="images/services-hero-mobile.webp"
-      type="image/webp"
-    >
-    <source
-      media="(min-width:769px)"
-      srcset="images/services-hero.webp"
-      type="image/webp"
-    >
-    <img
-      src="images/services-hero-mobile.webp"
-      class="hero-img"
-      alt="Psihoterapija Beograd"
-      loading="eager"
-      fetchpriority="high"
-      decoding="async"
-      width="768"
-      height="1080"
-    >
-  </picture>
-
+<img
+  src="images/services-hero-mobile.webp"
+  class="hero-img"
+  alt="Psihoterapija Beograd"
+  loading="eager"
+  fetchpriority="high"
+  decoding="sync"
+  width="768"
+  height="1080"
+>
   <!-- Mobile stat badge -->
   <div class="hero-stat-mob" style="position:absolute;top:calc(var(--nav-h) + 24px);left:var(--side-pad);z-index:4;" aria-hidden="true">
     <span class="hero-stat-mob-num t-sr t-en t-ru" style="display:block!important;">4</span>
